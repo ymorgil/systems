@@ -8,10 +8,9 @@ Veyon es una herramienta de software libre que permite la supervisión y el cont
 |---|---|
 | ![alt text](/web/img/vey01.PNG) |  ![alt text](/web/img/vey02.PNG) | 
 
-### ¿Qué hacer si winget no instala Veyon?
-En algunos casos, la instalación a través de winget puede no funcionar debido a que no encuentra la última versión disponible o el paquete no está actualizado. Si esto ocurre tendrás que descargarlo desde la web oficial: https://veyon.io/en/. Descarga la última versión estable del instalador manualmente para Windows. Sigue las instrucciones de instalación que aparecen durante el proceso de configuración para completar la instalación de manera manual.
+**¿Qué hacer si winget no instala Veyon?** En algunos casos, la instalación a través de winget puede no funcionar debido a que no encuentra la última versión disponible o el paquete no está actualizado. Si esto ocurre tendrás que descargarlo desde la web oficial: https://veyon.io/en/. Descarga la última versión estable del instalador manualmente para Windows. Sigue las instrucciones de instalación que aparecen durante el proceso de configuración para completar la instalación de manera manual.
  
-## Configuración del Veyon alumnado
+## Veyon alumnado
 
 |  |  |
 |---|---|
@@ -21,7 +20,7 @@ En algunos casos, la instalación a través de winget puede no funcionar debido 
 Cambiar el idioma de la interfaz de usuario a español y en la sección de Autentificación ponemos como método “Autentificación mediante archivo de clave” por último solo nos queda aplicar al final de la ventana y aceptar el reinicio para que se apliquen los cambios.
 ![alt text](/web/img/vey05.PNG)
 
-### 2. Pestaña Claves de autentificación
+### 2. Claves de autentificación
 Descargar la clave pública de este mismo repositorio y agregarla en la sección de claves de autentificación.
  - Hay que descargarla en documentos si la pones en el escritorio podría no funcionar.
  - Cuando la agregas no cambiar el nombre, seguir con los valores por defecto
@@ -33,7 +32,7 @@ Descargar la clave pública de este mismo repositorio y agregarla en la sección
 ![alt text](/web/img/vey06.PNG)
 
  
-## Configuración del Veyon profesorado
+## Veyon profesorado
 >Seguimos los mismos pasos que el alumnado, pero en vez de añadir la clave pública, añadimos solo la **clave privada** que se encuentra en el drive.
 
 ### 1. Ubicaciones y equipos

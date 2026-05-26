@@ -46,28 +46,30 @@ Durante el desarrollo del módulo se tendrán en cuenta los siguientes apartados
     - Uso del término "Nombre": Todo lo referente a la palabra nombre en los supuestos se entenderá como "nombre del alumnado", el cual debe escribirse siempre sin caracteres especiales ni tildes.
 
 5. **Entrega en el Campus Virtual**
-    - Formato de archivo: El documento se subirá al CAMPUS obligatoriamente en formato PDF.
+    - Formato de archivo: El documento se subirá al CAMPUS obligatoriamente no se aceptan envíos por correo electrónico. El formato sera PDF y han de comprobar el funcionamiento de su documento, en caso de no poder abrirse o estar en blanco se puntuará como no entregado.
     - Nomenclatura por defecto: El archivo debe nombrarse siguiendo estrictamente la siguiente estructura: ``Apellido1Apellido2Nombre_PXX`` (sustituyendo los datos reales del alumno, sin tildes ni caracteres especiales).
-    - El alumnado es responsable de comprobar el funcionamiento de su documento, en caso de no poder abrirse o estar en blanco se puntuará como no entregado. Además, solo se corregirán los supuestos enviados por el CAMPUS no se aceptan envíos por correo electrónico.
----
-
-### Supuestos prácticos de aula
-Son aquellos supuestos que se desarrollarán en el aula durante la sesión de clase que cumplirán con las siguientes características:
-
-- Los dispositivos electrónicos deben de estar apagados sobre la torre boca abajo. También se ha de tener un correcto orden y organización del espacio de trabajo.
-- Antes de comenzar la prueba tienen que tener todos verificados que el veyon está en correcto funcionamiento, y que el profesor puede acceder al equipo del alumnado.
-- Otras que estime el profesorado como no usar apuntes, internet…
-
-### Scripting
-Para los scripts el alumnado se ha de crear una cuenta en [www.github.com](https://github.com/) en dicha cuenta ha de crear un repositorio con las siglas del módulo donde ira almacenando todos los scripts que haga durante el curso, en los apartados que se pidan script entregará el script con comentarios, capturas de la ejecución del mismo con dos ejemplos explicando lo que sucede en cada uno de ellos y enlace directo del script solicitado. Además se añadira el enlace de dicho repositorío a la wiki del CAMPUS.
 
 ## 3️⃣ Máquinas Virtuales
-12. `Máquinas`: El alumnado es responsable de tener las 5 máquinas bases del curso, con las configuraciones básicas según sistema. Además, se han de tener copias de seguridad de las mismas en formato ova, por cualquier problema que pueda ocurrir.
+1. **Máquinas**
+    - El alumnado es responsable de tener las 5 máquinas bases del curso, con las configuraciones básicas según sistema. Además, se han de tener copias de seguridad de las mismas en formato ova, por cualquier problema que pueda ocurrir.
 
-13. `Conservación`: Por defecto se han de guardar en el disco D del sistema, a veces por problemas técnicos se formatean los ordenadores por lo que se aconseja el uso de discos SSD externos propios. (Una capacidad de 256GB está bien para primero, pero se puede quedar corto para segundo, recomiendo 1TB).
+2. **Conservación**
+    - Por defecto se han de guardar en el disco D del sistema, a veces por problemas técnicos se formatean los ordenadores por lo que se aconseja el uso de discos SSD externos propios. (Una capacidad de 256GB está bien para primero, pero se puede quedar corto para segundo, recomiendo 1TB).
 
-14. `Comandos`: Se muestran en una sola línea, y solo los correctos (No capturas de comandos fallidos). En dichos comandos se debe mostrar parte del resultado del mismo.
+3. **Comandos**
+    - Se muestran en una sola línea, y solo los correctos (No capturas de comandos fallidos). En dichos comandos se debe mostrar parte del resultado del mismo.
 
-15. `Comprobaciones`: En los cambios de configuraciones se han de sacar capturas del correcto funcionamiento, por ejemplo, en los cambios de red, nombres de máquinas, inserción de discos, copias de seguridad …
+4. **Comprobaciones**
+    - En los cambios de configuraciones se han de sacar capturas del correcto funcionamiento, por ejemplo, en los cambios de red, nombres de máquinas, inserción de discos, copias de seguridad …
 
-16. `Supuestos prácticos de aula y recuperaciones`: Se aconseja al alumnado que en las sesiones previas al supuesto haga un mínimo de dos máquinas virtuales y guarde en formato ova una tercera, por los posibles problemas que pudieran surgir el día del supuesto, siendo la responsabilidad del alumnado tener dichas máquinas preparadas y en correcto funcionamiento.
+5. **Supuestos prácticos de aula y recuperaciones**
+    - Se aconseja al alumnado que en las sesiones previas al supuesto haga un mínimo de dos máquinas virtuales y guarde en formato ova una tercera, por los posibles problemas que pudieran surgir el día del supuesto, siendo la responsabilidad del alumnado tener dichas máquinas preparadas y en correcto funcionamiento.
+
+## 4️⃣ Otros
+1. **Supuestos prácticos de aula** Son aquellos supuestos que se desarrollarán en el aula durante la sesión de clase que cumplirán con las siguientes características:
+    - Los dispositivos electrónicos deben de estar apagados sobre la torre boca abajo. También se ha de tener un correcto orden y organización del espacio de trabajo.
+    - Antes de comenzar la prueba tienen que tener todos verificados que el veyon está en correcto funcionamiento, y que el profesor puede acceder al equipo del alumnado.
+    - Otras que estime el profesorado como no usar apuntes, internet…
+    
+2. **Scripting**
+Para los scripts el alumnado se ha de crear una cuenta en [www.github.com](https://github.com/) en dicha cuenta ha de crear un repositorio con las siglas del módulo donde ira almacenando todos los scripts que haga durante el curso, en los apartados que se pidan script entregará el script con comentarios, capturas de la ejecución del mismo con dos ejemplos explicando lo que sucede en cada uno de ellos y enlace directo del script solicitado. Además se añadira el enlace de dicho repositorío a la wiki del CAMPUS.
