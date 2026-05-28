@@ -3,11 +3,11 @@
 Durante el curso se van a trabajar con diferentes máquinas virtuales estas deben tener las configuraciones básicas solicitadas y realizar una ova de las mismas despues de configurarlas, para cada supuesto se harán clonaciones y se trabajará sobre estas. 
 
     Los sistemas operativos principales son:
-      px90 - Proxmox 9.1
-      ud24 - Ubuntu Desktop 26.04 LTS 
-      us24 - Ubuntu Server  26.04 LTS
+      px92 - Proxmox 9.2
+      ud26 - Ubuntu Desktop 26.04 LTS 
+      us26 - Ubuntu Server  26.04 LTS
       wd11 - Windows Clente 11
-      ws22 - Windows Server 2025
+      ws25 - Windows Server 2025
 
 ![Configuración](../assets/img/cur/con-01.png)
 
