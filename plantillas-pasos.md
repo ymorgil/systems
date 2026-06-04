@@ -1,7 +1,9 @@
 Gestiona el claude de yerayeduc
 ```bash
 mkdocs serve          # probar en local
-git add . && git commit -m "cambios"
+#◙----------------
+git add . 
+git commit -m "cambios"
 git push              # guardar código fuente
 mkdocs gh-deploy      # publicar cambios
 ```
