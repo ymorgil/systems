@@ -1,0 +1,2163 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/contenedores/02-doc-container/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Docker: Guía - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker-guia-completa-de-contenedores" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker: Guía
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/02virtualbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/01intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/02awsintro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/03EC2o.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/contenedores.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/docker-windows.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/docker-linux.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/docker-compose.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un contenedor?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="¿Qué es un contenedor?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-los-contenedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beneficios de los contenedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breve-historia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breve historia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contenedor-vs-maquina-virtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contenedor vs. Máquina Virtual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-del-ecosistema-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas del ecosistema Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-generales-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos generales esenciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imagenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Imágenes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Imágenes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-de-imagenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorio de imágenes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-imagenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de imágenes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contenedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contenedores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contenedores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-contenedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de contenedores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos de contenedores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comando-docker-ps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comando docker ps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-redes-en-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de redes en Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de redes en Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bridge-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Bridge (por defecto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Host
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Overlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-macvlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Macvlan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-redes-personalizadas-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Redes personalizadas (recomendado)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de redes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publicacion-de-puertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publicación de puertos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volumenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volúmenes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Volúmenes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-volumes-volumenes-gestionados-por-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Volumes (volúmenes gestionados por Docker)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bind-mounts-montajes-de-enlace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Bind Mounts (montajes de enlace)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tmpfs-mounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. tmpfs Mounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-volumenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de volúmenes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dockerfile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dockerfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-aplicacion-python-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 1: Aplicación Python simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-servidor-web-nginx-con-contenido-personalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 2: Servidor web Nginx con contenido personalizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-3-imagen-con-alpine-y-python-ejemplo-del-temario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-4-multi-stage-build-construccion-en-multiples-etapas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 4: Multi-stage build (construcción en múltiples etapas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-5-combinar-comandos-run-para-reducir-capas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 5: Combinar comandos RUN para reducir capas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-para-construir-imagenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos para construir imágenes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Compose
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-del-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura del archivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-web-base-de-datos-con-un-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación web + Base de datos (con un Dockerfile)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-web-con-nginx-php-fpm-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación web con Nginx + PHP-FPM + MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de Docker Compose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-de-comandos-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de comandos esenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="docker-guia-completa-de-contenedores">🐳 Docker: Guía Completa de Contenedores</h1>
+<h2 id="que-es-un-contenedor">¿Qué es un contenedor?</h2>
+<hr>
+<p>No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de <strong>incompatibilidad de entornos</strong>.</p>
+<p>Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de <strong>"en mi máquina funciona"</strong>.</p>
+<p>Un contenedor es una <strong>unidad ligera y portátil</strong> que permite empaquetar una aplicación junto con todas sus dependencias (bibliotecas, configuraciones y binarios) en un entorno aislado.</p>
+<p>A diferencia de las máquinas virtuales, los contenedores <strong>no incluyen un sistema operativo completo</strong>: comparten el núcleo (kernel) del sistema operativo del anfitrión, lo que los hace más eficientes en consumo de recursos (memoria y CPU).</p>
+<h4 id="beneficios-de-los-contenedores"><code>Beneficios de los contenedores</code></h4>
+<ul>
+<li><strong>Portabilidad:</strong> Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.</li>
+<li><strong>Eficiencia:</strong> Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.</li>
+<li><strong>Escalabilidad:</strong> Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.</li>
+</ul>
+<h4 id="breve-historia"><code>Breve historia</code></h4>
+<table>
+<thead>
+<tr>
+<th>Año</th>
+<th>Hito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~1970s</td>
+<td><code>chroot</code> en UNIX: primer concepto de aislamiento de procesos</td>
+</tr>
+<tr>
+<td>2000s</td>
+<td>FreeBSD Jails y tecnologías avanzadas en el kernel de Linux</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>Nace <strong>Docker</strong>: democratiza los contenedores con herramientas fáciles de usar y Docker Hub</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>Google lanza Kubernetes para orquestación de contenedores</td>
+</tr>
+<tr>
+<td>2020+</td>
+<td>Alternativas como <strong>Podman</strong> emergen: sin daemon, ejecución rootless</td>
+</tr>
+<tr>
+<td>Actualidad</td>
+<td>Componente esencial de la infraestructura moderna, microservicios y DevOps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="contenedor-vs-maquina-virtual"><strong>Contenedor vs. Máquina Virtual</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Contenedor</th>
+<th>Máquina Virtual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Virtualización</td>
+<td>Nivel de SO (kernel compartido)</td>
+<td>Hardware completo</td>
+</tr>
+<tr>
+<td>SO propio</td>
+<td>No (comparte el kernel)</td>
+<td>Sí, uno por instancia</td>
+</tr>
+<tr>
+<td>Peso</td>
+<td>Ligero (MB)</td>
+<td>Pesado (GB)</td>
+</tr>
+<tr>
+<td>Tiempo de inicio</td>
+<td>Casi instantáneo</td>
+<td>Minutos</td>
+</tr>
+<tr>
+<td>Aislamiento</td>
+<td>Proceso/aplicación</td>
+<td>Sistema completo</td>
+</tr>
+<tr>
+<td>Eficiencia de recursos</td>
+<td>Alta</td>
+<td>Menor</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker">Docker</h2>
+<hr>
+<p>Docker es la <strong>plataforma de contenedores más popular del mundo</strong>. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft. Docker sigue una arquitectura <strong>cliente-servidor</strong>:</p>
+<p><strong>Componentes principales</strong></p>
+<p><strong>Docker Engine</strong> es el núcleo de la plataforma y está compuesto por:
+- <strong>Daemon de Docker (<code>dockerd</code>):</strong> servicio en segundo plano que gestiona imágenes, contenedores, redes y volúmenes. Responde a las solicitudes del cliente.
+- <strong>CLI de Docker:</strong> interfaz de línea de comandos para interactuar con Docker (docker run, docker build, docker ps, etc.).
+- <strong>API REST de Docker:</strong> interfaz programática para comunicarse con el daemon, utilizada tanto por la CLI como por aplicaciones externas.</p>
+<h3 id="herramientas-del-ecosistema-docker"><strong>Herramientas del ecosistema Docker</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Docker Desktop</strong></td>
+<td>Aplicación de escritorio para Mac, Windows y Linux con GUI integrada</td>
+</tr>
+<tr>
+<td><strong>Docker Engine</strong></td>
+<td>Motor de ejecución de contenedores (daemon + CLI + API)</td>
+</tr>
+<tr>
+<td><strong>Docker Compose</strong></td>
+<td>Define y ejecuta aplicaciones multi-contenedor con un archivo YAML</td>
+</tr>
+<tr>
+<td><strong>Docker Hub</strong></td>
+<td>Registro público y privado de imágenes de contenedores</td>
+</tr>
+<tr>
+<td><strong>Docker Swarm</strong></td>
+<td>Orquestación nativa de clústeres de Docker</td>
+</tr>
+<tr>
+<td><strong>Docker CLI</strong></td>
+<td>Interfaz de línea de comandos</td>
+</tr>
+<tr>
+<td><strong>Docker Volume</strong></td>
+<td>Gestión de almacenamiento persistente</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comandos-generales-esenciales"><strong>Comandos generales esenciales</strong></h3>
+<pre><code class="language-bash">docker version              # Muestra la versión de Docker
+docker info                 # Información del sistema Docker
+docker help                 # Ayuda general
+docker login                # Inicia sesión en Docker Hub
+docker logout               # Cierra sesión
+</code></pre>
+<h2 id="imagenes">Imágenes</h2>
+<hr>
+<p>Una imagen Docker es un <strong>paquete inmutable de solo lectura</strong> que contiene todo lo necesario para ejecutar una aplicación: código, ejecutables, librerías, configuraciones, variables de entorno y el sistema de archivos que usarán los contenedores.</p>
+<p><strong>Conceptos clave</strong>: 
+- <strong>Plantilla de solo lectura:</strong> Las imágenes no se modifican. A partir de una imagen se crean los contenedores (instancias en ejecución).
+- <strong>Sistema de capas (layers):</strong> Las imágenes se construyen en capas apiladas, como una cebolla. Cada instrucción del Dockerfile genera una nueva capa. Las capas son inmutables y se pueden compartir entre imágenes, lo que ahorra espacio y acelera las descargas.
+- <strong>Tags (etiquetas):</strong> Identifican versiones de una imagen. Por ejemplo, <code>ubuntu:22.04</code> o <code>nginx:latest</code>.
+- <strong>Imagen base:</strong> Toda imagen parte de otra imagen (<code>FROM</code>). Las imágenes base suelen ser distribuciones Linux minimalistas como Alpine (~5 MB), Debian slim, o imágenes oficiales de servicios.</p>
+<blockquote>
+<p><strong>Analogía imagen / contenedor</strong>
+La imagen es el <strong>ejecutable</strong> (binario); el contenedor es la <strong>instancia en ejecución</strong> (proceso). De la misma imagen puedes lanzar múltiples contenedores simultáneamente.</p>
+</blockquote>
+<h3 id="repositorio-de-imagenes"><strong>Repositorio de imágenes</strong></h3>
+<p><a href="https://hub.docker.com/">Docker-Hub</a> es el registro público oficial. Contiene:
+- Imágenes <strong>oficiales</strong> (mantenidas por Docker y los propios proyectos): nginx, postgres, python, node, ubuntu...
+- Imágenes de <strong>la comunidad</strong>: <code>usuario/imagen</code>
+- Repositorios <strong>privados</strong> (con plan de suscripción)</p>
+<p>Otros registros populares: GitHub Container Registry, Google Container Registry, Amazon ECR, Azure Container Registry...</p>
+<h3 id="comandos-de-imagenes"><strong>Comandos de imágenes</strong></h3>
+<pre><code class="language-bash"># Comandos más utilizados
+docker image ls                    # Listar todas las imágenes locales
+docker images                      # equivalente
+docker image inspect ubuntu        # Información detallada de una imagen
+docker image history ubuntu        # Historial de capas de una imagen
+docker image rm ubuntu             # Eliminar una imagen
+docker rmi ubuntu                  # equivalente
+docker image prune                 # Eliminar imágenes no utilizadas
+
+# Repositorio de imágenes
+docker search nginx                                 # Buscar imágenes en Docker Hub
+# ──────────────────────────────────
+docker image pull ubuntu                            # Descargar una imagen desde Docker Hub
+docker pull ubuntu                                  # equivalente
+docker pull ubuntu:22.04                            # versión específica
+docker pull ubuntu:latest                           # última versión (por defecto)
+# ──────────────────────────────────
+docker image build -t mi-app:1.0 .                  # Construir una imagen desde un Dockerfile
+docker build -t mi-app:1.0 .                        # equivalente
+docker image tag mi-app:1.0 mi-usuario/mi-app:1.0   # Etiquetar una imagen
+# ──────────────────────────────────
+docker image push mi-usuario/mi-app:1.0             # Subir una imagen a Docker Hub
+docker push mi-usuario/mi-app:1.0                   # equivalente
+</code></pre>
+<h2 id="contenedores">Contenedores</h2>
+<hr>
+<p>Un contenedor es una <strong>instancia ejecutable de una imagen</strong>. Se crea a partir de ella y representa el proceso en ejecución de la aplicación con su entorno aislado.
+<strong>Características:</strong>
+- Puede tener <strong>más de un proceso</strong> en ejecución, aunque la buena práctica es <strong>un proceso por contenedor</strong>.
+- Está <strong>aislado</strong> de otros contenedores y del host (red, sistema de archivos, procesos).
+- Cuando se elimina un contenedor, <strong>se pierden los datos</strong> que no estén en un volumen persistente.
+- Se puede conectar a redes, adjuntar volúmenes y publicar puertos.</p>
+<h3 id="comandos-de-contenedores"><strong>Comandos de contenedores</strong></h3>
+<pre><code class="language-bash"># Comandos más utilizados
+docker container run nginx          # Crear y ejecutar un contenedor
+docker run nginx                    # equivalente
+docker container ls                 # Listar contenedores en ejecución
+docker ps                           # equivalente
+docker container ls -a              # Listar TODOS los contenedores (incluidos parados)
+docker ps -a                        # equivalente
+docker container rm mi-nginx        # Eliminar un contenedor (debe estar parado)
+docker rm mi-nginx                  # equivalente
+docker rm -f mi-nginx               # forzar eliminación aunque esté activo
+docker container prune              # Elimina todos los contenedores parados
+
+# Opciones comunes de docker run:
+docker run -d nginx                    # -d: segundo plano (detached)
+docker run -it ubuntu bash             # -it: modo interactivo + terminal
+docker run --name mi-nginx nginx       # --name: asignar nombre
+docker run -p 8080:80 nginx            # -p: mapear puertos host:contenedor
+docker run -e VAR=valor nginx          # -e: variable de entorno
+docker run -v /host:/contenedor nginx  # -v: montar volumen
+docker run --rm nginx                  # --rm: eliminar al parar
+docker run --network mi-red nginx      # --network: conectar a red
+
+# Iniciar/detener/reiniciar/pausar/reanudar un contenedor
+docker container start mi-nginx
+docker container stop mi-nginx
+docker container restart mi-nginx
+docker container pause mi-nginx
+docker container unpause mi-nginx
+
+# Otros comandos importantes
+docker container logs mi-nginx                                  # Ver logs de un contenedor
+docker logs -f mi-nginx                                         # seguir logs en tiempo real
+docker logs --tail 100 mi-nginx                                 # últimos 100 logs
+docker container exec mi-nginx ls /etc/nginx                    # Ejecutar comando en contenedor activo
+docker exec -it mi-nginx bash                                   # abrir terminal interactivo
+docker container inspect mi-nginx                               # Información detallada del contenedor
+docker stats mi-nginx                                           # Estadísticas de uso de recursos
+docker container cp mi-nginx:/etc/nginx/nginx.conf ./nginx.conf # Copiar archivos entre host y contenedor
+docker cp ./index.html mi-nginx:/usr/share/nginx/html/          # equivalente
+docker container inspect`                                       # Información detallada del contenedor
+</code></pre>
+<h4 id="comando-docker-ps"><code>Comando docker ps</code></h4>
+<p>Columnas que muestra <code>docker ps -a</code>:
+| Columna | Descripción |
+|---|---|
+| <code>CONTAINER ID</code> | Identificador único del contenedor |
+| <code>IMAGE</code> | Imagen desde la que se creó |
+| <code>COMMAND</code> | Proceso que se está ejecutando dentro |
+| <code>CREATED</code> | Tiempo desde que se creó |
+| <code>STATUS</code> | Estado actual y tiempo en ese estado |
+| <code>PORTS</code> | Mapeo de puertos |
+| <code>NAMES</code> | Nombre del contenedor (aleatorio si no se especifica) |</p>
+<h2 id="redes">Redes</h2>
+<hr>
+<p>Las redes Docker permiten definir <strong>cómo se comunican los contenedores</strong> entre sí y con el exterior. El componente principal que gestiona la conectividad es <strong>libnetwork</strong>.</p>
+<h3 id="tipos-de-redes-en-docker"><strong>Tipos de redes en Docker</strong></h3>
+<h4 id="1-bridge-por-defecto"><code>1. Bridge (por defecto)</code></h4>
+<p>Red puente, es la red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.</p>
+<pre><code class="language-bash">docker run -d --name web --network bridge -p 8080:80 nginx
+</code></pre>
+<h4 id="2-host"><code>2. Host</code></h4>
+<p>Elimina el aislamiento de red entre el contenedor y el host. El contenedor comparte directamente la interfaz de red del sistema, usando la misma IP. Mejor rendimiento pero mayor riesgo de conflicto de puertos.</p>
+<pre><code class="language-bash">docker run -d --network host nginx
+</code></pre>
+<h4 id="3-overlay"><code>3. Overlay</code></h4>
+<p>Utilizada para contenedores distribuidos en <strong>diferentes hosts</strong>. Es la red usada en entornos de <strong>Docker Swarm</strong> para comunicar servicios entre nodos.</p>
+<h4 id="4-macvlan"><code>4. Macvlan</code></h4>
+<p>Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como dispositivos físicos en la red. Útil para aplicaciones que necesitan estar directamente en la red LAN.</p>
+<h4 id="5-none"><code>5. None</code></h4>
+<p>Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.</p>
+<h4 id="6-redes-personalizadas-recomendado"><code>6. Redes personalizadas (recomendado)</code></h4>
+<p>Las redes bridge personalizadas son <strong>la práctica recomendada</strong> ya que ofrecen:
+- <strong>Resolución DNS automática</strong> entre contenedores por nombre.
+- Mejor aislamiento que la red bridge por defecto.
+- Mayor control sobre la subnet y el gateway.</p>
+<pre><code class="language-bash">docker network create mi-red                                        # Crear una red personalizada
+docker network create --driver bridge --subnet 172.20.0.0/16 mi-red # Crear red con subnet específica
+docker run -d --name app --network mi-red mi-app  # Conectar contenedores a mi-red personalizada
+docker run -d --name db --network mi-red postgres # Ahora 'app' puede llegar a 'db' usando su nombre
+</code></pre>
+<h3 id="comandos-de-redes"><strong>Comandos de redes</strong></h3>
+<pre><code class="language-bash"># Comandos más utilizados
+docker network create mi-red                      # Crear una red
+docker network create --driver overlay mi-overlay # tipo overlay
+docker network ls                                 # Listar todas las redes
+docker network rm mi-red                          # Eliminar una red
+docker network prune                              # Eliminar todas las redes no utilizadas
+# ──────────────────────────────────
+docker network inspect mi-red   # Información detallada de una red
+docker network inspect bridge   # red por defecto
+# ──────────────────────────────────
+docker network connect mi-red mi-contenedor     # Conectar un contenedor a una red (en caliente)
+docker network disconnect mi-red mi-contenedor  # Desconectar un contenedor de una red
+</code></pre>
+<h3 id="publicacion-de-puertos"><strong>Publicación de puertos</strong></h3>
+<pre><code class="language-bash"># Mapear puerto del host al contenedor
+docker run -p 8080:80 nginx           # host:contenedor
+docker run -p 127.0.0.1:8080:80 nginx # solo desde localhost
+docker run -P nginx                   # mapeo automático de todos los puertos expuestos
+</code></pre>
+<h2 id="volumenes">Volúmenes</h2>
+<hr>
+<p>Un volumen Docker permite <strong>conservar los datos más allá del ciclo de vida de un contenedor</strong>. Sin volúmenes, todos los datos generados dentro de un contenedor se pierden cuando este se elimina.</p>
+<p><strong>Casos de uso:</strong>
+- <strong>Transferir datos</strong> a un contenedor.
+- <strong>Guardar datos persistentes</strong> (bases de datos, logs, configuraciones).
+- <strong>Compartir datos</strong> entre múltiples contenedores.</p>
+<p><strong>Características de los volúmenes</strong>
+- <strong>Persistencia de datos:</strong> Los datos sobreviven a la eliminación del contenedor.
+- <strong>Compartir datos entre contenedores:</strong> Varios contenedores pueden montar el mismo volumen simultáneamente.
+- <strong>Desacoplamiento datos/contenedor:</strong> Se puede actualizar o reemplazar el contenedor sin perder datos.
+- <strong>Integración con el host:</strong> Los datos son accesibles desde fuera del contenedor.
+- <strong>Flexibilidad:</strong> Volúmenes con nombre, anónimos o gestionados externamente (NFS, cloud storage...).
+- <strong>Escalabilidad:</strong> Facilitan la distribución de datos en entornos orquestados.</p>
+<h3 id="tipos"><strong>Tipos</strong></h3>
+<h4 id="1-volumes-volumenes-gestionados-por-docker"><code>1. Volumes (volúmenes gestionados por Docker)</code></h4>
+<p>Son la opción <strong>recomendada</strong>. Docker gestiona su ubicación en el sistema de archivos del host (<code>/var/lib/docker/volumes/</code>). Son independientes del contenedor.</p>
+<pre><code class="language-bash">docker run -d -v ruta-en-mi-pc:ruta-dentro-del-contenedor imagen
+docker run -d -v mi-volumen:/var/lib/postgresql/data postgres
+</code></pre>
+<h4 id="2-bind-mounts-montajes-de-enlace"><code>2. Bind Mounts (montajes de enlace)</code></h4>
+<p>Montan un directorio o archivo específico del host dentro del contenedor. Útiles en desarrollo para reflejar cambios del código fuente en tiempo real.</p>
+<pre><code class="language-bash">docker run -d -v /ruta/en/host:/ruta/en/contenedor nginx
+docker run -d -v $(pwd)/html:/usr/share/nginx/html nginx
+</code></pre>
+<h4 id="3-tmpfs-mounts"><code>3. tmpfs Mounts</code></h4>
+<p>Almacenamiento temporal en memoria RAM. Los datos no se persisten y desaparecen cuando el contenedor para. Útil para datos sensibles que no deben persistir en disco.</p>
+<pre><code class="language-bash">docker run -d --tmpfs /tmp nginx
+</code></pre>
+<h3 id="comandos-de-volumenes"><strong>Comandos de volúmenes</strong></h3>
+<pre><code class="language-bash"># Comandos más utilizados
+docker volume create mi-volumen # Crear un volumen
+docker volume ls                # Listar volúmenes
+docker volume rm mi-volumen     # Eliminar un volumen
+docker volume prune             # Eliminar todos los volúmenes no utilizados
+# ──────────────────────────────────
+docker volume inspect mi-volumen # Información detallada de un volumen
+# ──────────────────────────────────
+docker run -d -v mi-volumen:/datos mi-app                     # Usar un volumen al crear un contenedor
+docker run -d --mount source=mi-volumen,target=/datos mi-app  # Usar un volumen al crear un contenedor 
+docker run -d -v mi-volumen:/datos:ro mi-app                  # Contenedor de solo lectura
+</code></pre>
+<h2 id="dockerfile">Dockerfile</h2>
+<hr>
+<p>Un <strong>Dockerfile</strong> es un archivo de texto con una serie de instrucciones que Docker utiliza para construir una imagen de forma automatizada y reproducible. Cada instrucción genera una nueva <strong>capa</strong> en la imagen.</p>
+<p><strong>Instrucciones del Dockerfile</strong>
+| Instrucción | Descripción |
+|---|---|
+| <code>FROM</code> | <strong>Obligatoria.</strong> Indica la imagen base. Siempre es la primera instrucción. |
+| <code>RUN</code> | Ejecuta un comando durante la construcción y guarda el resultado como capa. |
+| <code>CMD</code> | Comando por defecto al iniciar el contenedor (puede ser sobreescrito). |
+| <code>ENTRYPOINT</code> | Comando principal que se ejecuta siempre al arrancar el contenedor. |
+| <code>COPY</code> | Copia archivos/directorios del host a la imagen. |
+| <code>ADD</code> | Como COPY pero también soporta URLs y descomprime archivos tar. |
+| <code>EXPOSE</code> | Documenta el puerto que escuchará el contenedor (no lo publica). |
+| <code>ENV</code> | Declara variables de entorno disponibles en la imagen y el contenedor. |
+| <code>ARG</code> | Define variables disponibles solo durante el proceso de construcción. |
+| <code>WORKDIR</code> | Establece el directorio de trabajo para RUN, CMD, COPY, ADD, ENTRYPOINT. |
+| <code>USER</code> | Define el usuario con el que se ejecutarán las instrucciones posteriores. |
+| <code>VOLUME</code> | Declara un punto de montaje de volumen. |
+| <code>LABEL</code> | Añade metadatos a la imagen (autor, versión, descripción...). |
+| <code>MAINTAINER</code> | (Obsoleto) Indica el mantenedor del Dockerfile. Usar LABEL. |
+| <code>ONBUILD</code> | Instrucción que se ejecuta cuando la imagen es usada como base de otra. |
+| <code>HEALTHCHECK</code> | Define un comando para comprobar el estado de salud del contenedor. |
+| <code>STOPSIGNAL</code> | Define la señal de sistema para detener el contenedor. |</p>
+<blockquote>
+<p>📖 Documentación oficial de referencia: https://docs.docker.com/engine/reference/builder/</p>
+</blockquote>
+<p><strong>Buenas prácticas en Dockerfile</strong>
+1. <strong>Usar imágenes base oficiales y ligeras</strong> (alpine, slim).
+2. <strong>Ordenar las instrucciones por frecuencia de cambio</strong> (lo que menos cambia, al principio) para aprovechar la caché.
+3. <strong>Minimizar el número de capas</strong> combinando comandos RUN con <code>&amp;&amp;</code>.
+4. <strong>No ejecutar como root</strong>: crear un usuario no privilegiado con <code>USER</code>.
+5. <strong>Usar <code>.dockerignore</code></strong> para excluir archivos innecesarios (como <code>node_modules</code>, <code>.git</code>).
+6. <strong>Un proceso por contenedor</strong>: simplifica el escalado y los logs.
+7. <strong>Usar multi-stage builds</strong> para reducir el tamaño de la imagen final.
+8. <strong>Usar variables ARG y ENV</strong> para hacer el Dockerfile configurable.</p>
+<h3 id="ejemplos"><strong>Ejemplos</strong></h3>
+<h4 id="ejemplo-1-aplicacion-python-simple"><code>Ejemplo 1: Aplicación Python simple</code></h4>
+<pre><code class="language-dockerfile"># Imagen base oficial de Python
+FROM python:3.11-slim
+# Metadatos
+LABEL maintainer="tu@email.com"
+LABEL version="1.0"
+# Variables de entorno
+ENV APP_HOME=/app
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+# Directorio de trabajo
+WORKDIR $APP_HOME
+# Copiar e instalar dependencias primero (aprovecha caché de capas)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+# Copiar el código fuente
+COPY . .
+# Exponer el puerto
+EXPOSE 8000
+# Usuario no root (buena práctica de seguridad)
+RUN adduser --disabled-password --gecos '' appuser
+USER appuser
+# Comando por defecto
+CMD ["python", "app.py"]
+</code></pre>
+<h4 id="ejemplo-2-servidor-web-nginx-con-contenido-personalizado"><code>Ejemplo 2: Servidor web Nginx con contenido personalizado</code></h4>
+<pre><code class="language-dockerfile">FROM nginx:alpine
+# Copiar configuración personalizada
+COPY nginx.conf /etc/nginx/nginx.conf
+# Copiar contenido web
+COPY html/ /usr/share/nginx/html/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+</code></pre>
+<h4 id="ejemplo-3-imagen-con-alpine-y-python-ejemplo-del-temario"><code>Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)</code></h4>
+<pre><code class="language-dockerfile">FROM alpine:latest
+RUN apk update &amp;&amp; apk add python3
+RUN ln -sf python3 /usr/bin/python
+CMD ["python3"]
+</code></pre>
+<h4 id="ejemplo-4-multi-stage-build-construccion-en-multiples-etapas"><code>Ejemplo 4: Multi-stage build (construcción en múltiples etapas)</code></h4>
+<pre><code class="language-dockerfile"># Técnica avanzada para reducir el tamaño de la imagen final
+FROM node:18 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+# Etapa de producción (imagen final ligera)
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+</code></pre>
+<h4 id="ejemplo-5-combinar-comandos-run-para-reducir-capas"><code>Ejemplo 5: Combinar comandos RUN para reducir capas</code></h4>
+<pre><code class="language-dockerfile">RUN apt-get update &amp;&amp; \
+    apt-get install -y curl git &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+</code></pre>
+<h3 id="comandos-para-construir-imagenes"><strong>Comandos para construir imágenes</strong></h3>
+<pre><code class="language-bash">docker build -t mi-app:1.0 .                          # Construir imagen desde el directorio actual
+docker build -f ruta/al/Dockerfile -t mi-app:1.0 .    # Especificar ubicación del Dockerfile
+docker build --build-arg VERSION=2.0 -t mi-app:2.0 .  # Pasar argumentos de construcción
+docker build --no-cache -t mi-app:1.0 .               # Sin usar caché
+docker history mi-app:1.0                             # Ver las capas generadas
+</code></pre>
+<h2 id="docker-compose">Docker Compose</h2>
+<hr>
+<p><strong>Docker Compose</strong> es una herramienta para <strong>definir y ejecutar aplicaciones Docker multi-contenedor</strong> mediante un archivo YAML (<code>docker-compose.yml</code>). Con un solo comando se crean e inician todos los servicios de la aplicación.</p>
+<p><strong>Casos de uso</strong>
+- Aplicaciones con varios servicios (frontend + backend + base de datos + cache...).
+- Entornos de desarrollo reproducibles.
+- Testing e integración continua.
+- Despliegues en entornos sencillos (staging, desarrollo).
+<strong>Buenas prácticas con Docker Compose</strong>
+1. <strong>Usar archivos <code>.env</code></strong> para las variables sensibles (contraseñas, claves API).
+2. <strong>Definir políticas de reinicio</strong> (<code>restart: unless-stopped</code>) en producción.
+3. <strong>Usar <code>healthcheck</code></strong> para que <code>depends_on</code> espere a que el servicio esté realmente listo.
+4. <strong>Separar configuraciones por entorno</strong>: <code>docker-compose.yml</code> (base) + <code>docker-compose.override.yml</code> (desarrollo) + <code>docker-compose.prod.yml</code> (producción).
+5. <strong>Definir redes explícitas</strong> en lugar de usar la red por defecto.
+6. <strong>Nombrar los volúmenes</strong> para facilitar su gestión e identificación.</p>
+<h3 id="estructura-del-archivo"><strong>Estructura del archivo</strong></h3>
+<pre><code class="language-yaml"># Ejemplo de plantilla definiendo cada variable
+services:                 # Sección principal donde defines tus contenedores
+  nombre-servicio:
+    image: node:18-alpine # Imagen Docker a usar (desde Docker Hub o registro)   
+    build: .              # Directorio para construir tu propia imagen (Dockerfile)
+    container_name: app   # Nombre personalizado para el contenedor
+    ports:                # Mapeo de puertos: "anfitrión:contenedor"
+      - "8080:3000"      
+    volumes:              # Montaje de volúmenes persistentes o carpetas compartidas
+      - ./data:/app/data  # "anfitrión:contenedor"      
+    environment:          # Variables de entorno directamente en el archivo
+      - NODE_ENV=production      
+    env_file:             # Carga variables de entorno desde un archivo externo 
+      - .env      
+    depends_on:           # Orden de inicio: espera a que otros servicios arranquen 
+      - db      
+    networks:             # Redes a las que se debe conectar este servicio
+      - mi-red      
+    restart: always       # Reinicio (no, always, unless-stopped, on-failure)
+    command: npm start    # Sobreescribe el comando por defecto (CMD) de la imagen    
+    entrypoint: /app.sh   # Sobreescribe el punto de entrada principal de la imagen    
+    healthcheck:          # Comando para verificar si el servicio está sano
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+
+volumes:                  # Declarar volúmenes con nombre (persistencia)
+  nombre-volumen:
+
+networks:                 # Definir redes personalizadas (aislamiento de red)
+  nombre-red:
+</code></pre>
+<h3 id="ejemplos_1"><strong>Ejemplos</strong></h3>
+<h4 id="aplicacion-web-base-de-datos-con-un-dockerfile"><code>Aplicación web + Base de datos (con un Dockerfile)</code></h4>
+<pre><code class="language-yaml">services:
+  web:
+    build: .                # Construye desde el Dockerfile del directorio actual
+    image: mi-app:latest
+    container_name: mi-web
+    ports:
+      - "8080:80"           # host:contenedor
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/midb
+      - DEBUG=false
+    volumes:
+      - ./static:/app/static
+    depends_on:
+      - db
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    container_name: mi-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: midb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  cache:
+    image: redis:7-alpine
+    container_name: mi-cache
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:          # Volumen persistente para la base de datos
+
+networks:
+  app-network:
+    driver: bridge
+</code></pre>
+<h4 id="aplicacion-web-con-nginx-php-fpm-mysql"><code>Aplicación web con Nginx + PHP-FPM + MySQL</code></h4>
+<pre><code class="language-yaml">services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  php:
+    image: php:8.2-fpm
+    volumes:
+      - ./src:/var/www/html
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: app
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
+</code></pre>
+<h3 id="comandos-de-docker-compose"><strong>Comandos de Docker Compose</strong></h3>
+<pre><code class="language-bash"># Gestión de Ciclo de Vida
+docker compose up -d              # Iniciar todos los servicios (en segundo plano)
+docker compose up -d --build      # Iniciar y reconstruir imágenes si hay cambios
+docker compose down               # Detener y eliminar contenedores y redes
+docker compose down -v            # también elimina volúmenes
+docker compose start              # Inicia servicios que ya estaban creados pero parados
+docker compose restart            # Reinicia los servicios
+docker compose stop               # Detiene los servicios sin eliminarlos
+# Construcción y Preparación
+docker compose build              # Construye o reconstruye las imágenes (si cambias Dockerfile)
+docker compose pull               # Descarga las imágenes de los servicios desde el registro
+docker compose create             # Crea los contenedores pero no los inicia
+# Mantenimiento y Visualización
+docker compose ps                 # Lista el estado de los contenedores del proyecto
+docker compose logs -f            # Muestra los logs de los servicios (en tiempo real)
+docker compose config             # Valida y muestra la configuración final del archivo YAML
+docker compose top                # Muestra los procesos que se ejecutan en cada contenedor
+# Escalado y Ejecución
+docker compose exec servicio bash # Entra a la terminal de un contenedor en ejecución
+docker compose run servicio       # Ejecuta un comando puntual en un servicio nuevo
+docker compose scale servicio=3   # Escala el número de instancias/réplicas de un servicio
+</code></pre>
+<h2 id="resumen-de-comandos-esenciales">Resumen de comandos esenciales</h2>
+<hr>
+<pre><code class="language-bash"># ── IMÁGENES ──────────────────────────────────────
+docker pull nginx:alpine            # Descargar imagen
+docker images                       # Listar imágenes
+docker rmi nginx:alpine             # Eliminar imagen
+docker build -t mi-app .            # Construir imagen
+
+# ── CONTENEDORES ──────────────────────────────────
+docker run -d -p 8080:80 --name web nginx   # Crear y ejecutar
+docker ps                           # Listar activos
+docker ps -a                        # Listar todos
+docker stop web                     # Parar
+docker start web                    # Iniciar
+docker rm web                       # Eliminar
+docker exec -it web bash            # Terminal interactivo
+docker logs -f web                  # Ver logs
+
+# ── REDES ─────────────────────────────────────────
+docker network ls                   # Listar redes
+docker network create mi-red        # Crear red
+docker network inspect mi-red       # Inspeccionar
+docker network connect mi-red web   # Conectar contenedor
+
+# ── VOLÚMENES ─────────────────────────────────────
+docker volume create mis-datos      # Crear volumen
+docker volume ls                    # Listar volúmenes
+docker volume inspect mis-datos     # Inspeccionar
+docker run -v mis-datos:/data nginx # Usar volumen
+
+# ── DOCKER COMPOSE ────────────────────────────────
+docker compose up -d                # Iniciar servicios
+docker compose down                 # Parar y eliminar
+docker compose ps                   # Ver estado
+docker compose logs -f              # Ver logs
+docker compose exec web bash        # Terminal en servicio
+</code></pre>
+<h2 id="referencias">Referencias</h2>
+<hr>
+<blockquote>
+<p>📚 <strong>Documentación oficial:</strong> https://docs.docker.com<br>
+🐳 <strong>Docker Hub:</strong> https://hub.docker.com<br>
+🔧 <strong>Referencia Dockerfile:</strong> https://docs.docker.com/engine/reference/builder/<br>
+⚙️ <strong>Referencia Compose:</strong> https://docs.docker.com/compose/compose-file/</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

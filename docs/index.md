@@ -14,7 +14,7 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
     🐙 <a href="https://github.com/ymorgil" target="_blank">github.com/ymorgil</a>
   </div>
   <div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 14px; font-size: 13px;">
-    💼 <a href="https://linkedin.com/in/yeray-moreno" target="_blank">LinkedIn</a>
+    💼 <a href="https://www.linkedin.com/in/yeraymo/" target="_blank">LinkedIn</a>
   </div>
 </div>
 

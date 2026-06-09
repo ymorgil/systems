@@ -1,8 +1,5 @@
 # Ejemplo: imagen y PDF en una página
 
-## Imagen
-
-![Imagen de prueba](../assets/img/pru.jpg)
 
 ## PDF
 
