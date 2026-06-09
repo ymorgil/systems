@@ -1,8 +1,6 @@
 # 🖥️ Proxmox VE — Documentación completa
 
-> Virtualización con Proxmox · [📺 Playlist completa (13 vídeos)](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ)
-
----
+> Virtualización con Proxmox · [📺 Playlist](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ)
 
 ## 📥 Instalación
 
@@ -11,7 +9,10 @@
 
 <iframe src="../assets/pdf/proxmox.pdf" width="100%" height="600px" style="border: none; border-radius: 8px;"></iframe>
 
-[:material-download: Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button }
+<iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" 
+width="100%" height="600px" style="border: none;"></iframe>
+
+[Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button }
 
 ---
 
