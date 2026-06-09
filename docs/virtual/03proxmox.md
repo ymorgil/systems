@@ -2,12 +2,7 @@
 
 > Virtualización con Proxmox · [📺 Playlist](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ)
 
-## 📥 Instalación
-
-!!! info "Guía de instalación en PDF"
-    Puedes visualizar la guía completa de instalación aquí abajo o descargarla.
-
-<iframe src="../assets/pdf/proxmox.pdf" width="100%" height="600px" style="border: none; border-radius: 8px;"></iframe>
+## 📥 Guía de instalación en PDF
 
 <iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" 
 width="100%" height="600px" style="border: none;"></iframe>
