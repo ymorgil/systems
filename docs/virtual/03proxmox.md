@@ -1,41 +1,28 @@
 # 🖥️ Proxmox VE — Documentación completa
 
-> Virtualización con Proxmox · [📺 Playlist](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ)
+## Guía de instalación en PDF
 
-## 📥 Guía de instalación en PDF
+<iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" width="70%" height="700px" style="display: block; margin: 0 auto;"></iframe>
 
-<iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" 
-width="100%" height="600px" style="border: none;"></iframe>
+[Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button style="display:table;margin:0 auto;"}
 
-[Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button }
-
----
-
-## 🧩 Conceptos básicos
+## Conceptos básicos
 
 | Término | Descripción |
 |---|---|
 | **PVE** | Proxmox Virtual Environment — el sistema completo |
 | **Nodo** | Servidor físico que tiene Proxmox instalado |
 | **Datacenter** | Vista global de todos los nodos del clúster. Los cambios aquí se aplican a todos los nodos |
+| **Summary** | Panel de monitorización del nodo |
+| **8006** | Puerto que se utiliza para el acceso web a la interfaz de Proxmox |
 
----
 
-## 🌐 Interfaz web
-
-- El acceso a la interfaz web se hace desde el navegador por el puerto `8006`
-- Para instalar Proxmox en un USB → minuto `3:30` del vídeo 02
-- **Datacenter** → muestra todos los nodos del clúster
-- **Summary** → panel de monitorización del nodo
-
-### Opciones de almacenamiento
+### Almacenamiento
 
 | Tipo | Recomendación |
 |---|---|
 | Almacenamiento local | ❌ No recomendado |
 | Almacenamiento en red | ✅ Recomendado |
-
----
 
 ## 💾 Almacenamiento local
 
@@ -66,8 +53,6 @@ df -h
     Un **directorio** organiza archivos dentro de un sistema de archivos.
     Un **volumen lógico LVM** es una entidad de almacenamiento flexible y dinámica creada dentro de un grupo de volúmenes, mucho más versátil para entornos virtualizados.
 
----
-
 ## 🖥️ Crear máquinas virtuales
 
 Pasos en orden al crear una nueva VM:
@@ -80,15 +65,11 @@ Pasos en orden al crear una nueva VM:
 6. Configurar **memoria RAM**
 7. Configurar **red**
 
----
-
 ## 🔗 Configurar un clúster
 
 Un **clúster** es la composición de varios nodos trabajando en orquestación.
 
 Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
-
----
 
 ## ⚡ Alta disponibilidad (HA)
 
@@ -101,8 +82,6 @@ Configuración en **Datacenter → HA**:
 
 1. Crear **grupos HA** formados por los nodos que participan
 2. En **HA** agregar las máquinas virtuales que se quieren proteger
-
----
 
 ## 🌐 Networking — Bridge, Bonds, VLANs
 
@@ -119,8 +98,6 @@ Las configuraciones de red se hacen a nivel de nodo en **System → Network**.
 **`active-backup`** — Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en `bond-primary`.
 
 **`LACP (802.3ad)`** — Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. Política de hash recomendada: `layer3+4`.
-
----
 
 ## 📋 Crear plantillas y clonar máquinas
 
@@ -170,8 +147,6 @@ rm /tmp/zeroes
 !!! tip "Convención de numeración"
     Por convención no escrita, las **plantillas** reciben números altos (ej. 900+) y las **máquinas virtuales** números bajos.
 
----
-
 ## 🪟 Plantillas de Windows
 
 **Requisitos:**
@@ -187,8 +162,6 @@ Antes de crear la plantilla ejecutar **Sysprep** para generalizar la instalació
 
 !!! warning "Importante"
     No añadir aplicaciones de la Microsoft Store a la imagen que se va a generalizar.
-
----
 
 ## 💾 Backup vs Snapshot
 
@@ -214,8 +187,6 @@ Antes de crear la plantilla ejecutar **Sysprep** para generalizar la instalació
 
 Documentación oficial: [pve.proxmox.com/wiki/Backup_and_Restore](https://pve.proxmox.com/wiki/Backup_and_Restore)
 
----
-
 ## 🔐 Habilitar MFA
 
 El **MFA** (Multi-Factor Authentication) requiere dos o más formas de autenticación para acceder al sistema.
@@ -237,8 +208,6 @@ Factores disponibles:
 
 !!! danger "Importante"
     Guardar siempre la **recovery key** por si se pierde el dispositivo autenticador.
-
----
 
 ## 🚚 Migrar máquinas virtuales
 
@@ -280,8 +249,6 @@ qm rescan
 # Editar la config de la VM y cambiar la etiqueta del disco a sata1
 vi /etc/pve/qemu-server/101.conf
 ```
-
----
 
 ### Método 3 — dd (clonado a nivel de bloque)
 
