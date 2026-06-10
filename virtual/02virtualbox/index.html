@@ -1,0 +1,1574 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/virtual/02virtualbox/">
+      
+      
+        <link rel="prev" href="../01introducci%C3%B3n/">
+      
+      
+        <link rel="next" href="../03proxmox/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>VirtualBox - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#virtual-box" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VirtualBox
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#configuraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Configuraciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💿WINDOWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💿WINDOWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actualizar-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actualizar sistemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actualizar-guest-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Actualizar Guest Additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-prompt-en-color" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Prompt en color
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-alias-y-atajos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Alias y atajos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📀LINUX
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📀LINUX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actualizar-sistemas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actualizar sistemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actualizar-guest-additions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Actualizar Guest Additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-color-del-promptdirectorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Color del prompt/directorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-alias-y-atajos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Alias y atajos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-frecuentes-faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☢️ Preguntas frecuentes (FAQ)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="☢️ Preguntas frecuentes (FAQ)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-usuario-en-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Usuario en Windows 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-pantallazo-negro-en-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Pantallazo negro en Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-tortuga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Tortuga
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/01intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/02awsintro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/03EC2o.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenedores/00contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01docker-windows.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/02docker-linux.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03docker-compose.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/04kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#configuraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Configuraciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💿WINDOWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💿WINDOWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actualizar-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actualizar sistemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actualizar-guest-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Actualizar Guest Additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-prompt-en-color" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Prompt en color
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-alias-y-atajos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Alias y atajos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📀LINUX
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📀LINUX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actualizar-sistemas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actualizar sistemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actualizar-guest-additions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Actualizar Guest Additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-color-del-promptdirectorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Color del prompt/directorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-alias-y-atajos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Alias y atajos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preguntas-frecuentes-faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☢️ Preguntas frecuentes (FAQ)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="☢️ Preguntas frecuentes (FAQ)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-usuario-en-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Usuario en Windows 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-pantallazo-negro-en-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Pantallazo negro en Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-tortuga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Tortuga
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="virtual-box"><strong>💠 VIRTUAL BOX</strong></h1>
+<p>Durante el curso se van a trabajar con diferentes máquinas virtuales estas deben tener las configuraciones básicas solicitadas y realizar una ova de las mismas despues de configurarlas, para cada supuesto se harán clonaciones y se trabajará sobre estas. </p>
+<pre><code>Los sistemas operativos principales son:
+  px92 - Proxmox 9.2
+  ud26 - Ubuntu Desktop 26.04 LTS 
+  us26 - Ubuntu Server  26.04 LTS
+  wd11 - Windows Clente 11
+  ws25 - Windows Server 2025
+</code></pre>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/con-01.png" data-desc-position="bottom"><img alt="Configuración" src="../../assets/img/vir/con-01.png"></a></p>
+<h2 id="configuraciones">💻 Configuraciones</h2>
+<p>Las configuraciones de las máquinas dependen de los recursos que tenga el equipo real, pero para un correcto funcionamiento y evitar problema se solicitan los siguientes requisitos <strong>mínimos</strong>:</p>
+<ol>
+<li>Sistemas de 64-bit y sistema EFI activado en todos</li>
+<li>4GB = 4096MB de memoria RAM y 4 procesadores</li>
+<li>100GB de disco duro</li>
+<li>Habilitar en General → Avanzado el portapapeles y el arrastrar y soltar.</li>
+<li>Descargar las <strong>imágenes iso</strong>, de los diferentes sistemas operativos, las agregamos a la unidad óptica e iniciamos la máquina virtual siguiendo el asistente de instalación. En este apartado es importante poner como nombre de usuario el nombre de alumnado, y como nombre de equipo la clave del sistema operatico y el nombre del alumnado.</li>
+</ol>
+<blockquote>
+<p>NOTA: Las máquinas en los equipos de clase se han de guardar en la unidad D, cada cierto tiempo se hace limpieza de la unidad C y podrían ser eliminadas.</p>
+</blockquote>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/con-02.png" data-desc-position="bottom"><img alt="Configuración" src="../../assets/img/vir/con-02.png" width="400"></a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/con-03.png" data-desc-position="bottom"><img alt="Configuración" src="../../assets/img/vir/con-03.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/con-04.png" data-desc-position="bottom"><img alt="Configuración" src="../../assets/img/vir/con-04.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="windows">💿WINDOWS</h2>
+<p>Las configuraciones básicas se basan en hacer los siguientes pasos en todas las máquinas, como ejemplo se van a realizar para <code>Windows 11 PRO</code>:</p>
+<h3 id="1-actualizar-sistemas">1. Actualizar sistemas</h3>
+<p>Para actualizar el sistema iremos a la pestaña de configuración y en la sección de Windows Update buscaremos y actualizaremos el sistema hasta la última versión disponible. </p>
+<p>Una vez actualizado comprobaremos que nuestra versión, obtenida con las teclas <code>win + R</code> y escribiendo <code>winver</code> en la pestaña de ejecutar, coincide con la última del historial de versiones de nuestro sistemas el cual lo obtendremos de la información de la <a href="https://learn.microsoft.com/es-es/windows/release-health/" target="_blank">web oficial</a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-01.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-01.png"></a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-02.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-02.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-03.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-03.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-actualizar-guest-additions">2. Actualizar Guest Additions</h3>
+<p>Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. Para ello vamos a la unidad de CD desde el sistema operativo y ejecutamos el programa y seguimos los pasos del asistente de instalación:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-04.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-04.png" width="400"></a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-05.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-05.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-06.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-06.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-07.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-07.png"></a></td>
+</tr>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-08.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-08.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-09.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-09.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-10.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-10.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-prompt-en-color">3. Prompt en color</h3>
+<p>Para cambiar el color del <strong>prompt</strong> en PowerShell tenemos que:</p>
+<ol>
+<li>Iniciar Powershell como administrador y cambiar las políticas de ejecución que nos permita ejecutar el script que vamos a crear   <code>Set-ExecutionPolicy Unrestricted</code> </li>
+<li>Crear un <strong>Script</strong>, es un archivo con el nombre "<strong>Microsoft.PowerShell_profile.ps1</strong>" para lo cual usaremos el <code>PowerShell ISE</code>, este archivo tendrá el código de la imagen 2 y se guardará en el directorio <code>C:\Users\user1\Documents\WindowsPowerShell</code>, al reiniciar PowerShell ya estaría el color cambiado.</li>
+</ol>
+<blockquote>
+<p>IMPORTANTE: Hay que respetar el nombre del archivo, la ruta y el código, cualquier carácter incorrecto podría significar el no funcionamiento del mismo. Recordar que user1 es el nombre de vuestro usuario en el sistema</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-11.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-11.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-12.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-12.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-13.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-13.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-alias-y-atajos">4. Alias y atajos</h3>
+<p>Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerShell en mi caso es <code>C:\Users\yeray\AppData\Roaming\Microsoft\Windows\StartMenu\Programs\Windows PowerShell</code>. A continuación, botón secundario <strong>propiedades</strong>, pestaña <strong>Acceso directo</strong> y tecla de método abreviado y pulsamos las teclas que queremos que pasen hacer los atajos para abrir dicho programa. En este caso se ha configurado para que el programa se ejecute como administrador ya que será el que frecuentemente usemos.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-14.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-14.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-15.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-15.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/win-16.png" data-desc-position="bottom"><img alt="Windows" src="../../assets/img/vir/win-16.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="linux">📀LINUX</h2>
+<p>Los siguientes pasos de configuraciones básicas se han de hacer en todas las máquinas base de Linux en este caso se muestra un ejemplo en Ubuntu server que al no tener interfaz gráfica puede presenta mayores dificultades.</p>
+<h3 id="1-actualizar-sistemas_1">1. Actualizar sistemas</h3>
+<p>Para actualizar debemos de ejecutar el siguiente comando en modo superusuario: <code>sudo apt update &amp;&amp; apt upgrade -y &amp;&amp; apt autoremove</code> a veces la propia terminal nos solicitara algunos comandos más en sus mensajes, deberemos realizarlo hasta que al final de la captura se muestran <strong>cuatro 0</strong> que indican que no faltan paquetes por actualizar ni instalar.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-01.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-01.png"></a></p>
+<h3 id="2-actualizar-guest-additions_1">2. Actualizar Guest Additions</h3>
+<p>Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de las Guest Additions. A continuación, creamos una carpeta (guest) montamos los directorios del CD y comprobamos su contenido, en él nos encontramos varios programas ejecutables usamos el comando sh para ejecutar las Guestt Additions de Linux y se instalen. A veces nos muestra un error porque necesitamos el paquete bzip2 para poder descomprimir el contenido de las Guest Additions, lo instalamos con <code>apt install bzip2</code> y después ejecutamos el script.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-02.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-02.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-03.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-03.png"></a></td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-04.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-04.png"></a></p>
+<h3 id="3-color-del-promptdirectorios">3. Color del prompt/directorios</h3>
+<p>Para cambiar el color del <strong>prompt</strong> debemos de seguir los siguientes pasos por <strong>cada usuario</strong> del sistema (por defecto hay 2), en este manual se hará solo para el usuario administrador (<strong>root</strong>):</p>
+<ol>
+<li>Iniciamos sesión en el usuario y vamos a su directorio personal con el comando <code>cd ~</code>, a continuación, modificamos el archivo oculto .bashrc con el siguiente comando: <code>nano .bashrc</code></li>
+<li>Debemos hacer dos cambios:<ol>
+<li>Eliminar el comentario, es decir eliminar el <strong>#</strong> que aparece delante de la línea <strong>force_color_prompt=yes</strong></li>
+<li>Cambiar el valor de la variable PS1 que tendrá que cambiarse por lo siguiente: <code>PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '</code> (El 36 es el cambio)</li>
+</ol>
+</li>
+<li>Comprobamos reiniciando sesión en los usuario y mostrando que sale el prompt en los colores configurados.</li>
+</ol>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-05.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-05.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-06.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-06.png" width="500"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-07.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-07.png"></a></p>
+<hr>
+<p>Para cambiar el color de los <strong>directorios</strong> modificamos la variable <code>$LS_COLORS</code> (archivo que contiene los colores predeterminados que vienen preconfigurados en el sistema), la modificación consistira en cambiar el código de los directorios ya que el azul como se muestra en la captura es un color con dificultades de legibilidad en fondo negro. Pasos:</p>
+<ol>
+<li>Crear el archivo oculto <code>dircolors -p &gt; .dircolors</code> formateado.</li>
+<li>Editar archivo con el nano y buscar donde esta el color de los directorios (variable <strong>dir</strong>) y cambiar de <strong>34(azul)</strong> a <strong>32(Verde)</strong> como se muestra en la captura.</li>
+<li>Reiniciamos la sesión del usuario y comprobamos los cambios.</li>
+</ol>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-08.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-08.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-09.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-09.png" width="500"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-10.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-10.png"></a></p>
+<h3 id="4-alias-y-atajos_1">4. Alias y atajos</h3>
+<p>En este paso crearemos un alias que nos va a facilitar el trabajo durante el resto del curso y será el alias de <strong>act</strong>, para ello en el archivo <strong>.bashrc</strong>, debemos añadir una línea por cada alias. Una vez abierto con <code>nano .bashrc</code> podemos editar, buscamos la sección de los alias y añadimos los alias que necesitemos.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/ubu-11.png" data-desc-position="bottom"><img alt="Ubuntu" src="../../assets/img/vir/ubu-11.png"></a></p>
+<h2 id="preguntas-frecuentes-faq">☢️ Preguntas frecuentes (FAQ)</h2>
+<h3 id="-usuario-en-windows-11">- Usuario en Windows 11</h3>
+<p>En la configuración de Windows 11 nos solicita un correo electrónico para generar una cuenta de microsoft, para saltarnos este paso y crear una cuenta local debemos de mostrar la consola con <code>SHIFT + F10</code> justo en el momento que nos pida el correo.</p>
+<p>Una vez en la consola escribir el comando <code>start ms-cxh:localonly</code> y se nos mostrara el asistente para la creación del usuario local.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/faq-01.png" data-desc-position="bottom"><img alt="Preguntas" src="../../assets/img/vir/faq-01.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/vir/faq-02.png" data-desc-position="bottom"><img alt="a" src="../../assets/img/vir/faq-02.png"></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-pantallazo-negro-en-ubuntu">- Pantallazo negro en Ubuntu</h3>
+<ol>
+<li>En primer lugar, mirar la comprobación hardware de la máquina y comprobar que el <strong>Tipo de chipset: ICH9</strong></li>
+<li>En caso de que siga sin funcionar pasamos al método número dos que consiste en seguir las instrucciones del siguiente <a href="https://youtu.be/LKIJFn6cqVE" target="_blank">video</a></li>
+</ol>
+<h3 id="-tortuga">- Tortuga</h3>
+<p>Hay un pequeño icono de una tortuga verde que aparece en la barra de estado de la máquina virtual (abajo a la derecha, justo al lado de los iconos de disco duro, red, etc.).</p>
+<p>Significa que VirtualBox no está usando la aceleración por hardware de tu procesador (VT-x en Intel o AMD-V en AMD).</p>
+<p>Si las máquinas van muy lentas deberemos de comprobar si tenemos un error de la tortuga y solucionarlo a través del siguiente <a href="https://youtu.be/6FUJJN4K-2o" target="_blank">video</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

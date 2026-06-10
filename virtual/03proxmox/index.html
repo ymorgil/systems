@@ -1,0 +1,1906 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/virtual/03proxmox/">
+      
+      
+        <link rel="prev" href="../02virtualbox/">
+      
+      
+        <link rel="next" href="../../contenedores/00contenedores/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Proxmox - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proxmox-ve-documentacion-completa" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Proxmox
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02virtualbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-instalacion-en-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía de instalación en PDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Almacenamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#almacenamiento-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Almacenamiento local
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💾 Almacenamiento local">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redimensionado-de-volumenes-logicos-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redimensionado de volúmenes lógicos (LVM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-maquinas-virtuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🖥️ Crear máquinas virtuales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurar-un-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Configurar un clúster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alta-disponibilidad-ha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Alta disponibilidad (HA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#networking-bridge-bonds-vlans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Networking — Bridge, Bonds, VLANs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 Networking — Bridge, Bonds, VLANs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modos-de-bond-destacados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modos de Bond destacados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-plantillas-y-clonar-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Crear plantillas y clonar máquinas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Crear plantillas y clonar máquinas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-preparar-la-maquina-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1 — Preparar la máquina base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-convertir-a-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2 — Convertir a plantilla
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plantillas-de-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🪟 Plantillas de Windows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-vs-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Backup vs Snapshot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💾 Backup vs Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regla-de-los-3-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regla de los 3 backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modos-de-backup-en-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modos de Backup en Proxmox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#habilitar-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔐 Habilitar MFA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Habilitar MFA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurar-totp-en-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar TOTP en Proxmox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrar-maquinas-virtuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚚 Migrar máquinas virtuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚚 Migrar máquinas virtuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-1-clonezilla-disco-a-disco-por-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 1 — Clonezilla (disco a disco por red)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-2-disk2vhd-p2v-fisico-a-virtual-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 2 — Disk2vhd (P2V, físico a virtual Windows)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-3-dd-clonado-a-nivel-de-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 3 — dd (clonado a nivel de bloque)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/01intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/02awsintro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/03EC2o.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenedores/00contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01docker-windows.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/02docker-linux.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03docker-compose.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/04kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-instalacion-en-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía de instalación en PDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Almacenamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#almacenamiento-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Almacenamiento local
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💾 Almacenamiento local">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redimensionado-de-volumenes-logicos-lvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redimensionado de volúmenes lógicos (LVM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-maquinas-virtuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🖥️ Crear máquinas virtuales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurar-un-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Configurar un clúster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alta-disponibilidad-ha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Alta disponibilidad (HA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#networking-bridge-bonds-vlans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Networking — Bridge, Bonds, VLANs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 Networking — Bridge, Bonds, VLANs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modos-de-bond-destacados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modos de Bond destacados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-plantillas-y-clonar-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Crear plantillas y clonar máquinas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Crear plantillas y clonar máquinas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-preparar-la-maquina-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1 — Preparar la máquina base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-convertir-a-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2 — Convertir a plantilla
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plantillas-de-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🪟 Plantillas de Windows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-vs-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Backup vs Snapshot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💾 Backup vs Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regla-de-los-3-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regla de los 3 backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modos-de-backup-en-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modos de Backup en Proxmox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#habilitar-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔐 Habilitar MFA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Habilitar MFA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurar-totp-en-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar TOTP en Proxmox
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrar-maquinas-virtuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚚 Migrar máquinas virtuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚚 Migrar máquinas virtuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-1-clonezilla-disco-a-disco-por-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 1 — Clonezilla (disco a disco por red)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-2-disk2vhd-p2v-fisico-a-virtual-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 2 — Disk2vhd (P2V, físico a virtual Windows)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-3-dd-clonado-a-nivel-de-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método 3 — dd (clonado a nivel de bloque)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="proxmox-ve-documentacion-completa">🖥️ Proxmox VE — Documentación completa</h1>
+<h2 id="guia-de-instalacion-en-pdf">Guía de instalación en PDF</h2>
+<iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&amp;embedded=true" width="70%" height="700px" style="display: block; margin: 0 auto;"></iframe>
+
+<p><a class="md-button" href="../../assets/pdf/proxmox.pdf" style="display:table;margin:0 auto;">Descargar guía de instalación</a></p>
+<h2 id="conceptos-basicos">Conceptos básicos</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PVE</strong></td>
+<td>Proxmox Virtual Environment — el sistema completo</td>
+</tr>
+<tr>
+<td><strong>Nodo</strong></td>
+<td>Servidor físico que tiene Proxmox instalado</td>
+</tr>
+<tr>
+<td><strong>Datacenter</strong></td>
+<td>Vista global de todos los nodos del clúster. Los cambios aquí se aplican a todos los nodos</td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>Panel de monitorización del nodo</td>
+</tr>
+<tr>
+<td><strong>8006</strong></td>
+<td>Puerto que se utiliza para el acceso web a la interfaz de Proxmox</td>
+</tr>
+</tbody>
+</table>
+<h3 id="almacenamiento">Almacenamiento</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Recomendación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Almacenamiento local</td>
+<td>❌ No recomendado</td>
+</tr>
+<tr>
+<td>Almacenamiento en red</td>
+<td>✅ Recomendado</td>
+</tr>
+</tbody>
+</table>
+<h2 id="almacenamiento-local">💾 Almacenamiento local</h2>
+<p><strong><code>local</code></strong> — Configurado para ISO, plantillas y copias de seguridad. Por defecto no almacena máquinas virtuales.</p>
+<p><strong><code>local-lvm</code></strong> — Permite almacenar imágenes de disco y contenedores.</p>
+<h3 id="redimensionado-de-volumenes-logicos-lvm">Redimensionado de volúmenes lógicos (LVM)</h3>
+<pre><code class="language-bash"># 1. Crear volumen físico
+pvcreate /dev/sdX
+
+# 2. Extender el grupo de volúmenes
+vgextend nombre-vg /dev/sdX
+
+# 3. Extender el volumen lógico
+lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+
+# 4. Redimensionar el sistema de archivos
+resize2fs /dev/ubuntu-vg/ubuntu-lv
+
+# 5. Comprobar puntos de montaje
+df -h
+</code></pre>
+<p>!!! note "Directorio vs Volumen lógico"
+    Un <strong>directorio</strong> organiza archivos dentro de un sistema de archivos.
+    Un <strong>volumen lógico LVM</strong> es una entidad de almacenamiento flexible y dinámica creada dentro de un grupo de volúmenes, mucho más versátil para entornos virtualizados.</p>
+<h2 id="crear-maquinas-virtuales">🖥️ Crear máquinas virtuales</h2>
+<p>Pasos en orden al crear una nueva VM:</p>
+<ol>
+<li>Seleccionar <strong>nodo</strong>, ID y nombre</li>
+<li>Seleccionar <strong>sistema operativo</strong> (ISO)</li>
+<li><strong>System</strong> — dejar por defecto</li>
+<li>Añadir <strong>disco</strong> y elegir el almacenamiento</li>
+<li>Configurar <strong>CPU</strong></li>
+<li>Configurar <strong>memoria RAM</strong></li>
+<li>Configurar <strong>red</strong></li>
+</ol>
+<h2 id="configurar-un-cluster">🔗 Configurar un clúster</h2>
+<p>Un <strong>clúster</strong> es la composición de varios nodos trabajando en orquestación.</p>
+<p>Desde <strong>Datacenter → Cluster</strong> se crea o se une a un clúster. Una vez configurado, es posible <strong>migrar máquinas virtuales entre nodos</strong> del clúster.</p>
+<h2 id="alta-disponibilidad-ha">⚡ Alta disponibilidad (HA)</h2>
+<p>!!! warning "Requisito"
+    Para configurar HA es <strong>obligatorio</strong> tener un clúster previo.</p>
+<p>Si un nodo falla, las máquinas virtuales se <strong>migran automáticamente</strong> a otro nodo del clúster.</p>
+<p>Configuración en <strong>Datacenter → HA</strong>:</p>
+<ol>
+<li>Crear <strong>grupos HA</strong> formados por los nodos que participan</li>
+<li>En <strong>HA</strong> agregar las máquinas virtuales que se quieren proteger</li>
+</ol>
+<h2 id="networking-bridge-bonds-vlans">🌐 Networking — Bridge, Bonds, VLANs</h2>
+<p>Las configuraciones de red se hacen a nivel de nodo en <strong>System → Network</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bridge</strong></td>
+<td>Switch virtual. Permite conectar múltiples VMs con un solo adaptador físico. Se crea uno por defecto en la instalación</td>
+</tr>
+<tr>
+<td><strong>VLAN</strong></td>
+<td>Segmentos de red virtuales</td>
+</tr>
+<tr>
+<td><strong>Bond</strong></td>
+<td>Une varios adaptadores de red físicos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modos-de-bond-destacados">Modos de Bond destacados</h3>
+<p><strong><code>active-backup</code></strong> — Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en <code>bond-primary</code>.</p>
+<p><strong><code>LACP (802.3ad)</code></strong> — Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. Política de hash recomendada: <code>layer3+4</code>.</p>
+<h2 id="crear-plantillas-y-clonar-maquinas">📋 Crear plantillas y clonar máquinas</h2>
+<h3 id="paso-1-preparar-la-maquina-base">Paso 1 — Preparar la máquina base</h3>
+<pre><code class="language-bash"># Actualizar el sistema
+apt update -y &amp;&amp; apt dist-upgrade -y
+
+# Instalar agente QEMU
+apt install qemu-guest-agent -y
+
+# Limpiar caché de paquetes
+apt-get clean
+apt-get autoremove
+apt-get autoclean
+
+# Eliminar logs
+find /var/log -type f -delete
+rm -rf /var/log/*
+
+# Limpiar /tmp
+rm -rf /tmp/*
+
+# Borrar historial de comandos
+cat /dev/null &gt; ~/.bash_history &amp;&amp; history -c
+
+# Borrar caché de usuario
+rm -rf ~/.cache/*
+
+# Eliminar claves SSH (se regenerarán al clonar)
+rm /etc/ssh/ssh_host_*
+
+# Resetear hostname
+hostnamectl set-hostname plantilla
+
+# Escribir ceros al espacio libre (compresión más eficiente)
+dd if=/dev/zero of=/tmp/zeroes bs=1M
+rm /tmp/zeroes
+</code></pre>
+<h3 id="paso-2-convertir-a-plantilla">Paso 2 — Convertir a plantilla</h3>
+<ol>
+<li>Clic derecho sobre la VM → <strong>Convert to Template</strong></li>
+<li>Añadir un <strong>Cloud-Init Drive</strong> para poder automatizar el despliegue</li>
+</ol>
+<p>!!! tip "Convención de numeración"
+    Por convención no escrita, las <strong>plantillas</strong> reciben números altos (ej. 900+) y las <strong>máquinas virtuales</strong> números bajos.</p>
+<h2 id="plantillas-de-windows">🪟 Plantillas de Windows</h2>
+<p><strong>Requisitos:</strong>
+- VM con 2 unidades de CD
+- ISO de Windows
+- ISO de drivers VirtIO: <a href="https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers">pve.proxmox.com/wiki/Windows_VirtIO_Drivers</a>
+- Guía oficial Windows 10: <a href="https://pve.proxmox.com/wiki/Windows_10_guest_best_practices">pve.proxmox.com/wiki/Windows_10_guest_best_practices</a></p>
+<p>Antes de crear la plantilla ejecutar <strong>Sysprep</strong> para generalizar la instalación (evita IDs duplicados al clonar):</p>
+<ul>
+<li><a href="https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11">Generalizar con Sysprep</a></li>
+<li><a href="https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11">Opciones de línea de comandos Sysprep</a></li>
+</ul>
+<p>!!! warning "Importante"
+    No añadir aplicaciones de la Microsoft Store a la imagen que se va a generalizar.</p>
+<h2 id="backup-vs-snapshot">💾 Backup vs Snapshot</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Backup</th>
+<th>Snapshot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Qué es</strong></td>
+<td>Clon completo del disco</td>
+<td>Estado puntual de la VM</td>
+</tr>
+<tr>
+<td><strong>Es independiente de la VM</strong></td>
+<td>✅ Sí</td>
+<td>❌ No, forma parte de la VM</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Recuperación ante desastre</td>
+<td>Probar cambios y revertir rápido</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regla-de-los-3-backups">Regla de los 3 backups</h3>
+<ol>
+<li><strong>Producción</strong> — copia en el propio entorno</li>
+<li><strong>Backup externo</strong> — en otro medio/red fuera de la infraestructura</li>
+<li><strong>Backup offsite</strong> — en otra geolocalización</li>
+</ol>
+<h3 id="modos-de-backup-en-proxmox">Modos de Backup en Proxmox</h3>
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stop</strong></td>
+<td>Mayor consistencia, breve tiempo de inactividad</td>
+</tr>
+<tr>
+<td><strong>Suspend</strong></td>
+<td>Suspende la VM. No recomendado (mayor inactividad sin mejor consistencia)</td>
+</tr>
+<tr>
+<td><strong>Snapshot</strong></td>
+<td>Mínimo tiempo de inactividad. Pequeño riesgo de inconsistencia</td>
+</tr>
+</tbody>
+</table>
+<p>Documentación oficial: <a href="https://pve.proxmox.com/wiki/Backup_and_Restore">pve.proxmox.com/wiki/Backup_and_Restore</a></p>
+<h2 id="habilitar-mfa">🔐 Habilitar MFA</h2>
+<p>El <strong>MFA</strong> (Multi-Factor Authentication) requiere dos o más formas de autenticación para acceder al sistema.</p>
+<p>Factores disponibles:</p>
+<ul>
+<li>Contraseña</li>
+<li>Código SMS</li>
+<li>Aplicación de autenticación (TOTP)</li>
+<li>Token hardware (ej. <strong>Yubico</strong> — recomendado)</li>
+<li>Biometría</li>
+</ul>
+<h3 id="configurar-totp-en-proxmox">Configurar TOTP en Proxmox</h3>
+<ol>
+<li>Ir a <strong>My Settings → TFA</strong></li>
+<li>En <strong>Permisos → Two Factor</strong> → <strong>Add</strong></li>
+<li>Seleccionar <strong>TOTP</strong> → escanear el QR con la app autenticadora</li>
+<li>El token se renueva cada 30 segundos</li>
+</ol>
+<p>!!! danger "Importante"
+    Guardar siempre la <strong>recovery key</strong> por si se pierde el dispositivo autenticador.</p>
+<h2 id="migrar-maquinas-virtuales">🚚 Migrar máquinas virtuales</h2>
+<h3 id="metodo-1-clonezilla-disco-a-disco-por-red">Método 1 — Clonezilla (disco a disco por red)</h3>
+<p><a href="https://clonezilla.org/downloads.php">Descargar Clonezilla liveCD</a></p>
+<p><strong>En la MV origen:</strong></p>
+<pre><code>remote-source &gt;&gt; Beginner &gt;&gt; disk_to_remote_disk &gt;&gt; dhcp
+&gt;&gt; elegir disco &gt;&gt; -sfsck &gt;&gt; -k0 &gt;&gt; -p choose
+</code></pre>
+<p><strong>En la MV destino:</strong></p>
+<pre><code>remote-dest &gt;&gt; dhcp &gt;&gt; IP_MVorigen &gt;&gt; restoredisk
+</code></pre>
+<p>Revertir el orden de arranque al disco tras finalizar.</p>
+<hr>
+<h3 id="metodo-2-disk2vhd-p2v-fisico-a-virtual-windows">Método 2 — Disk2vhd (P2V, físico a virtual Windows)</h3>
+<p><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/disk2vhd">Descargar Disk2vhd</a></p>
+<pre><code class="language-bash"># Convertir el disco VHD a formato QCOW2
+qemu-img convert -O qcow2 &lt;disco_origen&gt; &lt;disco_destino.qcow2&gt;
+
+# Mover la imagen a la carpeta de la VM (ej. ID 101)
+mv &lt;disco_destino.qcow2&gt; /var/lib/vz/images/101/
+
+cd /var/lib/vz/images/101/
+
+# Reescanear discos
+qm rescan
+
+# Editar la config de la VM y cambiar la etiqueta del disco a sata1
+vi /etc/pve/qemu-server/101.conf
+</code></pre>
+<h3 id="metodo-3-dd-clonado-a-nivel-de-bloque">Método 3 — dd (clonado a nivel de bloque)</h3>
+<p>Ideal para análisis forense o cuando no hay otro método.</p>
+<pre><code class="language-bash"># Ver discos disponibles
+lsblk
+
+# Clonar disco completo
+sudo dd if=/dev/nvme0n1 of=lab.img bs=1M status=progress
+
+# Renombrar como raw
+mv lab.img lab.raw
+
+# Mover a la carpeta de la VM y reescanear
+mv lab.raw /var/lib/vz/images/101/
+cd /var/lib/vz/images/101/
+qm rescan
+
+# Editar config y cambiar etiqueta a sata2
+vi /etc/pve/qemu-server/101.conf
+</code></pre>
+<hr>
+<p><em>Documentación basada en el curso de Proxmox VE · <a href="https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ">📺 Ver playlist completa</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,1331 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/contenedores/03-doc-vsc/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Docker: VSC - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ejercicio-programar-en-contenedores-docker-con-vs-code" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker: VSC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/02virtualbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/01intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/02awsintro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/03EC2o.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/01docker-windows.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/02docker-linux.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/03docker-compose.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curso/04kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos Previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-configuracion-del-proyecto-base-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Configuración del Proyecto Base (FastAPI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 1: Configuración del Proyecto Base (FastAPI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-mainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. main.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-requirementstxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. requirements.txt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-metodo-manual-docker-puro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Método Manual (Docker Puro)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 2: Método Manual (Docker Puro)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-crear-el-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Crear el Dockerfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-construir-la-imagen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Construir la imagen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ejecutar-el-contenedor-con-volumen-sincronizacion-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Ejecutar el contenedor con volumen (sincronización de código)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-conexion-mediante-la-extension-dev-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Conexión mediante la Extensión "Dev Containers"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-configuracion-de-ambiente-nativo-dev-container-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Configuración de Ambiente Nativo (Dev Container Config)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-de-comandos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de Comandos Útiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ejercicio-programar-en-contenedores-docker-con-vs-code">Ejercicio: Programar en Contenedores Docker con VS Code</h1>
+<p><strong>🎬 Enlace al video original:</strong> <a href="https://youtu.be/9_WkqhLMUZA">https://youtu.be/9_WkqhLMUZA</a></p>
+<p>Este ejercicio te guiará a través de las tres formas de programar directamente dentro de contenedores Docker utilizando Visual Studio Code para aislar dependencias.</p>
+<hr>
+<h2 id="requisitos-previos">Requisitos Previos</h2>
+<ol>
+<li><strong>Docker Desktop:</strong> Instalado y en ejecución.</li>
+<li><strong>Visual Studio Code:</strong> Con las extensiones:</li>
+<li><code>Docker</code> (de Microsoft)</li>
+<li><code>Dev Containers</code> (de Microsoft)</li>
+</ol>
+<hr>
+<h2 id="paso-1-configuracion-del-proyecto-base-fastapi">Paso 1: Configuración del Proyecto Base (FastAPI)</h2>
+<p>Crea una carpeta para tu proyecto y añade los siguientes archivos básicos:</p>
+<h3 id="11-mainpy">1.1. <code>main.py</code></h3>
+<pre><code class="language-python">from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World desde Docker"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+</code></pre>
+<h3 id="12-requirementstxt">1.2. <code>requirements.txt</code></h3>
+<pre><code>fastapi
+uvicorn
+</code></pre>
+<hr>
+<h2 id="paso-2-metodo-manual-docker-puro">Paso 2: Método Manual (Docker Puro)</h2>
+<p>Este método consiste en construir la imagen y correr el contenedor manualmente enlazando carpetas.</p>
+<h3 id="21-crear-el-dockerfile">2.1. Crear el <code>Dockerfile</code></h3>
+<pre><code class="language-dockerfile">FROM python:3.11-slim
+WORKDIR /code
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+</code></pre>
+<h3 id="22-construir-la-imagen">2.2. Construir la imagen</h3>
+<pre><code class="language-powershell">docker build -t imagen-fastapi .
+</code></pre>
+<h3 id="23-ejecutar-el-contenedor-con-volumen-sincronizacion-de-codigo">2.3. Ejecutar el contenedor con volumen (sincronización de código)</h3>
+<pre><code class="language-powershell"># PowerShell (Windows)
+docker run -d -p 8000:8000 -v ${PWD}:/code imagen-fastapi
+
+# Linux / Mac
+docker run -d -p 8000:8000 -v $(pwd):/code imagen-fastapi
+</code></pre>
+<blockquote>
+<p><strong>Nota:</strong> El flag <code>-v</code> monta tu carpeta local dentro del contenedor, por lo que cualquier cambio en el código se refleja en tiempo real sin reconstruir la imagen.</p>
+</blockquote>
+<hr>
+<h2 id="paso-3-conexion-mediante-la-extension-dev-containers">Paso 3: Conexión mediante la Extensión "Dev Containers"</h2>
+<p>Este método permite usar todas las ayudas de VS Code (IntelliSense, autocompletado) directamente dentro del contenedor.</p>
+<ol>
+<li>Con el contenedor del paso anterior en ejecución, haz clic en el botón <strong>azul</strong> (<code>&gt;&lt;</code>) de la esquina inferior izquierda de VS Code.</li>
+<li>Selecciona <strong>"Attach to Running Container"</strong>.</li>
+<li>Elige el contenedor <code>imagen-fastapi</code> de la lista.</li>
+<li>Se abrirá una nueva ventana de VS Code conectada al contenedor. Abre la carpeta <code>/code</code>.</li>
+<li><strong>Tip:</strong> Instala la extensión de Python <em>dentro del contenedor</em> para tener autocompletado y análisis de errores.</li>
+</ol>
+<hr>
+<h2 id="paso-4-configuracion-de-ambiente-nativo-dev-container-config">Paso 4: Configuración de Ambiente Nativo (Dev Container Config)</h2>
+<p>Para proyectos nuevos donde quieres que VS Code configure todo el ambiente automáticamente.</p>
+<ol>
+<li>Crea una carpeta vacía y ábrela en VS Code.</li>
+<li>Presiona <code>Ctrl + Shift + P</code> y busca:
+   <code>Dev Containers: Add Dev Container Configuration File...</code></li>
+<li>Selecciona <strong>Python 3</strong> (versión 3.11 o similar) de la lista de plantillas.</li>
+<li>VS Code creará automáticamente una carpeta <code>.devcontainer/</code> con un archivo <code>devcontainer.json</code>.</li>
+<li>Haz clic en el botón azul inferior (<code>&gt;&lt;</code>) y selecciona <strong>"Reopen in Container"</strong>.</li>
+<li>VS Code construirá la imagen y reabrirá el proyecto ya dentro del contenedor.</li>
+</ol>
+<hr>
+<h2 id="resumen-de-comandos-utiles">Resumen de Comandos Útiles</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker ps</code></td>
+<td>Ver contenedores activos</td>
+</tr>
+<tr>
+<td><code>docker stop &lt;ID&gt;</code></td>
+<td>Detener un contenedor</td>
+</tr>
+<tr>
+<td><code>docker rm &lt;ID&gt;</code></td>
+<td>Eliminar un contenedor</td>
+</tr>
+<tr>
+<td><code>docker images</code></td>
+<td>Ver imágenes creadas</td>
+</tr>
+<tr>
+<td><code>docker build -t &lt;nombre&gt; .</code></td>
+<td>Construir una imagen desde un Dockerfile</td>
+</tr>
+<tr>
+<td><code>docker run -d -p &lt;host&gt;:&lt;cont&gt; &lt;imagen&gt;</code></td>
+<td>Ejecutar un contenedor en segundo plano</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<blockquote>
+<p>Tutorial basado en el canal <strong>Píldoras de Programación</strong>.</p>
+</blockquote>
+<h1 id="visual-studio-code-usando-wsl-y-docker">Visual Studio Code usando WSL y Docker</h1>
+<p>Una vez instalado <strong>WSL</strong>, configurado <strong>Ubuntu</strong> y teniendo <strong>Docker Desktop</strong> integrado con <strong>Visual Studio Code</strong>, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.</p>
+<p>Este documento describe cómo utilizar Visual Studio Code dentro de Ubuntu y cómo crear y ejecutar un contenedor sencillo con Python, que servirá como base para proyectos más complejos.</p>
+<h2 id="extensiones-necesarias-en-visual-studio-code-para-trabajar-con-docker-y-wsl">Extensiones necesarias en Visual Studio Code para trabajar con Docker y WSL</h2>
+<p>Instalar <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Se recomienda instalar las siguientes extensiones:
+- Python
+- Jupyter
+- WSL (si usáis WSL2)
+- GitHub Copilot</p>
+<ul>
+<li>
+<p><strong>Remote - WSL</strong><br>
+Permite abrir y trabajar en el entorno Linux (Ubuntu) desde Visual Studio Code utilizando WSL.</p>
+</li>
+<li>
+<p><strong>Docker</strong><br>
+Permite crear, ejecutar y gestionar contenedores e imágenes Docker directamente desde Visual Studio Code.</p>
+</li>
+<li>
+<p><strong>Python</strong><br>
+Proporciona soporte para desarrollar, ejecutar y depurar scripts Python dentro del editor.</p>
+</li>
+<li>
+<p><strong>Dev Containers</strong><br>
+Permite abrir proyectos directamente dentro de contenedores Docker para trabajar en entornos aislados y reproducibles.</p>
+</li>
+<li>
+<p><strong>YAML</strong><br>
+Facilita la edición y validación de archivos de configuración como <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>GitHub Pull Requests and Issues</strong><br>
+Permite gestionar repositorios, cambios y revisiones de código desde Visual Studio Code.</p>
+</li>
+<li>
+<p><strong>Markdown All in One</strong><br>
+Mejora la edición de archivos Markdown con herramientas de formato, tablas y atajos de escritura.</p>
+</li>
+</ul>
+<h1 id="1-ejecutar-visual-studio-code-en-ubuntu-wsl">1. Ejecutar Visual Studio Code en Ubuntu (WSL)</h1>
+<p>Trabajar desde Ubuntu dentro de WSL permite utilizar herramientas Linux
+reales, gestionar dependencias de forma más sencilla y ejecutar
+contenedores Docker en un entorno similar a producción.</p>
+<h2 id="11-abrir-ubuntu-wsl">1.1 Abrir Ubuntu (WSL)</h2>
+<pre><code class="language-bash">wsl
+</code></pre>
+<p>o bien:</p>
+<pre><code class="language-bash">ubuntu
+</code></pre>
+<hr>
+<h2 id="12-ir-al-directorio-de-trabajo">1.2 Ir al directorio de trabajo</h2>
+<pre><code class="language-bash">cd ~
+mkdir proyectos
+cd proyectos
+</code></pre>
+<hr>
+<h2 id="13-abrir-visual-studio-code-desde-ubuntu">1.3 Abrir Visual Studio Code desde Ubuntu</h2>
+<pre><code class="language-bash">code .
+</code></pre>
+<p>Esto:</p>
+<ul>
+<li>Abre Visual Studio Code</li>
+<li>Conecta automáticamente con WSL</li>
+<li>Permite trabajar como si estuvieras en Linux real</li>
+</ul>
+<hr>
+<h2 id="14-comprobar-que-docker-funciona">1.4 Comprobar que Docker funciona</h2>
+<pre><code class="language-bash">docker --version
+docker run hello-world
+</code></pre>
+<hr>
+<h1 id="2-uso-de-contenedores-docker-desde-visual-studio-code">2. Uso de contenedores Docker desde Visual Studio Code</h1>
+<p>Los contenedores permiten ejecutar aplicaciones en entornos aislados,
+reproducibles y portables.</p>
+<hr>
+<h2 id="21-crear-un-proyecto-python">2.1 Crear un proyecto Python</h2>
+<pre><code class="language-bash">mkdir python-docker
+cd python-docker
+</code></pre>
+<hr>
+<h2 id="22-crear-un-script-python">2.2 Crear un script Python</h2>
+<p>Archivo:</p>
+<pre><code class="language-bash">nano app.py
+</code></pre>
+<p>Contenido:</p>
+<pre><code class="language-python">print("Hola desde un contenedor Docker con Python")
+</code></pre>
+<hr>
+<h2 id="23-crear-un-dockerfile">2.3 Crear un Dockerfile</h2>
+<p>Archivo:</p>
+<pre><code class="language-bash">nano Dockerfile
+</code></pre>
+<p>Contenido:</p>
+<pre><code class="language-dockerfile">FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY app.py .
+
+CMD ["python", "app.py"]
+</code></pre>
+<hr>
+<h2 id="24-construir-la-imagen">2.4 Construir la imagen</h2>
+<pre><code class="language-bash">docker build -t mi-python .
+</code></pre>
+<hr>
+<h2 id="25-ejecutar-el-contenedor">2.5 Ejecutar el contenedor</h2>
+<pre><code class="language-bash">docker run mi-python
+</code></pre>
+<p>Salida esperada:</p>
+<pre><code>Hola desde un contenedor Docker con Python
+</code></pre>
+<hr>
+<h1 id="resumen">Resumen</h1>
+<p>Se ha aprendido a:</p>
+<ul>
+<li>Ejecutar VS Code en Ubuntu</li>
+<li>Crear un script Python</li>
+<li>Crear un Dockerfile</li>
+<li>Construir una imagen</li>
+<li>Ejecutar un contenedor</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
