@@ -16,7 +16,7 @@ WSL es una característica de Windows que permite ejecutar un entorno Linux dire
 Abrir **Características de Windows** y activar:
 - Plataforma de máquina virtual
 - Subsistema de Windows para Linux
-![Activación de características de Windows](/web/docker/img/docker01.png)
+![Activación de características de Windows](../assets/img/cont/dow-01.png)
 
 #### ``👉 Paso 2 — Instalación de WSL + Ubuntu 24.04``
  
@@ -39,7 +39,7 @@ La **Terminal de Windows** es una herramienta «todo en uno» disponible de form
  
 Su principal ventaja es que permite abrir múltiples pestañas con diferentes entornos (PowerShell, CMD, Ubuntu...) en una sola ventana, con personalización completa de colores y fuentes.
 
-![terminal](/web/docker/img/docker02.png)
+![terminal](../assets/img/cont/dow-02.png)
 
 Una vez dentro de Ubuntu, actualizar los paquetes:
 ```bash

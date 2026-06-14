@@ -1,59 +1,111 @@
-# 🖥️ Proxmox VE — Documentación completa
+# 🖥️ Proxmox VE
+> Plataforma completa de virtualización de código abierto que permite desplegar, gestionar y monitorizar fácilmente máquinas virtuales (**KVM**) y contenedores ligeros (**LXC**) desde una interfaz web intuitiva. El sistema combina cómputo, almacenamiento y redes en una única solución lista para entornos empresariales, incluyendo herramientas nativas para crear clústeres, gestionar alta disponibilidad y realizar copias de seguridad de forma centralizada.
 
-## Guía de instalación en PDF
-
+## 1. Instalación
 <iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" width="70%" height="700px" style="display: block; margin: 0 auto;"></iframe>
 
 [Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button style="display:table;margin:0 auto;"}
 
-## Conceptos básicos
+## 2. Interfaz
 
-| Término | Descripción |
-|---|---|
-| **PVE** | Proxmox Virtual Environment — el sistema completo |
-| **Nodo** | Servidor físico que tiene Proxmox instalado |
-| **Datacenter** | Vista global de todos los nodos del clúster. Los cambios aquí se aplican a todos los nodos |
-| **Summary** | Panel de monitorización del nodo |
-| **8006** | Puerto que se utiliza para el acceso web a la interfaz de Proxmox |
+![Interfaz de proxmox](../assets/img/vir/prx-01.png){width="900"}
 
+| Concepto básicos| Descripción |
+|-----------|-------------|
+| **PVE** | Proxmox Virtual Environment: el sistema completo. |
+| **Nodo** | Servidor físico que tiene Proxmox instalado. |
+| **Datacenter** | Vista global de todos los nodos del clúster. Los cambios aquí se aplican a todos los nodos. |
+| **Summary** | Panel de monitorización del nodo. |
+| **8006** | Puerto utilizado para el acceso web a la interfaz de Proxmox. |
+| **KVM** | Máquinas virtuales completas que emulan hardware. Ideales para cualquier sistema operativo. |
+| **LXC** | Contenedores ligeros basados en Linux que comparten el núcleo del host. |
+| **VMID** | Número de identificación único asignado a cada máquina virtual o contenedor. |
+| **Clúster** | Grupo de dos o más nodos administrados desde una única interfaz. |
+| **Quórum** | Mayoría de nodos activos necesaria para que el clúster pueda tomar decisiones. |
+| **HA** | Alta Disponibilidad. Permite reiniciar automáticamente servicios en otro nodo si uno falla. |
+| **Almacenamiento local** | No recomendado en entornos de alta disponibilidad. Utiliza discos internos del propio nodo. |
+| **Almacenamiento en red** | Recomendado. Utiliza almacenamiento compartido mediante NFS, iSCSI, Ceph, NAS, SAN, etc. |
+| **PBS** | Proxmox Backup Server: herramienta para realizar copias de seguridad optimizadas. |
+| **Linux Bridge (vmbr)** | Switch virtual que conecta la red física con las máquinas virtuales y contenedores. |
 
-### Almacenamiento
+## 3. Almacenamiento
+Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse **dos almacenamientos** principales.Aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.
 
-| Tipo | Recomendación |
-|---|---|
-| Almacenamiento local | ❌ No recomendado |
-| Almacenamiento en red | ✅ Recomendado |
+![Interfaz de proxmox](../assets/img/vir/prx-02.png){width="900"}
 
-## 💾 Almacenamiento local
+- **`local`** suele corresponder al directorio ``/var/lib/vz``. Cuando descargamos una imagen ISO de Ubuntu desde la interfaz web de Proxmox, esta se almacena aquí. Su función principal es almacenar archivos relacionados con la plataforma, como:
+    - Imágenes ISO.
+    - Copias de seguridad (Backups).
+    - Plantillas de contenedores.
+    - Fragmentos de configuración (Snippets).
 
-**`local`** — Configurado para ISO, plantillas y copias de seguridad. Por defecto no almacena máquinas virtuales.
+- **`local-lvm`** utiliza la tecnología LVM-Thin (Logical Volume Manager Thin Provisioning).Cuando se crea una nueva máquina virtual y se le asigna un disco de 50 GB, dicho disco se almacena normalmente en `local-lvm`. Su función principal es almacenar los discos virtuales de Máquinas virtuales (**VM**) y Contenedores **LXC**. Ventajas:
+    - Mejor aprovechamiento del espacio disponible.
+    - Creación rápida de discos virtuales.
+    - Soporte para snapshots.
+    - Mayor flexibilidad en la gestión del almacenamiento.
 
-**`local-lvm`** — Permite almacenar imágenes de disco y contenedores.
+| Característica | local | local-lvm |
+|--------------|--------|-----------|
+| Tipo de almacenamiento | Directorio | LVM-Thin |
+| Imágenes ISO | Sí | No |
+| Backups | Sí | No |
+| Plantillas | Sí | No |
+| Discos de VM | No (por defecto) | Sí |
+| Discos de contenedores | No (por defecto) | Sí |
+| Ubicación | /var/lib/vz | Volumen LVM |
 
-### Redimensionado de volúmenes lógicos (LVM)
-
-```bash
-# 1. Crear volumen físico
-pvcreate /dev/sdX
-
-# 2. Extender el grupo de volúmenes
-vgextend nombre-vg /dev/sdX
-
-# 3. Extender el volumen lógico
-lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
-
-# 4. Redimensionar el sistema de archivos
-resize2fs /dev/ubuntu-vg/ubuntu-lv
-
-# 5. Comprobar puntos de montaje
-df -h
-```
-
-!!! note "Directorio vs Volumen lógico"
+> Nota "Directorio vs Volumen lógico"
     Un **directorio** organiza archivos dentro de un sistema de archivos.
     Un **volumen lógico LVM** es una entidad de almacenamiento flexible y dinámica creada dentro de un grupo de volúmenes, mucho más versátil para entornos virtualizados.
 
-## 🖥️ Crear máquinas virtuales
+```bash
+Redimensionado de volúmenes lógicos (LVM)
+
+pvcreate /dev/sdX                               # 1. Crear volumen físico
+vgextend nombre-vg /dev/sdX                     # 2. Extender el grupo de volúmenes 
+lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv  # 3. Extender el volumen lógico
+resize2fs /dev/ubuntu-vg/ubuntu-lv              # 4. Redimensionar el sistema de archivos
+df -h                                           # 5. Comprobar puntos de montaje
+```
+
+## 4. Máquinas virtuales (VM)
+> Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico.
+
+Pasos para crear e iniciar una máquina virtual en Proxmox VE:
+
+1. En la interfaz web de Proxmox, selecciona el nodo donde deseas almacenar la ISO.
+3. Haz clic en **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**.
+5. Pulsa el botón **Upload** y selecciona el archivo ISO desde tu equipo y espera a que finalice la transferencia.
+
+1. Haz clic en **Create VM** en la parte superior derecha.
+2. Introduce un nombre para la máquina virtual y pulsa **Next**.
+3. En **OS**, selecciona la imagen ISO previamente subida.
+4. Configura el tipo de sistema operativo y pulsa **Next**.
+5. En **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades.
+6. Configura el tamaño del disco virtual en **Disks**.
+7. Asigna la cantidad de procesadores virtuales en **CPU**.
+8. Configura la memoria RAM en **Memory**.
+9. Selecciona la interfaz de red en **Network**.
+10. Revisa el resumen de configuración.
+11. Marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
+12. Haz clic en **Finish** para crear la máquina virtual.
+
+**C) Iniciar la máquina virtual**
+
+1. Selecciona la máquina virtual creada en el panel lateral.
+2. Haz clic en **Start**.
+3. Accede a la consola mediante **Console**.
+4. Sigue el proceso de instalación del sistema operativo desde la ISO cargada.
+
+
+
+![Interfaz de proxmox](../assets/img/vir/prx-03.png){width="900"}
+
+
+
+
+
 
 Pasos en orden al crear una nueva VM:
 
@@ -273,6 +325,11 @@ qm rescan
 vi /etc/pve/qemu-server/101.conf
 ```
 
----
 
-*Documentación basada en el curso de Proxmox VE · [📺 Ver playlist completa](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ)*
+
+## 📚 Recursos
+
+- [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
+- [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas)
+
+A por el 4

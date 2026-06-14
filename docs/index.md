@@ -29,12 +29,26 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
 
 ---
 
-## 🆕 Novedades
+## 🆕 Repositorio
 
-- 🚀 Se comienza con el modelado del repositorio — *Mayo 2025*
-- 🐳 Próximamente: material de Docker y contenedores
-- 📊 En preparación: módulo de Power BI para Big Data
+**Temas principales** que se abordarán en este repositorio:
+
+-  Instalación y configuración de sistemas operativos (Windows y Linux)
+-  Virtualización y despliegue de sistemas
+-  Automatización mediante scripting (Bash, PowerShell, Python)
+-  Gestión de usuarios, permisos y seguridad
+-  Configuración de servicios esenciales (SSH, DNS, DHCP, etc.)
+-  Monitorización y mantenimiento de sistemas
+
+**Contribución** Si eres estudiante y deseas contribuir al repositorio, sigue estos pasos:
+
+1. Haz un fork del repositorio.
+2. Clona tu fork en local: `git clone https://github.com/tuusuario/turepositorio.git`
+3. Crea una rama para tus cambios: `git checkout -b mi-rama`
+4. Sube los cambios y haz un pull request.
+
+> Para dudas o sugerencias, puedes abrir un **Issue** o contactar mediante correo electrónico.
 
 ---
 
-*Última actualización: Mayo 2025 · [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)*
+*Última actualización: Junio 2026 · [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)*
