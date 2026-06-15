@@ -75,53 +75,53 @@ df -h                                           # 5. Comprobar puntos de montaje
 Pasos para crear e iniciar una máquina virtual en Proxmox VE:
 
 1. En la interfaz web de Proxmox, selecciona el nodo donde deseas almacenar la ISO.
-3. Haz clic en **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**.
-5. Pulsa el botón **Upload** y selecciona el archivo ISO desde tu equipo y espera a que finalice la transferencia.
+2. Haz clic en **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**.
+3. Pulsa el botón **Cargar** y selecciona el archivo ISO desde tu equipo y espera a que finalice la transferencia.
+![Interfaz de proxmox](../assets/img/vir/prx-03.png){width="700"}
+4. Haz clic en **Create VM** en la parte superior derecha.
+5. Sigue el asistente, introduciendo un nombre para la máquina virtual, en **OS**, selecciona la imagen ISO previamente subida, en **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades. Configura el tamaño del disco virtual de 100GB, la cantidad de procesadores virtuales en **CPU**, la memoria RAM en **Memory** y la interfaz de red en **Network**.
+6. Revisa el resumen de configuración, haz clic en **Finish** para crear la máquina virtual y marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
+7. Para iniciar selecciona la máquina virtual creada en el panel lateral y haz clic en **Start**. A continuación accede a la consola mediante **Console**.
 
-1. Haz clic en **Create VM** en la parte superior derecha.
-2. Introduce un nombre para la máquina virtual y pulsa **Next**.
-3. En **OS**, selecciona la imagen ISO previamente subida.
-4. Configura el tipo de sistema operativo y pulsa **Next**.
-5. En **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades.
-6. Configura el tamaño del disco virtual en **Disks**.
-7. Asigna la cantidad de procesadores virtuales en **CPU**.
-8. Configura la memoria RAM en **Memory**.
-9. Selecciona la interfaz de red en **Network**.
-10. Revisa el resumen de configuración.
-11. Marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
-12. Haz clic en **Finish** para crear la máquina virtual.
+| | | |
+|---|---|---|
+| ![Interfaz de proxmox](../assets/img/vir/prx-04.png) | ![Interfaz de proxmox](../assets/img/vir/prx-05.png) | ![Interfaz de proxmox](../assets/img/vir/prx-06.png) |
+| ![Interfaz de proxmox](../assets/img/vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/vir/prx-09.png) |
+| ![Interfaz de proxmox](../assets/img/vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/vir/prx-11.png) | ![Interfaz de proxmox](../assets/img/vir/prx-12.png) |
 
-**C) Iniciar la máquina virtual**
+## 5. Clúster
+Un **clúster** es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado. En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde una sola interfaz, migrar máquinas virtuales entre ellos y compartir configuraciones de red, almacenamiento y usuarios.
 
-1. Selecciona la máquina virtual creada en el panel lateral.
-2. Haz clic en **Start**.
-3. Accede a la consola mediante **Console**.
-4. Sigue el proceso de instalación del sistema operativo desde la ISO cargada.
+Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster de Proxmox, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.
+
+Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la HA en Proxmox, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
+
+**Crear el clúster**
+
+1. En el primer nodo (por ejemplo, **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster.
+2. Una vez creado, pulsa en **Información de unión** y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
+3. En el segundo nodo (**PVE2**), ve también a `Datacenter > Cluster`, haz clic en **Unirse al Clusterr** y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.
+
+![Interfaz de proxmox](../assets/img/vir/prx-13.png){width="700"}
+> Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
+
+**Activar la Alta Disponibilidad (HA)**
+
+6. Asegúrate de que las máquinas virtuales que quieras proteger están en **almacenamiento compartido** (por ejemplo, NFS, Ceph o iSCSI), ya que la HA necesita que todos los nodos puedan acceder a los discos.
+
+7. Ve a `Datacenter > HA` y, en la sección **Resources**, pulsa **Add** para seleccionar la máquina virtual o contenedor que quieras gestionar con HA.
+
+8. A partir de la versión 9.0, el antiguo modelo de "groups" de HA fue sustituido por reglas de afinidad, una forma más expresiva de controlar dónde se ejecutan las máquinas virtuales.  Para definir en qué nodos puede ejecutarse cada recurso y con qué prioridad, ve a `Datacenter > HA > Affinity Rules` y crea una **node affinity rule**, indicando los nodos permitidos (y su orden de preferencia) y añadiendo a esa regla los recursos creados en el paso anterior.
+
+9. Si necesitas que dos VMs siempre estén juntas (o nunca compartan nodo), existe también un segundo tipo de regla, las resource affinity rules, que mantienen a las máquinas virtuales juntas o las separan;  este tipo de regla se usa por ejemplo cuando dos VMs deben compartir nodo por latencia, o al contrario, no deben caer juntas ante un fallo.
+
+10. Para que la HA pueda reaccionar ante un fallo real, el clúster debe tener configurado el **fencing**: un mecanismo que aísla o reinicia el nodo que ha dejado de responder, evitando que dos nodos intenten ejecutar la misma VM a la vez (lo que provocaría corrupción de datos). En Proxmox esto se gestiona mediante *watchdogs* (hardware o software) integrados en cada nodo.
+
+11. Guarda los cambios. A partir de ahora, si el nodo donde corre esa VM falla, será aislado mediante fencing y la máquina virtual se reiniciará automáticamente en otro nodo según la regla de afinidad definida.
+
+> **Nota:** la versión 9.2 añadió además un interruptor a nivel de clúster llamado "Arm HA / Disarm HA". Desactivar la HA antes de un mantenimiento planificado evita que el clúster aplique fencing o reubique máquinas mientras se está apagando hardware deliberadamente. 
 
 
-
-![Interfaz de proxmox](../assets/img/vir/prx-03.png){width="900"}
-
-
-
-
-
-
-Pasos en orden al crear una nueva VM:
-
-1. Seleccionar **nodo**, ID y nombre
-2. Seleccionar **sistema operativo** (ISO)
-3. **System** — dejar por defecto
-4. Añadir **disco** y elegir el almacenamiento
-5. Configurar **CPU**
-6. Configurar **memoria RAM**
-7. Configurar **red**
-
-## 🔗 Configurar un clúster
-
-Un **clúster** es la composición de varios nodos trabajando en orquestación.
-
-Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
 
 ## ⚡ Alta disponibilidad (HA)
 
@@ -134,6 +134,8 @@ Configuración en **Datacenter → HA**:
 
 1. Crear **grupos HA** formados por los nodos que participan
 2. En **HA** agregar las máquinas virtuales que se quieren proteger
+
+
 
 ## 🌐 Networking — Bridge, Bonds, VLANs
 
@@ -332,4 +334,4 @@ vi /etc/pve/qemu-server/101.conf
 - [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
 - [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas)
 
-A por el 4
+A por el 6
