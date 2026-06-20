@@ -94,48 +94,18 @@ Un **clúster** es un conjunto de varios servidores (nodos) que están intercone
 
 Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster de Proxmox, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.
 
-Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la HA en Proxmox, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
-
 **Crear el clúster**
 
-1. En el primer nodo (por ejemplo, **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster.
+1. En el primer nodo (ejemplo **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster.
 2. Una vez creado, pulsa en **Información de unión** y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
 3. En el segundo nodo (**PVE2**), ve también a `Datacenter > Cluster`, haz clic en **Unirse al Clusterr** y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.
-
 ![Interfaz de proxmox](../assets/img/vir/prx-13.png){width="700"}
 > Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
 
-**Activar la Alta Disponibilidad (HA)**
 
-6. Asegúrate de que las máquinas virtuales que quieras proteger están en **almacenamiento compartido** (por ejemplo, NFS, Ceph o iSCSI), ya que la HA necesita que todos los nodos puedan acceder a los discos.
+**Alta Disponibilidad (HA)** ⚡
 
-7. Ve a `Datacenter > HA` y, en la sección **Resources**, pulsa **Add** para seleccionar la máquina virtual o contenedor que quieras gestionar con HA.
-
-8. A partir de la versión 9.0, el antiguo modelo de "groups" de HA fue sustituido por reglas de afinidad, una forma más expresiva de controlar dónde se ejecutan las máquinas virtuales.  Para definir en qué nodos puede ejecutarse cada recurso y con qué prioridad, ve a `Datacenter > HA > Affinity Rules` y crea una **node affinity rule**, indicando los nodos permitidos (y su orden de preferencia) y añadiendo a esa regla los recursos creados en el paso anterior.
-
-9. Si necesitas que dos VMs siempre estén juntas (o nunca compartan nodo), existe también un segundo tipo de regla, las resource affinity rules, que mantienen a las máquinas virtuales juntas o las separan;  este tipo de regla se usa por ejemplo cuando dos VMs deben compartir nodo por latencia, o al contrario, no deben caer juntas ante un fallo.
-
-10. Para que la HA pueda reaccionar ante un fallo real, el clúster debe tener configurado el **fencing**: un mecanismo que aísla o reinicia el nodo que ha dejado de responder, evitando que dos nodos intenten ejecutar la misma VM a la vez (lo que provocaría corrupción de datos). En Proxmox esto se gestiona mediante *watchdogs* (hardware o software) integrados en cada nodo.
-
-11. Guarda los cambios. A partir de ahora, si el nodo donde corre esa VM falla, será aislado mediante fencing y la máquina virtual se reiniciará automáticamente en otro nodo según la regla de afinidad definida.
-
-> **Nota:** la versión 9.2 añadió además un interruptor a nivel de clúster llamado "Arm HA / Disarm HA". Desactivar la HA antes de un mantenimiento planificado evita que el clúster aplique fencing o reubique máquinas mientras se está apagando hardware deliberadamente. 
-
-
-
-## ⚡ Alta disponibilidad (HA)
-
-!!! warning "Requisito"
-    Para configurar HA es **obligatorio** tener un clúster previo.
-
-Si un nodo falla, las máquinas virtuales se **migran automáticamente** a otro nodo del clúster.
-
-Configuración en **Datacenter → HA**:
-
-1. Crear **grupos HA** formados por los nodos que participan
-2. En **HA** agregar las máquinas virtuales que se quieren proteger
-
-
+Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la HA en Proxmox, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
 
 ## 🌐 Networking — Bridge, Bonds, VLANs
 
@@ -332,6 +302,6 @@ vi /etc/pve/qemu-server/101.conf
 ## 📚 Recursos
 
 - [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
-- [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas)
+- [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas){target="_blank"}
 
-A por el 6
+Video 08

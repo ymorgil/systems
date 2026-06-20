@@ -6,19 +6,23 @@
 
 Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comunicaciones con experiencia en administración de sistemas Linux y Windows, redes corporativas y entornos cloud. En esta web encontrarás los materiales, apuntes y recursos de mis clases organizados por módulo, disponibles de forma abierta para que puedas consultarlos cuando lo necesites.
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 1.2rem 0;">
-  <div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 14px; font-size: 13px;">
-    📧 <a href="mailto:ymorgil@canariaseducacion.es">ymorgil@canariaseducacion.es</a>
-  </div>
-  <div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 14px; font-size: 13px;">
-    🐙 <a href="https://github.com/ymorgil" target="_blank">github.com/ymorgil</a>
-  </div>
-  <div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 14px; font-size: 13px;">
-    💼 <a href="https://www.linkedin.com/in/yeraymo/" target="_blank">LinkedIn</a>
-  </div>
+<div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 10px; font-size: 13px; margin: 5px">
+  📧 <a href="mailto:ymorgil@canariaseducacion.es">ymorgil@canariaseducacion.es</a>
+</div>
+<div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 10px; font-size: 13px; margin: 5px">
+  🐙 <a href="https://github.com/ymorgil" target="_blank">github.com/ymorgil</a>
+</div>
+<div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 10px; font-size: 13px; margin: 5px">
+  💼 <a href="https://www.linkedin.com/in/yeraymo/" target="_blank">LinkedIn</a>
+</div>
+<div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 10px; font-size: 13px; margin: 5px">
+  🤖 <a href="https://ymorgil.github.io/intart/" target="_blank">Inteligencia</a>
+</div>
+<div style="border: 0.5px solid #ddd; border-radius: 8px; padding: 10px 10px; font-size: 13px; margin: 5px">
+  🛰️ <a href="https://ymorgil.github.io/innovacion/" target="_blank">Innovación</a>
 </div>
 
----
+
 
 ## 📚 Módulos
 

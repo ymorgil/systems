@@ -1,28 +1,9 @@
-# 🖥️ Manual de VMware Workstation Pro
-### Guía para Alumnado — Instalación, Uso y Creación de Máquinas Virtuales
-
----
-
-## Índice
-
-1. [¿Qué es VMware?](#1-qué-es-vmware)
-2. [Tipos de licencias](#2-tipos-de-licencias)
-3. [¿Qué licencia debo elegir?](#3-qué-licencia-debo-elegir)
-4. [Instalación de VMware Workstation Pro](#4-instalación-de-vmware-workstation-pro)
-5. [Primeros pasos: Interfaz de VMware](#5-primeros-pasos-interfaz-de-vmware)
-6. [Creación de una máquina virtual con Ubuntu Server 25.04](#6-creación-de-una-máquina-virtual-con-ubuntu-server-2504)
-7. [Operaciones básicas con la máquina virtual](#7-operaciones-básicas-con-la-máquina-virtual)
-8. [Consejos y buenas prácticas](#8-consejos-y-buenas-prácticas)
-
----
+# 🖥️ VMware Workstation Pro
 
 ## 1. ¿Qué es VMware?
+**VMware** es un software de **virtualización** que permite ejecutar uno o varios sistemas operativos (*máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo. **Ejemplo:** Puedes tener Windows 11 como sistema principal y, al mismo tiempo, ejecutar Ubuntu Server dentro de una ventana de VMware.
 
-**VMware** es un software de **virtualización** que permite ejecutar uno o varios sistemas operativos (llamados *máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo.
-
-> 💡 **Ejemplo:** Puedes tener Windows 11 como sistema principal y, al mismo tiempo, ejecutar Ubuntu Server dentro de una ventana de VMware.
-
-### ¿Para qué se usa en el aula?
+**¿Para qué se usa en el aula?**
 
 - Practicar instalación y administración de sistemas operativos
 - Probar configuraciones de red sin afectar al equipo real
@@ -30,15 +11,10 @@
 - Aprender Linux sin riesgos
 - Crear entornos de prueba aislados
 
----
-
 ## 2. Tipos de licencias
-
 VMware (ahora bajo **Broadcom**) ofrece varias versiones de su producto de escritorio:
 
----
-
-### 🆓 VMware Workstation Pro — **Uso Personal (Gratuito)**
+**1. VMware Workstation Pro — Uso Personal (Gratuito)**
 
 | Característica | Detalle |
 |---|---|
@@ -52,9 +28,7 @@ VMware (ahora bajo **Broadcom**) ofrece varias versiones de su producto de escri
 
 Desde **mayo de 2024**, Broadcom hizo VMware Workstation Pro **gratuito para uso personal**, incluyendo el uso **educativo y académico**. Solo es necesario registrarse con una cuenta de Broadcom.
 
----
-
-### 💼 VMware Workstation Pro — **Licencia Comercial**
+**2. VMware Workstation Pro — Licencia Comercial**
 
 | Característica | Detalle |
 |---|---|
@@ -63,37 +37,25 @@ Desde **mayo de 2024**, Broadcom hizo VMware Workstation Pro **gratuito para uso
 | **Soporte** | ✅ Soporte técnico oficial |
 | **Actualizaciones** | ✅ Acceso garantizado |
 
----
-
-### 🏫 VMware Academic Program
+**3. VMware Academic Program**
 
 Broadcom ofrece acuerdos académicos para centros educativos que quieran desplegar VMware de forma centralizada. Si tu centro tiene convenio, puede que ya tengas acceso a licencias académicas gestionadas por el departamento de informática.
 
 > 📌 Consulta con tu profesor o técnico de sistemas si tu centro dispone de este programa.
 
----
-
-### 🔄 Alternativa gratuita: VMware Workstation Player *(descontinuado)*
+**4. Alternativa gratuita: VMware Workstation Player *(descontinuado)***
 
 Anteriormente existía **VMware Player** como versión gratuita simplificada. **Ya no se distribuye por separado** desde 2024; ha sido absorbido por la versión gratuita de Workstation Pro.
 
----
-
-## 3. ¿Qué licencia debo elegir?
-
-> ### ✅ Recomendación para alumnado
->
+### Recomendación
 > **VMware Workstation Pro — Versión Personal Gratuita**
 >
 > Como estudiante, esta es la opción correcta. Es completamente gratuita, incluye **todas las funcionalidades** de la versión de pago (snapshots, redes virtuales, clonación, etc.) y solo requiere crear una cuenta gratuita en el portal de Broadcom.
 >
 > 🔗 Descarga oficial: [https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)
 
----
-
-## 4. Instalación de VMware Workstation Pro
-
-### Requisitos del sistema
+## 3. Instalación de VMware
+**Requisitos del sistema**
 
 | Componente | Mínimo | Recomendado |
 |---|---|---|
@@ -105,54 +67,37 @@ Anteriormente existía **VMware Player** como versión gratuita simplificada. **
 
 > ⚠️ **Importante:** Asegúrate de que la virtualización por hardware esté **activada en la BIOS/UEFI** del equipo. Sin esto, VMware no funcionará correctamente.
 
----
-
-### Paso a paso: Instalación en Windows
-
-**Paso 1 — Descargar el instalador**
+**INSTALACIÓN**
 
 1. Ve a [https://www.vmware.com/products/desktop-hypervisor](https://www.vmware.com/products/desktop-hypervisor)
 2. Haz clic en **"Download for Free"** o **"Workstation Pro for Windows"**
 3. Inicia sesión o crea una cuenta gratuita de Broadcom
 4. Descarga el archivo `.exe`
+5. Haz doble clic en el archivo descargado (ej. `VMware-Workstation-Full-XX.X.X-XXXXXX.exe`)
+6. Acepta los términos de licencia
+7. Selecciona las opciones de instalación:
+      - ✅ **Enhanced Keyboard Driver** (recomendado)
+      - ✅ **Add VMware Workstation console tools to the system PATH**
+8. Elige la carpeta de instalación (por defecto está bien)
+9. Haz clic en **Install** y espera a que finalice
+10. Abre VMware Workstation Pro desde el escritorio o el menú Inicio
+11. Cuando pregunte por la licencia, selecciona **"Use VMware Workstation 17 for Personal Use"** (o la versión correspondiente)
+12. ¡Listo! Ya tienes VMware instalado
 
-**Paso 2 — Ejecutar el instalador**
-
-1. Haz doble clic en el archivo descargado (ej. `VMware-Workstation-Full-XX.X.X-XXXXXX.exe`)
-2. Acepta los términos de licencia
-3. Selecciona las opciones de instalación:
-   - ✅ **Enhanced Keyboard Driver** (recomendado)
-   - ✅ **Add VMware Workstation console tools to the system PATH**
-4. Elige la carpeta de instalación (por defecto está bien)
-5. Haz clic en **Install** y espera a que finalice
-
-**Paso 3 — Primer arranque**
-
-1. Abre VMware Workstation Pro desde el escritorio o el menú Inicio
-2. Cuando pregunte por la licencia, selecciona **"Use VMware Workstation 17 for Personal Use"** (o la versión correspondiente)
-3. ¡Listo! Ya tienes VMware instalado
-
----
-
-### Paso a paso: Instalación en Linux (Ubuntu/Debian)
 
 ```bash
-# 1. Dar permisos de ejecución al instalador descargado
-chmod +x VMware-Workstation-Full-*.bundle
+# Instalación en Linux (Ubuntu/Debian)
 
-# 2. Ejecutar como superusuario
-sudo ./VMware-Workstation-Full-*.bundle
+chmod +x VMware-Workstation-Full-*.bundle # 1. Dar permisos de ejecución
+
+sudo ./VMware-Workstation-Full-*.bundle # 2. Ejecutar como superusuario
 
 # 3. Seguir el asistente gráfico de instalación
 
-# 4. Iniciar VMware
-vmware
+vmware # 4. Iniciar VMware
 ```
 
----
-
-## 5. Primeros pasos: Interfaz de VMware
-
+## 4. Interfaz de VMware
 Al abrir VMware Workstation Pro verás la pantalla principal:
 
 ```
@@ -173,8 +118,7 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 │                 │                                            │
 └─────────────────┴────────────────────────────────────────────┘
 ```
-
-### Elementos principales de la interfaz
+**Elementos principales de la interfaz**
 
 | Elemento | Función |
 |---|---|
@@ -183,7 +127,7 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 | **Área central** | Pantalla de la máquina virtual activa |
 | **Barra de estado** | Información de red, dispositivos USB, etc. |
 
-### Atajos de teclado esenciales
+**Atajos de teclado esenciales**
 
 | Atajo | Acción |
 |---|---|
@@ -193,25 +137,14 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 | `Ctrl + Z` | Suspender la VM |
 | `Ctrl + Shift + P` | Tomar snapshot |
 
----
+## 5. Creación de una VM
+> Para este manual vamos a crear una máquina virtual de Ubuntu Server 26, los pasos son exactamente los mismos para otras versiones.
 
-## 6. Creación de una máquina virtual con Ubuntu Server 25.04
+**Paso 1 — Descargar la ISO de Ubuntu Server**
+Ve a [https://ubuntu.com/download/server](https://ubuntu.com/download/server){target=_blank}, descarga la imagen ISO de **Ubuntu Server 26.04 LTS** y guarda el archivo `.iso` en una carpeta donde guardes todas las ISOS (ej. `C:\ISOs\ubuntu-server.iso`)
 
-> ⚠️ **Nota:** A la fecha de este manual, la versión disponible es **Ubuntu Server 25.04 "Plucky Puffin"**. La versión 26 aún no ha sido lanzada (se esperaría para abril de 2026). Si ya existe, los pasos son exactamente los mismos.
-
-### Paso 1 — Descargar la ISO de Ubuntu Server
-
-1. Ve a [https://ubuntu.com/download/server](https://ubuntu.com/download/server)
-2. Descarga la imagen ISO de **Ubuntu Server 25.04** (o la más reciente disponible)
-3. Guarda el archivo `.iso` en una carpeta accesible (ej. `C:\ISOs\ubuntu-server.iso`)
-
----
-
-### Paso 2 — Crear la nueva máquina virtual
-
-1. Abre VMware Workstation Pro
-2. Haz clic en **"Create a New Virtual Machine"** o ve a `Archivo → Nueva máquina virtual`
-3. Selecciona **"Typical (recommended)"** → clic en **Next**
+**Paso 2 — Crear la nueva máquina virtual**
+Abre VMware Workstation Pro, haz clic en **"Create a New Virtual Machine"** o ve a `Archivo → Nueva máquina virtual` y selecciona **"Typical (recommended)"** → clic en **Next**
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -224,13 +157,7 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 └──────────────────────────────────────────────────┘
 ```
 
----
-
-### Paso 3 — Seleccionar la ISO
-
-1. Selecciona **"Installer disc image file (ISO)"**
-2. Haz clic en **Browse** y navega hasta tu archivo `.iso` de Ubuntu Server
-3. VMware detectará automáticamente el sistema operativo → clic en **Next**
+**Paso 3 — Seleccionar la ISO** Selecciona **"Installer disc image file (ISO)"**, haz clic en **Browse** y navega hasta tu archivo `.iso` de Ubuntu Server, VMware detectará automáticamente el sistema operativo → clic en **Next**
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -245,10 +172,7 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 └──────────────────────────────────────────────────┘
 ```
 
----
-
-### Paso 4 — Configurar usuario inicial (Easy Install)
-
+**Paso 4 — Configurar usuario inicial (Easy Install)**
 VMware puede ofrecerte la instalación rápida. Rellena:
 
 | Campo | Valor recomendado |
@@ -261,19 +185,12 @@ VMware puede ofrecerte la instalación rápida. Rellena:
 
 Clic en **Next**.
 
----
-
-### Paso 5 — Nombre y ubicación de la VM
-
+**Paso 5 — Nombre y ubicación de la VM** 
 1. **Virtual machine name:** escribe `Ubuntu Server 25.04` (o el nombre que prefieras)
 2. **Location:** elige dónde guardar los archivos de la VM (necesitarás espacio suficiente)
 3. Clic en **Next**
 
----
-
-### Paso 6 — Tamaño del disco virtual
-
-Se recomienda para un servidor de prácticas:
+**Paso 6 — Tamaño del disco virtual** Se recomienda para un servidor de prácticas:
 
 | Parámetro | Valor recomendado |
 |---|---|
@@ -295,11 +212,7 @@ Se recomienda para un servidor de prácticas:
 
 Clic en **Next**.
 
----
-
-### Paso 7 — Revisar y personalizar hardware
-
-Antes de finalizar, haz clic en **"Customize Hardware..."** para ajustar los recursos:
+**Paso 7 — Revisar y personalizar hardware** Antes de finalizar, haz clic en **"Customize Hardware..."** para ajustar los recursos:
 
 | Recurso | Valor recomendado para prácticas |
 |---|---|
@@ -310,11 +223,7 @@ Antes de finalizar, haz clic en **"Customize Hardware..."** para ajustar los rec
 
 Cierra la ventana de hardware → clic en **Finish**.
 
----
-
-### Paso 8 — Instalación de Ubuntu Server
-
-La VM arrancará automáticamente desde la ISO. Sigue el asistente de instalación:
+**Paso 8 — Instalación de Ubuntu Server** La VM arrancará automáticamente desde la ISO. Sigue el asistente de instalación:
 
 **8.1 Selección de idioma**
 ```
@@ -370,9 +279,7 @@ Storage configuration:
 - Espera a que se instale el sistema (5-15 minutos según el equipo)
 - Cuando aparezca **"Installation complete!"** → clic en **"Reboot Now"**
 
----
-
-### Paso 9 — Primer arranque de Ubuntu Server
+**Paso 9 — Primer arranque de Ubuntu Server**
 
 1. La VM reiniciará y expulsará la ISO automáticamente
 2. Aparecerá el prompt de login:
@@ -390,32 +297,23 @@ Welcome to Ubuntu 25.04 LTS (GNU/Linux 6.x.x-xx-generic x86_64)
 alumno@ubuntu-server:~$
 ```
 
-✅ **¡Ubuntu Server está funcionando correctamente dentro de VMware!**
 
----
 
-### Paso 10 — Primeros comandos útiles
+**Paso 10 — Primeros comandos útiles**
 
 ```bash
-# Actualizar el sistema
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y # Actualizar el sistema
 
-# Ver la IP de la máquina virtual
-ip addr show
+ip addr show # Ver la IP de la máquina virtual
 
-# Comprobar espacio en disco
-df -h
+df -h  # Comprobar espacio en disco
 
-# Ver la versión de Ubuntu instalada
-lsb_release -a
+lsb_release -a  # Ver la versión de Ubuntu instalada
 
-# Apagar la máquina virtual de forma segura
-sudo poweroff
+sudo poweroff  # Apagar la máquina virtual de forma segura
 ```
 
----
-
-## 7. Operaciones básicas con la máquina virtual
+## 6. Operaciones básicas con la máquina virtual
 
 ### Encender / Apagar / Pausar
 
@@ -426,8 +324,6 @@ sudo poweroff
 | **Suspender** | `VM → Suspend` (guarda el estado en RAM) |
 | **Pausar** | `VM → Pause` |
 | **Reiniciar** | `VM → Power → Restart Guest` |
-
----
 
 ### Snapshots (Instantáneas)
 
@@ -449,8 +345,6 @@ VM con snapshot = "punto de guardado" del sistema
 
 > 💡 **Consejo:** Toma siempre un snapshot justo después de instalar el sistema y antes de hacer cambios importantes. Si algo falla, puedes volver atrás en segundos.
 
----
-
 ### Configurar la red de la VM
 
 VMware ofrece 3 modos de red principales:
@@ -463,9 +357,7 @@ VMware ofrece 3 modos de red principales:
 
 Para cambiar: `VM → Settings → Network Adapter → Tipo de red`
 
----
-
-## 8. Consejos y buenas prácticas
+## 7. Consejos y buenas prácticas
 
 > ✅ **Toma un snapshot antes de cualquier práctica destructiva**
 
@@ -481,18 +373,11 @@ Para cambiar: `VM → Settings → Network Adapter → Tipo de red`
 
 > ⚠️ **No muevas o renombres los archivos `.vmdk`** fuera de VMware o la VM dejará de funcionar
 
----
-
-## Referencias y recursos adicionales
-
-| Recurso | Enlace |
-|---|---|
-| Descarga VMware Workstation Pro | https://www.vmware.com/products/desktop-hypervisor |
-| Documentación oficial VMware | https://docs.vmware.com/en/VMware-Workstation-Pro |
-| Descarga Ubuntu Server | https://ubuntu.com/download/server |
-| Documentación Ubuntu | https://ubuntu.com/server/docs |
-| Foros VMware (comunidad) | https://communities.vmware.com |
-
----
+## Recursos
+- [Descarga VMware Workstation Pro](https://www.vmware.com/products/desktop-hypervisor){target="_blank"}
+- [Documentación oficial VMware](https://docs.vmware.com/en/VMware-Workstation-Pro){target="_blank"}
+- [Documentación Ubuntu](https://ubuntu.com/server/docs){target="_blank"}
+- [Foros VMware (comunidad)](https://communities.vmware.comr){target="_blank"}
+  
 
 *Manual elaborado para uso académico · VMware Workstation Pro (versión gratuita personal) · Ubuntu Server 25.04*
