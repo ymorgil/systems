@@ -69,7 +69,91 @@ resize2fs /dev/ubuntu-vg/ubuntu-lv              # 4. Redimensionar el sistema de
 df -h                                           # 5. Comprobar puntos de montaje
 ```
 
-## 4. Máquinas virtuales (VM)
+## 4. Redes: Bridge, Bonds y VLANs
+Proxmox usa el stack de red de Linux (a través de `/etc/network/interfaces`), así que estos conceptos no son exclusivos de Proxmox, pero la interfaz web los simplifica bastante. Las configuraciones de red en interfaz gráfica se hacen en **System → Network**.
+
+| Concepto | Para qué sirve | Analogía |
+|---|---|---|
+| **Bridge** | Conectar VMs/LXCs a la red | Switch virtual |
+| **Bond** | Redundancia/rendimiento de NICs físicas | Cable doble por seguridad |
+| **VLAN** | Segmentar tráfico lógicamente | Diferentes "carriles" en la misma autopista |
+
+**Bridge (Puente)**
+
+Funciona como un switch virtual dentro del propio host de Proxmox. Por defecto, crea **vmbr0** durante la instalación, vinculado a la NIC física principal y conecta las interfaces físicas (NICs) del servidor con las interfaces virtuales de las VMs/LXC. Cada VM/LXC que quieras conectar a la red simplemente se "enchufa" a ese bridge, igual que enchufarías un cable a un switch físico.
+
+Ejemplo de configuración típica:
+
+    auto vmbr0
+    iface vmbr0 inet static
+        address 192.168.1.10/24
+        gateway 192.168.1.1
+        bridge-ports eno1
+        bridge-stp off
+        bridge-fd 0
+
+**Cuándo usarlo:** siempre. Es la forma estándar de dar red a tus máquinas virtuales. Si tienes varias NICs físicas o quieres segmentar tráfico, puedes tener varios bridges. (ej: `vmbr0` para LAN, `vmbr1` para una red de almacenamiento/backup aislada).
+
+---
+
+**Bond (Agregación de enlaces / Bonding)**
+
+Combina dos o más interfaces físicas en una sola interfaz lógica. Sus principales objetivos son:
+
+- **Redundancia (failover):** si un cable o NIC falla, el tráfico sigue por la otra.
+- **Mayor ancho de banda:** combinando varias NICs (no siempre es una suma directa, depende del modo).
+
+Ejemplo:
+
+    auto bond0
+    iface bond0 inet manual
+        bond-slaves eno1 eno2
+        bond-miimon 100
+        bond-mode 802.3ad
+        bond-xmit-hash-policy layer2+3
+
+    auto vmbr0
+    iface vmbr0 inet static
+        address 192.168.1.10/24
+        gateway 192.168.1.1
+        bridge-ports bond0
+        bridge-stp off
+        bridge-fd 0
+
+> Nota cómo el **bridge ahora usa el bond** (`bond0`) en lugar de una NIC física directamente. El bond se "esconde" debajo del bridge.
+
+**Cuándo usarlo:** entornos de producción donde la alta disponibilidad o el rendimiento de red importan (clústeres, almacenamiento compartido tipo Ceph/NFS, etc.). Modos de Bond destacados:
+
+- **`active-backup`** — Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en `bond-primary`.
+- **`LACP (802.3ad)`** — Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. Política de hash recomendada: `layer3+4`.
+- **`balance-rr`** — Este modo distribuye los paquetes de datos de forma secuencial y rotatoria entre todas las interfaces activas.
+- **`balance-alb`** —  permite balancear el tráfico de tus máquinas virtuales en ambas direcciones sin tocar la configuración del switch.
+
+---
+
+**VLANs (Redes de Área Local Virtuales)**
+
+Permiten segmentar el tráfico de red dentro de la misma infraestructura física, etiquetando los paquetes con un ID (1-4094). En Proxmox hay dos formas principales de trabajar con VLANs:
+
+**a) VLAN Aware Bridge (recomendado)** Marcas el bridge como "VLAN aware" y luego, al configurar la red de cada VM/LXC, simplemente indicas el **VLAN Tag**. Proxmox se encarga de etiquetar el tráfico y esa VM queda aislada en esa VLAN, todo a través del mismo bridge. **Ventaja:** flexible, no necesitas crear un bridge por cada VLAN. Es el método más usado hoy en día.
+
+    auto vmbr0
+    iface vmbr0 inet manual
+        bridge-ports eno1
+        bridge-stp off
+        bridge-fd 0
+        bridge-vlan-aware yes
+        bridge-vids 2-4094
+
+**b) Interfaces VLAN dedicadas** Creas una interfaz VLAN explícita (`eno1.10`) y un bridge específico para ella, se usa cuando necesitas separar tráfico (gestión, almacenamiento, VMs de producción, DMZ, etc.) sin necesidad de switches físicos adicionales, siempre que tu switch físico soporte 802.1Q (trunking).
+
+    auto vmbr0v10
+    iface vmbr0v10 inet manual
+        bridge-ports eno1.10
+        bridge-stp off
+        bridge-fd 0
+
+## 5. Máquinas virtuales (VM)
 > Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico.
 
 Pasos para crear e iniciar una máquina virtual en Proxmox VE:
@@ -89,7 +173,7 @@ Pasos para crear e iniciar una máquina virtual en Proxmox VE:
 | ![Interfaz de proxmox](../assets/img/vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/vir/prx-09.png) |
 | ![Interfaz de proxmox](../assets/img/vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/vir/prx-11.png) | ![Interfaz de proxmox](../assets/img/vir/prx-12.png) |
 
-## 5. Clúster
+## 6. Clúster
 Un **clúster** es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado. En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde una sola interfaz, migrar máquinas virtuales entre ellos y compartir configuraciones de red, almacenamiento y usuarios.
 
 Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster de Proxmox, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.
@@ -102,90 +186,178 @@ Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados 
 ![Interfaz de proxmox](../assets/img/vir/prx-13.png){width="700"}
 > Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
 
-
 **Alta Disponibilidad (HA)** ⚡
 
 Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la HA en Proxmox, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
 
-## 🌐 Networking — Bridge, Bonds, VLANs
+## 7. Plantillas (template)
+Máquina virtual (VM) o contenedor (CT) preconfigurado que se convierte en una imagen base de solo lectura, usada para crear nuevas VMs/CTs rápidamente por **clonación**, en lugar de instalar el sistema operativo desde cero cada vez. 
+Existen dos tipos principales en Proxmox:
 
-Las configuraciones de red se hacen a nivel de nodo en **System → Network**.
+- **Plantillas de VM (QEMU/KVM)**: una máquina virtual completa convertida en plantilla.
+- **Plantillas de contenedor (LXC)**: imágenes de sistema de archivos descargadas desde el repositorio de plantillas de Proxmox (Debian, Ubuntu, Alpine, CentOS, etc.).
 
-| Tipo | Descripción |
-|---|---|
-| **Bridge** | Switch virtual. Permite conectar múltiples VMs con un solo adaptador físico. Se crea uno por defecto en la instalación |
-| **VLAN** | Segmentos de red virtuales |
-| **Bond** | Une varios adaptadores de red físicos |
+**Ventajas**
 
-### Modos de Bond destacados
+- **Rapidez**: despliegue de nuevas VMs/CTs en segundos o minutos.
+- **Consistencia**: todas las VMs nacen desde la misma base, configuración estandarizada.
+- **Ahorro de espacio** (con linked clones).
+- **Automatización**: combinadas con cloud-init o scripts, permiten despliegues totalmente automatizados (útil con Terraform, Ansible, etc.).
 
-**`active-backup`** — Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en `bond-primary`.
+**Buenas prácticas**
 
-**`LACP (802.3ad)`** — Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. Política de hash recomendada: `layer3+4`.
+- Usa convenios de nombres claros (`tpl-debian12-base`, `tpl-ubuntu24-docker`).
+- Mantén las plantillas **actualizadas** periódicamente (regenerarlas cuando haya cambios de versión del SO).
+- Si usarás *linked clones* en producción, recuerda que **no podrás eliminar la plantilla** mientras existan clones enlazados activos.
+- Documenta qué software/configuración trae cada plantilla.
+- Considera tener una plantilla "mínima" (solo SO) y plantillas "especializadas" (con Docker, agentes de monitorización, etc.) según tus necesidades habituales.
 
-## 📋 Crear plantillas y clonar máquinas
+### 1. Plantillas LXC
+Proxmox ofrece un repositorio integrado con plantillas oficiales de distribuciones Linux. Se pueden descargar desde la interfaz web `Datacenter → [nodo] → local (almacenamiento) → Plantillas CT`
+Pulsa **Plantillas** y elige la distribución/versión (ej. `debian-12-standard`, `ubuntu-24.04-standard`), descargar y guardar como archivo `.tar.zst` en `/var/lib/vz/template/cache/`.
 
-### Paso 1 — Preparar la máquina base
+Por línea de comandos:
 
 ```bash
-# Actualizar el sistema
-apt update -y && apt dist-upgrade -y
+pveam update        # Actualizar el índice de plantillas disponibles
 
-# Instalar agente QEMU
-apt install qemu-guest-agent -y
+pveam available     # Listar plantillas disponibles
 
-# Limpiar caché de paquetes
-apt-get clean
-apt-get autoremove
-apt-get autoclean
+pveam download local debian-12-standard_12.7-1_amd64.tar.zst # Descargar una plantilla
 
-# Eliminar logs
-find /var/log -type f -delete
-rm -rf /var/log/*
-
-# Limpiar /tmp
-rm -rf /tmp/*
-
-# Borrar historial de comandos
-cat /dev/null > ~/.bash_history && history -c
-
-# Borrar caché de usuario
-rm -rf ~/.cache/*
-
-# Eliminar claves SSH (se regenerarán al clonar)
-rm /etc/ssh/ssh_host_*
-
-# Resetear hostname
-hostnamectl set-hostname plantilla
-
-# Escribir ceros al espacio libre (compresión más eficiente)
-dd if=/dev/zero of=/tmp/zeroes bs=1M
-rm /tmp/zeroes
+pveam list local    # Listar plantillas ya descargadas
 ```
 
-### Paso 2 — Convertir a plantilla
+**Crear un contenedor desde una plantilla**
+```bash
+pct create 200 local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst \
+  --hostname mi-contenedor \
+  --memory 512 \
+  --cores 1 \
+  --rootfs local-lvm:8 \
+  --net0 name=eth0,bridge=vmbr0,ip=dhcp
+```
 
-1. Clic derecho sobre la VM → **Convert to Template**
-2. Añadir un **Cloud-Init Drive** para poder automatizar el despliegue
+### 2. Plantillas VM (QEMU/KVM)
+A diferencia de los CT, las plantillas de VM las creas tú mismo a partir de una VM ya instalada y configurada. Los paso son los siguientes:
 
-!!! tip "Convención de numeración"
-    Por convención no escrita, las **plantillas** reciben números altos (ej. 900+) y las **máquinas virtuales** números bajos.
+1. **Crear y configurar una VM** con el SO deseado (instalar actualizaciones, agentes, software base).
+2. **Limpiar identificadores únicos** (muy importante para evitar conflictos al clonar):
+   - Eliminar `machine-id` (Linux): `truncate -s0 /etc/machine-id`
+   - Limpiar claves SSH del host si se reutilizarán.
+   - Desinstalar `cloud-init` si no se va a usar, o configurarlo si sí.
+3. **Apagar la VM** (no puede convertirse en plantilla estando encendida).
+4. **Convertir en plantilla**:
+   - Interfaz web: clic derecho sobre la VM → **Convertir a plantilla**
+   - CLI: `qm template <ID_VM>`
 
-## 🪟 Plantillas de Windows
+> ⚠️ **Esta acción es irreversible**: la VM original deja de poder arrancarse; queda como base de solo lectura para clonar.
+> 
+---
+> **Plantillas de Windows**: es recomendable instalar los controladores **VirtIO** para que Windows reconozca correctamente los dispositivos virtuales de Proxmox y obtenga un mejor rendimiento en disco, red y otros componentes. Una vez configurado el sistema, actualizado e instalado el software necesario, se debe ejecutar **Sysprep** con la opción Generalize, lo que elimina la información única de la instalación (SID, nombre del equipo y otros identificadores) para que cada nueva máquina creada desde la plantilla se configure como un sistema independiente durante su primer arranque. Tras finalizar Sysprep, se apaga la máquina virtual y se convierte en plantilla dentro de Proxmox.
+> 
+> - ISO de drivers VirtIO: [pve.proxmox.com/wiki/Windows_VirtIO_Drivers](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers){target="_blank"}
+- Guía oficial Windows 10: [pve.proxmox.com/wiki/Windows_10_guest_best_practices](https://pve.proxmox.com/wiki/Windows_10_guest_best_practices){target="_blank"}
+- [Generalizar con Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11){target="_blank"}
+- [Opciones de línea de comandos Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11){target="_blank"}
 
-**Requisitos:**
-- VM con 2 unidades de CD
-- ISO de Windows
-- ISO de drivers VirtIO: [pve.proxmox.com/wiki/Windows_VirtIO_Drivers](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers)
-- Guía oficial Windows 10: [pve.proxmox.com/wiki/Windows_10_guest_best_practices](https://pve.proxmox.com/wiki/Windows_10_guest_best_practices)
+**Clonar desde una plantilla**
 
-Antes de crear la plantilla ejecutar **Sysprep** para generalizar la instalación (evita IDs duplicados al clonar):
+```bash
+# Clonación completa (full clone) - copia independiente - más lenta
+qm clone 9000 105 --name servidor-web-01 --full  
+# Clonación enlazada (linked clone) - Plantilla como base, ahorra espacio - Dependiente
+qm clone 9000 106 --name servidor-web-02  
+```
 
-- [Generalizar con Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11)
-- [Opciones de línea de comandos Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11)
+### 3. Plantillas con Cloud-Init
+Una práctica muy común es crear plantillas de VM basadas en imágenes **cloud** (ej. Ubuntu Cloud Image, Debian generic cloud) combinadas con **cloud-init**, lo que permite inyectar automáticamente al clonar:
 
-!!! warning "Importante"
-    No añadir aplicaciones de la Microsoft Store a la imagen que se va a generalizar.
+- Usuario y contraseña/clave SSH
+- Hostname
+- Configuración de red (IP estática o DHCP)
+- Scripts de arranque personalizados
+
+**Ejemplo resumido**
+
+```bash
+# Descargar imagen cloud
+wget https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img  
+# Crear VM base
+qm create 9000 --name ubuntu-cloud-template --memory 2048 --cores 2 --net0 virtio,bridge=vmbr0  
+# Importar el disco
+qm importdisk 9000 noble-server-cloudimg-amd64.img local-lvm  
+# Asociar disco y añadir unidad cloud-init
+qm set 9000 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-9000-disk-0
+qm set 9000 --ide2 local-lvm:cloudinit
+qm set 9000 --boot c --bootdisk scsi0
+qm set 9000 --serial0 socket --vga serial0
+# Convertir en plantilla
+qm template 9000  
+```
+
+```bash
+#Al clonar, se pueden ajustar parámetros cloud-init por VM:
+qm set 110 --ciuser admin --cipassword 'clave' --ipconfig0 ip=192.168.1.50/24,gw=192.168.1.1
+```
+
+**Resumen de comandos**
+
+| Acción | Comando |
+|---|---|
+| Actualizar índice de plantillas LXC | `pveam update` |
+| Ver plantillas LXC disponibles | `pveam available` |
+| Descargar plantilla LXC | `pveam download local <plantilla>` |
+| Crear CT desde plantilla | `pct create <ID> local:vztmpl/<archivo>` |
+| Convertir VM en plantilla | `qm template <ID>` |
+| Clonar (full) | `qm clone <ID_origen> <ID_nuevo> --full` |
+| Clonar (linked) | `qm clone <ID_origen> <ID_nuevo>` |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##
+##
+
+
 
 ## 💾 Backup vs Snapshot
 
@@ -301,7 +473,14 @@ vi /etc/pve/qemu-server/101.conf
 
 ## 📚 Recursos
 
+- [Proxmox VE API - Proxmox VE](https://pve.proxmox.com/wiki/Proxmox_VE_API){target="_blank"}
+- [Proxmox VE Helper-Scripts](https://tteck.github.io/Proxmox/){target="_blank"}
+- [Scripts para Proxmox - SomeBooks.es](https://somebooks.es/?s=+Scripts+para+Proxmox){target="_blank"}
+- [Proxmox VE API. Pools.](http://vasilisc.com/proxmox-ve-api-pools){target="_blank"}
+- [Proxmox VE Administration Guide](https://pve.proxmox.com/pve-docs/pve-admin-guide.html){target="_blank"}
+- [Usar el API de Proxmox VE | Wikicrática](https://tecnocratica.net/wikicratica/books/proxmox-ve/page/usar-el-api-de-proxmox-ve){target="_blank"}
+- [GitHub - iesgn/curso_proxmox_cep: Curso sobre Proxmox VE para el CEP.](https://github.com/iesgn/curso_proxmox_cep){target="_blank"}
 - [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
 - [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas){target="_blank"}
 
-Video 08
+Video 9 / 190
