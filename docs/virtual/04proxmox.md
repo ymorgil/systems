@@ -28,6 +28,17 @@
 | **PBS** | Proxmox Backup Server: herramienta para realizar copias de seguridad optimizadas. |
 | **Linux Bridge (vmbr)** | Switch virtual que conecta la red física con las máquinas virtuales y contenedores. |
 
+### MFA
+El MFA (Multi-Factor Authentication o autenticación multifactor) es un sistema de seguridad que requiere que un usuario demuestre su identidad usando más de un método de autenticación antes de acceder a un sistema.
+
+**Activarla en Proxmox**
+
+1. Entrar en la interfaz web de Proxmox, Ir a **My Settings → TFA**, En **Permisos → Two Factor** → **Add**.
+2. Elegir el tipo de MFA: **TOTP** (más habitual): códigos generados por aplicaciones como Google Authenticator.
+3. Al iniciar sesión de nuevo en Proxmox, además de la contraseña pedirá el código temporal de 6 dígitos generado por la aplicación. El token se renueva cada 30 segundos
+
+
+
 ## 3. Almacenamiento
 Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse **dos almacenamientos** principales.Aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.
 
@@ -68,6 +79,29 @@ lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv  # 3. Extender el volumen lógico
 resize2fs /dev/ubuntu-vg/ubuntu-lv              # 4. Redimensionar el sistema de archivos
 df -h                                           # 5. Comprobar puntos de montaje
 ```
+
+
+### Backup vs Snapshot
+
+- **Backup (copia de seguridad)** es una copia de los datos de un sistema que se guarda en otro lugar para poder recuperarlos si se pierden, se dañan o se borran. Modos de backup en Proxmox:
+    - **Stop** | Mayor consistencia, breve tiempo de inactividad
+    - **Suspend** | Suspende la VM. No recomendado (mayor inactividad sin mejor consistencia)
+    - **Snapshot** | Mínimo tiempo de inactividad. Pequeño riesgo de inconsistencia
+    - [Documentación oficial Backup Proxmox](https://pve.proxmox.com/wiki/Backup_and_Restore){target="_blank"}
+    - **Regla de los 3 backups** : **Producción** — copia en el propio entorno, **Backup externo** — en otro medio/red fuera de la infraestructura y **Backup offsite** — en otra geolocalización
+
+ 
+- **Snapshot (instantánea)** es una captura del estado de un sistema en un momento concreto. Guarda cómo estaba una máquina virtual, disco o sistema para poder volver a ese punto anterior. Se usa frecuentemente para volver rápidamente a un estado anterior y se hace antes de actualizar un servidor; si la actualización falla, vuelves al estado anterior.
+
+| | Backup | Snapshot |
+|---|---|---|
+| **Qué es** | Clon completo del disco | Estado puntual de la VM |
+| **Es independiente de la VM** | ✅ Sí | ❌ No, forma parte de la VM |
+| **Uso** | Recuperación ante desastre | Probar cambios y revertir rápido |
+ 
+
+
+
 
 ## 4. Redes: Bridge, Bonds y VLANs
 Proxmox usa el stack de red de Linux (a través de `/etc/network/interfaces`), así que estos conceptos no son exclusivos de Proxmox, pero la interfaz web los simplifica bastante. Las configuraciones de red en interfaz gráfica se hacen en **System → Network**.
@@ -152,6 +186,7 @@ Permiten segmentar el tráfico de red dentro de la misma infraestructura física
         bridge-ports eno1.10
         bridge-stp off
         bridge-fd 0
+
 
 ## 5. Máquinas virtuales (VM)
 > Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico.
@@ -239,6 +274,7 @@ pct create 200 local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst \
 ```
 
 ### 2. Plantillas VM (QEMU/KVM)
+*v9*
 A diferencia de los CT, las plantillas de VM las creas tú mismo a partir de una VM ya instalada y configurada. Los paso son los siguientes:
 
 1. **Crear y configurar una VM** con el SO deseado (instalar actualizaciones, agentes, software base).
@@ -247,7 +283,7 @@ A diferencia de los CT, las plantillas de VM las creas tú mismo a partir de una
    - Limpiar claves SSH del host si se reutilizarán.
    - Desinstalar `cloud-init` si no se va a usar, o configurarlo si sí.
 3. **Apagar la VM** (no puede convertirse en plantilla estando encendida).
-4. **Convertir en plantilla**:
+4. **Convertir en plantilla**: (Proceso irreversible)
    - Interfaz web: clic derecho sobre la VM → **Convertir a plantilla**
    - CLI: `qm template <ID_VM>`
 
@@ -313,166 +349,9 @@ qm set 110 --ciuser admin --cipassword 'clave' --ipconfig0 ip=192.168.1.50/24,gw
 | Clonar (full) | `qm clone <ID_origen> <ID_nuevo> --full` |
 | Clonar (linked) | `qm clone <ID_origen> <ID_nuevo>` |
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##
-##
-
-
-
-## 💾 Backup vs Snapshot
-
-| | Backup | Snapshot |
-|---|---|---|
-| **Qué es** | Clon completo del disco | Estado puntual de la VM |
-| **Es independiente de la VM** | ✅ Sí | ❌ No, forma parte de la VM |
-| **Uso** | Recuperación ante desastre | Probar cambios y revertir rápido |
-
-### Regla de los 3 backups
-
-1. **Producción** — copia en el propio entorno
-2. **Backup externo** — en otro medio/red fuera de la infraestructura
-3. **Backup offsite** — en otra geolocalización
-
-### Modos de Backup en Proxmox
-
-| Modo | Descripción |
-|---|---|
-| **Stop** | Mayor consistencia, breve tiempo de inactividad |
-| **Suspend** | Suspende la VM. No recomendado (mayor inactividad sin mejor consistencia) |
-| **Snapshot** | Mínimo tiempo de inactividad. Pequeño riesgo de inconsistencia |
-
-Documentación oficial: [pve.proxmox.com/wiki/Backup_and_Restore](https://pve.proxmox.com/wiki/Backup_and_Restore)
-
-## 🔐 Habilitar MFA
-
-El **MFA** (Multi-Factor Authentication) requiere dos o más formas de autenticación para acceder al sistema.
-
-Factores disponibles:
-
-- Contraseña
-- Código SMS
-- Aplicación de autenticación (TOTP)
-- Token hardware (ej. **Yubico** — recomendado)
-- Biometría
-
-### Configurar TOTP en Proxmox
-
-1. Ir a **My Settings → TFA**
-2. En **Permisos → Two Factor** → **Add**
-3. Seleccionar **TOTP** → escanear el QR con la app autenticadora
-4. El token se renueva cada 30 segundos
-
-!!! danger "Importante"
-    Guardar siempre la **recovery key** por si se pierde el dispositivo autenticador.
-
-## 🚚 Migrar máquinas virtuales
-
-### Método 1 — Clonezilla (disco a disco por red)
-
-[Descargar Clonezilla liveCD](https://clonezilla.org/downloads.php)
-
-**En la MV origen:**
-```
-remote-source >> Beginner >> disk_to_remote_disk >> dhcp
->> elegir disco >> -sfsck >> -k0 >> -p choose
-```
-
-**En la MV destino:**
-```
-remote-dest >> dhcp >> IP_MVorigen >> restoredisk
-```
-
-Revertir el orden de arranque al disco tras finalizar.
-
----
-
-### Método 2 — Disk2vhd (P2V, físico a virtual Windows)
-
-[Descargar Disk2vhd](https://learn.microsoft.com/en-us/sysinternals/downloads/disk2vhd)
-
-```bash
-# Convertir el disco VHD a formato QCOW2
-qemu-img convert -O qcow2 <disco_origen> <disco_destino.qcow2>
-
-# Mover la imagen a la carpeta de la VM (ej. ID 101)
-mv <disco_destino.qcow2> /var/lib/vz/images/101/
-
-cd /var/lib/vz/images/101/
-
-# Reescanear discos
-qm rescan
-
-# Editar la config de la VM y cambiar la etiqueta del disco a sata1
-vi /etc/pve/qemu-server/101.conf
-```
-
-### Método 3 — dd (clonado a nivel de bloque)
-
-Ideal para análisis forense o cuando no hay otro método.
-
-```bash
-# Ver discos disponibles
-lsblk
-
-# Clonar disco completo
-sudo dd if=/dev/nvme0n1 of=lab.img bs=1M status=progress
-
-# Renombrar como raw
-mv lab.img lab.raw
-
-# Mover a la carpeta de la VM y reescanear
-mv lab.raw /var/lib/vz/images/101/
-cd /var/lib/vz/images/101/
-qm rescan
-
-# Editar config y cambiar etiqueta a sata2
-vi /etc/pve/qemu-server/101.conf
-```
-
-
-
 ## 📚 Recursos
 
+- [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"} v12
 - [Proxmox VE API - Proxmox VE](https://pve.proxmox.com/wiki/Proxmox_VE_API){target="_blank"}
 - [Proxmox VE Helper-Scripts](https://tteck.github.io/Proxmox/){target="_blank"}
 - [Scripts para Proxmox - SomeBooks.es](https://somebooks.es/?s=+Scripts+para+Proxmox){target="_blank"}
@@ -480,7 +359,4 @@ vi /etc/pve/qemu-server/101.conf
 - [Proxmox VE Administration Guide](https://pve.proxmox.com/pve-docs/pve-admin-guide.html){target="_blank"}
 - [Usar el API de Proxmox VE | Wikicrática](https://tecnocratica.net/wikicratica/books/proxmox-ve/page/usar-el-api-de-proxmox-ve){target="_blank"}
 - [GitHub - iesgn/curso_proxmox_cep: Curso sobre Proxmox VE para el CEP.](https://github.com/iesgn/curso_proxmox_cep){target="_blank"}
-- [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
 - [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas){target="_blank"}
-
-Video 9 / 190

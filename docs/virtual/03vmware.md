@@ -1,7 +1,7 @@
 # 🖥️ VMware Workstation Pro
 
-## 1. ¿Qué es VMware?
-**VMware** es un software de **virtualización** que permite ejecutar uno o varios sistemas operativos (*máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo. **Ejemplo:** Puedes tener Windows 11 como sistema principal y, al mismo tiempo, ejecutar Ubuntu Server dentro de una ventana de VMware.
+## 1. VMware
+**VMware** es un software de **virtualización** que permite ejecutar uno o varios sistemas operativos (*máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo. 
 
 **¿Para qué se usa en el aula?**
 
@@ -11,7 +11,43 @@
 - Aprender Linux sin riesgos
 - Crear entornos de prueba aislados
 
-## 2. Tipos de licencias
+## 2. Licencias
+
+| Licencia | Precio | Uso | Snapshots | Red Virtual | Soporte | Descarga |
+|---|---|---|---|---|---|---|
+| Workstation Pro Personal ⭐ | Gratuito | Personal y educativo | ✅ | ✅ | ❌ | [Descargar](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion){target="_blank"} |
+| Workstation Pro Comercial | Suscripción anual | Empresarial y profesional | ✅ | ✅ | ✅ | [Descargar](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion){target="_blank"} |
+| Academic Program | Según convenio | Centros educativos | ✅ | ✅ | ✅ | — |
+| Workstation Player | ~~Gratuito~~ | ~~Simplificado~~ | ❌ | ❌ | ❌ | ~~Descontinuado~~ |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 VMware (ahora bajo **Broadcom**) ofrece varias versiones de su producto de escritorio:
 
 **1. VMware Workstation Pro — Uso Personal (Gratuito)**
