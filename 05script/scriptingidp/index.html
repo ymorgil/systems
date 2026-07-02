@@ -1,0 +1,2200 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/05script/scriptingidp/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Guía de Scripting en Bash y PowerShell - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-de-scripting-en-bash-y-powershell" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía de Scripting en Bash y PowerShell
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02virtualbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/04proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/00contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/01docker-windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/02docker-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/03docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/04kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/01introducción.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/02bash.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/03python.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/add.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/biu.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indíce
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indíce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-que-es-el-scripting-en-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - ¿Qué es el Scripting en Bash?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-sintaxis-basica-de-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Sintaxis Básica de Bash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-comandos-comunes-de-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Comandos Comunes de Bash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-introduccion-al-scripting-en-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Introducción al Scripting en PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-sintaxis-basica-de-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Sintaxis Básica de PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-comandos-comunes-de-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Comandos Comunes de PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-comparativa-entre-bash-y-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Comparativa entre Bash y PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-el-scripting-en-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ¿Qué es el Scripting en Bash?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ¿Qué es el Scripting en Bash?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-principales-de-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características principales de Bash:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-bash-en-sistemas-linuxunix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso de Bash en sistemas Linux/Unix:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sintaxis-basica-de-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sintaxis Básica de Bash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Sintaxis Básica de Bash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-en-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables en Bash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras de Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras de Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#condicional-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Condicional if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-switch-en-otros-lenguajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        case (Switch en otros lenguajes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bucles-en-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucles en Bash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bucles en Bash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bucle-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bucle-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bucle-until" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle until
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-en-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones en Bash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones en Bash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcion-con-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función con parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcion-con-retorno-de-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función con retorno de valor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comandos-comunes-de-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comandos comunes de Bash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Comandos comunes de Bash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ls-listar-archivos-y-directorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ls - Listar archivos y directorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-cambiar-de-directorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cd - Cambiar de directorio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#echo-imprimir-texto-en-la-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        echo - Imprimir texto en la terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grep-buscar-patrones-en-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        grep - Buscar patrones en archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwd-mostrar-directorio-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pwd - Mostrar directorio actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdir-crear-un-directorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mkdir - Crear un directorio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rm-eliminar-archivos-o-directorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rm - Eliminar archivos o directorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cp-copiar-archivos-o-directorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cp - Copiar archivos o directorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mv-mover-o-renombrar-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mv - Mover o renombrar archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cat-mostrar-contenido-de-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cat - Mostrar contenido de archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-buscar-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        find - Buscar archivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-introduccion-al-scripting-en-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Introducción al Scripting en PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Introducción al Scripting en PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es PowerShell?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-operativos-compatibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistemas operativos compatibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sintaxis-basica-de-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sintaxis Básica de PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Sintaxis Básica de PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-de-control_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras de Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras de Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#condicional-if-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Condicional if-else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bucle-for_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bucle-while_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle while
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-comandos-comunes-de-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Comandos Comunes de PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Comandos Comunes de PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get-Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set-Item
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get-Help
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get-Item
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set-Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get-Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stop-Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get-Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start-Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New-Item
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comparativa-entre-bash-y-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Comparativa entre Bash y PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Comparativa entre Bash y PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guia-de-scripting-en-bash-y-powershell">Guía de Scripting en Bash y PowerShell</h1>
+<hr>
+<h2 id="indice">Indíce</h2>
+<h3 id="-que-es-el-scripting-en-bash">- <a href="#1-qué-es-el-scripting-en-bash">¿Qué es el Scripting en Bash?</a></h3>
+<h3 id="-sintaxis-basica-de-bash">- <a href="#2-sintaxis-básica-de-bash">Sintaxis Básica de Bash</a></h3>
+<h3 id="-comandos-comunes-de-bash">- <a href="#3-comandos-comunes-de-bash">Comandos Comunes de Bash</a></h3>
+<h3 id="-introduccion-al-scripting-en-powershell">- <a href="#4-introducción-al-scripting-en-powershell">Introducción al Scripting en PowerShell</a></h3>
+<h3 id="-sintaxis-basica-de-powershell">- <a href="#5-sintaxis-básica-de-powershell">Sintaxis Básica de PowerShell</a></h3>
+<h3 id="-comandos-comunes-de-powershell">- <a href="#6-comandos-comunes-de-powershell">Comandos Comunes de PowerShell</a></h3>
+<h3 id="-comparativa-entre-bash-y-powershell">- <a href="#7-comparativa-entre-bash-y-powershell">Comparativa entre Bash y PowerShell</a></h3>
+<hr>
+<h2 id="1-que-es-el-scripting-en-bash">1. ¿Qué es el Scripting en Bash?</h2>
+<p>El <strong>scripting en Bash</strong> se refiere a la escritura de secuencias de comandos (scripts) en el lenguaje de shell de Bash. Bash es el intérprete de comandos predeterminado en la mayoría de las distribuciones de <strong>Linux</strong> y <strong>Unix</strong>. Los scripts de Bash permiten automatizar tareas repetitivas, administrar sistemas y ejecutar comandos del sistema operativo mediante secuencias programadas.</p>
+<h3 id="caracteristicas-principales-de-bash">Características principales de Bash:</h3>
+<ul>
+<li><strong>Interactividad</strong>: Permite la ejecución de comandos uno por uno.</li>
+<li><strong>Automatización</strong>: Permite crear scripts para tareas repetitivas.</li>
+<li><strong>Compatibilidad</strong>: Funciona en sistemas Unix y Linux.</li>
+<li><strong>Lenguaje de programación</strong>: Bash es un lenguaje de scripting que incluye estructuras de control, variables, funciones y más.</li>
+</ul>
+<h3 id="uso-de-bash-en-sistemas-linuxunix">Uso de Bash en sistemas Linux/Unix:</h3>
+<ul>
+<li>Es ampliamente utilizado en servidores para administrar sistemas y realizar tareas de mantenimiento.</li>
+<li>Ideal para la automatización de tareas administrativas como copias de seguridad, actualización de sistemas, etc.</li>
+</ul>
+<hr>
+<h2 id="2-sintaxis-basica-de-bash">2. Sintaxis Básica de Bash</h2>
+<h3 id="variables-en-bash">Variables en Bash</h3>
+<p>Las variables en Bash se definen sin necesidad de especificar su tipo.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">nombre</span><span class="o">=</span><span class="s2">"Juan"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Hola, </span><span class="nv">$nombre</span><span class="s2">!"</span>
+</code></pre></div>
+<p>Para variables de solo lectura:
+</p><div class="highlight"><pre><span></span><code><span class="nb">readonly</span><span class="w"> </span><span class="nv">PI</span><span class="o">=</span><span class="m">3</span>.1416
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"El valor de PI es </span><span class="nv">$PI</span><span class="s2">"</span>
+</code></pre></div><p></p>
+<p>Para eliminar una variable:
+</p><div class="highlight"><pre><span></span><code><span class="nb">unset</span><span class="w"> </span>nombre
+</code></pre></div><p></p>
+<h2 id="estructuras-de-control">Estructuras de Control</h2>
+<h3 id="condicional-if">Condicional <code>if</code></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">num</span><span class="o">=</span><span class="m">10</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$num</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"El número es mayor que 5"</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"El número es 5 o menor"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<h3 id="case-switch-en-otros-lenguajes"><code>case</code> (Switch en otros lenguajes)</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Ingrese un número: "</span>
+<span class="nb">read</span><span class="w"> </span>num
+<span class="k">case</span><span class="w"> </span><span class="nv">$num</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Elegiste uno"</span><span class="p">;;</span>
+<span class="w">    </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Elegiste dos"</span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Opción no válida"</span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
+<h2 id="bucles-en-bash">Bucles en Bash</h2>
+<h3 id="bucle-for">Bucle <code>for</code></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..5<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Número: </span><span class="nv">$i</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre></div>
+<h3 id="bucle-while">Bucle <code>while</code></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">contador</span><span class="o">=</span><span class="m">1</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$contador</span><span class="w"> </span>-le<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Iteración </span><span class="nv">$contador</span><span class="s2">"</span>
+<span class="w">    </span><span class="o">((</span>contador++<span class="o">))</span>
+<span class="k">done</span>
+</code></pre></div>
+<h3 id="bucle-until">Bucle <code>until</code></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">contador</span><span class="o">=</span><span class="m">1</span>
+<span class="k">until</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$contador</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Iteración </span><span class="nv">$contador</span><span class="s2">"</span>
+<span class="w">    </span><span class="o">((</span>contador++<span class="o">))</span>
+<span class="k">done</span>
+</code></pre></div>
+<h2 id="funciones-en-bash">Funciones en Bash</h2>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+mi_funcion<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hola desde la función!"</span>
+<span class="o">}</span>
+mi_funcion
+</code></pre></div>
+<h3 id="funcion-con-parametros">Función con parámetros</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+suma<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">resultado</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">$2</span><span class="w"> </span><span class="k">))</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"La suma es: </span><span class="nv">$resultado</span><span class="s2">"</span>
+<span class="o">}</span>
+suma<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">7</span>
+</code></pre></div>
+<h3 id="funcion-con-retorno-de-valor">Función con retorno de valor</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+multiplica<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">$2</span><span class="w"> </span><span class="k">))</span>
+<span class="o">}</span>
+<span class="nv">resultado</span><span class="o">=</span><span class="k">$(</span>multiplica<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"El resultado de la multiplicación es: </span><span class="nv">$resultado</span><span class="s2">"</span>
+</code></pre></div>
+<hr>
+<h2 id="3-comandos-comunes-de-bash">3. Comandos comunes de Bash</h2>
+<h3 id="ls-listar-archivos-y-directorios"><code>ls</code> - Listar archivos y directorios</h3>
+<div class="highlight"><pre><span></span><code>ls<span class="w">          </span><span class="c1"># Lista archivos y directorios</span>
+ls<span class="w"> </span>-l<span class="w">       </span><span class="c1"># Lista con detalles</span>
+ls<span class="w"> </span>-a<span class="w">       </span><span class="c1"># Muestra archivos ocultos</span>
+</code></pre></div>
+<h3 id="cd-cambiar-de-directorio"><code>cd</code> - Cambiar de directorio</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/ruta/destino<span class="w">   </span><span class="c1"># Cambia al directorio especificado</span>
+<span class="nb">cd</span><span class="w"> </span>..<span class="w">              </span><span class="c1"># Sube un nivel</span>
+<span class="nb">cd</span><span class="w"> </span>~<span class="w">               </span><span class="c1"># Va al directorio home</span>
+</code></pre></div>
+<h3 id="echo-imprimir-texto-en-la-terminal"><code>echo</code> - Imprimir texto en la terminal</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hola, mundo"</span><span class="w">   </span><span class="c1"># Muestra el mensaje</span>
+</code></pre></div>
+<h3 id="grep-buscar-patrones-en-archivos"><code>grep</code> - Buscar patrones en archivos</h3>
+<div class="highlight"><pre><span></span><code>grep<span class="w"> </span><span class="s2">"texto"</span><span class="w"> </span>archivo.txt<span class="w">   </span><span class="c1"># Busca "texto" en archivo.txt</span>
+grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"texto"</span><span class="w"> </span>archivo.txt<span class="w"> </span><span class="c1"># Búsqueda sin distinguir mayúsculas/minúsculas</span>
+</code></pre></div>
+<h3 id="pwd-mostrar-directorio-actual"><code>pwd</code> - Mostrar directorio actual</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">pwd</span><span class="w">  </span><span class="c1"># Muestra la ruta completa del directorio actual</span>
+</code></pre></div>
+<h3 id="mkdir-crear-un-directorio"><code>mkdir</code> - Crear un directorio</h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>nuevo_directorio<span class="w">   </span><span class="c1"># Crea un directorio nuevo</span>
+</code></pre></div>
+<h3 id="rm-eliminar-archivos-o-directorios"><code>rm</code> - Eliminar archivos o directorios</h3>
+<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>archivo.txt<span class="w">        </span><span class="c1"># Elimina un archivo</span>
+rm<span class="w"> </span>-r<span class="w"> </span>directorio/<span class="w">     </span><span class="c1"># Elimina un directorio y su contenido</span>
+</code></pre></div>
+<h3 id="cp-copiar-archivos-o-directorios"><code>cp</code> - Copiar archivos o directorios</h3>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>archivo.txt<span class="w"> </span>/ruta/destino<span class="w">   </span><span class="c1"># Copia un archivo</span>
+cp<span class="w"> </span>-r<span class="w"> </span>carpeta/<span class="w"> </span>/ruta/destino<span class="w">   </span><span class="c1"># Copia un directorio</span>
+</code></pre></div>
+<h3 id="mv-mover-o-renombrar-archivos"><code>mv</code> - Mover o renombrar archivos</h3>
+<div class="highlight"><pre><span></span><code>mv<span class="w"> </span>archivo.txt<span class="w"> </span>/ruta/destino<span class="w">   </span><span class="c1"># Mueve un archivo</span>
+mv<span class="w"> </span>viejo_nombre.txt<span class="w"> </span>nuevo_nombre.txt<span class="w">  </span><span class="c1"># Renombra un archivo</span>
+</code></pre></div>
+<h3 id="cat-mostrar-contenido-de-archivos"><code>cat</code> - Mostrar contenido de archivos</h3>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>archivo.txt<span class="w">   </span><span class="c1"># Muestra el contenido del archivo</span>
+</code></pre></div>
+<h3 id="find-buscar-archivos"><code>find</code> - Buscar archivos</h3>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/ruta<span class="w"> </span>-name<span class="w"> </span><span class="s2">"archivo.txt"</span><span class="w">   </span><span class="c1"># Busca archivo.txt en /ruta</span>
+</code></pre></div>
+<hr>
+<h2 id="4-introduccion-al-scripting-en-powershell">4. Introducción al Scripting en PowerShell</h2>
+<h3 id="que-es-powershell">¿Qué es PowerShell?</h3>
+<p>PowerShell es un lenguaje de scripting y una interfaz de línea de comandos desarrollado por Microsoft. Se basa en .NET y permite automatizar tareas del sistema, administrar configuraciones y ejecutar comandos de manera eficiente.</p>
+<h3 id="sistemas-operativos-compatibles">Sistemas operativos compatibles</h3>
+<p>PowerShell está disponible en:
+- <strong>Windows</strong> (preinstalado desde Windows 7 y Server 2008 R2)
+- <strong>Linux</strong> (mediante PowerShell Core)
+- <strong>macOS</strong> (mediante PowerShell Core)</p>
+<h3 id="caracteristicas-principales">Características principales</h3>
+<ul>
+<li><strong>Basado en objetos</strong>: A diferencia de otros intérpretes de comandos, PowerShell maneja objetos en lugar de texto.</li>
+<li><strong>Cmdlets</strong>: Comandos especializados para realizar tareas específicas.</li>
+<li><strong>Automatización</strong>: Permite la creación de scripts avanzados para gestionar sistemas y redes.</li>
+<li><strong>Integración con .NET</strong>: Facilita la extensibilidad y el acceso a recursos del sistema.</li>
+<li><strong>Remoting</strong>: Ejecuta comandos en máquinas remotas de manera segura.</li>
+</ul>
+<hr>
+<h2 id="5-sintaxis-basica-de-powershell">5. Sintaxis Básica de PowerShell</h2>
+<h3 id="variables">Variables</h3>
+<p>Las variables en PowerShell se definen con el prefijo <code>$</code>.
+</p><div class="highlight"><pre><span></span><code><span class="nv">$nombre</span> <span class="p">=</span> <span class="s2">"Juan"</span>
+<span class="nv">$edad</span> <span class="p">=</span> <span class="n">30</span>
+<span class="nb">Write-Output</span> <span class="s2">"Nombre: $nombre, Edad: $edad"</span>
+</code></pre></div><p></p>
+<h2 id="estructuras-de-control_1">Estructuras de Control</h2>
+<h3 id="condicional-if-else">Condicional <code>if-else</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$numero</span> <span class="p">=</span> <span class="n">10</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$numero</span> <span class="o">-gt</span> <span class="n">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Output</span> <span class="s2">"El número es mayor que 5"</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nb">Write-Output</span> <span class="s2">"El número es 5 o menor"</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="bucle-for_1">Bucle <code>for</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="n">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="n">5</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++)</span> <span class="p">{</span>
+    <span class="nb">Write-Output</span> <span class="s2">"Iteración $i"</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="bucle-while_1">Bucle <code>while</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$contador</span> <span class="p">=</span> <span class="n">1</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$contador</span> <span class="o">-le</span> <span class="n">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Output</span> <span class="s2">"Contador: $contador"</span>
+    <span class="nv">$contador</span><span class="p">++</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="funciones">Funciones</h2>
+<p>Las funciones en PowerShell se definen con <strong>function</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="n">Saludar</span> <span class="p">{</span>
+    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$nombre</span><span class="p">)</span>
+    <span class="nb">Write-Output</span> <span class="s2">"Hola, $nombre!"</span>
+<span class="p">}</span>
+<span class="n">Saludar</span> <span class="s2">"Carlos"</span>
+</code></pre></div>
+<hr>
+<h2 id="6-comandos-comunes-de-powershell">6. Comandos Comunes de PowerShell</h2>
+<p>PowerShell es una potente herramienta de línea de comandos que permite administrar sistemas y automatizar tareas. A continuación, se presentan algunos de los comandos más utilizados en PowerShell junto con ejemplos prácticos de cómo se usan.</p>
+<h3 id="get-command"><strong>Get-Command</strong></h3>
+<p>El comando <code>Get-Command</code> se utiliza para obtener una lista de todos los cmdlets, funciones y alias disponibles en PowerShell.</p>
+<h3 id="ejemplo">Ejemplo:</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Command</span> <span class="p">*</span><span class="n">proceso</span><span class="p">*</span>
+</code></pre></div>
+<h3 id="set-item"><strong>Set-Item</strong></h3>
+<p>El comando Set-Item se utiliza para cambiar el valor de un elemento, como un archivo, una carpeta o una variable.</p>
+<div class="highlight"><pre><span></span><code><span class="c">#Este comando cambiará el contenido de "archivo.txt" al texto "Nuevo contenido del archivo"</span>
+<span class="nb">Set-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\Mis Archivos\\archivo.txt"</span> <span class="n">-Value</span> <span class="s2">"Nuevo contenido del archivo"</span>
+
+<span class="c">#Este comando cambiará el valor de la variable $miVariable a "Nuevo valor"</span>
+<span class="nv">$miVariable</span> <span class="p">=</span> <span class="s2">"Valor inicial"</span>
+<span class="nb">Set-Item</span> <span class="n">-Path</span> <span class="n">Variable</span><span class="p">:\\</span><span class="n">miVariable</span> <span class="n">-Value</span> <span class="s2">"Nuevo valor"</span>
+</code></pre></div>
+<h3 id="get-help"><strong>Get-Help</strong></h3>
+<p>El comando Get-Help se utiliza para obtener información detallada sobre cualquier cmdlet, función o comando en PowerShell.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Help</span> <span class="nb">Get-Command</span>    <span class="c">#Mostrará detalles de cómo usar el cmdlet Get-Command</span>
+<span class="nb">Get-Help</span> <span class="nb">Get-Command</span> <span class="n">-Examples</span>    <span class="c">#Mostrará ejemplos de uso del cmdlet</span>
+</code></pre></div>
+<h3 id="get-item"><strong>Get-Item</strong></h3>
+<p>El comando Get-Item se utiliza para obtener información sobre un archivo, carpeta o registro.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\Mis Archivos\\archivo.txt"</span>
+</code></pre></div>
+<h3 id="set-location"><strong>Set-Location</strong></h3>
+<p>El comando Set-Location se utiliza para cambiar el directorio actual.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Set-Location</span> <span class="n">-Path</span> <span class="s2">"C:\\Mis Archivos"</span>
+</code></pre></div>
+<h3 id="get-process"><strong>Get-Process</strong></h3>
+<p>El comando Get-Process se utiliza para obtener información sobre los procesos que se están ejecutando en el sistema.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Process</span>    <span class="c">#General</span>
+
+<span class="nb">Get-Process</span> <span class="n">-Name</span> <span class="s2">"notepad"</span>    <span class="c">#Un proceso específico</span>
+</code></pre></div>
+<h3 id="stop-process"><strong>Stop-Process</strong></h3>
+<p>El comando Stop-Process se utiliza para detener un proceso en ejecución.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Stop-Process</span> <span class="n">-Name</span> <span class="s2">"notepad"</span>
+</code></pre></div>
+<h3 id="get-service"><strong>Get-Service</strong></h3>
+<p>El comando Get-Service se utiliza para obtener información sobre los servicios de Windows que están instalados en el sistema.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Service</span>    <span class="c">#General</span>
+
+<span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="s2">"wuauserv"</span>    <span class="c">#Un servicio específico</span>
+</code></pre></div>
+<h3 id="start-service"><strong>Start-Service</strong></h3>
+<p>El comando Start-Service se utiliza para iniciar un servicio detenido.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Start-Service</span> <span class="n">-Name</span> <span class="s2">"wuauserv"</span>
+</code></pre></div>
+<h3 id="new-item"><strong>New-Item</strong></h3>
+<p>El comando New-Item se utiliza para crear nuevos archivos o carpetas.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\Mis Archivos"</span> <span class="n">-Name</span> <span class="s2">"NuevoArchivo.txt"</span> <span class="n">-ItemType</span> <span class="s2">"File"</span>    <span class="c">#Archivo</span>
+<span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\Mis Archivos"</span> <span class="n">-Name</span> <span class="s2">"NuevaCarpeta"</span> <span class="n">-ItemType</span> <span class="s2">"Directory"</span>    <span class="c">#Carpeta</span>
+</code></pre></div>
+<hr>
+<h2 id="7-comparativa-entre-bash-y-powershell">7. Comparativa entre Bash y PowerShell</h2>
+<p>A continuación se muestra una breve comparación entre Bash y PowerShell, destacando las principales diferencias y similitudes.</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th><strong>Bash</strong></th>
+<th><strong>PowerShell</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sistema operativo principal</strong></td>
+<td>Principalmente Linux y macOS, pero también en Windows con WSL</td>
+<td>Principalmente Windows, pero también disponible en Linux y macOS</td>
+</tr>
+<tr>
+<td><strong>Paradigma de programación</strong></td>
+<td>Basado en comandos y scripts, estilo UNIX</td>
+<td>Basado en objetos y scripting, más orientado a .NET</td>
+</tr>
+<tr>
+<td><strong>Sintaxis</strong></td>
+<td>Simples comandos textuales y scripts de shell</td>
+<td>Sintaxis basada en cmdlets y objetos</td>
+</tr>
+<tr>
+<td><strong>Manipulación de texto</strong></td>
+<td>Manipulación de texto simple con herramientas como <code>awk</code>, <code>sed</code>, etc.</td>
+<td>Manipulación de texto con objetos y cmdlets como <code>Select-String</code></td>
+</tr>
+<tr>
+<td><strong>Comandos</strong></td>
+<td>Utiliza comandos tradicionales de Unix/Linux (ls, cat, grep, etc.)</td>
+<td>Utiliza cmdlets, que son comandos estructurados como <code>Get-Command</code></td>
+</tr>
+<tr>
+<td><strong>Tipo de datos</strong></td>
+<td>Maneja cadenas y variables básicas</td>
+<td>Maneja objetos completos, incluidos tipos complejos como arrays y tablas</td>
+</tr>
+<tr>
+<td><strong>Pipe (tuberías)</strong></td>
+<td>Los pipes pasan texto entre los comandos</td>
+<td>Los pipes pasan objetos entre cmdlets</td>
+</tr>
+<tr>
+<td><strong>Compatibilidad</strong></td>
+<td>Compatible con la mayoría de herramientas UNIX/Linux</td>
+<td>Alta compatibilidad con el ecosistema de Windows y cmdlets .NET</td>
+</tr>
+<tr>
+<td><strong>Redirección</strong></td>
+<td>Redirección de salida estándar con <code>&gt;</code> y <code>&gt;&gt;</code></td>
+<td>Redirección usando <code>Out-File</code>, <code>Out-String</code> y otros cmdlets</td>
+</tr>
+<tr>
+<td><strong>Automatización de tareas</strong></td>
+<td>Utiliza scripts sencillos y herramientas externas para la automatización</td>
+<td>Potente motor de scripting orientado a tareas de administración de sistemas</td>
+</tr>
+<tr>
+<td><strong>Interactividad</strong></td>
+<td>Terminal de línea de comandos tradicional</td>
+<td>Consola interactiva con soporte para comandos y objetos</td>
+</tr>
+<tr>
+<td><strong>Extensibilidad</strong></td>
+<td>Ampliable con scripts y herramientas de terceros</td>
+<td>Extensible con módulos adicionales, soporte para extensiones en .NET</td>
+</tr>
+<tr>
+<td><strong>Orientación</strong></td>
+<td>Orientado a tareas de administración y scripting en sistemas basados en UNIX</td>
+<td>Orientado a la administración de sistemas, especialmente en entornos Windows</td>
+</tr>
+<tr>
+<td><strong>Ejemplo de comando básico</strong></td>
+<td><code>ls -l</code> para listar archivos en directorio</td>
+<td><code>Get-ChildItem</code> para listar archivos en directorio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conclusion">Conclusión</h3>
+<ul>
+<li><strong>Bash</strong> es más adecuado para tareas en sistemas Unix/Linux y aquellos que prefieren la simplicidad y la velocidad.</li>
+<li><strong>PowerShell</strong> es más adecuado para usuarios de Windows o aquellos que trabajan en entornos de administración de sistemas complejos y necesitan trabajar con objetos y un ecosistema .NET.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

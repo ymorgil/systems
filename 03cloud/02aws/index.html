@@ -1,0 +1,2374 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/03cloud/02aws/">
+      
+      
+        <link rel="prev" href="../01introcloud/">
+      
+      
+        <link rel="next" href="../ec2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AWS - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-amazon-web-service" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02virtualbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VirtualBox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/04proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#5-amazon-web-services-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Amazon Web Services (AWS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Amazon Web Services (AWS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-infraestructura-global-de-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Infraestructura Global de AWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Infraestructura Global de AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonas-de-disponibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zonas de Disponibilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-amazon-vpc-virtual-private-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Amazon VPC (Virtual Private Cloud)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Amazon VPC (Virtual Private Cloud)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-de-la-vpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características de la VPC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subredes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subredes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloques-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bloques CIDR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direcciones-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direcciones IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablas-de-enrutamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tablas de Enrutamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-servicios-de-computo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Servicios de Cómputo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-amazon-ec2-elastic-compute-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Amazon EC2 (Elastic Compute Cloud)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Amazon EC2 (Elastic Compute Cloud)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significado-del-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significado del nombre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usos-comunes-de-instancias-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usos comunes de instancias EC2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-machine-image-ami" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Amazon Machine Image (AMI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Amazon Machine Image (AMI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-ami-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de AMI disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#categorias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorías
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomenclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomenclatura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#par-de-claves-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Par de Claves (Login)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-creacion-de-una-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Creación de una Instancia EC2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Creación de una Instancia EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-ingresar-a-aws-academy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1 — Ingresar a AWS Academy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-acceder-a-la-consola-de-administracion-de-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2 — Acceder a la consola de administración de AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-lanzar-el-asistente-de-creacion-de-instancias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3 — Lanzar el asistente de creación de instancias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-del-asistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración del asistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-configuraciones-de-red-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Configuraciones de Red en EC2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Configuraciones de Red en EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grupos-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grupos de Seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-configuracion-de-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Configuración de Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Configuración de Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opciones-de-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones de almacenamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-detalles-avanzados-datos-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Detalles Avanzados — Datos de Usuario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-iniciar-y-gestionar-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Iniciar y Gestionar la Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Iniciar y Gestionar la Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pestanas-de-gestion-de-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pestañas de gestión de la instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-conectarse-a-una-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Conectarse a una Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Conectarse a una Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instancia-windows-rdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instancia Windows (RDP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/00contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/01docker-windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/02docker-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker en Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/03docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04contenedores/04kubernetes.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/01introducción.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/02bash.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/03python.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add/add.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biu/biu.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#5-amazon-web-services-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Amazon Web Services (AWS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Amazon Web Services (AWS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-infraestructura-global-de-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Infraestructura Global de AWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Infraestructura Global de AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonas-de-disponibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zonas de Disponibilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-amazon-vpc-virtual-private-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Amazon VPC (Virtual Private Cloud)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Amazon VPC (Virtual Private Cloud)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-de-la-vpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características de la VPC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subredes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subredes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloques-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bloques CIDR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direcciones-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direcciones IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablas-de-enrutamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tablas de Enrutamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-servicios-de-computo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Servicios de Cómputo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-amazon-ec2-elastic-compute-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Amazon EC2 (Elastic Compute Cloud)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Amazon EC2 (Elastic Compute Cloud)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significado-del-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significado del nombre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usos-comunes-de-instancias-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usos comunes de instancias EC2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-machine-image-ami" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Amazon Machine Image (AMI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Amazon Machine Image (AMI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-ami-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de AMI disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#categorias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorías
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomenclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomenclatura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#par-de-claves-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Par de Claves (Login)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-creacion-de-una-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Creación de una Instancia EC2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Creación de una Instancia EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-ingresar-a-aws-academy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1 — Ingresar a AWS Academy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-acceder-a-la-consola-de-administracion-de-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2 — Acceder a la consola de administración de AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-lanzar-el-asistente-de-creacion-de-instancias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3 — Lanzar el asistente de creación de instancias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-del-asistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración del asistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-configuraciones-de-red-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Configuraciones de Red en EC2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Configuraciones de Red en EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grupos-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grupos de Seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-configuracion-de-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Configuración de Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Configuración de Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opciones-de-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones de almacenamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-detalles-avanzados-datos-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Detalles Avanzados — Datos de Usuario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-iniciar-y-gestionar-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Iniciar y Gestionar la Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Iniciar y Gestionar la Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pestanas-de-gestion-de-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pestañas de gestión de la instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-conectarse-a-una-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Conectarse a una Instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Conectarse a una Instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instancia-windows-rdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instancia Windows (RDP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aws-amazon-web-service">🖥️ AWS (AMAZON WEB SERVICE)</h1>
+<h2 id="5-amazon-web-services-aws">5. Amazon Web Services (AWS)</h2>
+<p>Plataforma de servicios en la nube proporcionada por Amazon que ofrece una amplia gama de servicios web para crear, implementar y gestionar aplicaciones sin necesidad de infraestructura física.</p>
+<h3 id="caracteristicas-principales">Características principales</h3>
+<ul>
+<li>Plataforma en la nube segura con un amplio conjunto de productos globales basados en la nube.</li>
+<li>Acceso bajo demanda a recursos de cómputo, almacenamiento, red, bases de datos y herramientas de administración.</li>
+<li>Ofrece flexibilidad.</li>
+<li>Solo se paga por los servicios individuales que se necesitan y en la medida que se utilicen.</li>
+<li>Los servicios de AWS trabajan en conjunto como piezas fundamentales.</li>
+</ul>
+<hr>
+<h2 id="6-infraestructura-global-de-aws">6. Infraestructura Global de AWS</h2>
+<h3 id="regiones">Regiones</h3>
+<ul>
+<li>La infraestructura de AWS se basa en <strong>regiones</strong>. AWS cuenta con <strong>22 regiones</strong> en todo el mundo.</li>
+<li>Una región de AWS es una ubicación geográfica física con una o más zonas de disponibilidad.</li>
+<li>Las regiones están aisladas unas de otras para obtener tolerancia a errores y estabilidad.</li>
+<li>Los recursos en una región <strong>no se replican automáticamente</strong> en otras regiones.</li>
+<li>Si las necesidades del negocio lo requieren, es responsabilidad del usuario replicar los datos entre regiones.</li>
+</ul>
+<h3 id="zonas-de-disponibilidad">Zonas de Disponibilidad</h3>
+<ul>
+<li>Cada región cuenta con varias zonas de disponibilidad.</li>
+<li>Cada zona de disponibilidad es una partición completamente aislada de la infraestructura de AWS.</li>
+<li>Constan de centros de datos discretos.</li>
+<li>Diseñadas para el aislamiento de errores.</li>
+<li>Se interconectan con otras zonas de disponibilidad mediante redes privadas de alta velocidad.</li>
+<li>AWS recomienda replicar los datos y recursos entre las zonas de disponibilidad para obtener mayor resiliencia.</li>
+</ul>
+<hr>
+<h2 id="7-amazon-vpc-virtual-private-cloud">7. Amazon VPC (Virtual Private Cloud)</h2>
+<p>Amazon VPC permite crear una red virtual aislada dentro de la nube de AWS con control total sobre:
+- Selección del rango de direcciones IP.
+- Configuración de subredes.
+- Creación de tablas de enrutamiento.
+- Gestión de puertas de enlace (gateways) para conectividad interna y externa.</p>
+<h3 id="caracteristicas-de-la-vpc">Características de la VPC</h3>
+<ul>
+<li>Aislada de forma lógica de otras VPC.</li>
+<li>Dedicada a la cuenta de AWS del usuario.</li>
+<li>Pertenece a una única región de AWS y puede abarcar varias zonas de disponibilidad.</li>
+</ul>
+<h3 id="subredes">Subredes</h3>
+<ul>
+<li>Intervalo de direcciones IP que divide una VPC.</li>
+<li>Pertenece a una única zona de disponibilidad.</li>
+<li>Se clasifica como <strong>pública</strong> o <strong>privada</strong>.</li>
+</ul>
+<h3 id="bloques-cidr">Bloques CIDR</h3>
+<ul>
+<li>Al crear una VPC se le asigna un bloque IPv4 de CIDR (rango de direcciones IPv4 privadas).</li>
+<li>No se puede cambiar el rango de dirección después de crear la VPC.</li>
+<li>El tamaño de bloque de CIDR IPv4 más grande es <code>/16</code>.</li>
+<li>El tamaño de bloque de CIDR IPv4 más pequeño es <code>/28</code>.</li>
+<li>AWS reserva <strong>5 direcciones IP</strong> por cada bloque de CIDR de subred (red, router local, DNS, uso futuro, difusión).</li>
+</ul>
+<h3 id="direcciones-ip">Direcciones IP</h3>
+<ul>
+<li><strong>IP pública:</strong> Asignada automáticamente a una instancia EC2 en una subred pública. Cambia cada vez que se detiene y vuelve a iniciar la instancia.</li>
+<li><strong>IP elástica:</strong> Dirección IP estática asignada a una cuenta de AWS. Permanece fija aunque la instancia se detenga y reinicie; puede reasignarse a otras instancias.</li>
+</ul>
+<h3 id="tablas-de-enrutamiento">Tablas de Enrutamiento</h3>
+<ul>
+<li>Contienen reglas (rutas) que determinan hacia dónde se dirige el tráfico de red de una subred.</li>
+<li>Cada ruta especifica un <strong>destino</strong> (bloque CIDR) y un <strong>objetivo</strong> (gateway o interfaz).</li>
+<li>Por defecto, incluye una ruta local para la comunicación dentro de la VPC.</li>
+</ul>
+<hr>
+<h2 id="8-servicios-de-computo">8. Servicios de Cómputo</h2>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Amazon EC2</strong></td>
+<td>Proporciona máquinas virtuales redimensionables.</td>
+</tr>
+<tr>
+<td><strong>Amazon ECR</strong></td>
+<td>Almacena y recupera imágenes de Docker.</td>
+</tr>
+<tr>
+<td><strong>Amazon ECS</strong></td>
+<td>Servicio de coordinación compatible con Docker.</td>
+</tr>
+<tr>
+<td><strong>AWS Elastic Beanstalk</strong></td>
+<td>Forma sencilla de ejecutar y administrar aplicaciones web.</td>
+</tr>
+<tr>
+<td><strong>AWS Lambda</strong></td>
+<td>Opción de cómputo sin servidor; solo se paga por el tiempo de cómputo utilizado.</td>
+</tr>
+<tr>
+<td><strong>Amazon EKS</strong></td>
+<td>Permite ejecutar Kubernetes administrado en AWS.</td>
+</tr>
+<tr>
+<td><strong>AWS Fargate</strong></td>
+<td>Ejecuta contenedores reduciendo la necesidad de administrar servidores o clústeres.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-amazon-ec2-elastic-compute-cloud">9. Amazon EC2 (Elastic Compute Cloud)</h2>
+<p>Amazon EC2 proporciona máquinas virtuales en la nube con control administrativo total sobre el sistema operativo (Windows o Linux).</p>
+<h3 id="significado-del-nombre">Significado del nombre</h3>
+<ul>
+<li><strong>Elastic:</strong> Puedes aumentar o reducir el número o tamaño de servidores de forma automática.</li>
+<li><strong>Compute:</strong> Referencia a los recursos de procesamiento (CPU) y memoria (RAM).</li>
+<li><strong>Cloud:</strong> Las instancias están alojadas en la nube.</li>
+</ul>
+<h3 id="usos-comunes-de-instancias-ec2">Usos comunes de instancias EC2</h3>
+<ul>
+<li>Servidores de aplicaciones, web, bases de datos, juegos, correo, multimedia, catálogos, archivos, cómputo y proxy.</li>
+</ul>
+<h3 id="amazon-machine-image-ami">Amazon Machine Image (AMI)</h3>
+<p>Una AMI proporciona la información necesaria para lanzar una instancia de EC2 e incluye:
+- Plantilla para el volumen raíz (SO y aplicaciones instaladas).
+- Permisos de lanzamiento.
+- Asignación de dispositivos de bloques.</p>
+<h4 id="tipos-de-ami-disponibles">Tipos de AMI disponibles</h4>
+<ul>
+<li><strong>Quick Start:</strong> AMI prediseñadas (Linux y Windows).</li>
+<li><strong>Mis AMI:</strong> AMI creadas por el usuario.</li>
+<li><strong>AWS Marketplace:</strong> Catálogo digital con miles de soluciones de software.</li>
+<li><strong>AMI comunitarias:</strong> Creadas por la comunidad; AWS no las verifica — usar con precaución.</li>
+</ul>
+<h3 id="tipos-de-instancia">Tipos de Instancia</h3>
+<p>El tipo de instancia determina: memoria (RAM), potencia de procesamiento (CPU), espacio en disco, tipo de disco y rendimiento de red.</p>
+<h4 id="categorias">Categorías</h4>
+<ul>
+<li>Instancias de propósito general</li>
+<li>Optimizadas para cómputo</li>
+<li>Optimizadas para memoria</li>
+<li>Optimizadas para almacenamiento</li>
+<li>Con cómputo acelerado</li>
+</ul>
+<h4 id="nomenclatura">Nomenclatura</h4>
+<p>Ejemplo: <code>c5.large</code>
+- <code>c</code> → familia
+- <code>5</code> → número de generación
+- <code>large</code> → tamaño</p>
+<h3 id="par-de-claves-login">Par de Claves (Login)</h3>
+<p>Amazon EC2 utiliza criptografía de <strong>clave pública/privada</strong>:
+- AWS almacena la clave pública.
+- El usuario guarda la clave privada.
+- Permite acceso seguro a instancias sin contraseña.</p>
+<hr>
+<h2 id="10-creacion-de-una-instancia-ec2">10. Creación de una Instancia EC2</h2>
+<h3 id="paso-1-ingresar-a-aws-academy">Paso 1 — Ingresar a AWS Academy</h3>
+<ol>
+<li>Dirígete a <a href="https://www.awsacademy.com">https://www.awsacademy.com</a>.</li>
+<li>Inicia sesión con las credenciales proporcionadas por el instructor.</li>
+<li>Accede al entorno de AWS Management Console (generalmente desde LMS).</li>
+<li>Si es la primera vez, completa los pasos de configuración inicial.</li>
+</ol>
+<h3 id="paso-2-acceder-a-la-consola-de-administracion-de-aws">Paso 2 — Acceder a la consola de administración de AWS</h3>
+<ol>
+<li>Accede a la pestaña <strong>Asignaturas</strong> y entra en tu asignatura.</li>
+<li>Accede a <strong>Contenidos</strong> y lanza el laboratorio.</li>
+<li>Dentro del laboratorio, pulsa <strong>Start Lab</strong> y espera a que el círculo junto a AWS cambie de rojo a verde.</li>
+<li>Pulsa sobre el texto <strong>AWS</strong> para entrar en la consola.</li>
+</ol>
+<h3 id="paso-3-lanzar-el-asistente-de-creacion-de-instancias">Paso 3 — Lanzar el asistente de creación de instancias</h3>
+<ol>
+<li>Ve a <strong>Servicios → Informática → EC2</strong>.</li>
+<li>Desde el menú lateral puedes configurar instancias, imágenes, EBS, redes, etc.</li>
+<li>Haz clic en el botón <strong>Lanzar instancias</strong> (asistente de creación).</li>
+</ol>
+<h3 id="configuracion-del-asistente">Configuración del asistente</h3>
+<p>El asistente incluye los siguientes pasos:</p>
+<ol>
+<li><strong>Nombre y etiquetas</strong></li>
+<li><strong>Imagen de máquina de Amazon (AMI)</strong></li>
+<li><strong>Tipo de instancia</strong></li>
+<li><strong>Par de claves (inicio de sesión)</strong></li>
+<li><strong>Configuraciones de red</strong></li>
+<li><strong>Configurar almacenamiento</strong></li>
+<li><strong>Detalles avanzados</strong></li>
+</ol>
+<hr>
+<h2 id="11-configuraciones-de-red-en-ec2">11. Configuraciones de Red en EC2</h2>
+<p>En la sección de red del asistente se configura:
+- VPC y subred donde se ejecutará la instancia.
+- Asignación de IP pública para acceso a internet o configuración privada.
+- Habilitación de direcciones IPv6.</p>
+<h3 id="grupos-de-seguridad">Grupos de Seguridad</h3>
+<p>Un grupo de seguridad funciona como un <strong>firewall virtual</strong> que controla el tráfico de una o varias instancias.</p>
+<ul>
+<li>Las reglas se pueden modificar en cualquier momento y se aplican automáticamente a todas las instancias asociadas.</li>
+<li>Se pueden definir reglas de <strong>entrada</strong> (origen) y de <strong>salida</strong> (destino).</li>
+<li>Por defecto, incluye una regla de salida que permite todo el tráfico saliente.</li>
+<li>Ejemplo: regla para permitir tráfico SSH a través del puerto 22 (TCP).</li>
+</ul>
+<hr>
+<h2 id="12-configuracion-de-almacenamiento">12. Configuración de Almacenamiento</h2>
+<h3 id="opciones-de-almacenamiento">Opciones de almacenamiento</h3>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Instance Store</strong></td>
+<td>Efímero (temporal)</td>
+<td>Almacenamiento a nivel de bloques físicamente adjunto al host. Se elimina si la instancia se detiene.</td>
+</tr>
+<tr>
+<td><strong>Amazon EBS</strong> (Elastic Block Store)</td>
+<td>Persistente en bloques</td>
+<td>Almacenamiento duradero de alto rendimiento. Cuatro tipos de volúmenes. Permite cambiar tipo/tamaño sin interrumpir aplicaciones.</td>
+</tr>
+<tr>
+<td><strong>Amazon EFS</strong> (Elastic File System)</td>
+<td>Sistema de archivos NFS</td>
+<td>Elástico, escalable y completamente administrado. Escala a petabytes bajo demanda.</td>
+</tr>
+<tr>
+<td><strong>Amazon S3</strong> (Simple Storage Service)</td>
+<td>Objetos</td>
+<td>Almacenamiento de objetos con escalabilidad, seguridad y alto rendimiento.</td>
+</tr>
+</tbody>
+</table>
+<p>Para cada volumen se especifica:
+- Tamaño del disco (en GB).
+- Tipo de volumen (SSD o HDD).
+- Si el volumen se eliminará al finalizar la instancia.
+- Si se debe utilizar cifrado.</p>
+<hr>
+<h2 id="13-detalles-avanzados-datos-de-usuario">13. Detalles Avanzados — Datos de Usuario</h2>
+<p>Al crear instancias EC2 se pueden pasar <strong>datos de usuario</strong> que automatizan la configuración en el lanzamiento:
+- Aplicar parches y actualizar el sistema operativo.
+- Instalar claves de licencia de software.
+- Instalar software adicional.</p>
+<blockquote>
+<p>En instancias Windows, el script debe estar en formato de símbolo del sistema (batch) o Windows PowerShell.</p>
+</blockquote>
+<hr>
+<h2 id="14-iniciar-y-gestionar-la-instancia">14. Iniciar y Gestionar la Instancia</h2>
+<h3 id="pestanas-de-gestion-de-la-instancia">Pestañas de gestión de la instancia</h3>
+<table>
+<thead>
+<tr>
+<th>Pestaña</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Detalles</strong></td>
+<td>Información general: ID, tipo de instancia, AMI, configuración de red.</td>
+</tr>
+<tr>
+<td><strong>Estado y alarmas</strong></td>
+<td>Estado actual y alertas configuradas en Amazon CloudWatch.</td>
+</tr>
+<tr>
+<td><strong>Monitoreo</strong></td>
+<td>Métricas de rendimiento: uso de CPU, tráfico de red, estadísticas clave.</td>
+</tr>
+<tr>
+<td><strong>Seguridad</strong></td>
+<td>Grupos de seguridad, políticas de acceso, puertos abiertos y reglas de firewall.</td>
+</tr>
+<tr>
+<td><strong>Redes</strong></td>
+<td>VPC, subred, interfaces de red y direcciones IP asignadas.</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento</strong></td>
+<td>Volúmenes EBS conectados: tipo, tamaño y estado.</td>
+</tr>
+<tr>
+<td><strong>Etiquetas</strong></td>
+<td>Pares clave-valor para organizar, identificar y administrar recursos.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="15-conectarse-a-una-instancia">15. Conectarse a una Instancia</h2>
+<h3 id="instancia-windows-rdp">Instancia Windows (RDP)</h3>
+<ol>
+<li>Inicia la instancia, selecciónala y pulsa <strong>Conectar</strong>.</li>
+<li>Selecciona la pestaña <strong>Cliente RDP</strong>.</li>
+<li>Pulsa <strong>Obtener contraseña</strong> y carga la clave privada creada durante la configuración.</li>
+<li>Descarga el archivo de escritorio remoto y sigue los pasos del asistente para conectarte.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
