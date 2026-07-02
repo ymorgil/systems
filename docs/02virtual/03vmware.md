@@ -1,7 +1,7 @@
 # 🖥️ VMware Workstation Pro
 
 ## 1. VMware
-**VMware** es un software de **virtualización** que permite ejecutar uno o varios sistemas operativos (*máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo. 
+Software de **virtualización** que permite ejecutar uno o varios sistemas operativos (*máquinas virtuales*) dentro de tu sistema operativo principal, sin necesidad de particionar el disco ni reiniciar el equipo. 
 
 **¿Para qué se usa en el aula?**
 
@@ -20,141 +20,32 @@
 | Academic Program | Según convenio | Centros educativos | ✅ | ✅ | ✅ | — |
 | Workstation Player | ~~Gratuito~~ | ~~Simplificado~~ | ❌ | ❌ | ❌ | ~~Descontinuado~~ |
 
+## 3. Instalación 
 
+**DESCARGAR**
 
+1. Ve a [Fusion and Workstation](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion){target="_blank"} y haz clic en **DOWNLOAD NOW**
+2. Inicia sesión o crea una cuenta gratuita de [Broadcom](https://profile.broadcom.com/web/registration){target="_blank}. 
+3. Descargar el archivo `.exe`. Para ello una vez iniciada sesión, en el menu seleccionamos `My Downloads` y despues en `Free Software Downloads available HERE` y buscamos `VMware Workstation Pro`, seleccionamos la última versión leemos y aceptamos los terminos y condiciones y descargamos el software.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-VMware (ahora bajo **Broadcom**) ofrece varias versiones de su producto de escritorio:
-
-**1. VMware Workstation Pro — Uso Personal (Gratuito)**
-
-| Característica | Detalle |
-|---|---|
-| **Precio** | Gratuito para uso personal y educativo |
-| **Sistema Host** | Windows y Linux |
-| **Sistemas Guest** | Más de 200 SO compatibles |
-| **Snapshots** | ✅ Sí |
-| **Red virtual** | ✅ Sí |
-| **Soporte oficial** | ❌ No incluido |
-| **Uso comercial** | ❌ No permitido |
-
-Desde **mayo de 2024**, Broadcom hizo VMware Workstation Pro **gratuito para uso personal**, incluyendo el uso **educativo y académico**. Solo es necesario registrarse con una cuenta de Broadcom.
-
-**2. VMware Workstation Pro — Licencia Comercial**
-
-| Característica | Detalle |
-|---|---|
-| **Precio** | De pago (suscripción anual) |
-| **Uso** | Empresas y uso profesional |
-| **Soporte** | ✅ Soporte técnico oficial |
-| **Actualizaciones** | ✅ Acceso garantizado |
-
-**3. VMware Academic Program**
-
-Broadcom ofrece acuerdos académicos para centros educativos que quieran desplegar VMware de forma centralizada. Si tu centro tiene convenio, puede que ya tengas acceso a licencias académicas gestionadas por el departamento de informática.
-
-> 📌 Consulta con tu profesor o técnico de sistemas si tu centro dispone de este programa.
-
-**4. Alternativa gratuita: VMware Workstation Player *(descontinuado)***
-
-Anteriormente existía **VMware Player** como versión gratuita simplificada. **Ya no se distribuye por separado** desde 2024; ha sido absorbido por la versión gratuita de Workstation Pro.
-
-### Recomendación
-> **VMware Workstation Pro — Versión Personal Gratuita**
->
-> Como estudiante, esta es la opción correcta. Es completamente gratuita, incluye **todas las funcionalidades** de la versión de pago (snapshots, redes virtuales, clonación, etc.) y solo requiere crear una cuenta gratuita en el portal de Broadcom.
->
-> 🔗 Descarga oficial: [https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)
-
-## 3. Instalación de VMware
-**Requisitos del sistema**
-
-| Componente | Mínimo | Recomendado |
+|  |  |  |
 |---|---|---|
-| **CPU** | 64-bit dual-core | Quad-core o superior |
-| **RAM** | 4 GB | 8 GB o más |
-| **Disco** | 1.5 GB (instalación) | 50+ GB (para VMs) |
-| **Virtualización** | VT-x / AMD-V activado en BIOS | — |
-| **SO Host** | Windows 10/11 o Linux | — |
-
-> ⚠️ **Importante:** Asegúrate de que la virtualización por hardware esté **activada en la BIOS/UEFI** del equipo. Sin esto, VMware no funcionará correctamente.
+|![VMware](../assets/img/vir/vmw-01.png) | ![VMware](../assets/img/vir/vmw-02.png)| ![VMware](../assets/img/vir/vmw-03.png)|
 
 **INSTALACIÓN**
 
-1. Ve a [https://www.vmware.com/products/desktop-hypervisor](https://www.vmware.com/products/desktop-hypervisor)
-2. Haz clic en **"Download for Free"** o **"Workstation Pro for Windows"**
-3. Inicia sesión o crea una cuenta gratuita de Broadcom
-4. Descarga el archivo `.exe`
-5. Haz doble clic en el archivo descargado (ej. `VMware-Workstation-Full-XX.X.X-XXXXXX.exe`)
-6. Acepta los términos de licencia
-7. Selecciona las opciones de instalación:
-      - ✅ **Enhanced Keyboard Driver** (recomendado)
-      - ✅ **Add VMware Workstation console tools to the system PATH**
-8. Elige la carpeta de instalación (por defecto está bien)
-9. Haz clic en **Install** y espera a que finalice
-10. Abre VMware Workstation Pro desde el escritorio o el menú Inicio
-11. Cuando pregunte por la licencia, selecciona **"Use VMware Workstation 17 for Personal Use"** (o la versión correspondiente)
-12. ¡Listo! Ya tienes VMware instalado
+Haz doble clic en el archivo descargado (ej. `VMware-Workstation-Full-XX.X.X-XXXXXX.exe`), sigue los pasos del asistente y elige las carpetas po defecto. 
+
+|  |  |  |
+|---|---|---|
+|![VMware](../assets/img/vir/vmw-04.png) | ![VMware](../assets/img/vir/vmw-05.png)| ![VMware](../assets/img/vir/vmw-06.png)|
+
+Una vez finalice abre el programa.
+
+![VMware](../assets/img/vir/vmw-07.png) 
 
 
-```bash
-# Instalación en Linux (Ubuntu/Debian)
-
-chmod +x VMware-Workstation-Full-*.bundle # 1. Dar permisos de ejecución
-
-sudo ./VMware-Workstation-Full-*.bundle # 2. Ejecutar como superusuario
-
-# 3. Seguir el asistente gráfico de instalación
-
-vmware # 4. Iniciar VMware
-```
-
-## 4. Interfaz de VMware
-Al abrir VMware Workstation Pro verás la pantalla principal:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  VMware Workstation Pro                              [─][□][×]│
-├──────────────────────────────────────────────────────────────┤
-│  Archivo  Editar  Ver  VM  Pestañas  Ayuda                   │
-├─────────────────┬────────────────────────────────────────────┤
-│                 │                                            │
-│  MIS EQUIPOS    │         PANTALLA DE INICIO                 │
-│  ─────────────  │                                            │
-│  [+] Nueva VM   │   [ Crear nueva máquina virtual ]          │
-│                 │   [ Abrir máquina virtual        ]          │
-│  Máquinas       │   [ Conectar a servidor remoto   ]          │
-│  guardadas      │                                            │
-│  aparecerán     │                                            │
-│  aquí           │                                            │
-│                 │                                            │
-└─────────────────┴────────────────────────────────────────────┘
-```
-**Elementos principales de la interfaz**
+### Interfaz
 
 | Elemento | Función |
 |---|---|
@@ -162,16 +53,17 @@ Al abrir VMware Workstation Pro verás la pantalla principal:
 | **Barra de herramientas** | Botones de encendido, pausa, snapshot, etc. |
 | **Área central** | Pantalla de la máquina virtual activa |
 | **Barra de estado** | Información de red, dispositivos USB, etc. |
-
-**Atajos de teclado esenciales**
-
-| Atajo | Acción |
-|---|---|
+| **Atajo** | **Acción** |
 | `Ctrl + Alt` | Liberar el ratón/teclado de la VM |
 | `Ctrl + Alt + Enter` | Pantalla completa |
 | `Ctrl + Alt + P` | Pausar la VM |
 | `Ctrl + Z` | Suspender la VM |
 | `Ctrl + Shift + P` | Tomar snapshot |
+
+
+##
+##
+https://www.youtube.com/watch?v=5lGB-zHPm-0&pp=ugUHEgVlcy1FUw%3D%3D
 
 ## 5. Creación de una VM
 > Para este manual vamos a crear una máquina virtual de Ubuntu Server 26, los pasos son exactamente los mismos para otras versiones.

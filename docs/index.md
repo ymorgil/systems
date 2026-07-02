@@ -22,9 +22,9 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
   🛰️ <a href="https://ymorgil.github.io/innovacion/" target="_blank">Innovación</a>
 </div>
 
+---
 
-
-## 📚 Módulos
+**📚 MÓDULOS**
 
 | Módulo | Descripción | Nivel |
 |--------|-------------|-------|
@@ -33,9 +33,7 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
 
 ---
 
-## 🆕 Repositorio
-
-**Temas principales** que se abordarán en este repositorio:
+**😼 REPOSITORIOS** 
 
 -  Instalación y configuración de sistemas operativos (Windows y Linux)
 -  Virtualización y despliegue de sistemas
@@ -44,15 +42,43 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
 -  Configuración de servicios esenciales (SSH, DNS, DHCP, etc.)
 -  Monitorización y mantenimiento de sistemas
 
-**Contribución** Si eres estudiante y deseas contribuir al repositorio, sigue estos pasos:
-
-1. Haz un fork del repositorio.
-2. Clona tu fork en local: `git clone https://github.com/tuusuario/turepositorio.git`
-3. Crea una rama para tus cambios: `git checkout -b mi-rama`
-4. Sube los cambios y haz un pull request.
-
-> Para dudas o sugerencias, puedes abrir un **Issue** o contactar mediante correo electrónico.
-
 ---
 
-*Última actualización: Junio 2026 · [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)*
+<div style="background: linear-gradient(135deg, #ffffff 0%, #f4f7f9 100%); color: #2c3e50; padding: 20px; border-radius: 15px; border: 1px solid #d1d9e6; margin: 20px auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); line-height: 1.6;">
+    <h3 style="color: #1a3a5a; font-size: 18px; margin-bottom: 15px;">FORMACIÓN ACADÉMICA SUPERIOR</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; margin-bottom: 35px;">
+        
+        <div style="background: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #e1e8ed; border-left: 5px solid #004580;">
+            <strong style="color: #004580; display: block;">Máster en Desarrollo de Apps Móviles (UOC)</strong>
+            <span style="font-size: 12px; font-weight: bold; color: #7f8c8d;">2022</span>
+            <p style="margin: 5px 0 0 0; font-size: 13px; color: #556677;">TFM: "Charcones" - App de piscinas naturales (Flutter). Exp: Android, Unity, MongoDB.</p>
+        </div>
+
+        <div style="background: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #e1e8ed; border-left: 5px solid #2980b9;">
+            <strong style="color: #2980b9; display: block;">Máster TIC para Educación y Aprendizaje Digital</strong>
+            <span style="font-size: 12px; font-weight: bold; color: #7f8c8d;">2019 • Univ. Nebrija</span>
+            <p style="margin: 5px 0 0 0; font-size: 13px; color: #556677;">Capacitación en entornos de aprendizaje virtual y digitalización docente.</p>
+        </div>
+
+        <div style="background: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #e1e8ed; border-left: 5px solid #27ae60;">
+            <strong style="color: #27ae60; display: block;">Máster Formación del Profesorado (ESO/FP)</strong>
+            <span style="font-size: 12px; font-weight: bold; color: #7f8c8d;">2017 • ULPGC</span>
+            <p style="margin: 5px 0 0 0; font-size: 13px; color: #556677;">Especialidad en Tecnología e Informática. Capacitación pedagógica oficial.</p>
+        </div>
+
+        <div style="background: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #e1e8ed; border-left: 5px solid #7f8c8d;">
+            <strong style="color: #2c3e50; display: block;">Ingeniería Técnica en Informática de Gestión</strong>
+            <span style="font-size: 12px; font-weight: bold; color: #7f8c8d;">2012 • ULPGC</span>
+            <p style="margin: 5px 0 0 0; font-size: 13px; color: #556677;">Base técnica de ingeniería aplicada a la gestión de sistemas y procesos.</p>
+        </div>
+    </div>
+</div>
+<div style="background: #1a3a5a; color: #ffffff; padding: 25px; border-radius: 12px; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; text-align: center;">
+        <div><div style="font-size: 20px;">⚙️</div><div style="font-size: 12px; font-weight: bold;">ADD / SISTEMAS</div></div>
+        <div><div style="font-size: 20px;">📊</div><div style="font-size: 12px; font-weight: bold;">BIG DATA APLICADO</div></div>
+        <div><div style="font-size: 20px;">📱</div><div style="font-size: 12px; font-weight: bold;">DESARROLLO MÓVIL</div></div>
+        <div><div style="font-size: 20px;">🏫</div><div style="font-size: 12px; font-weight: bold;">GESTIÓN DUAL / FEOE</div></div>
+</div>
+
+
+*Última actualización: Julio 2026 · [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)*
