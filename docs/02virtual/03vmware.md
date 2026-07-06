@@ -44,24 +44,72 @@ Una vez finalice abre el programa.
 
 ![VMware](../assets/img/vir/vmw-07.png) 
 
+**Interfaz de VirtualBox**
 
-### Interfaz
+- **Panel izquierdo**: Lista de todas tus máquinas virtuales
+- **Barra de herramientas**: Botones de encendido, pausa, snapshot, etc.
+- **Área central**: Pantalla de la máquina virtual activa
+- **Barra de estado**: Información de red, dispositivos USB, etc.
 
-| Elemento | Función |
+**Atajos de teclado**
+
+- **Ctrl + Alt** → Liberar el ratón/teclado de la VM
+- **Ctrl + Alt + Enter** → Pantalla completa
+- **Ctrl + Alt + P** → Pausar la VM
+- **Ctrl + Z** → Suspender la VM
+- **Ctrl + Shift + P** → Tomar snapshot
+
+## 3. Creación de una VM
+Para este manual vamos a crear una máquina virtual de Ubuntu Desktop 26, los pasos son exactamente los mismos para otras versiones.
+
+**Paso 1 — Descargar la ISO de Ubuntu**
+Ve a [https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop){target=_blank}, descarga la imagen ISO de Ubuntu Desktop 26.04 LTS y guarda el archivo `.iso` en una carpeta donde guardes todas las ISOS (ej. `Y:\ISOs\ubuntu-desktop.iso`)
+
+![VMware](../assets/img/vir/vmw-10.png)
+
+**Paso 2 — Crear máquina virtual**
+En VMware haz clic en **Crear una máquina virtual nueva** o ve a `Archivo → Nueva máquina virtual` y  seguir el asistente de creación de máquina virtual, comenzando seleccionando la creación `Típica (recomendado)`. 
+
+**Paso 3 — Seleccionar la ISO** Haz clic en `Examinar` y navega hasta tu archivo `.iso` de Ubuntu, VMware detectará automáticamente el sistema operativo.
+
+**Paso 4 — Configurar usuario inicial (Easy Install)** Recuerda estos datos, los necesitarás para iniciar sesión en Ubuntu.
+
+**Paso 5 — Nombre y ubicación de la VM** 
+
+1. **Nombre de la maquina virtual** escribe `estándar de clase` 
+2. **Ubicación:** Recomendable en un disco externo donde haya una carpeta con el nombre de VMware y dentro otra carpeta con el nombre de la máquina, donde se crearán todos los archivos de configuración.
+
+## 💡💡💡💡💡
+**Paso 6 — Tamaño del disco virtual** Se recomienda para un servidor de prácticas:
+
+| Parámetro | Valor recomendado |
 |---|---|
-| **Panel izquierdo** | Lista de todas tus máquinas virtuales |
-| **Barra de herramientas** | Botones de encendido, pausa, snapshot, etc. |
-| **Área central** | Pantalla de la máquina virtual activa |
-| **Barra de estado** | Información de red, dispositivos USB, etc. |
-| **Atajo** | **Acción** |
-| `Ctrl + Alt` | Liberar el ratón/teclado de la VM |
-| `Ctrl + Alt + Enter` | Pantalla completa |
-| `Ctrl + Alt + P` | Pausar la VM |
-| `Ctrl + Z` | Suspender la VM |
-| `Ctrl + Shift + P` | Tomar snapshot |
+| **Tamaño** | `20 GB` mínimo (40 GB ideal) |
+| **Tipo** | `Store virtual disk as a single file` |
+
+Clic en **Next**.
+
+**Paso 7 — Revisar y personalizar hardware** Antes de finalizar, haz clic en **"Customize Hardware..."** para ajustar los recursos:
+
+| Recurso | Valor recomendado para prácticas |
+|---|---|
+| **Memory (RAM)** | `2048 MB` (2 GB) mínimo |
+| **Processors** | `2` núcleos virtuales |
+| **Network Adapter** | `NAT` (acceso a Internet por defecto) |
+| **CD/DVD** | Verificar que apunta a la ISO correcta |
+
+Cierra la ventana de hardware → clic en **Finish**.
+
+|  |  |  |  |  |  |
+|---|---|---|---|---|---|
+|![VMware](../assets/img/vir/vmw-11.png) | ![VMware](../assets/img/vir/vmw-12.png)| ![VMware](../assets/img/vir/vmw-13.png)|![VMware](../assets/img/vir/vmw-14.png)| ![VMware](../assets/img/vir/vmw-15.png)|![VMware](../assets/img/vir/vmw-16.png) |
+
+|  |  |  
+|---|---|
+|![VMware](../assets/img/vir/vmw-17.png) | ![VMware](../assets/img/vir/vmw-18.png)|
 
 
-##
+
 ##
 https://www.youtube.com/watch?v=5lGB-zHPm-0&pp=ugUHEgVlcy1FUw%3D%3D
 
