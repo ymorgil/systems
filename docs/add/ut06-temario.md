@@ -378,4 +378,4 @@ El último criterio de evaluación de esta unidad (h) exige documentar la config
 
 ## Para profundizar
 
-Esta unidad recopila y reorganiza el material de clase de Administración de Sistemas Operativos sobre interoperabilidad NFS/Samba, clustering, almacenamiento en red y virtualización con contenedores (Docker, Podman, Kubernetes y Proxmox VE). El resto de enlaces de referencia, manuales oficiales y vídeos citados a lo largo del temario está recopilado en la página de [Recursos](99-recursos.md).
+Esta unidad recopila y reorganiza el material de clase de Administración de Sistemas Operativos sobre interoperabilidad NFS/Samba, clustering, almacenamiento en red y virtualización con contenedores (Docker, Podman, Kubernetes y Proxmox VE). El resto de enlaces de referencia, manuales oficiales y vídeos citados a lo largo del temario está recopilado en la página de [Recursos](99-recursos.md). Para Proxmox, la colección [tteck/Proxmox](https://github.com/tteck){:target="_blank"} reúne scripts de automatización muy usados por la comunidad; para Docker/Kubernetes, los cursos de [iesgn](https://github.com/iesgn){:target="_blank"} son una referencia completa y abierta.

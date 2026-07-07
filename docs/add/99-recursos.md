@@ -42,6 +42,36 @@ Enlaces recopilados en la Unidad de Trabajo 4 (Administración remota), útiles 
 34. [Actualizar los clientes a través de GPOs](https://youtu.be/FXPNVlW711A)
 35. [Repositorio espejo de Ubuntu con apt-mirror](https://algodelinux.com/crear-un-mirror-local-con-apt-mirror/)
 
+## Repositorios y proyectos de referencia
+
+Selección de repositorios públicos de GitHub, revisados y filtrados por relevancia real para el módulo (se han descartado los que no aportaban contenido específico de ASIR/ADD o cuyo acceso no pudo verificarse).
+
+**UT1 · Servicio de directorio**
+
+- [fjavier-hernandez/aso](https://github.com/fjavier-hernandez/aso) — apuntes de otro docente sobre Administración de Sistemas Operativos, buen contraste con el enfoque de este material.
+- [iesgn/gestiona_iesgn](https://github.com/iesgn) (organización IES Gonzalo Nazareno) — scripts de gestión de cuentas y directorio en entornos educativos.
+- [ilanami](https://github.com/ilanami) — guías centradas en Active Directory desde la perspectiva de seguridad (auditoría y pentesting), útil como ampliación del RA1 más allá de la administración básica.
+
+**UT3 · Automatización de tareas / UT6 · Integración de sistemas**
+
+- [omorest/ASIR](https://github.com/omorest/ASIR) — prácticas de otro ciclo de ASIR, incluye una carpeta específica de ADD como referencia comparativa.
+- [tteck/Proxmox](https://github.com/tteck) — colección muy popular de scripts de automatización para Proxmox VE (creación y mantenimiento de contenedores/VMs).
+- [iesgn](https://github.com/iesgn) — cursos completos de Docker, Kubernetes y Proxmox en formato de apuntes abiertos.
+
+**UT4 · Administración remota**
+
+- [ngoduykhanh/wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui) — interfaz web para gestionar servidores WireGuard, complementa la parte de VPN de esta UT.
+
+**Automatización (06auto)**
+
+- [iesgn](https://github.com/iesgn) — playbooks Ansible de despliegue (OpenStack, servicios educativos).
+- [mablanco/ansible-lynis](https://github.com/mablanco) — rol Ansible para auditoría de seguridad con Lynis, ejemplo real de automatización aplicada.
+- [jose-emilio/terraform-on-aws](https://github.com/jose-emilio) — ejemplos de Terraform sobre AWS Academy, útiles como referencia adicional para el archivo de Terraform.
+- [asir-idp](https://github.com/asir-idp) (organización) — apuntes y playbooks de Ansible de otro grupo de ASIR-IDP.
+
+!!! note "Sobre esta selección"
+    Algunos perfiles aportados (`dvarrui`, `josedom24`) no pudieron consultarse por fallos de acceso temporales; si el alumnado los conoce y considera que aportan material relevante, puede proponerlos para revisión.
+
 ## Prueba de nivel
 
 Al inicio del módulo se realiza una prueba de nivel para conocer los conocimientos previos del alumnado sobre sistemas operativos, administración de dominios y scripting. Las preguntas planteadas son las siguientes:
