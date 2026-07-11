@@ -1,6 +1,6 @@
 # **🏗️ Terraform · Infraestructura como código**
 
-![Ciclo de vida de Terraform: init, plan, apply y destroy](../assets/img/06auto/terraform-ciclo.svg)
+![Ciclo de vida de Terraform: init, plan, apply y destroy](../assets/img/06auto-monit/terraform-ciclo.svg)
 
 ## 1. Qué es Terraform y el paradigma de infraestructura como código
 
@@ -139,7 +139,7 @@ Sin este fichero, Terraform no tendría forma de saber que el bloque `aws_instan
 
 Guardar `terraform.tfstate` como un fichero local en el portátil de cada persona genera un problema evidente: si dos personas del equipo aplican cambios de forma independiente, cada una tiene una versión distinta del estado, y no hay forma de evitar que se pisen los cambios mutuamente.
 
-![Estado remoto de Terraform coordinando el trabajo de varios ingenieros sobre la misma infraestructura](../assets/img/06auto/terraform-estado.svg)
+![Estado remoto de Terraform coordinando el trabajo de varios ingenieros sobre la misma infraestructura](../assets/img/06auto-monit/terraform-estado.svg)
 
 La solución es un **backend remoto**: el estado se guarda en un almacenamiento compartido (S3 con bloqueo por DynamoDB, Azure Blob Storage, Google Cloud Storage, o el propio **Terraform Cloud/HCP Terraform** de HashiCorp) que además implementa un mecanismo de bloqueo (*locking*): mientras una persona está aplicando cambios, cualquier otra que intente ejecutar `apply` sobre el mismo estado recibe un aviso de bloqueo, evitando condiciones de carrera.
 
@@ -201,7 +201,7 @@ El atributo `sensitive = true` evita que ese valor se muestre en texto plano en 
 
 Un **módulo** es un conjunto de ficheros `.tf` agrupados en una carpeta, pensado para reutilizarse desde distintos proyectos o distintos entornos del mismo proyecto — el equivalente directo, en el mundo de Terraform, a lo que es un rol en Ansible.
 
-![Módulos reutilizables de Terraform: el root module invoca módulos de red, cómputo y base de datos](../assets/img/06auto/terraform-modulos.svg)
+![Módulos reutilizables de Terraform: el root module invoca módulos de red, cómputo y base de datos](../assets/img/06auto-monit/terraform-modulos.svg)
 
 ```hcl
 module "servidor_web" {

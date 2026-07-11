@@ -1,6 +1,6 @@
 # **📦 Vagrant · Entornos de desarrollo reproducibles**
 
-![Arquitectura de Vagrant: del Vagrantfile a la máquina virtual funcionando](../assets/img/06auto/vagrant-arquitectura.svg)
+![Arquitectura de Vagrant: del Vagrantfile a la máquina virtual funcionando](../assets/img/06auto-monit/vagrant-arquitectura.svg)
 
 ## 1. Qué es Vagrant y qué problema resuelve
 
@@ -77,7 +77,7 @@ Descargar una box es una operación que se hace una sola vez por máquina anfitr
 
 ## 4. Ciclo de vida de una máquina Vagrant
 
-![Ciclo de vida de una máquina Vagrant: init, up, halt, destroy](../assets/img/06auto/vagrant-ciclo-vida.svg)
+![Ciclo de vida de una máquina Vagrant: init, up, halt, destroy](../assets/img/06auto-monit/vagrant-ciclo-vida.svg)
 
 Una máquina Vagrant atraviesa un ciclo de vida bien definido, y cada fase tiene su comando asociado:
 
@@ -150,7 +150,7 @@ Con esta configuración, cada `vagrant up` (o `vagrant provision`) ejecuta autom
 
 ## 7. Redes en Vagrant
 
-![Modos de red en Vagrant: port forwarding, red privada y red pública](../assets/img/06auto/vagrant-redes.svg)
+![Modos de red en Vagrant: port forwarding, red privada y red pública](../assets/img/06auto-monit/vagrant-redes.svg)
 
 Vagrant ofrece tres formas principales de conectar la máquina virtual con el exterior, configurables en el bloque `config.vm.network`:
 

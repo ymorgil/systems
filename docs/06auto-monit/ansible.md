@@ -1,6 +1,6 @@
 # **🔧 Ansible · Automatización sin agentes**
 
-![Arquitectura agentless de Ansible: nodo de control, inventario y hosts gestionados por SSH](../assets/img/06auto/ansible-arquitectura.svg)
+![Arquitectura agentless de Ansible: nodo de control, inventario y hosts gestionados por SSH](../assets/img/06auto-monit/ansible-arquitectura.svg)
 
 ## 1. Qué es Ansible y qué problema resuelve
 
@@ -155,7 +155,7 @@ Los handlers se ejecutan, como máximo una vez, al final del play, aunque varias
 
 Un **rol** es la unidad de reutilización y organización en Ansible: agrupa tasks, handlers, variables, plantillas y ficheros relacionados con una función concreta (por ejemplo, "instalar y configurar Nginx") en una estructura de carpetas estandarizada que Ansible reconoce automáticamente.
 
-![Estructura de un rol de Ansible: tasks, handlers y plantillas Jinja2](../assets/img/06auto/ansible-roles.svg)
+![Estructura de un rol de Ansible: tasks, handlers y plantillas Jinja2](../assets/img/06auto-monit/ansible-roles.svg)
 
 ```text
 roles/
@@ -208,7 +208,7 @@ El módulo `ansible.builtin.template` toma este fichero `.j2`, sustituye las var
 
 La **idempotencia** es, probablemente, el concepto más importante para entender por qué Ansible es fiable en producción: **ejecutar el mismo playbook varias veces sobre el mismo host produce siempre el mismo resultado final**, sin efectos secundarios acumulativos.
 
-![Idempotencia: la primera ejecución cambia el estado, las siguientes no hacen nada si ya está correcto](../assets/img/06auto/ansible-idempotencia.svg)
+![Idempotencia: la primera ejecución cambia el estado, las siguientes no hacen nada si ya está correcto](../assets/img/06auto-monit/ansible-idempotencia.svg)
 
 Cada módulo de Ansible, antes de actuar, **comprueba el estado actual del sistema** y solo aplica un cambio si es necesario:
 

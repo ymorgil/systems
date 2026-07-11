@@ -62,7 +62,7 @@ Selección de repositorios públicos de GitHub, revisados y filtrados por releva
 
 - [ngoduykhanh/wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui) — interfaz web para gestionar servidores WireGuard, complementa la parte de VPN de esta UT.
 
-**Automatización (06auto)**
+**Automatización y Monitorización (06auto-monit)**
 
 - [iesgn](https://github.com/iesgn) — playbooks Ansible de despliegue (OpenStack, servicios educativos).
 - [mablanco/ansible-lynis](https://github.com/mablanco) — rol Ansible para auditoría de seguridad con Lynis, ejemplo real de automatización aplicada.
