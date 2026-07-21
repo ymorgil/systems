@@ -1,12 +1,14 @@
 # 🖥️ Proxmox VE
-> Plataforma completa de virtualización de código abierto que permite desplegar, gestionar y monitorizar fácilmente máquinas virtuales (**KVM**) y contenedores ligeros (**LXC**) desde una interfaz web intuitiva. El sistema combina cómputo, almacenamiento y redes en una única solución lista para entornos empresariales, incluyendo herramientas nativas para crear clústeres, gestionar alta disponibilidad y realizar copias de seguridad de forma centralizada.
 
-## 1. Instalación
+## 1. Proxmox VE
+Plataforma completa de virtualización de código abierto que permite desplegar, gestionar y monitorizar fácilmente máquinas virtuales (**VM**) y contenedores ligeros (**LXC**) desde una interfaz web intuitiva. El sistema combina cómputo, almacenamiento y redes en una única solución lista para entornos empresariales, incluyendo herramientas nativas para crear clústeres, gestionar alta disponibilidad y realizar copias de seguridad de forma centralizada.
+
+### Instalación
 <iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&embedded=true" width="70%" height="700px" style="display: block; margin: 0 auto;"></iframe>
 
 [Descargar guía de instalación](../assets/pdf/proxmox.pdf){ .md-button style="display:table;margin:0 auto;"}
 
-## 2. Interfaz
+### Interfaz
 
 ![Interfaz de proxmox](../assets/img/vir/prx-01.png){width="900"}
 
@@ -28,33 +30,27 @@
 | **PBS** | Proxmox Backup Server: herramienta para realizar copias de seguridad optimizadas. |
 | **Linux Bridge (vmbr)** | Switch virtual que conecta la red física con las máquinas virtuales y contenedores. |
 
-### MFA
-El MFA (Multi-Factor Authentication o autenticación multifactor) es un sistema de seguridad que requiere que un usuario demuestre su identidad usando más de un método de autenticación antes de acceder a un sistema.
+??? note "MFA (Multi-Factor Authentication o autenticación multifactor)"
+    Sistema de seguridad que requiere que un usuario demuestre su identidad usando más de un método de autenticación antes de acceder a un sistema. Para activarlo en Proxmox:
 
-**Activarla en Proxmox**
+    1. Entrar en la interfaz web de Proxmox, Ir a **My Settings → TFA**, En **Permisos → Two Factor** → **Add**.
+    2. Elegir el tipo de MFA: **TOTP** (más habitual): códigos generados por aplicaciones como Google Authenticator.
+    3. Al iniciar sesión de nuevo en Proxmox, además de la contraseña pedirá el código temporal de 6 dígitos generado por la aplicación. El token se renueva cada 30 segundos
 
-1. Entrar en la interfaz web de Proxmox, Ir a **My Settings → TFA**, En **Permisos → Two Factor** → **Add**.
-2. Elegir el tipo de MFA: **TOTP** (más habitual): códigos generados por aplicaciones como Google Authenticator.
-3. Al iniciar sesión de nuevo en Proxmox, además de la contraseña pedirá el código temporal de 6 dígitos generado por la aplicación. El token se renueva cada 30 segundos
-
-
-
-## 3. Almacenamiento
-Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse **dos almacenamientos** principales.Aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.
-
+## 2. Almacenamiento
 ![Interfaz de proxmox](../assets/img/vir/prx-02.png){width="900"}
 
-- **`local`** suele corresponder al directorio ``/var/lib/vz``. Cuando descargamos una imagen ISO de Ubuntu desde la interfaz web de Proxmox, esta se almacena aquí. Su función principal es almacenar archivos relacionados con la plataforma, como:
+Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse **dos almacenamientos** principales, aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.
+
+1. **local** Corresponde al directorio ``/var/lib/vz``. Cuando descargamos una imagen ISO de Ubuntu desde la interfaz web de Proxmox, esta se almacena aquí. Su función principal es almacenar archivos relacionados con la plataforma, como:
     - Imágenes ISO.
     - Copias de seguridad (Backups).
     - Plantillas de contenedores.
-    - Fragmentos de configuración (Snippets).
 
-- **`local-lvm`** utiliza la tecnología LVM-Thin (Logical Volume Manager Thin Provisioning).Cuando se crea una nueva máquina virtual y se le asigna un disco de 50 GB, dicho disco se almacena normalmente en `local-lvm`. Su función principal es almacenar los discos virtuales de Máquinas virtuales (**VM**) y Contenedores **LXC**. Ventajas:
+2. **local-lvm** utiliza la tecnología LVM-Thin (Logical Volume Manager Thin Provisioning).Cuando se crea una nueva máquina virtual y se le asigna un disco de 50 GB, dicho disco se almacena normalmente en `local-lvm`. Su función principal es almacenar los discos virtuales de Máquinas virtuales (**VM**) y Contenedores **LXC**. Ventajas:
     - Mejor aprovechamiento del espacio disponible.
-    - Creación rápida de discos virtuales.
     - Soporte para snapshots.
-    - Mayor flexibilidad en la gestión del almacenamiento.
+    - Mayor flexibilidad en la gestión del almacenamiento y creación rápida de discos virtuales
 
 | Característica | local | local-lvm |
 |--------------|--------|-----------|
@@ -66,8 +62,9 @@ Es es el sistema que permite guardar todos los datos necesarios para el funciona
 | Discos de contenedores | No (por defecto) | Sí |
 | Ubicación | /var/lib/vz | Volumen LVM |
 
-> Nota "Directorio vs Volumen lógico"
+??? note "Directorio vs Volumen lógico"
     Un **directorio** organiza archivos dentro de un sistema de archivos.
+
     Un **volumen lógico LVM** es una entidad de almacenamiento flexible y dinámica creada dentro de un grupo de volúmenes, mucho más versátil para entornos virtualizados.
 
 ```bash
@@ -79,45 +76,31 @@ lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv  # 3. Extender el volumen lógico
 resize2fs /dev/ubuntu-vg/ubuntu-lv              # 4. Redimensionar el sistema de archivos
 df -h                                           # 5. Comprobar puntos de montaje
 ```
-
-
 ### Backup vs Snapshot
 
-- **Backup (copia de seguridad)** es una copia de los datos de un sistema que se guarda en otro lugar para poder recuperarlos si se pierden, se dañan o se borran. Modos de backup en Proxmox:
+- **Backup (copia de seguridad)** es una copia de los datos de un sistema que se guarda en otro lugar para poder recuperarlos si se pierden, se dañan o se borran. Se suele aplicar la regla de los 3 backups (**Producción**:copia en el propio entorno, **Backup externo**:en otro medio/red fuera de la infraestructura y **Backup offsite**:en otra geolocalización). Además Proxmox ofrece tres modos de copias:
     - **Stop** | Mayor consistencia, breve tiempo de inactividad
     - **Suspend** | Suspende la VM. No recomendado (mayor inactividad sin mejor consistencia)
     - **Snapshot** | Mínimo tiempo de inactividad. Pequeño riesgo de inconsistencia
-    - [Documentación oficial Backup Proxmox](https://pve.proxmox.com/wiki/Backup_and_Restore){target="_blank"}
-    - **Regla de los 3 backups** : **Producción** — copia en el propio entorno, **Backup externo** — en otro medio/red fuera de la infraestructura y **Backup offsite** — en otra geolocalización
 
- 
 - **Snapshot (instantánea)** es una captura del estado de un sistema en un momento concreto. Guarda cómo estaba una máquina virtual, disco o sistema para poder volver a ese punto anterior. Se usa frecuentemente para volver rápidamente a un estado anterior y se hace antes de actualizar un servidor; si la actualización falla, vuelves al estado anterior.
 
-| | Backup | Snapshot |
-|---|---|---|
-| **Qué es** | Clon completo del disco | Estado puntual de la VM |
-| **Es independiente de la VM** | ✅ Sí | ❌ No, forma parte de la VM |
-| **Uso** | Recuperación ante desastre | Probar cambios y revertir rápido |
+??? tip "Backup vs Snapshot"
+
+    | | Backup | Snapshot |
+    |---|---|---|
+    | **Qué es** | Clon completo del disco | Estado puntual de la VM |
+    | **Es independiente de la VM** | ✅ Sí | ❌ No, forma parte de la VM |
+    | **Uso** | Recuperación ante desastre | Probar cambios y revertir rápido |
  
+## 3. Redes
+Proxmox usa el stack de red de Linux (a través de `/etc/network/interfaces`), pero la interfaz web (**System → Network**) los simplifica bastante. 
+
+### **Bridge**
 
 
-
-
-## 4. Redes: Bridge, Bonds y VLANs
-Proxmox usa el stack de red de Linux (a través de `/etc/network/interfaces`), así que estos conceptos no son exclusivos de Proxmox, pero la interfaz web los simplifica bastante. Las configuraciones de red en interfaz gráfica se hacen en **System → Network**.
-
-| Concepto | Para qué sirve | Analogía |
-|---|---|---|
-| **Bridge** | Conectar VMs/LXCs a la red | Switch virtual |
-| **Bond** | Redundancia/rendimiento de NICs físicas | Cable doble por seguridad |
-| **VLAN** | Segmentar tráfico lógicamente | Diferentes "carriles" en la misma autopista |
-
-**Bridge (Puente)**
-
-Funciona como un switch virtual dentro del propio host de Proxmox. Por defecto, crea **vmbr0** durante la instalación, vinculado a la NIC física principal y conecta las interfaces físicas (NICs) del servidor con las interfaces virtuales de las VMs/LXC. Cada VM/LXC que quieras conectar a la red simplemente se "enchufa" a ese bridge, igual que enchufarías un cable a un switch físico.
-
-Ejemplo de configuración típica:
-
+Se utiliza de forma estándar para **dar red** a tus máquinas virtuales. Si tienes varias NICs físicas o quieres segmentar tráfico, puedes tener varios bridges. (ej: `vmbr0` para LAN, `vmbr1` para una red de almacenamiento/backup aislada). Funciona como un switch virtual por defecto, dentro de proxmox crea **vmbr0** durante la instalación, vinculado a la NIC física principal y conecta las interfaces físicas (NICs) del servidor con las interfaces virtuales de las VMs/LXC. Cada VM/LXC que quieras conectar a la red simplemente se "enchufa" a ese bridge, igual que enchufarías un cable a un switch físico. Configuración:
+```bash 
     auto vmbr0
     iface vmbr0 inet static
         address 192.168.1.10/24
@@ -125,105 +108,95 @@ Ejemplo de configuración típica:
         bridge-ports eno1
         bridge-stp off
         bridge-fd 0
+```
+---
+### **Bond**
+Se utiliza en **entornos de producción** donde la alta disponibilidad o el rendimiento de red importan (clústeres, almacenamiento compartido tipo Ceph/NFS, etc.). Modos destacados:
 
-**Cuándo usarlo:** siempre. Es la forma estándar de dar red a tus máquinas virtuales. Si tienes varias NICs físicas o quieres segmentar tráfico, puedes tener varios bridges. (ej: `vmbr0` para LAN, `vmbr1` para una red de almacenamiento/backup aislada).
+- **`active-backup`** → Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en `bond-primary`.
+- **`LACP (802.3ad)`** → Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. 
+- **`balance-rr`** → Este modo distribuye los paquetes de datos de forma secuencial y rotatoria entre todas las interfaces activas.
+- **`balance-alb`** →  permite balancear el tráfico de tus máquinas virtuales en ambas direcciones sin tocar la configuración del switch.
+
+```bash 
+# --- Bonding en modo active-backup ---
+# Solo una interfaz está activa a la vez; si falla, la otra toma el relevo.
+auto bond0
+iface bond0 inet manual
+    bond-slaves enp0s3 enp0s8  # Interfaces físicas esclavas del bond
+    bond-miimon 100            # Comprobación de enlace cada 100 ms
+    bond-mode active-backup    # Modo 
+    bond-primary eno1          # (Opcional) Fuerza eno1 interfaz preferida 
+    bond-primary-reselect always  # (Opcional) Vuelve a eno1 en cuanto esté disponible de nuevo
+
+# --- Bridge de Proxmox sobre el bond ---
+auto vmbr0
+iface vmbr0 inet static
+    address 192.168.1.10/24    # IP fija del host
+    gateway 192.168.1.1        # Puerta de enlace por defecto
+    bridge-ports bond0         # El bond0 es el puerto físico del bridge
+    bridge-stp off             # STP desactivado (no es necesario con un solo bridge)
+    bridge-fd 0                # Sin retardo de forwarding
+```
 
 ---
-
-**Bond (Agregación de enlaces / Bonding)**
-
-Combina dos o más interfaces físicas en una sola interfaz lógica. Sus principales objetivos son:
-
-- **Redundancia (failover):** si un cable o NIC falla, el tráfico sigue por la otra.
-- **Mayor ancho de banda:** combinando varias NICs (no siempre es una suma directa, depende del modo).
-
-Ejemplo:
-
-    auto bond0
-    iface bond0 inet manual
-        bond-slaves eno1 eno2
-        bond-miimon 100
-        bond-mode 802.3ad
-        bond-xmit-hash-policy layer2+3
-
-    auto vmbr0
-    iface vmbr0 inet static
-        address 192.168.1.10/24
-        gateway 192.168.1.1
-        bridge-ports bond0
-        bridge-stp off
-        bridge-fd 0
-
-> Nota cómo el **bridge ahora usa el bond** (`bond0`) en lugar de una NIC física directamente. El bond se "esconde" debajo del bridge.
-
-**Cuándo usarlo:** entornos de producción donde la alta disponibilidad o el rendimiento de red importan (clústeres, almacenamiento compartido tipo Ceph/NFS, etc.). Modos de Bond destacados:
-
-- **`active-backup`** — Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en `bond-primary`.
-- **`LACP (802.3ad)`** — Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. Política de hash recomendada: `layer3+4`.
-- **`balance-rr`** — Este modo distribuye los paquetes de datos de forma secuencial y rotatoria entre todas las interfaces activas.
-- **`balance-alb`** —  permite balancear el tráfico de tus máquinas virtuales en ambas direcciones sin tocar la configuración del switch.
-
----
-
-**VLANs (Redes de Área Local Virtuales)**
-
+### **VLANs**
 Permiten segmentar el tráfico de red dentro de la misma infraestructura física, etiquetando los paquetes con un ID (1-4094). En Proxmox hay dos formas principales de trabajar con VLANs:
 
 **a) VLAN Aware Bridge (recomendado)** Marcas el bridge como "VLAN aware" y luego, al configurar la red de cada VM/LXC, simplemente indicas el **VLAN Tag**. Proxmox se encarga de etiquetar el tráfico y esa VM queda aislada en esa VLAN, todo a través del mismo bridge. **Ventaja:** flexible, no necesitas crear un bridge por cada VLAN. Es el método más usado hoy en día.
 
-    auto vmbr0
-    iface vmbr0 inet manual
-        bridge-ports eno1
-        bridge-stp off
-        bridge-fd 0
-        bridge-vlan-aware yes
-        bridge-vids 2-4094
+**b) Interfaces VLAN dedicadas** Creas interfaz VLAN explícita tiene un bridge específico para ella, se usa cuando necesitas separar tráfico (gestión, almacenamiento, VMs de producción, DMZ, etc.) sin necesidad de switches físicos adicionales, siempre que tu switch físico soporte 802.1Q (**trunking**).
+```bash 
+# --- Bridge VLAN Aware sobre el bond ---
+# Un único bridge gestiona el tráfico de todas las VLANs.
+auto vmbr0
+iface vmbr0 inet static
+    address 192.168.1.10/24
+    gateway 192.168.1.1
+    bridge-ports bond0          # Puerto físico (o bond) que lleva el tráfico troncal (trunk)
+    bridge-stp off
+    bridge-fd 0
+    bridge-vlan-aware yes       # Activa el modo VLAN aware en el bridge
+    bridge-vids 2-4094          # Rango de VLAN IDs permitidas a través del bridge
+```
 
-**b) Interfaces VLAN dedicadas** Creas una interfaz VLAN explícita (`eno1.10`) y un bridge específico para ella, se usa cuando necesitas separar tráfico (gestión, almacenamiento, VMs de producción, DMZ, etc.) sin necesidad de switches físicos adicionales, siempre que tu switch físico soporte 802.1Q (trunking).
+---
+??? abstract "Resumen"
+    1. **Bridge (Puente)**: Conectar VMs/LXCs a la red, funcionando como un switch virtual.
+    2. **Bond (Agregación de enlaces/ Bonding)**: Hay redundancia/rendimiento de NICs físicas, funcionando como un cable doble de seguridad.
+    3. **VLANs  (Redes de Área Local Virtuales)**: Segmentar tráfico lógicamente, creando diferentes "carriles" en la misma autopista.
 
-    auto vmbr0v10
-    iface vmbr0v10 inet manual
-        bridge-ports eno1.10
-        bridge-stp off
-        bridge-fd 0
+## 4. Máquinas virtuales (VM)
+Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico. Los pasos a seguir para crear e iniciar una máquina virtual en Proxmox VE son:
 
-
-## 5. Máquinas virtuales (VM)
-> Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico.
-
-Pasos para crear e iniciar una máquina virtual en Proxmox VE:
-
-1. En la interfaz web de Proxmox, selecciona el nodo donde deseas almacenar la ISO.
-2. Haz clic en **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**.
-3. Pulsa el botón **Cargar** y selecciona el archivo ISO desde tu equipo y espera a que finalice la transferencia.
+1. Acceder a la interfaz web de Proxmox, selecciona el almacenamiento **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**, desde hay pulsar el botón **Cargar** y selecciona el archivo ISO descargado previamente desde tu equipo y espera a que finalice la transferencia.
 ![Interfaz de proxmox](../assets/img/vir/prx-03.png){width="700"}
-4. Haz clic en **Create VM** en la parte superior derecha.
-5. Sigue el asistente, introduciendo un nombre para la máquina virtual, en **OS**, selecciona la imagen ISO previamente subida, en **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades. Configura el tamaño del disco virtual de 100GB, la cantidad de procesadores virtuales en **CPU**, la memoria RAM en **Memory** y la interfaz de red en **Network**.
-6. Revisa el resumen de configuración, haz clic en **Finish** para crear la máquina virtual y marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
-7. Para iniciar selecciona la máquina virtual creada en el panel lateral y haz clic en **Start**. A continuación accede a la consola mediante **Console**.
+4. Haz clic en **Create VM** en la parte superior derecha, para iniciar el asistente.
+![Interfaz de proxmox](../assets/img/vir/prx-02a.png)
+5. Sigue el asistente, introduciendo un nombre para la máquina virtual, en **OS**, selecciona la imagen ISO previamente subida, en **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades. Configura el tamaño del disco virtual de 100GB, la cantidad de procesadores virtuales en **CPU**, la memoria RAM en **Memory** y la interfaz de red en **Network** y por último revisa el resumen de configuración, haz clic en **Finish** para crear la máquina virtual y marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
 
-| | | |
-|---|---|---|
-| ![Interfaz de proxmox](../assets/img/vir/prx-04.png) | ![Interfaz de proxmox](../assets/img/vir/prx-05.png) | ![Interfaz de proxmox](../assets/img/vir/prx-06.png) |
-| ![Interfaz de proxmox](../assets/img/vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/vir/prx-09.png) |
-| ![Interfaz de proxmox](../assets/img/vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/vir/prx-11.png) | ![Interfaz de proxmox](../assets/img/vir/prx-12.png) |
+| | | | | | | | |
+|---|---|---||---|---|---|---|
+| ![Interfaz de proxmox](../assets/img/vir/prx-04.png) | ![Interfaz de proxmox](../assets/img/vir/prx-05.png) | ![Interfaz de proxmox](../assets/img/vir/prx-06.png) |![Interfaz de proxmox](../assets/img/vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/vir/prx-09.png) |![Interfaz de proxmox](../assets/img/vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/vir/prx-11.png) | 
+
+Para iniciar selecciona la máquina virtual creada en el panel lateral y haz clic en **Start**. A continuación accede a la consola mediante **Console**.
+![Interfaz de proxmox](../assets/img/vir/prx-12.png){width="700"}
 
 ## 6. Clúster
-Un **clúster** es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado. En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde una sola interfaz, migrar máquinas virtuales entre ellos y compartir configuraciones de red, almacenamiento y usuarios.
+Un **clúster** es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado.
 
-Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster de Proxmox, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.
+En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde una sola interfaz, migrar máquinas virtuales entre ellos y compartir configuraciones de red, almacenamiento y usuarios. Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.
 
 **Crear el clúster**
 
-1. En el primer nodo (ejemplo **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster.
-2. Una vez creado, pulsa en **Información de unión** y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
-3. En el segundo nodo (**PVE2**), ve también a `Datacenter > Cluster`, haz clic en **Unirse al Clusterr** y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.
+1. En el primer nodo (ejemplo **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster. Una vez creado, pulsa en **Información de unión** y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
 ![Interfaz de proxmox](../assets/img/vir/prx-13.png){width="700"}
-> Desde **Datacenter → Cluster** se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster.
+3. En el segundo nodo (**PVE2**), ve también a `Datacenter > Cluster`, haz clic en **Unirse al Clusterr** y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.
 
-**Alta Disponibilidad (HA)** ⚡
+!!! info "Desde /Datacenter → Cluster/ se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster."
 
-Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la HA en Proxmox, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
+??? tip "Alta Disponibilidad (HA)"
+    Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de **alta disponibilidad (HA)**, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la **HA en Proxmox**, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.
 
 ## 7. Plantillas (template)
 Máquina virtual (VM) o contenedor (CT) preconfigurado que se convierte en una imagen base de solo lectura, usada para crear nuevas VMs/CTs rápidamente por **clonación**, en lugar de instalar el sistema operativo desde cero cada vez. 
@@ -360,3 +333,4 @@ qm set 110 --ciuser admin --cipassword 'clave' --ipconfig0 ip=192.168.1.50/24,gw
 - [Usar el API de Proxmox VE | Wikicrática](https://tecnocratica.net/wikicratica/books/proxmox-ve/page/usar-el-api-de-proxmox-ve){target="_blank"}
 - [GitHub - iesgn/curso_proxmox_cep: Curso sobre Proxmox VE para el CEP.](https://github.com/iesgn/curso_proxmox_cep){target="_blank"}
 - [Más cursos Windows Server, Linux, Hacking](https://www.nosolohacking.info/ofertas){target="_blank"}
+- [Documentación oficial Backup Proxmox](https://pve.proxmox.com/wiki/Backup_and_Restore){target="_blank"}

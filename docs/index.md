@@ -28,8 +28,8 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
 
 | Módulo | Descripción | Nivel |
 |--------|-------------|-------|
-| [Administración de Sistemas Operativos](add/index.md) | Instalación, configuración y administración de SO | 2º CFGS |
-| [Big Data Aplicado](biu/index.md) | Bases de datos, Spark, Kafka, Power BI... | 1º CE |
+| [Administración de Sistemas Operativos](11add/00-introduccion) | Instalación, configuración y administración de SO | 2º CFGS |
+| [Big Data Aplicado](12biu/00-introduccion) | Bases de datos, Spark, Kafka, Power BI... | 1º CE |
 
 ---
 

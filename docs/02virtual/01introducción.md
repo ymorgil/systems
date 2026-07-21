@@ -1,4 +1,4 @@
-# Virtualización
+# 🖥️ Virtualización
 
 La virtualización es una tecnología que permite ejecutar varios sistemas o entornos 
 completamente aislados sobre una misma máquina física. En lugar de necesitar un 
@@ -32,3 +32,19 @@ mucho más amplio que iremos explorando.
 > **En definitiva: VirtualBox y VMware para aprender en local, Proxmox para montar tu propia 
 infraestructura, y AWS cuando necesitas potencia, escala o acceso desde cualquier 
 lugar del mundo.**
+
+## Consejos de virtualización
+
+> ✅ **Toma un snapshot antes de cualquier práctica destructiva**
+
+> ✅ **Asigna solo los recursos que necesitas** — no pongas 8 GB de RAM a una VM si tu equipo solo tiene 8 GB en total
+
+> ✅ **Apaga las VMs cuando no las uses** — consumen CPU y RAM incluso en reposo
+
+> ✅ **Guarda las ISOs** en una carpeta organizada para reutilizarlas
+
+> ✅ **Usa nombres descriptivos** para tus VMs: `Ubuntu-Server-Practica1` es mejor que `Nueva VM`
+
+> ⚠️ **No suspendas el equipo host** con VMs encendidas sin pausarlas antes
+
+> ⚠️ **No muevas o renombres los archivos `.vmdk`** fuera de la aplicación o la VM dejará de funcionar
