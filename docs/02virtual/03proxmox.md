@@ -161,7 +161,7 @@ iface vmbr0 inet static
 ```
 
 ---
-??? abstract "Resumen"
+!!! abstract "Resumen"
     1. **Bridge (Puente)**: Conectar VMs/LXCs a la red, funcionando como un switch virtual.
     2. **Bond (Agregación de enlaces/ Bonding)**: Hay redundancia/rendimiento de NICs físicas, funcionando como un cable doble de seguridad.
     3. **VLANs  (Redes de Área Local Virtuales)**: Segmentar tráfico lógicamente, creando diferentes "carriles" en la misma autopista.
@@ -202,76 +202,46 @@ En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde un
 Máquina virtual (VM) o contenedor (CT) preconfigurado que se convierte en una imagen base de solo lectura, usada para crear nuevas VMs/CTs rápidamente por **clonación**, en lugar de instalar el sistema operativo desde cero cada vez. 
 Existen dos tipos principales en Proxmox:
 
-- **Plantillas de VM (QEMU/KVM)**: una máquina virtual completa convertida en plantilla.
-- **Plantillas de contenedor (LXC)**: imágenes de sistema de archivos descargadas desde el repositorio de plantillas de Proxmox (Debian, Ubuntu, Alpine, CentOS, etc.).
+1. **Plantillas de VM (QEMU/KVM)**: una máquina virtual completa convertida en plantilla.
+2. **Plantillas de contenedor (LXC)**: imágenes de sistema de archivos descargadas desde el repositorio de plantillas de Proxmox (Debian, Ubuntu, Alpine, CentOS, etc.).
 
 **Ventajas**
 
 - **Rapidez**: despliegue de nuevas VMs/CTs en segundos o minutos.
 - **Consistencia**: todas las VMs nacen desde la misma base, configuración estandarizada.
-- **Ahorro de espacio** (con linked clones).
-- **Automatización**: combinadas con cloud-init o scripts, permiten despliegues totalmente automatizados (útil con Terraform, Ansible, etc.).
+- **Automatización**: combinadas con **cloud-init o scripts**, permiten despliegues totalmente automatizados (útil con Terraform, Ansible, etc.).
 
-**Buenas prácticas**
+!!! success "Buenas prácticas"
+    - Usa convenios de nombres claros (`tpl-debian12-base`, `tpl-ubuntu24-docker`).
+    - Mantén las plantillas **actualizadas** periódicamente (regenerarlas cuando haya cambios de versión del SO).
+    - Si usarás *linked clones* en producción, recuerda que **no podrás eliminar la plantilla** mientras existan clones enlazados activos.
+    - Documenta qué software/configuración trae cada plantilla.
+    - Considera tener una plantilla "mínima" (solo SO) y plantillas "especializadas" (con Docker, agentes de monitorización, etc.) según tus necesidades habituales.
 
-- Usa convenios de nombres claros (`tpl-debian12-base`, `tpl-ubuntu24-docker`).
-- Mantén las plantillas **actualizadas** periódicamente (regenerarlas cuando haya cambios de versión del SO).
-- Si usarás *linked clones* en producción, recuerda que **no podrás eliminar la plantilla** mientras existan clones enlazados activos.
-- Documenta qué software/configuración trae cada plantilla.
-- Considera tener una plantilla "mínima" (solo SO) y plantillas "especializadas" (con Docker, agentes de monitorización, etc.) según tus necesidades habituales.
+### 1. Plantillas de VM
+Las plantillas de VM las creas tú mismo a partir de una VM ya instalada y configurada. Los paso son los siguientes:
 
-### 1. Plantillas LXC
-Proxmox ofrece un repositorio integrado con plantillas oficiales de distribuciones Linux. Se pueden descargar desde la interfaz web `Datacenter → [nodo] → local (almacenamiento) → Plantillas CT`
-Pulsa **Plantillas** y elige la distribución/versión (ej. `debian-12-standard`, `ubuntu-24.04-standard`), descargar y guardar como archivo `.tar.zst` en `/var/lib/vz/template/cache/`.
-
-Por línea de comandos:
-
-```bash
-pveam update        # Actualizar el índice de plantillas disponibles
-
-pveam available     # Listar plantillas disponibles
-
-pveam download local debian-12-standard_12.7-1_amd64.tar.zst # Descargar una plantilla
-
-pveam list local    # Listar plantillas ya descargadas
-```
-
-**Crear un contenedor desde una plantilla**
-```bash
-pct create 200 local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst \
-  --hostname mi-contenedor \
-  --memory 512 \
-  --cores 1 \
-  --rootfs local-lvm:8 \
-  --net0 name=eth0,bridge=vmbr0,ip=dhcp
-```
-
-### 2. Plantillas VM (QEMU/KVM)
-*v9*
-A diferencia de los CT, las plantillas de VM las creas tú mismo a partir de una VM ya instalada y configurada. Los paso son los siguientes:
-
-1. **Crear y configurar una VM** con el SO deseado (instalar actualizaciones, agentes, software base).
+1. **Crear y configurar una VM** con el SO deseado (instalar actualizaciones, agentes, software base,...).
 2. **Limpiar identificadores únicos** (muy importante para evitar conflictos al clonar):
-   - Eliminar `machine-id` (Linux): `truncate -s0 /etc/machine-id`
-   - Limpiar claves SSH del host si se reutilizarán.
-   - Desinstalar `cloud-init` si no se va a usar, o configurarlo si sí.
+      - Eliminar `machine-id` (Linux): **`truncate -s0 /etc/machine-id`**
+      - Limpiar claves SSH del host si se reutilizarán.
+      - Desinstalar `cloud-init` si no se va a usar, o configurarlo si sí.
 3. **Apagar la VM** (no puede convertirse en plantilla estando encendida).
-4. **Convertir en plantilla**: (Proceso irreversible)
-   - Interfaz web: clic derecho sobre la VM → **Convertir a plantilla**
-   - CLI: `qm template <ID_VM>`
+4. **Convertir en plantilla**: (Proceso *irreversible* la VM original deja de poder arrancarse; queda como base de solo lectura para clonar)
+      - Interfaz web: clic derecho sobre la VM → **Convertir a plantilla**
+      - CLI: `qm template <ID_VM>`
 
-> ⚠️ **Esta acción es irreversible**: la VM original deja de poder arrancarse; queda como base de solo lectura para clonar.
-> 
----
-> **Plantillas de Windows**: es recomendable instalar los controladores **VirtIO** para que Windows reconozca correctamente los dispositivos virtuales de Proxmox y obtenga un mejor rendimiento en disco, red y otros componentes. Una vez configurado el sistema, actualizado e instalado el software necesario, se debe ejecutar **Sysprep** con la opción Generalize, lo que elimina la información única de la instalación (SID, nombre del equipo y otros identificadores) para que cada nueva máquina creada desde la plantilla se configure como un sistema independiente durante su primer arranque. Tras finalizar Sysprep, se apaga la máquina virtual y se convierte en plantilla dentro de Proxmox.
-> 
-> - ISO de drivers VirtIO: [pve.proxmox.com/wiki/Windows_VirtIO_Drivers](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers){target="_blank"}
-- Guía oficial Windows 10: [pve.proxmox.com/wiki/Windows_10_guest_best_practices](https://pve.proxmox.com/wiki/Windows_10_guest_best_practices){target="_blank"}
-- [Generalizar con Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11){target="_blank"}
-- [Opciones de línea de comandos Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11){target="_blank"}
+!!! bug "Plantillas de Windows"
+    Recomendable instalar los controladores **VirtIO** para que Windows reconozca correctamente los dispositivos virtuales de Proxmox y obtenga un mejor rendimiento en disco, red y otros componentes. 
+    
+    Una vez configurado el sistema, actualizado e instalado el software necesario, se debe ejecutar **Sysprep** con la opción Generalize, lo que elimina la información única de la instalación (SID, nombre del equipo y otros identificadores) para que cada nueva máquina creada desde la plantilla se configure como un sistema independiente durante su primer arranque. Tras finalizar Sysprep, se apaga la máquina virtual y se convierte en plantilla dentro de Proxmox.
+    
+    - ISO de drivers VirtIO: [pve.proxmox.com/wiki/Windows_VirtIO_Drivers](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers){target="_blank"}
+    - Guía oficial Windows 10: [pve.proxmox.com/wiki/Windows_10_guest_best_practices](https://pve.proxmox.com/wiki/Windows_10_guest_best_practices){target="_blank"}
+    - [Generalizar con Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11){target="_blank"}
+    - [Opciones de línea de comandos Sysprep](https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11){target="_blank"}
 
-**Clonar desde una plantilla**
-
+**Utilizando la interfaz de linea de comando (CLI)**
 ```bash
 # Clonación completa (full clone) - copia independiente - más lenta
 qm clone 9000 105 --name servidor-web-01 --full  
@@ -279,52 +249,47 @@ qm clone 9000 105 --name servidor-web-01 --full
 qm clone 9000 106 --name servidor-web-02  
 ```
 
-### 3. Plantillas con Cloud-Init
-Una práctica muy común es crear plantillas de VM basadas en imágenes **cloud** (ej. Ubuntu Cloud Image, Debian generic cloud) combinadas con **cloud-init**, lo que permite inyectar automáticamente al clonar:
+#### cloud-Init
+**`cloud-init`** es un paquete de software que automatiza la inicialización de las instancias de la nube durante el arranque del sistema. Cuando tu VM arranca por **primera vez**, se ejecuta cloud-init, es solo un comando que está integrado en la mayoría de las imágenes de VM en la nube. Se puede configurar para que realice una variedad de tareas. Algunos ejemplos de tareas que puede realizar son:
 
 - Usuario y contraseña/clave SSH
 - Hostname
+- Instalación de paquetes en una instancia
 - Configuración de red (IP estática o DHCP)
+- Suprimir el comportamiento por defecto de la máquina virtual 
 - Scripts de arranque personalizados
 
-**Ejemplo resumido**
+### 2. Plantillas de contenedor 
+Proxmox ofrece un repositorio integrado con plantillas oficiales de distribuciones Linux. Se pueden descargar desde la interfaz web `Datacenter → [nodo] → local (almacenamiento) → Plantillas CT`
+Pulsa **Plantillas** y elige la distribución/versión (ej. `debian-12-standard`, `ubuntu-24.04-standard`), descargar y guardar como archivo `.tar.zst` en `/var/lib/vz/template/cache/`.
 
+**Utilizando la interfaz de linea de comando (CLI)**
 ```bash
-# Descargar imagen cloud
-wget https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img  
-# Crear VM base
-qm create 9000 --name ubuntu-cloud-template --memory 2048 --cores 2 --net0 virtio,bridge=vmbr0  
-# Importar el disco
-qm importdisk 9000 noble-server-cloudimg-amd64.img local-lvm  
-# Asociar disco y añadir unidad cloud-init
-qm set 9000 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-9000-disk-0
-qm set 9000 --ide2 local-lvm:cloudinit
-qm set 9000 --boot c --bootdisk scsi0
-qm set 9000 --serial0 socket --vga serial0
-# Convertir en plantilla
-qm template 9000  
+pveam update            # Actualizar el índice de plantillas disponibles
+pveam available         # Listar plantillas disponibles
+pveam download local debian-12-standard_12.7-1_amd64.tar.zst # Descargar una plantilla
+pveam list local        # Listar plantillas ya descargadas
+
+# Creación de un LXC mediante plantilla
+pct create 200 local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst \
+  --hostname mi-contenedor \
+  --memory 512 \
+  --cores 1 \
+  --rootfs local-lvm:8 \
+  --net0 name=eth0,bridge=vmbr0,ip=dhcp
 ```
-
-```bash
-#Al clonar, se pueden ajustar parámetros cloud-init por VM:
-qm set 110 --ciuser admin --cipassword 'clave' --ipconfig0 ip=192.168.1.50/24,gw=192.168.1.1
-```
-
-**Resumen de comandos**
-
-| Acción | Comando |
-|---|---|
-| Actualizar índice de plantillas LXC | `pveam update` |
-| Ver plantillas LXC disponibles | `pveam available` |
-| Descargar plantilla LXC | `pveam download local <plantilla>` |
-| Crear CT desde plantilla | `pct create <ID> local:vztmpl/<archivo>` |
-| Convertir VM en plantilla | `qm template <ID>` |
-| Clonar (full) | `qm clone <ID_origen> <ID_nuevo> --full` |
-| Clonar (linked) | `qm clone <ID_origen> <ID_nuevo>` |
+!!! abstract "Resumen de comandos"
+    - **pveam update**: Actualizar índice de plantillas LXC
+    - **pveam available**: Ver plantillas LXC disponibles
+    - **pveam download local &lt;plantilla&gt;**: Descargar plantilla LXC
+    - **pct create &lt;ID&gt; local:vztmpl/&lt;archivo&gt;**: Crear CT desde plantilla
+    - **qm template &lt;ID&gt;**: Convertir VM en plantilla
+    - **qm clone &lt;ID_origen&gt; &lt;ID_nuevo&gt; --full**: Clonar (full)
+    - **qm clone &lt;ID_origen&gt; &lt;ID_nuevo&gt;**: Clonar (linked)
 
 ## 📚 Recursos
 
-- [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"} v12
+- [📺 Virtualización con Proxmox](https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ){target="_blank"}
 - [Proxmox VE API - Proxmox VE](https://pve.proxmox.com/wiki/Proxmox_VE_API){target="_blank"}
 - [Proxmox VE Helper-Scripts](https://tteck.github.io/Proxmox/){target="_blank"}
 - [Scripts para Proxmox - SomeBooks.es](https://somebooks.es/?s=+Scripts+para+Proxmox){target="_blank"}
