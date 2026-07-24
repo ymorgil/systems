@@ -1,46 +1,6 @@
----
-title: "Docker: Guía"
-weight: 2
----
-# 🐳 Docker: Guía Completa de Contenedores
-
-## ¿Qué es un contenedor?
----
-No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
-
-Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de **"en mi máquina funciona"**.
-
-Un contenedor es una **unidad ligera y portátil** que permite empaquetar una aplicación junto con todas sus dependencias (bibliotecas, configuraciones y binarios) en un entorno aislado.
-
-A diferencia de las máquinas virtuales, los contenedores **no incluyen un sistema operativo completo**: comparten el núcleo (kernel) del sistema operativo del anfitrión, lo que los hace más eficientes en consumo de recursos (memoria y CPU).
-
-#### ``Beneficios de los contenedores``
-- **Portabilidad:** Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.
-- **Eficiencia:** Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.
-- **Escalabilidad:** Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.
-
-#### ``Breve historia``
-| Año | Hito |
-|---|---|
-| ~1970s | `chroot` en UNIX: primer concepto de aislamiento de procesos |
-| 2000s | FreeBSD Jails y tecnologías avanzadas en el kernel de Linux |
-| 2013 | Nace **Docker**: democratiza los contenedores con herramientas fáciles de usar y Docker Hub |
-| 2014 | Google lanza Kubernetes para orquestación de contenedores |
-| 2020+ | Alternativas como **Podman** emergen: sin daemon, ejecución rootless |
-| Actualidad | Componente esencial de la infraestructura moderna, microservicios y DevOps |
-
-### **Contenedor vs. Máquina Virtual**
-| Característica | Contenedor | Máquina Virtual |
-|---|---|---|
-| Virtualización | Nivel de SO (kernel compartido) | Hardware completo |
-| SO propio | No (comparte el kernel) | Sí, uno por instancia |
-| Peso | Ligero (MB) | Pesado (GB) |
-| Tiempo de inicio | Casi instantáneo | Minutos |
-| Aislamiento | Proceso/aplicación | Sistema completo |
-| Eficiencia de recursos | Alta | Menor |
+# 🐳 Docker: 
 
 ## Docker
----
 Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft. Docker sigue una arquitectura **cliente-servidor**:
 
 **Componentes principales**

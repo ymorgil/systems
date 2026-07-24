@@ -1,50 +1,113 @@
----
-title: "Entorno (WSL y Docker)"
-weight: 1
----
+# 🛢️ Contenedores
 
-#  🐳 Entorno (WSL y Docker)
+## ¿Qué es un contenedor?
+No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
 
-## WSL (Windows Subsystem for Linux)
----
-WSL es una característica de Windows que permite ejecutar un entorno Linux directamente sobre Windows, sin necesidad de una máquina virtual ni de arranque dual. Gracias a WSL es posible usar herramientas de línea de comandos de Linux, ejecutar scripts Bash y trabajar con aplicaciones Linux integradas en el flujo de trabajo de Windows.
+Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de **"en mi máquina funciona"**.
 
-### **Activación y puesta en marcha**
+![terminal](../assets/img/03cont/con-01.png)
 
-#### ``👉 Paso 1 — Activar características de Windows``
+Un contenedor es una **unidad ligera y portátil** que permite empaquetar una aplicación junto con todas sus dependencias (bibliotecas, configuraciones y binarios) en un entorno aislado.
 
-Abrir **Características de Windows** y activar:
+A diferencia de las máquinas virtuales, los contenedores **no incluyen un sistema operativo completo**: comparten el núcleo (kernel) del sistema operativo del anfitrión, lo que los hace más eficientes en consumo de recursos (memoria y CPU).
+
+![terminal](../assets/img/03cont/con-02.png)
+
+**BENEFICIOS DE LOS CONTENEDORES**
+
+- **Portabilidad:** Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.
+- **Eficiencia:** Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.
+- **Escalabilidad:** Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.
+
+**BREVE HISTORIA**
+
+| Año | Hito |
+|---|---|
+| ~1970s | `chroot` en UNIX: primer concepto de aislamiento de procesos |
+| 2000s | FreeBSD Jails y tecnologías avanzadas en el kernel de Linux |
+| 2013 | Nace **Docker**: democratiza los contenedores con herramientas fáciles de usar y Docker Hub |
+| 2014 | Google lanza Kubernetes para orquestación de contenedores |
+| 2020+ | Alternativas como **Podman** emergen: sin daemon, ejecución rootless |
+| Actualidad | Componente esencial de la infraestructura moderna, microservicios y DevOps |
+??? info "Contenedor vs. Máquina Virtual"
+    | Característica | Contenedor | Máquina Virtual |
+    |---|---|---|
+    | Virtualización | Nivel de SO (kernel compartido) | Hardware completo |
+    | SO propio | No (comparte el kernel) | Sí, uno por instancia |
+    | Peso | Ligero (MB) | Pesado (GB) |
+    | Tiempo de inicio | Casi instantáneo | Minutos |
+    | Aislamiento | Proceso/aplicación | Sistema completo |
+    | Eficiencia de recursos | Alta | Menor |
+
+## ¿Qué es WSL?
+**WSL (Windows Subsystem for Linux)** es una característica de Windows que permite ejecutar un entorno Linux real (no una simulación) directamente sobre Windows, sin necesidad de una máquina virtual ni de arranque dual. Gracias a WSL es posible usar herramientas de línea de comandos de Linux, ejecutar scripts Bash y trabajar con aplicaciones Linux integradas en el flujo de trabajo de Windows.
+
+Con **WSL2** (la versión actual), no se trata de un simulador de comandos ni de una imitación de Linux. Por debajo corre un **kernel Linux auténtico**, integrado con Windows de forma muy eficiente. Cuando abres una terminal de Ubuntu en WSL, estás usando Linux real, no una versión "de mentira".
+
+**DESTACAR**
+
+1. **El software profesional serio vive en Linux**
+Servidores web, bases de datos, contenedores, herramientas DevOps, entornos de programación en la nube... la inmensa mayoría de la infraestructura tecnológica actual corre sobre Linux. Si vais a trabajar en desarrollo, sistemas o redes, tarde o temprano usaréis Linux a diario.
+2. **Podéis practicar sin dejar Windows**
+WSL elimina la excusa de "no tengo Linux en casa". El PC que ya tenéis (con Windows 10/11) sirve para practicar Linux de verdad, sin instalar nada exótico ni arriesgar el sistema.
+3. **Las herramientas modernas funcionan mejor en Linux**
+Docker, Git, Python, Node.js, servidores web como Nginx o Apache... muchas de estas herramientas están pensadas originalmente para Linux y funcionan de forma más nativa, rápida y "de verdad" ahí que en Windows.
+4. **Es el puente perfecto para aprender sin miedo**
+Antes de dar el salto a un servidor Linux real en producción, WSL permite equivocarse, romper cosas y volver a empezar sin ningún riesgo, todo dentro del mismo portátil con el que ya trabajáis cada día.
+5. **Es gratuito y viene integrado en Windows**
+No hay que comprar licencias ni descargar imágenes de discos complicadas. Con un solo comando, tenéis un Linux funcional en minutos.
+
+### Activación y puesta en marcha
+
+**👉 Paso 1 — Activar características de Windows**
+
 - Plataforma de máquina virtual
 - Subsistema de Windows para Linux
-![Activación de características de Windows](../assets/img/cont/dow-01.png)
+  
+![Activación de características de Windows](../assets/img/03cont/con-03.png)
 
-#### ``👉 Paso 2 — Instalación de WSL + Ubuntu 24.04``
+**👉 Paso 2 — Instalación de WSL + Ubuntu 24.04**
  
 Abrir **PowerShell** como administrador y ejecutar:
  
 ```powershell
-winget install Microsoft.WSL  # Instalar WSL con winget
-wsl --version  # Comprobar la instalación
-wsl --install -d Ubuntu-24.04  # Instalar Ubuntu 24.04
-wsl --list --online # Si no aparece esa versión, listar las disponibles
+winget install Microsoft.WSL    # Instalar WSL con winget
+wsl --version                   # Comprobar la instalación
+wsl --install -d Ubuntu-24.04   # Instalar Ubuntu 24.04
+wsl --list --online             # Si no aparece, listar las disponibles
 ```
+!!! note "Primera vez que arranque Ubuntu, el sistema solicitará, Usuario y contraseña para Administrador"
 
-La primera vez que arranque Ubuntu, el sistema solicitará crear:
-- **Usuario** → nombre de usuario Linux
-- **Contraseña** → se usará para `sudo`
+![Activación de características de Windows](../assets/img/03cont/con-05.png)
 
-### **Terminal de Windows**
- 
+**👉 Paso 3 — Terminal de Windows**
+
 La **Terminal de Windows** es una herramienta «todo en uno» disponible de forma gratuita en la Microsoft Store. Una vez instalada, basta con buscarla en el menú Inicio para ejecutarla.
  
 Su principal ventaja es que permite abrir múltiples pestañas con diferentes entornos (PowerShell, CMD, Ubuntu...) en una sola ventana, con personalización completa de colores y fuentes.
 
-![terminal](../assets/img/cont/dow-02.png)
+![terminal](../assets/img/03cont/con-04.png)
 
-Una vez dentro de Ubuntu, actualizar los paquetes:
-```bash
-sudo apt update && sudo apt upgrade -y && apt autoremove
-```
+!!! note "Una vez dentro de Ubuntu:  `sudo apt update && sudo apt upgrade -y && apt autoremove`"
+
+??? abstract "Resumen"
+    | Antes de WSL | Con WSL |
+    |---|---|
+    | Máquina virtual pesada y lenta | Integración ligera y rápida con Windows |
+    | Instalar Linux aparte (dual boot) | Un solo comando, sin reiniciar |
+    | Simulador de comandos | Kernel Linux real |
+    | Cambiar de sistema operativo | Cambiar de ventana |
+
+
+
+## 👉👉👉
+
+
+
+
+
+
+
 
 ## Docker
 ---
