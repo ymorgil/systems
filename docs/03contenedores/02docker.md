@@ -1,580 +1,781 @@
 # 🐳 Docker: 
 
-## Docker
-Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft. Docker sigue una arquitectura **cliente-servidor**:
+## ¿Qué es WSL?
+**WSL (Windows Subsystem for Linux)** es una característica de Windows que permite ejecutar un entorno Linux real (no una simulación) directamente sobre Windows, sin necesidad de una máquina virtual ni de arranque dual. Gracias a WSL es posible usar herramientas de línea de comandos de Linux, ejecutar scripts Bash y trabajar con aplicaciones Linux integradas en el flujo de trabajo de Windows.
 
-**Componentes principales**
+Con **WSL2** (la versión actual), no se trata de un simulador de comandos ni de una imitación de Linux. Por debajo corre un **kernel Linux auténtico**, integrado con Windows de forma muy eficiente. Cuando abres una terminal de Ubuntu en WSL, estás usando Linux real, no una versión "de mentira".
 
-**Docker Engine** es el núcleo de la plataforma y está compuesto por:
-- **Daemon de Docker (`dockerd`):** servicio en segundo plano que gestiona imágenes, contenedores, redes y volúmenes. Responde a las solicitudes del cliente.
-- **CLI de Docker:** interfaz de línea de comandos para interactuar con Docker (docker run, docker build, docker ps, etc.).
-- **API REST de Docker:** interfaz programática para comunicarse con el daemon, utilizada tanto por la CLI como por aplicaciones externas.
+**DESTACAR**
 
-### **Herramientas del ecosistema Docker**
+1. **El software profesional serio vive en Linux**
+Servidores web, bases de datos, contenedores, herramientas DevOps, entornos de programación en la nube... la inmensa mayoría de la infraestructura tecnológica actual corre sobre Linux. Si vais a trabajar en desarrollo, sistemas o redes, tarde o temprano usaréis Linux a diario.
+2. **Podéis practicar sin dejar Windows**
+WSL elimina la excusa de "no tengo Linux en casa". El PC que ya tenéis (con Windows 10/11) sirve para practicar Linux de verdad, sin instalar nada exótico ni arriesgar el sistema.
+3. **Las herramientas modernas funcionan mejor en Linux**
+Docker, Git, Python, Node.js, servidores web como Nginx o Apache... muchas de estas herramientas están pensadas originalmente para Linux y funcionan de forma más nativa, rápida y "de verdad" ahí que en Windows.
+4. **Es el puente perfecto para aprender sin miedo**
+Antes de dar el salto a un servidor Linux real en producción, WSL permite equivocarse, romper cosas y volver a empezar sin ningún riesgo, todo dentro del mismo portátil con el que ya trabajáis cada día.
+5. **Es gratuito y viene integrado en Windows**
+No hay que comprar licencias ni descargar imágenes de discos complicadas. Con un solo comando, tenéis un Linux funcional en minutos.
 
-| Herramienta | Descripción |
-|---|---|
-| **Docker Desktop** | Aplicación de escritorio para Mac, Windows y Linux con GUI integrada |
-| **Docker Engine** | Motor de ejecución de contenedores (daemon + CLI + API) |
-| **Docker Compose** | Define y ejecuta aplicaciones multi-contenedor con un archivo YAML |
-| **Docker Hub** | Registro público y privado de imágenes de contenedores |
-| **Docker Swarm** | Orquestación nativa de clústeres de Docker |
-| **Docker CLI** | Interfaz de línea de comandos |
-| **Docker Volume** | Gestión de almacenamiento persistente |
+### Activación y puesta en marcha
 
-### **Comandos generales esenciales**
+**👉 Paso 1 — Activar características de Windows**
 
-```bash
-docker version              # Muestra la versión de Docker
-docker info                 # Información del sistema Docker
-docker help                 # Ayuda general
-docker login                # Inicia sesión en Docker Hub
-docker logout               # Cierra sesión
-```
-
-## Imágenes
----
-Una imagen Docker es un **paquete inmutable de solo lectura** que contiene todo lo necesario para ejecutar una aplicación: código, ejecutables, librerías, configuraciones, variables de entorno y el sistema de archivos que usarán los contenedores.
-
-**Conceptos clave**: 
-- **Plantilla de solo lectura:** Las imágenes no se modifican. A partir de una imagen se crean los contenedores (instancias en ejecución).
-- **Sistema de capas (layers):** Las imágenes se construyen en capas apiladas, como una cebolla. Cada instrucción del Dockerfile genera una nueva capa. Las capas son inmutables y se pueden compartir entre imágenes, lo que ahorra espacio y acelera las descargas.
-- **Tags (etiquetas):** Identifican versiones de una imagen. Por ejemplo, `ubuntu:22.04` o `nginx:latest`.
-- **Imagen base:** Toda imagen parte de otra imagen (`FROM`). Las imágenes base suelen ser distribuciones Linux minimalistas como Alpine (~5 MB), Debian slim, o imágenes oficiales de servicios.
-
->**Analogía imagen / contenedor**
-La imagen es el **ejecutable** (binario); el contenedor es la **instancia en ejecución** (proceso). De la misma imagen puedes lanzar múltiples contenedores simultáneamente.
-
-### **Repositorio de imágenes**
-
-[Docker-Hub](https://hub.docker.com/) es el registro público oficial. Contiene:
-- Imágenes **oficiales** (mantenidas por Docker y los propios proyectos): nginx, postgres, python, node, ubuntu...
-- Imágenes de **la comunidad**: `usuario/imagen`
-- Repositorios **privados** (con plan de suscripción)
-
-Otros registros populares: GitHub Container Registry, Google Container Registry, Amazon ECR, Azure Container Registry...
-
-### **Comandos de imágenes**
-```bash
-# Comandos más utilizados
-docker image ls                    # Listar todas las imágenes locales
-docker images                      # equivalente
-docker image inspect ubuntu        # Información detallada de una imagen
-docker image history ubuntu        # Historial de capas de una imagen
-docker image rm ubuntu             # Eliminar una imagen
-docker rmi ubuntu                  # equivalente
-docker image prune                 # Eliminar imágenes no utilizadas
-
-# Repositorio de imágenes
-docker search nginx                                 # Buscar imágenes en Docker Hub
-# ──────────────────────────────────
-docker image pull ubuntu                            # Descargar una imagen desde Docker Hub
-docker pull ubuntu                                  # equivalente
-docker pull ubuntu:22.04                            # versión específica
-docker pull ubuntu:latest                           # última versión (por defecto)
-# ──────────────────────────────────
-docker image build -t mi-app:1.0 .                  # Construir una imagen desde un Dockerfile
-docker build -t mi-app:1.0 .                        # equivalente
-docker image tag mi-app:1.0 mi-usuario/mi-app:1.0   # Etiquetar una imagen
-# ──────────────────────────────────
-docker image push mi-usuario/mi-app:1.0             # Subir una imagen a Docker Hub
-docker push mi-usuario/mi-app:1.0                   # equivalente
-```
-
-## Contenedores
----
-Un contenedor es una **instancia ejecutable de una imagen**. Se crea a partir de ella y representa el proceso en ejecución de la aplicación con su entorno aislado.
-**Características:**
-- Puede tener **más de un proceso** en ejecución, aunque la buena práctica es **un proceso por contenedor**.
-- Está **aislado** de otros contenedores y del host (red, sistema de archivos, procesos).
-- Cuando se elimina un contenedor, **se pierden los datos** que no estén en un volumen persistente.
-- Se puede conectar a redes, adjuntar volúmenes y publicar puertos.
-
-### **Comandos de contenedores**
-```bash
-# Comandos más utilizados
-docker container run nginx          # Crear y ejecutar un contenedor
-docker run nginx                    # equivalente
-docker container ls                 # Listar contenedores en ejecución
-docker ps                           # equivalente
-docker container ls -a              # Listar TODOS los contenedores (incluidos parados)
-docker ps -a                        # equivalente
-docker container rm mi-nginx        # Eliminar un contenedor (debe estar parado)
-docker rm mi-nginx                  # equivalente
-docker rm -f mi-nginx               # forzar eliminación aunque esté activo
-docker container prune              # Elimina todos los contenedores parados
-
-# Opciones comunes de docker run:
-docker run -d nginx                    # -d: segundo plano (detached)
-docker run -it ubuntu bash             # -it: modo interactivo + terminal
-docker run --name mi-nginx nginx       # --name: asignar nombre
-docker run -p 8080:80 nginx            # -p: mapear puertos host:contenedor
-docker run -e VAR=valor nginx          # -e: variable de entorno
-docker run -v /host:/contenedor nginx  # -v: montar volumen
-docker run --rm nginx                  # --rm: eliminar al parar
-docker run --network mi-red nginx      # --network: conectar a red
-
-# Iniciar/detener/reiniciar/pausar/reanudar un contenedor
-docker container start mi-nginx
-docker container stop mi-nginx
-docker container restart mi-nginx
-docker container pause mi-nginx
-docker container unpause mi-nginx
-
-# Otros comandos importantes
-docker container logs mi-nginx                                  # Ver logs de un contenedor
-docker logs -f mi-nginx                                         # seguir logs en tiempo real
-docker logs --tail 100 mi-nginx                                 # últimos 100 logs
-docker container exec mi-nginx ls /etc/nginx                    # Ejecutar comando en contenedor activo
-docker exec -it mi-nginx bash                                   # abrir terminal interactivo
-docker container inspect mi-nginx                               # Información detallada del contenedor
-docker stats mi-nginx                                           # Estadísticas de uso de recursos
-docker container cp mi-nginx:/etc/nginx/nginx.conf ./nginx.conf # Copiar archivos entre host y contenedor
-docker cp ./index.html mi-nginx:/usr/share/nginx/html/          # equivalente
-docker container inspect`                                       # Información detallada del contenedor
-```
-
-#### `Comando docker ps`
-
-Columnas que muestra `docker ps -a`:
-| Columna | Descripción |
-|---|---|
-| `CONTAINER ID` | Identificador único del contenedor |
-| `IMAGE` | Imagen desde la que se creó |
-| `COMMAND` | Proceso que se está ejecutando dentro |
-| `CREATED` | Tiempo desde que se creó |
-| `STATUS` | Estado actual y tiempo en ese estado |
-| `PORTS` | Mapeo de puertos |
-| `NAMES` | Nombre del contenedor (aleatorio si no se especifica) |
-
-## Redes
----
-Las redes Docker permiten definir **cómo se comunican los contenedores** entre sí y con el exterior. El componente principal que gestiona la conectividad es **libnetwork**.
-
-### **Tipos de redes en Docker**
-
-#### ``1. Bridge (por defecto)``
-Red puente, es la red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.
-```bash
-docker run -d --name web --network bridge -p 8080:80 nginx
-```
-
-#### ``2. Host``
-Elimina el aislamiento de red entre el contenedor y el host. El contenedor comparte directamente la interfaz de red del sistema, usando la misma IP. Mejor rendimiento pero mayor riesgo de conflicto de puertos.
-```bash
-docker run -d --network host nginx
-```
-
-#### ``3. Overlay``
-Utilizada para contenedores distribuidos en **diferentes hosts**. Es la red usada en entornos de **Docker Swarm** para comunicar servicios entre nodos.
-
-#### ``4. Macvlan``
-Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como dispositivos físicos en la red. Útil para aplicaciones que necesitan estar directamente en la red LAN.
-
-#### ``5. None``
-Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.
-
-#### ``6. Redes personalizadas (recomendado)``
-Las redes bridge personalizadas son **la práctica recomendada** ya que ofrecen:
-- **Resolución DNS automática** entre contenedores por nombre.
-- Mejor aislamiento que la red bridge por defecto.
-- Mayor control sobre la subnet y el gateway.
-```bash
-docker network create mi-red                                        # Crear una red personalizada
-docker network create --driver bridge --subnet 172.20.0.0/16 mi-red # Crear red con subnet específica
-docker run -d --name app --network mi-red mi-app  # Conectar contenedores a mi-red personalizada
-docker run -d --name db --network mi-red postgres # Ahora 'app' puede llegar a 'db' usando su nombre
-```
-
-### **Comandos de redes**
-```bash
-# Comandos más utilizados
-docker network create mi-red                      # Crear una red
-docker network create --driver overlay mi-overlay # tipo overlay
-docker network ls                                 # Listar todas las redes
-docker network rm mi-red                          # Eliminar una red
-docker network prune                              # Eliminar todas las redes no utilizadas
-# ──────────────────────────────────
-docker network inspect mi-red   # Información detallada de una red
-docker network inspect bridge   # red por defecto
-# ──────────────────────────────────
-docker network connect mi-red mi-contenedor     # Conectar un contenedor a una red (en caliente)
-docker network disconnect mi-red mi-contenedor  # Desconectar un contenedor de una red
-```
-
-### **Publicación de puertos**
-
-```bash
-# Mapear puerto del host al contenedor
-docker run -p 8080:80 nginx           # host:contenedor
-docker run -p 127.0.0.1:8080:80 nginx # solo desde localhost
-docker run -P nginx                   # mapeo automático de todos los puertos expuestos
-```
-
-## Volúmenes
----
-Un volumen Docker permite **conservar los datos más allá del ciclo de vida de un contenedor**. Sin volúmenes, todos los datos generados dentro de un contenedor se pierden cuando este se elimina.
-
-**Casos de uso:**
-- **Transferir datos** a un contenedor.
-- **Guardar datos persistentes** (bases de datos, logs, configuraciones).
-- **Compartir datos** entre múltiples contenedores.
+- Plataforma de máquina virtual
+- Subsistema de Windows para Linux
   
-**Características de los volúmenes**
-- **Persistencia de datos:** Los datos sobreviven a la eliminación del contenedor.
-- **Compartir datos entre contenedores:** Varios contenedores pueden montar el mismo volumen simultáneamente.
-- **Desacoplamiento datos/contenedor:** Se puede actualizar o reemplazar el contenedor sin perder datos.
-- **Integración con el host:** Los datos son accesibles desde fuera del contenedor.
-- **Flexibilidad:** Volúmenes con nombre, anónimos o gestionados externamente (NFS, cloud storage...).
-- **Escalabilidad:** Facilitan la distribución de datos en entornos orquestados.
+![Activación de características de Windows](../assets/img/03cont/con-03.png)
 
-### **Tipos**
-
-#### ``1. Volumes (volúmenes gestionados por Docker)``
-Son la opción **recomendada**. Docker gestiona su ubicación en el sistema de archivos del host (`/var/lib/docker/volumes/`). Son independientes del contenedor.
-```bash
-docker run -d -v ruta-en-mi-pc:ruta-dentro-del-contenedor imagen
-docker run -d -v mi-volumen:/var/lib/postgresql/data postgres
+**👉 Paso 2 — Instalación de WSL + Ubuntu 24.04**
+ 
+Abrir **PowerShell** como administrador y ejecutar:
+ 
+```powershell
+winget install Microsoft.WSL    # Instalar WSL con winget
+wsl --version                   # Comprobar la instalación
+wsl --install -d Ubuntu-24.04   # Instalar Ubuntu 24.04
+wsl --list --online             # Si no aparece, listar las disponibles
 ```
+!!! note "Primera vez que arranque Ubuntu, el sistema solicitará, Usuario y contraseña para Administrador"
 
-#### ``2. Bind Mounts (montajes de enlace)``
-Montan un directorio o archivo específico del host dentro del contenedor. Útiles en desarrollo para reflejar cambios del código fuente en tiempo real.
-```bash
-docker run -d -v /ruta/en/host:/ruta/en/contenedor nginx
-docker run -d -v $(pwd)/html:/usr/share/nginx/html nginx
+![Activación de características de Windows](../assets/img/03cont/con-05.png)
+
+**👉 Paso 3 — Terminal de Windows**
+
+La **Terminal de Windows** es una herramienta «todo en uno» disponible de forma gratuita en la Microsoft Store. Una vez instalada, basta con buscarla en el menú Inicio para ejecutarla.
+ 
+Su principal ventaja es que permite abrir múltiples pestañas con diferentes entornos (PowerShell, CMD, Ubuntu...) en una sola ventana, con personalización completa de colores y fuentes.
+
+![terminal](../assets/img/03cont/con-04.png)
+
+!!! note "Una vez dentro de Ubuntu:  `sudo apt update && sudo apt upgrade -y && apt autoremove`"
+
+??? info "WSL"
+    | Antes de WSL | Con WSL |
+    |---|---|
+    | Máquina virtual pesada y lenta | Integración ligera y rápida con Windows |
+    | Instalar Linux aparte (dual boot) | Un solo comando, sin reiniciar |
+    | Simulador de comandos | Kernel Linux real |
+    | Cambiar de sistema operativo | Cambiar de ventana |
+
+### Conflictos
+**WSL 2** requiere que la característica de **Hyper-V** (el hipervisor nativo de Windows) esté activada obligatoriamente. En el pasado, cuando Hyper-V estaba activo, VirtualBox no podía utilizar su propio motor de virtualización de manera eficiente, lo que causaba que las máquinas virtuales de VirtualBox funcionaran con un rendimiento muy lento o directamente se cerraran con errores (como pantallas azules o fallos al iniciar).
+
+**Solución**:
+
+![terminal](../assets/img/03cont/con-08.png)
+
+- Si la consola te devuelve hypervisorlaunchtype **Auto**, significa que el hipervisor de Windows arranca automáticamente con el sistema (necesario para Docker Desktop, WSL 2 y máquinas virtuales de Hyper-V).
+- Si te devuelve hypervisorlaunchtype **Off**, significa que está desactivado (lo que permite que programas como VirtualBox funcionen sin conflictos de virtualización a nivel de hardware, pero impedirá que Docker y WSL 2 funcionen).
+
+## Docker Desktop
+Aplicación de interfaz gráfica para (Windows, Mac o Linux) que empaqueta todo el motor de Docker junto con herramientas adicionales, permitiéndote gestionar contenedores, imágenes y volúmenes de manera visual y sencilla sin depender exclusivamente de la línea de comandos.
+ 
+**INSTALACIÓN E INTEGRACIÓN CON WSL**
+
+**👉 Paso 1 — Instalar Docker Desktop**
+```powershell
+# PowerShell con winget
+winget install Docker.DockerDesktop
 ```
+**👉 Paso 2 — Integración con WSL**
 
-#### ``3. tmpfs Mounts``
-Almacenamiento temporal en memoria RAM. Los datos no se persisten y desaparecen cuando el contenedor para. Útil para datos sensibles que no deben persistir en disco.
-```bash
-docker run -d --tmpfs /tmp nginx
-```
+1. Iniciar **Docker Desktop** desde el menú de inicio.
+2. Esperar a que termine la configuración inicial.
+3. Ir a: **Settings → Resources → WSL Integration**
+4. Activar: **Ubuntu-24.04**
 
-### **Comandos de volúmenes**
-```bash
-# Comandos más utilizados
-docker volume create mi-volumen # Crear un volumen
-docker volume ls                # Listar volúmenes
-docker volume rm mi-volumen     # Eliminar un volumen
-docker volume prune             # Eliminar todos los volúmenes no utilizados
-# ──────────────────────────────────
-docker volume inspect mi-volumen # Información detallada de un volumen
-# ──────────────────────────────────
-docker run -d -v mi-volumen:/datos mi-app                     # Usar un volumen al crear un contenedor
-docker run -d --mount source=mi-volumen,target=/datos mi-app  # Usar un volumen al crear un contenedor 
-docker run -d -v mi-volumen:/datos:ro mi-app                  # Contenedor de solo lectura
-```
+![Integración WSL](../assets/img/03cont/con-06.png)
 
-## Dockerfile
+**👉 Paso 3 — Comprobar Docker desde Ubuntu**
+
+![terminal](../assets/img/03cont/con-07.png)
+
+## 👉👉👉 
+## Portainer
+**Interfaz gráfica web** para gestionar entornos Docker. Sustituye los comandos de terminal por un panel visual desde el que se pueden administrar **contenedores**, **imágenes**, **redes** y **volúmenes** de forma intuitiva. Es especialmente útil en entornos de desarrollo y aprendizaje, ya que permite ver el estado del sistema en tiempo real sin necesidad de recordar comandos.
+ 
+### **Instalación**
+ 
+La forma más sencilla de instalar Portainer en Docker Desktop es a través de las extensiones. Hay que abrir Docker Desktop, ir a la sección **Extensions** en el menú lateral izquierdo y buscar «Portainer» en el buscador. Al hacer clic en instalar, la aplicación descarga la imagen necesaria y configura el contenedor de gestión automáticamente.
+ 
+Una vez instalado, aparecerá el icono de Portainer en la barra lateral. Al acceder por primera vez, el sistema solicitará crear una contraseña de administrador de al menos 12 caracteres. A continuación, hay que seleccionar el entorno **local** para conectar Portainer al motor de Docker del equipo.
+ 
+### **Funcionalidades principales**
+ 
+Portainer ofrece una interfaz muy intuitiva: desde el panel de control se puede monitorizar el consumo de CPU y RAM de cada contenedor, revisar los logs en tiempo real y acceder directamente a la consola de un servicio con un solo clic. También permite gestionar redes y volúmenes de forma visual, lo que resulta muy práctico frente a la interfaz más limitada de Docker Desktop.
+ 
+Una de sus funciones más potentes son los **Stacks**, que permiten desplegar aplicaciones completas copiando y pegando el contenido de un archivo `docker-compose.yml` directamente en el navegador. Esto simplifica enormemente el despliegue de proyectos complejos sin necesidad de gestionar archivos locales de forma constante.
+
+
+
+
+
+
+
+
 ---
-Un **Dockerfile** es un archivo de texto con una serie de instrucciones que Docker utiliza para construir una imagen de forma automatizada y reproducible. Cada instrucción genera una nueva **capa** en la imagen.
+title: "Docker: VSC"
+weight: 3
+---
+# Ejercicio: Programar en Contenedores Docker con VS Code
 
-**Instrucciones del Dockerfile**
-| Instrucción | Descripción |
-|---|---|
-| `FROM` | **Obligatoria.** Indica la imagen base. Siempre es la primera instrucción. |
-| `RUN` | Ejecuta un comando durante la construcción y guarda el resultado como capa. |
-| `CMD` | Comando por defecto al iniciar el contenedor (puede ser sobreescrito). |
-| `ENTRYPOINT` | Comando principal que se ejecuta siempre al arrancar el contenedor. |
-| `COPY` | Copia archivos/directorios del host a la imagen. |
-| `ADD` | Como COPY pero también soporta URLs y descomprime archivos tar. |
-| `EXPOSE` | Documenta el puerto que escuchará el contenedor (no lo publica). |
-| `ENV` | Declara variables de entorno disponibles en la imagen y el contenedor. |
-| `ARG` | Define variables disponibles solo durante el proceso de construcción. |
-| `WORKDIR` | Establece el directorio de trabajo para RUN, CMD, COPY, ADD, ENTRYPOINT. |
-| `USER` | Define el usuario con el que se ejecutarán las instrucciones posteriores. |
-| `VOLUME` | Declara un punto de montaje de volumen. |
-| `LABEL` | Añade metadatos a la imagen (autor, versión, descripción...). |
-| `MAINTAINER` | (Obsoleto) Indica el mantenedor del Dockerfile. Usar LABEL. |
-| `ONBUILD` | Instrucción que se ejecuta cuando la imagen es usada como base de otra. |
-| `HEALTHCHECK` | Define un comando para comprobar el estado de salud del contenedor. |
-| `STOPSIGNAL` | Define la señal de sistema para detener el contenedor. |
-> 📖 Documentación oficial de referencia: https://docs.docker.com/engine/reference/builder/
+**🎬 Enlace al video original:** [https://youtu.be/9_WkqhLMUZA](https://youtu.be/9_WkqhLMUZA)
 
-**Buenas prácticas en Dockerfile**
-1. **Usar imágenes base oficiales y ligeras** (alpine, slim).
-2. **Ordenar las instrucciones por frecuencia de cambio** (lo que menos cambia, al principio) para aprovechar la caché.
-3. **Minimizar el número de capas** combinando comandos RUN con `&&`.
-4. **No ejecutar como root**: crear un usuario no privilegiado con `USER`.
-5. **Usar `.dockerignore`** para excluir archivos innecesarios (como `node_modules`, `.git`).
-6. **Un proceso por contenedor**: simplifica el escalado y los logs.
-7. **Usar multi-stage builds** para reducir el tamaño de la imagen final.
-8. **Usar variables ARG y ENV** para hacer el Dockerfile configurable.
+Este ejercicio te guiará a través de las tres formas de programar directamente dentro de contenedores Docker utilizando Visual Studio Code para aislar dependencias.
 
-### **Ejemplos**
+---
 
-#### ``Ejemplo 1: Aplicación Python simple``
+## Requisitos Previos
+
+1. **Docker Desktop:** Instalado y en ejecución.
+2. **Visual Studio Code:** Con las extensiones:
+   - `Docker` (de Microsoft)
+   - `Dev Containers` (de Microsoft)
+
+---
+
+## Paso 1: Configuración del Proyecto Base (FastAPI)
+
+Crea una carpeta para tu proyecto y añade los siguientes archivos básicos:
+
+### 1.1. `main.py`
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World desde Docker"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+```
+
+### 1.2. `requirements.txt`
+
+```
+fastapi
+uvicorn
+```
+
+---
+
+## Paso 2: Método Manual (Docker Puro)
+
+Este método consiste en construir la imagen y correr el contenedor manualmente enlazando carpetas.
+
+### 2.1. Crear el `Dockerfile`
+
 ```dockerfile
-# Imagen base oficial de Python
 FROM python:3.11-slim
-# Metadatos
-LABEL maintainer="tu@email.com"
-LABEL version="1.0"
-# Variables de entorno
-ENV APP_HOME=/app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-# Directorio de trabajo
-WORKDIR $APP_HOME
-# Copiar e instalar dependencias primero (aprovecha caché de capas)
+WORKDIR /code
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-# Copiar el código fuente
 COPY . .
-# Exponer el puerto
 EXPOSE 8000
-# Usuario no root (buena práctica de seguridad)
-RUN adduser --disabled-password --gecos '' appuser
-USER appuser
-# Comando por defecto
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+```
+
+### 2.2. Construir la imagen
+
+```powershell
+docker build -t imagen-fastapi .
+```
+
+### 2.3. Ejecutar el contenedor con volumen (sincronización de código)
+
+```powershell
+# PowerShell (Windows)
+docker run -d -p 8000:8000 -v ${PWD}:/code imagen-fastapi
+
+# Linux / Mac
+docker run -d -p 8000:8000 -v $(pwd):/code imagen-fastapi
+```
+
+> **Nota:** El flag `-v` monta tu carpeta local dentro del contenedor, por lo que cualquier cambio en el código se refleja en tiempo real sin reconstruir la imagen.
+
+---
+
+## Paso 3: Conexión mediante la Extensión "Dev Containers"
+
+Este método permite usar todas las ayudas de VS Code (IntelliSense, autocompletado) directamente dentro del contenedor.
+
+1. Con el contenedor del paso anterior en ejecución, haz clic en el botón **azul** (`><`) de la esquina inferior izquierda de VS Code.
+2. Selecciona **"Attach to Running Container"**.
+3. Elige el contenedor `imagen-fastapi` de la lista.
+4. Se abrirá una nueva ventana de VS Code conectada al contenedor. Abre la carpeta `/code`.
+5. **Tip:** Instala la extensión de Python *dentro del contenedor* para tener autocompletado y análisis de errores.
+
+---
+
+## Paso 4: Configuración de Ambiente Nativo (Dev Container Config)
+
+Para proyectos nuevos donde quieres que VS Code configure todo el ambiente automáticamente.
+
+1. Crea una carpeta vacía y ábrela en VS Code.
+2. Presiona `Ctrl + Shift + P` y busca:
+   ```
+   Dev Containers: Add Dev Container Configuration File...
+   ```
+3. Selecciona **Python 3** (versión 3.11 o similar) de la lista de plantillas.
+4. VS Code creará automáticamente una carpeta `.devcontainer/` con un archivo `devcontainer.json`.
+5. Haz clic en el botón azul inferior (`><`) y selecciona **"Reopen in Container"**.
+6. VS Code construirá la imagen y reabrirá el proyecto ya dentro del contenedor.
+
+---
+
+## Resumen de Comandos Útiles
+
+| Comando | Descripción |
+|---|---|
+| `docker ps` | Ver contenedores activos |
+| `docker stop <ID>` | Detener un contenedor |
+| `docker rm <ID>` | Eliminar un contenedor |
+| `docker images` | Ver imágenes creadas |
+| `docker build -t <nombre> .` | Construir una imagen desde un Dockerfile |
+| `docker run -d -p <host>:<cont> <imagen>` | Ejecutar un contenedor en segundo plano |
+
+---
+
+> Tutorial basado en el canal **Píldoras de Programación**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Visual Studio Code usando WSL y Docker
+
+Una vez instalado **WSL**, configurado **Ubuntu** y teniendo **Docker Desktop** integrado con **Visual Studio Code**, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.
+
+Este documento describe cómo utilizar Visual Studio Code dentro de Ubuntu y cómo crear y ejecutar un contenedor sencillo con Python, que servirá como base para proyectos más complejos.
+
+## Extensiones necesarias en Visual Studio Code para trabajar con Docker y WSL
+Instalar [Visual Studio Code](https://code.visualstudio.com/). Se recomienda instalar las siguientes extensiones:
+- Python
+- Jupyter
+- WSL (si usáis WSL2)
+- GitHub Copilot
+
+- **Remote - WSL**  
+Permite abrir y trabajar en el entorno Linux (Ubuntu) desde Visual Studio Code utilizando WSL.
+
+- **Docker**  
+Permite crear, ejecutar y gestionar contenedores e imágenes Docker directamente desde Visual Studio Code.
+
+- **Python**  
+Proporciona soporte para desarrollar, ejecutar y depurar scripts Python dentro del editor.
+
+- **Dev Containers**  
+Permite abrir proyectos directamente dentro de contenedores Docker para trabajar en entornos aislados y reproducibles.
+
+- **YAML**  
+Facilita la edición y validación de archivos de configuración como `docker-compose.yml`.
+
+- **GitHub Pull Requests and Issues**  
+Permite gestionar repositorios, cambios y revisiones de código desde Visual Studio Code.
+
+- **Markdown All in One**  
+Mejora la edición de archivos Markdown con herramientas de formato, tablas y atajos de escritura.
+
+## 1. Ejecutar Visual Studio Code en Ubuntu (WSL)
+
+Trabajar desde Ubuntu dentro de WSL permite utilizar herramientas Linux
+reales, gestionar dependencias de forma más sencilla y ejecutar
+contenedores Docker en un entorno similar a producción.
+
+## 1.1 Abrir Ubuntu (WSL)
+
+``` bash
+wsl
+```
+
+o bien:
+
+``` bash
+ubuntu
+```
+
+------------------------------------------------------------------------
+
+## 1.2 Ir al directorio de trabajo
+
+``` bash
+cd ~
+mkdir proyectos
+cd proyectos
+```
+
+------------------------------------------------------------------------
+
+## 1.3 Abrir Visual Studio Code desde Ubuntu
+
+``` bash
+code .
+```
+
+Esto:
+
+-   Abre Visual Studio Code
+-   Conecta automáticamente con WSL
+-   Permite trabajar como si estuvieras en Linux real
+
+------------------------------------------------------------------------
+
+## 1.4 Comprobar que Docker funciona
+
+``` bash
+docker --version
+docker run hello-world
+```
+
+------------------------------------------------------------------------
+
+## 2. Uso de contenedores Docker desde Visual Studio Code
+
+Los contenedores permiten ejecutar aplicaciones en entornos aislados,
+reproducibles y portables.
+
+------------------------------------------------------------------------
+
+## 2.1 Crear un proyecto Python
+
+``` bash
+mkdir python-docker
+cd python-docker
+```
+
+------------------------------------------------------------------------
+
+## 2.2 Crear un script Python
+
+Archivo:
+
+``` bash
+nano app.py
+```
+
+Contenido:
+
+``` python
+print("Hola desde un contenedor Docker con Python")
+```
+
+------------------------------------------------------------------------
+
+## 2.3 Crear un Dockerfile
+
+Archivo:
+
+``` bash
+nano Dockerfile
+```
+
+Contenido:
+
+``` dockerfile
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY app.py .
+
 CMD ["python", "app.py"]
 ```
-#### ``Ejemplo 2: Servidor web Nginx con contenido personalizado``
-```dockerfile
-FROM nginx:alpine
-# Copiar configuración personalizada
-COPY nginx.conf /etc/nginx/nginx.conf
-# Copiar contenido web
-COPY html/ /usr/share/nginx/html/
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+------------------------------------------------------------------------
+
+## 2.4 Construir la imagen
+
+``` bash
+docker build -t mi-python .
 ```
-#### ``Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)``
-```dockerfile
-FROM alpine:latest
-RUN apk update && apk add python3
-RUN ln -sf python3 /usr/bin/python
-CMD ["python3"]
+
+------------------------------------------------------------------------
+
+## 2.5 Ejecutar el contenedor
+
+``` bash
+docker run mi-python
 ```
-#### ``Ejemplo 4: Multi-stage build (construcción en múltiples etapas)``
+
+Salida esperada:
+
+    Hola desde un contenedor Docker con Python
+
+------------------------------------------------------------------------
+
+## Resumen
+
+Se ha aprendido a:
+
+-   Ejecutar VS Code en Ubuntu
+-   Crear un script Python
+-   Crear un Dockerfile
+-   Construir una imagen
+-   Ejecutar un contenedor
+
+
+---
+title: "Docker: VSC"
+weight: 3
+---
+# Ejercicio: Programar en Contenedores Docker con VS Code
+
+**🎬 Enlace al video original:** [https://youtu.be/9_WkqhLMUZA](https://youtu.be/9_WkqhLMUZA)
+
+Este ejercicio te guiará a través de las tres formas de programar directamente dentro de contenedores Docker utilizando Visual Studio Code para aislar dependencias.
+
+---
+
+## Requisitos Previos
+
+1. **Docker Desktop:** Instalado y en ejecución.
+2. **Visual Studio Code:** Con las extensiones:
+   - `Docker` (de Microsoft)
+   - `Dev Containers` (de Microsoft)
+
+---
+
+## Paso 1: Configuración del Proyecto Base (FastAPI)
+
+Crea una carpeta para tu proyecto y añade los siguientes archivos básicos:
+
+### 1.1. `main.py`
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World desde Docker"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+```
+
+### 1.2. `requirements.txt`
+
+```
+fastapi
+uvicorn
+```
+
+---
+
+## Paso 2: Método Manual (Docker Puro)
+
+Este método consiste en construir la imagen y correr el contenedor manualmente enlazando carpetas.
+
+### 2.1. Crear el `Dockerfile`
+
 ```dockerfile
-# Técnica avanzada para reducir el tamaño de la imagen final
-FROM node:18 AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
+FROM python:3.11-slim
+WORKDIR /code
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-RUN npm run build
-# Etapa de producción (imagen final ligera)
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-#### ``Ejemplo 5: Combinar comandos RUN para reducir capas``
-```dockerfile
-RUN apt-get update && \
-    apt-get install -y curl git && \
-    rm -rf /var/lib/apt/lists/*
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 ```
 
-### **Comandos para construir imágenes**
-```bash
-docker build -t mi-app:1.0 .                          # Construir imagen desde el directorio actual
-docker build -f ruta/al/Dockerfile -t mi-app:1.0 .    # Especificar ubicación del Dockerfile
-docker build --build-arg VERSION=2.0 -t mi-app:2.0 .  # Pasar argumentos de construcción
-docker build --no-cache -t mi-app:1.0 .               # Sin usar caché
-docker history mi-app:1.0                             # Ver las capas generadas
+### 2.2. Construir la imagen
+
+```powershell
+docker build -t imagen-fastapi .
 ```
 
-## Docker Compose
+### 2.3. Ejecutar el contenedor con volumen (sincronización de código)
+
+```powershell
+# PowerShell (Windows)
+docker run -d -p 8000:8000 -v ${PWD}:/code imagen-fastapi
+
+# Linux / Mac
+docker run -d -p 8000:8000 -v $(pwd):/code imagen-fastapi
+```
+
+> **Nota:** El flag `-v` monta tu carpeta local dentro del contenedor, por lo que cualquier cambio en el código se refleja en tiempo real sin reconstruir la imagen.
+
 ---
-**Docker Compose** es una herramienta para **definir y ejecutar aplicaciones Docker multi-contenedor** mediante un archivo YAML (`docker-compose.yml`). Con un solo comando se crean e inician todos los servicios de la aplicación.
 
-**Casos de uso**
-- Aplicaciones con varios servicios (frontend + backend + base de datos + cache...).
-- Entornos de desarrollo reproducibles.
-- Testing e integración continua.
-- Despliegues en entornos sencillos (staging, desarrollo).
-**Buenas prácticas con Docker Compose**
-1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
-2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
-3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.
-4. **Separar configuraciones por entorno**: `docker-compose.yml` (base) + `docker-compose.override.yml` (desarrollo) + `docker-compose.prod.yml` (producción).
-5. **Definir redes explícitas** en lugar de usar la red por defecto.
-6. **Nombrar los volúmenes** para facilitar su gestión e identificación.
+## Paso 3: Conexión mediante la Extensión "Dev Containers"
 
-### **Estructura del archivo**
-```yaml
-# Ejemplo de plantilla definiendo cada variable
-services:                 # Sección principal donde defines tus contenedores
-  nombre-servicio:
-    image: node:18-alpine # Imagen Docker a usar (desde Docker Hub o registro)   
-    build: .              # Directorio para construir tu propia imagen (Dockerfile)
-    container_name: app   # Nombre personalizado para el contenedor
-    ports:                # Mapeo de puertos: "anfitrión:contenedor"
-      - "8080:3000"      
-    volumes:              # Montaje de volúmenes persistentes o carpetas compartidas
-      - ./data:/app/data  # "anfitrión:contenedor"      
-    environment:          # Variables de entorno directamente en el archivo
-      - NODE_ENV=production      
-    env_file:             # Carga variables de entorno desde un archivo externo 
-      - .env      
-    depends_on:           # Orden de inicio: espera a que otros servicios arranquen 
-      - db      
-    networks:             # Redes a las que se debe conectar este servicio
-      - mi-red      
-    restart: always       # Reinicio (no, always, unless-stopped, on-failure)
-    command: npm start    # Sobreescribe el comando por defecto (CMD) de la imagen    
-    entrypoint: /app.sh   # Sobreescribe el punto de entrada principal de la imagen    
-    healthcheck:          # Comando para verificar si el servicio está sano
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
+Este método permite usar todas las ayudas de VS Code (IntelliSense, autocompletado) directamente dentro del contenedor.
 
-volumes:                  # Declarar volúmenes con nombre (persistencia)
-  nombre-volumen:
+1. Con el contenedor del paso anterior en ejecución, haz clic en el botón **azul** (`><`) de la esquina inferior izquierda de VS Code.
+2. Selecciona **"Attach to Running Container"**.
+3. Elige el contenedor `imagen-fastapi` de la lista.
+4. Se abrirá una nueva ventana de VS Code conectada al contenedor. Abre la carpeta `/code`.
+5. **Tip:** Instala la extensión de Python *dentro del contenedor* para tener autocompletado y análisis de errores.
 
-networks:                 # Definir redes personalizadas (aislamiento de red)
-  nombre-red:
-```
-### **Ejemplos**
-
-#### ``Aplicación web + Base de datos (con un Dockerfile)``
-```yaml
-services:
-  web:
-    build: .                # Construye desde el Dockerfile del directorio actual
-    image: mi-app:latest
-    container_name: mi-web
-    ports:
-      - "8080:80"           # host:contenedor
-    environment:
-      - DATABASE_URL=postgres://user:pass@db:5432/midb
-      - DEBUG=false
-    volumes:
-      - ./static:/app/static
-    depends_on:
-      - db
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  db:
-    image: postgres:15-alpine
-    container_name: mi-db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: midb
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  cache:
-    image: redis:7-alpine
-    container_name: mi-cache
-    networks:
-      - app-network
-
-volumes:
-  postgres-data:          # Volumen persistente para la base de datos
-
-networks:
-  app-network:
-    driver: bridge
-```
-#### ``Aplicación web con Nginx + PHP-FPM + MySQL``
-```yaml
-services:
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./src:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - php
-
-  php:
-    image: php:8.2-fpm
-    volumes:
-      - ./src:/var/www/html
-
-  mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: app
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-volumes:
-  mysql-data:
-```
-
-### **Comandos de Docker Compose**
-```bash
-# Gestión de Ciclo de Vida
-docker compose up -d              # Iniciar todos los servicios (en segundo plano)
-docker compose up -d --build      # Iniciar y reconstruir imágenes si hay cambios
-docker compose down               # Detener y eliminar contenedores y redes
-docker compose down -v            # también elimina volúmenes
-docker compose start              # Inicia servicios que ya estaban creados pero parados
-docker compose restart            # Reinicia los servicios
-docker compose stop               # Detiene los servicios sin eliminarlos
-# Construcción y Preparación
-docker compose build              # Construye o reconstruye las imágenes (si cambias Dockerfile)
-docker compose pull               # Descarga las imágenes de los servicios desde el registro
-docker compose create             # Crea los contenedores pero no los inicia
-# Mantenimiento y Visualización
-docker compose ps                 # Lista el estado de los contenedores del proyecto
-docker compose logs -f            # Muestra los logs de los servicios (en tiempo real)
-docker compose config             # Valida y muestra la configuración final del archivo YAML
-docker compose top                # Muestra los procesos que se ejecutan en cada contenedor
-# Escalado y Ejecución
-docker compose exec servicio bash # Entra a la terminal de un contenedor en ejecución
-docker compose run servicio       # Ejecuta un comando puntual en un servicio nuevo
-docker compose scale servicio=3   # Escala el número de instancias/réplicas de un servicio
-```
-
-## Resumen de comandos esenciales
 ---
-```bash
-# ── IMÁGENES ──────────────────────────────────────
-docker pull nginx:alpine            # Descargar imagen
-docker images                       # Listar imágenes
-docker rmi nginx:alpine             # Eliminar imagen
-docker build -t mi-app .            # Construir imagen
 
-# ── CONTENEDORES ──────────────────────────────────
-docker run -d -p 8080:80 --name web nginx   # Crear y ejecutar
-docker ps                           # Listar activos
-docker ps -a                        # Listar todos
-docker stop web                     # Parar
-docker start web                    # Iniciar
-docker rm web                       # Eliminar
-docker exec -it web bash            # Terminal interactivo
-docker logs -f web                  # Ver logs
+## Paso 4: Configuración de Ambiente Nativo (Dev Container Config)
 
-# ── REDES ─────────────────────────────────────────
-docker network ls                   # Listar redes
-docker network create mi-red        # Crear red
-docker network inspect mi-red       # Inspeccionar
-docker network connect mi-red web   # Conectar contenedor
+Para proyectos nuevos donde quieres que VS Code configure todo el ambiente automáticamente.
 
-# ── VOLÚMENES ─────────────────────────────────────
-docker volume create mis-datos      # Crear volumen
-docker volume ls                    # Listar volúmenes
-docker volume inspect mis-datos     # Inspeccionar
-docker run -v mis-datos:/data nginx # Usar volumen
+1. Crea una carpeta vacía y ábrela en VS Code.
+2. Presiona `Ctrl + Shift + P` y busca:
+   ```
+   Dev Containers: Add Dev Container Configuration File...
+   ```
+3. Selecciona **Python 3** (versión 3.11 o similar) de la lista de plantillas.
+4. VS Code creará automáticamente una carpeta `.devcontainer/` con un archivo `devcontainer.json`.
+5. Haz clic en el botón azul inferior (`><`) y selecciona **"Reopen in Container"**.
+6. VS Code construirá la imagen y reabrirá el proyecto ya dentro del contenedor.
 
-# ── DOCKER COMPOSE ────────────────────────────────
-docker compose up -d                # Iniciar servicios
-docker compose down                 # Parar y eliminar
-docker compose ps                   # Ver estado
-docker compose logs -f              # Ver logs
-docker compose exec web bash        # Terminal en servicio
+---
+
+## Resumen de Comandos Útiles
+
+| Comando | Descripción |
+|---|---|
+| `docker ps` | Ver contenedores activos |
+| `docker stop <ID>` | Detener un contenedor |
+| `docker rm <ID>` | Eliminar un contenedor |
+| `docker images` | Ver imágenes creadas |
+| `docker build -t <nombre> .` | Construir una imagen desde un Dockerfile |
+| `docker run -d -p <host>:<cont> <imagen>` | Ejecutar un contenedor en segundo plano |
+
+---
+
+> Tutorial basado en el canal **Píldoras de Programación**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Visual Studio Code usando WSL y Docker
+
+Una vez instalado **WSL**, configurado **Ubuntu** y teniendo **Docker Desktop** integrado con **Visual Studio Code**, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.
+
+Este documento describe cómo utilizar Visual Studio Code dentro de Ubuntu y cómo crear y ejecutar un contenedor sencillo con Python, que servirá como base para proyectos más complejos.
+
+## Extensiones necesarias en Visual Studio Code para trabajar con Docker y WSL
+Instalar [Visual Studio Code](https://code.visualstudio.com/). Se recomienda instalar las siguientes extensiones:
+- Python
+- Jupyter
+- WSL (si usáis WSL2)
+- GitHub Copilot
+
+- **Remote - WSL**  
+Permite abrir y trabajar en el entorno Linux (Ubuntu) desde Visual Studio Code utilizando WSL.
+
+- **Docker**  
+Permite crear, ejecutar y gestionar contenedores e imágenes Docker directamente desde Visual Studio Code.
+
+- **Python**  
+Proporciona soporte para desarrollar, ejecutar y depurar scripts Python dentro del editor.
+
+- **Dev Containers**  
+Permite abrir proyectos directamente dentro de contenedores Docker para trabajar en entornos aislados y reproducibles.
+
+- **YAML**  
+Facilita la edición y validación de archivos de configuración como `docker-compose.yml`.
+
+- **GitHub Pull Requests and Issues**  
+Permite gestionar repositorios, cambios y revisiones de código desde Visual Studio Code.
+
+- **Markdown All in One**  
+Mejora la edición de archivos Markdown con herramientas de formato, tablas y atajos de escritura.
+
+# 1. Ejecutar Visual Studio Code en Ubuntu (WSL)
+
+Trabajar desde Ubuntu dentro de WSL permite utilizar herramientas Linux
+reales, gestionar dependencias de forma más sencilla y ejecutar
+contenedores Docker en un entorno similar a producción.
+
+## 1.1 Abrir Ubuntu (WSL)
+
+``` bash
+wsl
 ```
 
-## Referencias
----
-> 📚 **Documentación oficial:** https://docs.docker.com  
-> 🐳 **Docker Hub:** https://hub.docker.com  
-> 🔧 **Referencia Dockerfile:** https://docs.docker.com/engine/reference/builder/  
-> ⚙️ **Referencia Compose:** https://docs.docker.com/compose/compose-file/
+o bien:
+
+``` bash
+ubuntu
+```
+
+------------------------------------------------------------------------
+
+## 1.2 Ir al directorio de trabajo
+
+``` bash
+cd ~
+mkdir proyectos
+cd proyectos
+```
+
+------------------------------------------------------------------------
+
+## 1.3 Abrir Visual Studio Code desde Ubuntu
+
+``` bash
+code .
+```
+
+Esto:
+
+-   Abre Visual Studio Code
+-   Conecta automáticamente con WSL
+-   Permite trabajar como si estuvieras en Linux real
+
+------------------------------------------------------------------------
+
+## 1.4 Comprobar que Docker funciona
+
+``` bash
+docker --version
+docker run hello-world
+```
+
+------------------------------------------------------------------------
+
+# 2. Uso de contenedores Docker desde Visual Studio Code
+
+Los contenedores permiten ejecutar aplicaciones en entornos aislados,
+reproducibles y portables.
+
+------------------------------------------------------------------------
+
+## 2.1 Crear un proyecto Python
+
+``` bash
+mkdir python-docker
+cd python-docker
+```
+
+------------------------------------------------------------------------
+
+## 2.2 Crear un script Python
+
+Archivo:
+
+``` bash
+nano app.py
+```
+
+Contenido:
+
+``` python
+print("Hola desde un contenedor Docker con Python")
+```
+
+------------------------------------------------------------------------
+
+## 2.3 Crear un Dockerfile
+
+Archivo:
+
+``` bash
+nano Dockerfile
+```
+
+Contenido:
+
+``` dockerfile
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY app.py .
+
+CMD ["python", "app.py"]
+```
+
+------------------------------------------------------------------------
+
+## 2.4 Construir la imagen
+
+``` bash
+docker build -t mi-python .
+```
+
+------------------------------------------------------------------------
+
+## 2.5 Ejecutar el contenedor
+
+``` bash
+docker run mi-python
+```
+
+Salida esperada:
+
+    Hola desde un contenedor Docker con Python
+
+------------------------------------------------------------------------
+
+# Resumen
+
+Se ha aprendido a:
+
+-   Ejecutar VS Code en Ubuntu
+-   Crear un script Python
+-   Crear un Dockerfile
+-   Construir una imagen
+-   Ejecutar un contenedor
