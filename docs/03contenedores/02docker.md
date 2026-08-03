@@ -92,21 +92,44 @@ winget install Docker.DockerDesktop
 
 ![terminal](../assets/img/03cont/con-07.png)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 👉👉👉 
 ## Portainer
-**Interfaz gráfica web** para gestionar entornos Docker. Sustituye los comandos de terminal por un panel visual desde el que se pueden administrar **contenedores**, **imágenes**, **redes** y **volúmenes** de forma intuitiva. Es especialmente útil en entornos de desarrollo y aprendizaje, ya que permite ver el estado del sistema en tiempo real sin necesidad de recordar comandos.
- 
-### **Instalación**
- 
+Sustituye los comandos de terminal por un panel visual desde el que se pueden administrar **contenedores**, **imágenes**, **redes** y **volúmenes** de forma intuitiva. Es especialmente útil en entornos de desarrollo y aprendizaje, ya que permite ver el estado del sistema en tiempo real sin necesidad de recordar comandos.
+
+- 👉 **Interfaz muy intuitiv**a: desde el panel de control se puede monitorizar el consumo de CPU y RAM de cada contenedor, revisar los logs en tiempo real y acceder directamente a la consola de un servicio con un solo clic. También permite gestionar redes y volúmenes de forma visual, lo que resulta muy práctico frente a la interfaz más limitada de Docker Desktop.
+- 👉 Una de sus funciones más potentes son los **Stacks**, que permiten desplegar aplicaciones completas copiando y pegando el contenido de un archivo **`docker-compose.yml`** directamente en el navegador. Esto simplifica enormemente el despliegue de proyectos complejos sin necesidad de gestionar archivos locales de forma constante.
+
+![terminal](../assets/img/03cont/con-14.png)
+
+**INSTALACIÓN**
+
 La forma más sencilla de instalar Portainer en Docker Desktop es a través de las extensiones. Hay que abrir Docker Desktop, ir a la sección **Extensions** en el menú lateral izquierdo y buscar «Portainer» en el buscador. Al hacer clic en instalar, la aplicación descarga la imagen necesaria y configura el contenedor de gestión automáticamente.
+
+||||
+||||
+|![terminal](../assets/img/03cont/con-11.png)|![terminal](../assets/img/03cont/con-12.png)|![terminal](../assets/img/03cont/con-13.png)|
  
-Una vez instalado, aparecerá el icono de Portainer en la barra lateral. Al acceder por primera vez, el sistema solicitará crear una contraseña de administrador de al menos 12 caracteres. A continuación, hay que seleccionar el entorno **local** para conectar Portainer al motor de Docker del equipo.
  
 ### **Funcionalidades principales**
  
-Portainer ofrece una interfaz muy intuitiva: desde el panel de control se puede monitorizar el consumo de CPU y RAM de cada contenedor, revisar los logs en tiempo real y acceder directamente a la consola de un servicio con un solo clic. También permite gestionar redes y volúmenes de forma visual, lo que resulta muy práctico frente a la interfaz más limitada de Docker Desktop.
- 
-Una de sus funciones más potentes son los **Stacks**, que permiten desplegar aplicaciones completas copiando y pegando el contenido de un archivo `docker-compose.yml` directamente en el navegador. Esto simplifica enormemente el despliegue de proyectos complejos sin necesidad de gestionar archivos locales de forma constante.
 
 
 
@@ -115,11 +138,8 @@ Una de sus funciones más potentes son los **Stacks**, que permiten desplegar ap
 
 
 
----
-title: "Docker: VSC"
-weight: 3
----
-# Ejercicio: Programar en Contenedores Docker con VS Code
+
+## Ejercicio: Programar en Contenedores Docker con VS Code
 
 **🎬 Enlace al video original:** [https://youtu.be/9_WkqhLMUZA](https://youtu.be/9_WkqhLMUZA)
 

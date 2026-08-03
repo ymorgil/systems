@@ -9,7 +9,7 @@ Durante el curso se van a trabajar con diferentes máquinas virtuales estas debe
       wd11 - Windows Clente 11
       ws25 - Windows Server 2025
 
-![Configuración](../assets/img/vir/con-01.png)
+![Configuración](../assets/img/01cur/con-01.png)
 
 ## 💻 Configuraciones
 Las configuraciones de las máquinas dependen de los recursos que tenga el equipo real, pero para un correcto funcionamiento y evitar problema se solicitan los siguientes requisitos **mínimos**:
@@ -22,11 +22,11 @@ Las configuraciones de las máquinas dependen de los recursos que tenga el equip
 
 > NOTA: Las máquinas en los equipos de clase se han de guardar en la unidad D, cada cierto tiempo se hace limpieza de la unidad C y podrían ser eliminadas.
 
-![Configuración](../assets/img/vir/con-02.png){ width="400" }
+![Configuración](../assets/img/01cur/con-02.png){ width="400" }
  
 |  |  |
 |---|---|
-|![Configuración](../assets/img/vir/con-03.png) | ![Configuración](../assets/img/vir/con-04.png)|
+|![Configuración](../assets/img/01cur/con-03.png) | ![Configuración](../assets/img/01cur/con-04.png)|
 
 ## 💿WINDOWS
 Las configuraciones básicas se basan en hacer los siguientes pasos en todas las máquinas, como ejemplo se van a realizar para `Windows 11 PRO`:
@@ -36,21 +36,21 @@ Para actualizar el sistema iremos a la pestaña de configuración y en la secci�
 
 Una vez actualizado comprobaremos que nuestra versión, obtenida con las teclas ``win + R`` y escribiendo ``winver`` en la pestaña de ejecutar, coincide con la última del historial de versiones de nuestro sistemas el cual lo obtendremos de la información de la [web oficial](https://learn.microsoft.com/es-es/windows/release-health/){target="_blank"}
 
-![Windows](../assets/img/vir/win-01.png)
+![Windows](../assets/img/01cur/win-01.png)
 
 |  |  |
 |---|---|
-|![Windows](../assets/img/vir/win-02.png) |  ![Windows](../assets/img/vir/win-03.png)|
+|![Windows](../assets/img/01cur/win-02.png) |  ![Windows](../assets/img/01cur/win-03.png)|
 
 ### 2. Actualizar Guest Additions
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. Para ello vamos a la unidad de CD desde el sistema operativo y ejecutamos el programa y seguimos los pasos del asistente de instalación:
 
-![Windows](../assets/img/vir/win-04.png){ width="400" }
+![Windows](../assets/img/01cur/win-04.png){ width="400" }
 
 |  |  |  |
 |---|---|---|
-|![Windows](../assets/img/vir/win-05.png) | ![Windows](../assets/img/vir/win-06.png)| ![Windows](../assets/img/vir/win-07.png)|
-|![Windows](../assets/img/vir/win-08.png) | ![Windows](../assets/img/vir/win-09.png)| ![Windows](../assets/img/vir/win-10.png)|
+|![Windows](../assets/img/01cur/win-05.png) | ![Windows](../assets/img/01cur/win-06.png)| ![Windows](../assets/img/01cur/win-07.png)|
+|![Windows](../assets/img/01cur/win-08.png) | ![Windows](../assets/img/01cur/win-09.png)| ![Windows](../assets/img/01cur/win-10.png)|
 
 ### 3. Prompt en color
 Para cambiar el color del **prompt** en PowerShell tenemos que:
@@ -62,14 +62,14 @@ Para cambiar el color del **prompt** en PowerShell tenemos que:
 
 |  |  |  |
 |---|---|---|
-|![Windows](../assets/img/vir/win-11.png) | ![Windows](../assets/img/vir/win-12.png)| ![Windows](../assets/img/vir/win-13.png)|
+|![Windows](../assets/img/01cur/win-11.png) | ![Windows](../assets/img/01cur/win-12.png)| ![Windows](../assets/img/01cur/win-13.png)|
 
 ###  4. Alias y atajos
 Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerShell en mi caso es `C:\Users\yeray\AppData\Roaming\Microsoft\Windows\StartMenu\Programs\Windows PowerShell`. A continuación, botón secundario **propiedades**, pestaña **Acceso directo** y tecla de método abreviado y pulsamos las teclas que queremos que pasen hacer los atajos para abrir dicho programa. En este caso se ha configurado para que el programa se ejecute como administrador ya que será el que frecuentemente usemos.
 
 |  |  |  |
 |---|---|---|
-|![Windows](../assets/img/vir/win-14.png) | ![Windows](../assets/img/vir/win-15.png)|![Windows](../assets/img/vir/win-16.png) |
+|![Windows](../assets/img/01cur/win-14.png) | ![Windows](../assets/img/01cur/win-15.png)|![Windows](../assets/img/01cur/win-16.png) |
 
 ## 📀LINUX
 Los siguientes pasos de configuraciones básicas se han de hacer en todas las máquinas base de Linux en este caso se muestra un ejemplo en Ubuntu server que al no tener interfaz gráfica puede presenta mayores dificultades.
@@ -77,16 +77,16 @@ Los siguientes pasos de configuraciones básicas se han de hacer en todas las m�
 ### 1. Actualizar sistemas
 Para actualizar debemos de ejecutar el siguiente comando en modo superusuario: `sudo apt update && apt upgrade -y && apt autoremove` a veces la propia terminal nos solicitara algunos comandos más en sus mensajes, deberemos realizarlo hasta que al final de la captura se muestran **cuatro 0** que indican que no faltan paquetes por actualizar ni instalar.
 
-![Ubuntu](../assets/img/vir/ubu-01.png)
+![Ubuntu](../assets/img/01cur/ubu-01.png)
 
 ### 2. Actualizar Guest Additions
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de las Guest Additions. A continuación, creamos una carpeta (guest) montamos los directorios del CD y comprobamos su contenido, en él nos encontramos varios programas ejecutables usamos el comando sh para ejecutar las Guestt Additions de Linux y se instalen. A veces nos muestra un error porque necesitamos el paquete bzip2 para poder descomprimir el contenido de las Guest Additions, lo instalamos con `apt install bzip2` y después ejecutamos el script.
 
 |  |  |
 |---|---|
-|![Ubuntu](../assets/img/vir/ubu-02.png) |  ![Ubuntu](../assets/img/vir/ubu-03.png)|
+|![Ubuntu](../assets/img/01cur/ubu-02.png) |  ![Ubuntu](../assets/img/01cur/ubu-03.png)|
 
-![Ubuntu](../assets/img/vir/ubu-04.png)
+![Ubuntu](../assets/img/01cur/ubu-04.png)
 
 ### 3. Color del prompt/directorios
 Para cambiar el color del **prompt** debemos de seguir los siguientes pasos por **cada usuario** del sistema (por defecto hay 2), en este manual se hará solo para el usuario administrador (**root**):
@@ -97,11 +97,11 @@ Para cambiar el color del **prompt** debemos de seguir los siguientes pasos por 
       2. Cambiar el valor de la variable PS1 que tendrá que cambiarse por lo siguiente: `PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '` (El 36 es el cambio)
 3. Comprobamos reiniciando sesión en los usuario y mostrando que sale el prompt en los colores configurados.
 
-![Ubuntu](../assets/img/vir/ubu-05.png)
+![Ubuntu](../assets/img/01cur/ubu-05.png)
 
-![Ubuntu](../assets/img/vir/ubu-06.png){ width="500" }
+![Ubuntu](../assets/img/01cur/ubu-06.png){ width="500" }
 
-![Ubuntu](../assets/img/vir/ubu-07.png)
+![Ubuntu](../assets/img/01cur/ubu-07.png)
 
 ---------
 Para cambiar el color de los **directorios** modificamos la variable ``$LS_COLORS`` (archivo que contiene los colores predeterminados que vienen preconfigurados en el sistema), la modificación consistira en cambiar el código de los directorios ya que el azul como se muestra en la captura es un color con dificultades de legibilidad en fondo negro. Pasos:
@@ -110,16 +110,16 @@ Para cambiar el color de los **directorios** modificamos la variable ``$LS_COLOR
 2. Editar archivo con el nano y buscar donde esta el color de los directorios (variable **dir**) y cambiar de **34(azul)** a **32(Verde)** como se muestra en la captura.
 3. Reiniciamos la sesión del usuario y comprobamos los cambios.
 
-![Ubuntu](../assets/img/vir/ubu-08.png)
+![Ubuntu](../assets/img/01cur/ubu-08.png)
 
-![Ubuntu](../assets/img/vir/ubu-09.png){ width="500" }
+![Ubuntu](../assets/img/01cur/ubu-09.png){ width="500" }
 
-![Ubuntu](../assets/img/vir/ubu-10.png)
+![Ubuntu](../assets/img/01cur/ubu-10.png)
 
 ### 4. Alias y atajos
 En este paso crearemos un alias que nos va a facilitar el trabajo durante el resto del curso y será el alias de **act**, para ello en el archivo **.bashrc**, debemos añadir una línea por cada alias. Una vez abierto con `nano .bashrc` podemos editar, buscamos la sección de los alias y añadimos los alias que necesitemos.
 
-![Ubuntu](../assets/img/vir/ubu-11.png)
+![Ubuntu](../assets/img/01cur/ubu-11.png)
 
 ## ☢️ Preguntas frecuentes (FAQ)
 
@@ -130,7 +130,7 @@ Una vez en la consola escribir el comando ``start ms-cxh:localonly`` y se nos mo
 
 | | |
 |---|---|
-|![Preguntas](../assets/img/vir/faq-01.png) | ![a](../assets/img/vir/faq-02.png)|
+|![Preguntas](../assets/img/01cur/faq-01.png) | ![a](../assets/img/01cur/faq-02.png)|
 
 ### - Pantallazo negro en Ubuntu
 

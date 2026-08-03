@@ -1,5 +1,5 @@
 # **💠 PAUTAS DEL CURSO 2026/2027**
-![Pautas](../assets/img/cur/pau-01.jpg)
+![Pautas](../assets/img/01cur/pau-01.jpg)
 
 Durante el desarrollo del módulo se tendrán en cuenta los siguientes apartados para la calificación del módulo y de las prácticas, algunos de ellos pueden anular la nota de las prácticas a un 0 y otros pueden afectar directamente a la calificación, quitando medio punto por cada apartado incumplido.
 

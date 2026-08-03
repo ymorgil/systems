@@ -1,6 +1,6 @@
-# 🛢️ Contenedores
+# 🐳 Docker
 
-## ¿Qué es un contenedor?
+## Contenedores
 No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
 
 Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de **"en mi máquina funciona"**.
@@ -39,7 +39,7 @@ A diferencia de las máquinas virtuales, los contenedores **no incluyen un siste
     | Aislamiento | Proceso/aplicación | Sistema completo |
     | Eficiencia de recursos | Alta | Menor |
 
-## 🐳 Docker
+## Docker
 Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft.
 
 ![Docker I](../assets/img/03cont/con-09.jpg)
@@ -51,17 +51,14 @@ Docker es la **plataforma de contenedores más popular del mundo**. Facilita la 
   - **CLI de Docker:** interfaz de línea de comandos para interactuar con Docker (docker run, docker build, docker ps, etc.).
   - **API REST de Docker:** interfaz programática para comunicarse con el daemon, utilizada tanto por la CLI como por aplicaciones externas.
 
-### Herramientas
-
-| Herramienta | Descripción |
-|---|---|
-| **Docker Desktop** | Aplicación de escritorio para Mac, Windows y Linux con GUI integrada |
-| **Docker Engine** | Motor de ejecución de contenedores (daemon + CLI + API) |
-| **Docker Compose** | Define y ejecuta aplicaciones multi-contenedor con un archivo **YAML** |
-| **Docker Hub** | Registro público y privado de imágenes de contenedores |
-| **Docker Swarm** | Orquestación nativa de clústeres de Docker |
-| **Docker CLI** | Interfaz de línea de comandos |
-| **Docker Volume** | Gestión de almacenamiento persistente |
+!!! info "Herramientas"
+    - **Docker Desktop**: Aplicación de escritorio para Mac, Windows y Linux con GUI integrada
+    - **Docker Engine**: Motor de ejecución de contenedores (daemon + CLI + API)
+    - **Docker Compose**: Define y ejecuta aplicaciones multi-contenedor con un archivo **YAML**
+    - **Docker Hub**: Registro público y privado de imágenes de contenedores
+    - **Docker Swarm**: Orquestación nativa de clústeres de Docker
+    - **Docker CLI**: Interfaz de línea de comandos
+    - **Docker Volume**: Gestión de almacenamiento persistente
 
 **COMANDOS generales esenciales**
 
@@ -73,7 +70,7 @@ docker login                # Inicia sesión en Docker Hub
 docker logout               # Cierra sesión
 ```
 
-## Imágenes
+## 1. Imágenes
 Una imagen Docker es un **paquete inmutable de solo lectura** que contiene todo lo necesario para ejecutar una aplicación: código, ejecutables, librerías, configuraciones, variables de entorno y el sistema de archivos que usarán los contenedores.
 
 !!! tip "Conceptos clave"
@@ -83,12 +80,14 @@ Una imagen Docker es un **paquete inmutable de solo lectura** que contiene todo 
     - **Imagen base:** Toda imagen parte de otra imagen (`FROM`). Las imágenes base suelen ser distribuciones Linux minimalistas como Alpine (~5 MB), Debian slim, o imágenes oficiales de servicios.
     - De la misma imagen puedes lanzar múltiples contenedores simultáneamente.
 
-### [Docker-Hub](https://hub.docker.com/) 
+### [Docker-Hub](https://hub.docker.com/){target="_blank"} 
 Repositorio de imágenes donde puedes registrarte y subir tus propias imágenes, además contiene:
+
+![Docker I](../assets/img/03cont/con-10.png)
 
 - Imágenes **oficiales** (mantenidas por Docker y los propios proyectos): nginx, postgres, python, node, ubuntu...
 - Imágenes de **la comunidad**: `usuario/imagen`
-- Repositorios **privados** (con plan de suscripción)
+- Repositorios **públicos** o **privados** (con plan de suscripción)
 
 > Otros registros populares: GitHub Container Registry, Google Container Registry, Amazon ECR, Azure Container Registry...
 
@@ -118,17 +117,16 @@ docker image tag mi-app:1.0 mi-usuario/mi-app:1.0   # Etiquetar una imagen
 docker image push mi-usuario/mi-app:1.0             # Subir una imagen a Docker Hub
 docker push mi-usuario/mi-app:1.0                   # equivalente
 ```
-## ✏️✏️✏️✏️
-## Contenedores
----
-Un contenedor es una **instancia ejecutable de una imagen**. Se crea a partir de ella y representa el proceso en ejecución de la aplicación con su entorno aislado.
-**Características:**
+
+## 2. Contenedores
+Un contenedor es una **instancia ejecutable de una imagen**. Se crea a partir de ella y representa el proceso en ejecución de la aplicación con su entorno aislado. **Características:**
+
 - Puede tener **más de un proceso** en ejecución, aunque la buena práctica es **un proceso por contenedor**.
 - Está **aislado** de otros contenedores y del host (red, sistema de archivos, procesos).
-- Cuando se elimina un contenedor, **se pierden los datos** que no estén en un volumen persistente.
+- Cuando se elimina un contenedor, **se pierden los datos** que no estén en un **volumen persistente**.
 - Se puede conectar a redes, adjuntar volúmenes y publicar puertos.
 
-### **Comandos de contenedores**
+**COMANDOS de contenedores**
 ```bash
 # Comandos más utilizados
 docker container run nginx          # Crear y ejecutar un contenedor
@@ -172,59 +170,56 @@ docker cp ./index.html mi-nginx:/usr/share/nginx/html/          # equivalente
 docker container inspect`                                       # Información detallada del contenedor
 ```
 
-#### `Comando docker ps`
+!!! info "Columnas que muestra `docker ps -a`"
+    - `CONTAINER ID`: Identificador único del contenedor
+    - `IMAGE`: Imagen desde la que se creó
+    - `COMMAND`: Proceso que se está ejecutando dentro
+    - `CREATED`: Tiempo desde que se creó
+    - `STATUS`: Estado actual y tiempo en ese estado
+    - `PORTS`: Mapeo de puertos
+    - `NAMES`: Nombre del contenedor (aleatorio si no se especifica)
 
-Columnas que muestra `docker ps -a`:
-| Columna | Descripción |
-|---|---|
-| `CONTAINER ID` | Identificador único del contenedor |
-| `IMAGE` | Imagen desde la que se creó |
-| `COMMAND` | Proceso que se está ejecutando dentro |
-| `CREATED` | Tiempo desde que se creó |
-| `STATUS` | Estado actual y tiempo en ese estado |
-| `PORTS` | Mapeo de puertos |
-| `NAMES` | Nombre del contenedor (aleatorio si no se especifica) |
+## 3. Redes
+Las redes Docker permiten definir **cómo se comunican los contenedores** entre sí y con el exterior. El componente principal que gestiona la conectividad es **libnetwork** y existen diferentes tipos de redes: (6)
 
-## Redes
----
-Las redes Docker permiten definir **cómo se comunican los contenedores** entre sí y con el exterior. El componente principal que gestiona la conectividad es **libnetwork**.
 
-### **Tipos de redes en Docker**
+!!! bug "1. Bridge (por defecto)-Red puente"
+    Red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.
 
-#### ``1. Bridge (por defecto)``
-Red puente, es la red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.
-```bash
-docker run -d --name web --network bridge -p 8080:80 nginx
-```
+`docker run -d --name web --network bridge -p 8080:80 nginx`
 
-#### ``2. Host``
-Elimina el aislamiento de red entre el contenedor y el host. El contenedor comparte directamente la interfaz de red del sistema, usando la misma IP. Mejor rendimiento pero mayor riesgo de conflicto de puertos.
-```bash
-docker run -d --network host nginx
-```
+!!! bug "2. Host"
+    Elimina el aislamiento de red entre el contenedor y el host. El contenedor comparte directamente la interfaz de red del sistema, usando la misma IP. Mejor rendimiento pero mayor riesgo de conflicto de puertos.
 
-#### ``3. Overlay``
-Utilizada para contenedores distribuidos en **diferentes hosts**. Es la red usada en entornos de **Docker Swarm** para comunicar servicios entre nodos.
+`docker run -d --network host nginx`
 
-#### ``4. Macvlan``
-Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como dispositivos físicos en la red. Útil para aplicaciones que necesitan estar directamente en la red LAN.
+!!! bug "3. Overlay"
+    Utilizada para contenedores distribuidos en **diferentes hosts**. Es la red usada en entornos de **Docker Swarm** para comunicar servicios entre nodos.
 
-#### ``5. None``
-Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.
+!!! bug "4. Macvlan"
+    Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como dispositivos físicos en la red. Útil para aplicaciones que necesitan estar directamente en la red LAN.
 
-#### ``6. Redes personalizadas (recomendado)``
-Las redes bridge personalizadas son **la práctica recomendada** ya que ofrecen:
-- **Resolución DNS automática** entre contenedores por nombre.
-- Mejor aislamiento que la red bridge por defecto.
-- Mayor control sobre la subnet y el gateway.
-```bash
-docker network create mi-red                                        # Crear una red personalizada
-docker network create --driver bridge --subnet 172.20.0.0/16 mi-red # Crear red con subnet específica
-docker run -d --name app --network mi-red mi-app  # Conectar contenedores a mi-red personalizada
-docker run -d --name db --network mi-red postgres # Ahora 'app' puede llegar a 'db' usando su nombre
-```
+!!! bug "5. None"
+    Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.
 
-### **Comandos de redes**
+!!! bug "6. Redes personalizadas (recomendado)"
+    Las redes bridge personalizadas son **la práctica recomendada** ya que ofrecen:
+
+    - **Resolución DNS automática** entre contenedores por nombre.
+    - Mejor aislamiento que la red bridge por defecto.
+    - Mayor control sobre la subnet y el gateway.
+  
+    ```bash
+    docker network create mi-red  # Crear una red personalizada
+    # Crear red con subnet específica
+    docker network create --driver bridge --subnet 172.20.0.0/16 mi-red 
+    # Conectar contenedores a mi-red personalizada
+    docker run -d --name app --network mi-red mi-app  
+    # Ahora 'app' puede llegar a 'db' usando su nombre
+    docker run -d --name db --network mi-red postgres 
+    ```
+
+**COMANDOS de redes**
 ```bash
 # Comandos más utilizados
 docker network create mi-red                      # Crear una red
@@ -238,27 +233,24 @@ docker network inspect bridge   # red por defecto
 # ──────────────────────────────────
 docker network connect mi-red mi-contenedor     # Conectar un contenedor a una red (en caliente)
 docker network disconnect mi-red mi-contenedor  # Desconectar un contenedor de una red
-```
-
-### **Publicación de puertos**
-
-```bash
-# Mapear puerto del host al contenedor
+# ──────────────────────────────────
+# Publicación y mapeo de puertos del host al contenedor
 docker run -p 8080:80 nginx           # host:contenedor
 docker run -p 127.0.0.1:8080:80 nginx # solo desde localhost
 docker run -P nginx                   # mapeo automático de todos los puertos expuestos
 ```
 
-## Volúmenes
----
+## 4. Volúmenes
 Un volumen Docker permite **conservar los datos más allá del ciclo de vida de un contenedor**. Sin volúmenes, todos los datos generados dentro de un contenedor se pierden cuando este se elimina.
 
 **Casos de uso:**
+
 - **Transferir datos** a un contenedor.
 - **Guardar datos persistentes** (bases de datos, logs, configuraciones).
 - **Compartir datos** entre múltiples contenedores.
   
 **Características de los volúmenes**
+
 - **Persistencia de datos:** Los datos sobreviven a la eliminación del contenedor.
 - **Compartir datos entre contenedores:** Varios contenedores pueden montar el mismo volumen simultáneamente.
 - **Desacoplamiento datos/contenedor:** Se puede actualizar o reemplazar el contenedor sin perder datos.
@@ -266,29 +258,38 @@ Un volumen Docker permite **conservar los datos más allá del ciclo de vida de 
 - **Flexibilidad:** Volúmenes con nombre, anónimos o gestionados externamente (NFS, cloud storage...).
 - **Escalabilidad:** Facilitan la distribución de datos en entornos orquestados.
 
-### **Tipos**
+**TIPOS**
 
-#### ``1. Volumes (volúmenes gestionados por Docker)``
-Son la opción **recomendada**. Docker gestiona su ubicación en el sistema de archivos del host (`/var/lib/docker/volumes/`). Son independientes del contenedor.
-```bash
-docker run -d -v ruta-en-mi-pc:ruta-dentro-del-contenedor imagen
-docker run -d -v mi-volumen:/var/lib/postgresql/data postgres
-```
+Docker permite persistir y compartir datos entre el host y los contenedores (o entre contenedores) mediante tres mecanismos principales. Todos "montan algo dentro del contenedor", pero cada uno tiene un propósito y una gestión muy distintos.
 
-#### ``2. Bind Mounts (montajes de enlace)``
-Montan un directorio o archivo específico del host dentro del contenedor. Útiles en desarrollo para reflejar cambios del código fuente en tiempo real.
-```bash
-docker run -d -v /ruta/en/host:/ruta/en/contenedor nginx
-docker run -d -v $(pwd)/html:/usr/share/nginx/html nginx
-```
+!!! bug "1. Named volumes - volúmenes con nombre (recomendado)"
+    Son gestionados completamente por Docker. Viven en una zona del sistema de archivos que Docker controla (normalmente `/var/lib/docker/volumes/` en Linux), y tú solo interactúas con ellos por su nombre.
 
-#### ``3. tmpfs Mounts``
-Almacenamiento temporal en memoria RAM. Los datos no se persisten y desaparecen cuando el contenedor para. Útil para datos sensibles que no deben persistir en disco.
-```bash
-docker run -d --tmpfs /tmp nginx
-```
+    **Cuándo usarlos**: para datos que debe gestionar Docker y que sobreviven a la eliminación del contenedor (bases de datos, uploads de una app, etc.). Es la opción recomendada para producción porque Docker se encarga de permisos, backups más sencillos
 
-### **Comandos de volúmenes**
+    El volumen empieza vacío y se va llenando solo, a medida que el contenedor trabaja, igual que un disco duro vacío se va llenando cuando instalas un sistema operativo en él.
+
+`docker volume create datos_mysql`
+
+`docker run -d --name mysql -v datos_mysql:/var/lib/mysql mysql:8`
+
+!!! bug "2. Bind Mounts (montajes de enlace)"
+    Montan un directorio o archivo específico del **host dentro del contenedor**. Tú controlas exactamente dónde está el archivo o carpeta, no Docker.
+    
+    **Cuándo usarlos**: en desarrollo, cuando quieres que los cambios que haces en tu editor (VS Code, etc.) se reflejen al instante dentro del contenedor sin reconstruir la imagen. Reflejar cambios del código fuente en tiempo real.
+
+`docker run -d -v /ruta/en/host:/ruta/en/contenedor nginx`
+
+`docker run -d --name web -v /home/yeray/apuntes:/usr/share/nginx/html nginx`
+
+!!! bug "3. tmpfs Mounts"
+    Almacenamiento temporal en memoria RAM. Los datos no se persisten y desaparecen cuando el contenedor para. 
+    
+    **Cuándo usarlos**: datos temporales sensibles o de alto rendimiento que no necesitas persistir (cachés, secretos temporales, ficheros de sesión). Solo funciona en Linux.
+    
+`docker run -d --tmpfs /tmp nginx`
+
+**COMANDOS de volúmenes**
 ```bash
 # Comandos más utilizados
 docker volume create mi-volumen # Crear un volumen
@@ -303,11 +304,13 @@ docker run -d --mount source=mi-volumen,target=/datos mi-app  # Usar un volumen 
 docker run -d -v mi-volumen:/datos:ro mi-app                  # Contenedor de solo lectura
 ```
 
-## Dockerfile
----
+## 📖 Dockerfile
 Un **Dockerfile** es un archivo de texto con una serie de instrucciones que Docker utiliza para construir una imagen de forma automatizada y reproducible. Cada instrucción genera una nueva **capa** en la imagen.
 
+[Documentación oficial](https://docs.docker.com/engine/reference/builder/){target="_blank"}
+
 **Instrucciones del Dockerfile**
+
 | Instrucción | Descripción |
 |---|---|
 | `FROM` | **Obligatoria.** Indica la imagen base. Siempre es la primera instrucción. |
@@ -323,116 +326,119 @@ Un **Dockerfile** es un archivo de texto con una serie de instrucciones que Dock
 | `USER` | Define el usuario con el que se ejecutarán las instrucciones posteriores. |
 | `VOLUME` | Declara un punto de montaje de volumen. |
 | `LABEL` | Añade metadatos a la imagen (autor, versión, descripción...). |
-| `MAINTAINER` | (Obsoleto) Indica el mantenedor del Dockerfile. Usar LABEL. |
+| `MAINTAINER` | Indica el autor del Dockerfile. Usar LABEL. |
 | `ONBUILD` | Instrucción que se ejecuta cuando la imagen es usada como base de otra. |
 | `HEALTHCHECK` | Define un comando para comprobar el estado de salud del contenedor. |
-| `STOPSIGNAL` | Define la señal de sistema para detener el contenedor. |
-> 📖 Documentación oficial de referencia: https://docs.docker.com/engine/reference/builder/
+| `STOPSIGNAL` | Define la señal de sistema para detener el contenedor. |    
+
 
 **Buenas prácticas en Dockerfile**
+
 1. **Usar imágenes base oficiales y ligeras** (alpine, slim).
 2. **Ordenar las instrucciones por frecuencia de cambio** (lo que menos cambia, al principio) para aprovechar la caché.
-3. **Minimizar el número de capas** combinando comandos RUN con `&&`.
+3. **Minimizar el número de capas** combinando comandos RUN con **`&&`**.
 4. **No ejecutar como root**: crear un usuario no privilegiado con `USER`.
 5. **Usar `.dockerignore`** para excluir archivos innecesarios (como `node_modules`, `.git`).
 6. **Un proceso por contenedor**: simplifica el escalado y los logs.
-7. **Usar multi-stage builds** para reducir el tamaño de la imagen final.
-8. **Usar variables ARG y ENV** para hacer el Dockerfile configurable.
+7. **Usar variables ARG y ENV** para hacer el Dockerfile configurable.
 
 ### **Ejemplos**
 
-#### ``Ejemplo 1: Aplicación Python simple``
-```dockerfile
-# Imagen base oficial de Python
-FROM python:3.11-slim
-# Metadatos
-LABEL maintainer="tu@email.com"
-LABEL version="1.0"
-# Variables de entorno
-ENV APP_HOME=/app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-# Directorio de trabajo
-WORKDIR $APP_HOME
-# Copiar e instalar dependencias primero (aprovecha caché de capas)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-# Copiar el código fuente
-COPY . .
-# Exponer el puerto
-EXPOSE 8000
-# Usuario no root (buena práctica de seguridad)
-RUN adduser --disabled-password --gecos '' appuser
-USER appuser
-# Comando por defecto
-CMD ["python", "app.py"]
-```
-#### ``Ejemplo 2: Servidor web Nginx con contenido personalizado``
-```dockerfile
-FROM nginx:alpine
-# Copiar configuración personalizada
-COPY nginx.conf /etc/nginx/nginx.conf
-# Copiar contenido web
-COPY html/ /usr/share/nginx/html/
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-#### ``Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)``
-```dockerfile
-FROM alpine:latest
-RUN apk update && apk add python3
-RUN ln -sf python3 /usr/bin/python
-CMD ["python3"]
-```
-#### ``Ejemplo 4: Multi-stage build (construcción en múltiples etapas)``
-```dockerfile
-# Técnica avanzada para reducir el tamaño de la imagen final
-FROM node:18 AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-# Etapa de producción (imagen final ligera)
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-#### ``Ejemplo 5: Combinar comandos RUN para reducir capas``
-```dockerfile
-RUN apt-get update && \
-    apt-get install -y curl git && \
-    rm -rf /var/lib/apt/lists/*
-```
+!!! example "Ejemplo 1: Aplicación Python simple"
+    ```dockerfile
+    # Imagen base oficial de Python
+    FROM python:3.11-slim
+    # Metadatos
+    LABEL maintainer="tu@email.com"
+    LABEL version="1.0"
+    # Variables de entorno
+    ENV APP_HOME=/app
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
+    # Directorio de trabajo
+    WORKDIR $APP_HOME
+    # Copiar e instalar dependencias primero (aprovecha caché de capas)
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
+    # Copiar el código fuente
+    COPY . .
+    # Exponer el puerto
+    EXPOSE 8000
+    # Usuario no root (buena práctica de seguridad)
+    RUN adduser --disabled-password --gecos '' appuser
+    USER appuser
+    # Comando por defecto
+    CMD ["python", "app.py"]
+    ```
 
-### **Comandos para construir imágenes**
+!!! example "Ejemplo 2: Servidor web Nginx con contenido personalizado"
+    ```dockerfile
+    FROM nginx:alpine
+    # Copiar configuración personalizada
+    COPY nginx.conf /etc/nginx/nginx.conf
+    # Copiar contenido web
+    COPY html/ /usr/share/nginx/html/
+    EXPOSE 80
+    CMD ["nginx", "-g", "daemon off;"]
+    ```
+
+!!! example "Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)"
+    ```dockerfile
+    FROM alpine:latest
+    RUN apk update && apk add python3
+    RUN ln -sf python3 /usr/bin/python
+    CMD ["python3"]
+    ```
+
+!!! example "Ejemplo 4: Multi-stage build (construcción en múltiples etapas)"
+    ```dockerfile
+    # Técnica avanzada para reducir el tamaño de la imagen final
+    FROM node:18 AS builder
+    WORKDIR /app
+    COPY package*.json ./
+    RUN npm install
+    COPY . .
+    RUN npm run build
+    # Etapa de producción (imagen final ligera)
+    FROM nginx:alpine
+    COPY --from=builder /app/dist /usr/share/nginx/html
+    EXPOSE 80
+    CMD ["nginx", "-g", "daemon off;"]
+    ```
+
+!!! example "Ejemplo 5: Combinar comandos RUN para reducir capas"
+    ```dockerfile
+    RUN apt-get update && \
+        apt-get install -y curl git && \
+        rm -rf /var/lib/apt/lists/*
+    ```
+
+**COMANDOS para construir imágenes**
 ```bash
 docker build -t mi-app:1.0 .                          # Construir imagen desde el directorio actual
 docker build -f ruta/al/Dockerfile -t mi-app:1.0 .    # Especificar ubicación del Dockerfile
 docker build --build-arg VERSION=2.0 -t mi-app:2.0 .  # Pasar argumentos de construcción
-docker build --no-cache -t mi-app:1.0 .               # Sin usar caché
 docker history mi-app:1.0                             # Ver las capas generadas
 ```
 
-## Docker Compose
----
+## 📖 Docker Compose
 **Docker Compose** es una herramienta para **definir y ejecutar aplicaciones Docker multi-contenedor** mediante un archivo YAML (`docker-compose.yml`). Con un solo comando se crean e inician todos los servicios de la aplicación.
 
 **Casos de uso**
+
 - Aplicaciones con varios servicios (frontend + backend + base de datos + cache...).
-- Entornos de desarrollo reproducibles.
+- Despliegues en entornos de desarrollo sencillos (staging, desarrollo).
 - Testing e integración continua.
-- Despliegues en entornos sencillos (staging, desarrollo).
+  
 **Buenas prácticas con Docker Compose**
+
 1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
 2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
 3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.
 4. **Separar configuraciones por entorno**: `docker-compose.yml` (base) + `docker-compose.override.yml` (desarrollo) + `docker-compose.prod.yml` (producción).
-5. **Definir redes explícitas** en lugar de usar la red por defecto.
-6. **Nombrar los volúmenes** para facilitar su gestión e identificación.
+5. **Definir redes y volúmenes explícitos** para facilitar su gestión e identificación.
 
-### **Estructura del archivo**
+### **Estructura**
 ```yaml
 # Ejemplo de plantilla definiendo cada variable
 services:                 # Sección principal donde defines tus contenedores
@@ -469,84 +475,85 @@ networks:                 # Definir redes personalizadas (aislamiento de red)
 ```
 ### **Ejemplos**
 
-#### ``Aplicación web + Base de datos (con un Dockerfile)``
-```yaml
-services:
-  web:
-    build: .                # Construye desde el Dockerfile del directorio actual
-    image: mi-app:latest
-    container_name: mi-web
-    ports:
-      - "8080:80"           # host:contenedor
-    environment:
-      - DATABASE_URL=postgres://user:pass@db:5432/midb
-      - DEBUG=false
+!!! example "Aplicación web + Base de datos (con un Dockerfile)"
+    ```yaml
+    services:
+      web:
+        build: .                # Construye desde el Dockerfile del directorio actual
+        image: mi-app:latest
+        container_name: mi-web
+        ports:
+          - "8080:80"           # host:contenedor
+        environment:
+          - DATABASE_URL=postgres://user:pass@db:5432/midb
+          - DEBUG=false
+        volumes:
+          - ./static:/app/static
+        depends_on:
+          - db
+        networks:
+          - app-network
+        restart: unless-stopped
+
+      db:
+        image: postgres:15-alpine
+        container_name: mi-db
+        environment:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: midb
+        volumes:
+          - postgres-data:/var/lib/postgresql/data
+          - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+          - app-network
+        restart: unless-stopped
+
+      cache:
+        image: redis:7-alpine
+        container_name: mi-cache
+        networks:
+          - app-network
+
     volumes:
-      - ./static:/app/static
-    depends_on:
-      - db
+      postgres-data:          # Volumen persistente para la base de datos
+
     networks:
-      - app-network
-    restart: unless-stopped
+      app-network:
+        driver: bridge
+    ```
 
-  db:
-    image: postgres:15-alpine
-    container_name: mi-db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: midb
+!!! example "Aplicación web con Nginx + PHP-FPM + MySQL"
+    ```yaml
+    services:
+      nginx:
+        image: nginx:alpine
+        ports:
+          - "80:80"
+        volumes:
+          - ./src:/var/www/html
+          - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+          - php
+
+      php:
+        image: php:8.2-fpm
+        volumes:
+          - ./src:/var/www/html
+
+      mysql:
+        image: mysql:8.0
+        environment:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: app
+        volumes:
+          - mysql-data:/var/lib/mysql
+
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - app-network
-    restart: unless-stopped
+      mysql-data:
+    ```
 
-  cache:
-    image: redis:7-alpine
-    container_name: mi-cache
-    networks:
-      - app-network
-
-volumes:
-  postgres-data:          # Volumen persistente para la base de datos
-
-networks:
-  app-network:
-    driver: bridge
-```
-#### ``Aplicación web con Nginx + PHP-FPM + MySQL``
-```yaml
-services:
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./src:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - php
-
-  php:
-    image: php:8.2-fpm
-    volumes:
-      - ./src:/var/www/html
-
-  mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: app
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-volumes:
-  mysql-data:
-```
-
-### **Comandos de Docker Compose**
+**COMANDOS de Docker Compose**
 ```bash
 # Gestión de Ciclo de Vida
 docker compose up -d              # Iniciar todos los servicios (en segundo plano)
@@ -571,8 +578,7 @@ docker compose run servicio       # Ejecuta un comando puntual en un servicio nu
 docker compose scale servicio=3   # Escala el número de instancias/réplicas de un servicio
 ```
 
-## Resumen de comandos esenciales
----
+## Comandos esenciales
 ```bash
 # ── IMÁGENES ──────────────────────────────────────
 docker pull nginx:alpine            # Descargar imagen
@@ -582,13 +588,10 @@ docker build -t mi-app .            # Construir imagen
 
 # ── CONTENEDORES ──────────────────────────────────
 docker run -d -p 8080:80 --name web nginx   # Crear y ejecutar
-docker ps                           # Listar activos
-docker ps -a                        # Listar todos
-docker stop web                     # Parar
+docker ps -a                        # Listar todos los contenedores
 docker start web                    # Iniciar
 docker rm web                       # Eliminar
 docker exec -it web bash            # Terminal interactivo
-docker logs -f web                  # Ver logs
 
 # ── REDES ─────────────────────────────────────────
 docker network ls                   # Listar redes
@@ -610,9 +613,8 @@ docker compose logs -f              # Ver logs
 docker compose exec web bash        # Terminal en servicio
 ```
 
-## Referencias
----
-> 📚 **Documentación oficial:** https://docs.docker.com  
-> 🐳 **Docker Hub:** https://hub.docker.com  
-> 🔧 **Referencia Dockerfile:** https://docs.docker.com/engine/reference/builder/  
-> ⚙️ **Referencia Compose:** https://docs.docker.com/compose/compose-file/
+## Recursos
+- [**Documentación oficial**](https://docs.docker.com){target="_blank"}
+- [**Docker Hub**](https://hub.docker.com){target="_blank"}
+- [**Referencia Dockerfile**](https://docs.docker.com/engine/reference/builder/){target="_blank"}
+- [**Referencia Compose**](https://docs.docker.com/compose/compose-file/){target="_blank"}

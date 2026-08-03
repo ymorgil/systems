@@ -10,7 +10,7 @@ Plataforma completa de virtualización de código abierto que permite desplegar,
 
 ### Interfaz
 
-![Interfaz de proxmox](../assets/img/vir/prx-01.png){width="900"}
+![Interfaz de proxmox](../assets/img/02vir/prx-01.png){width="900"}
 
 | Concepto básicos| Descripción |
 |-----------|-------------|
@@ -38,7 +38,7 @@ Plataforma completa de virtualización de código abierto que permite desplegar,
     3. Al iniciar sesión de nuevo en Proxmox, además de la contraseña pedirá el código temporal de 6 dígitos generado por la aplicación. El token se renueva cada 30 segundos
 
 ## 2. Almacenamiento
-![Interfaz de proxmox](../assets/img/vir/prx-02.png){width="900"}
+![Interfaz de proxmox](../assets/img/02vir/prx-02.png){width="900"}
 
 Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse **dos almacenamientos** principales, aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.
 
@@ -170,17 +170,17 @@ iface vmbr0 inet static
 Una **máquina virtual (VM)** es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico. Los pasos a seguir para crear e iniciar una máquina virtual en Proxmox VE son:
 
 1. Acceder a la interfaz web de Proxmox, selecciona el almacenamiento **local (nombre_del_nodo)** y accede a la pestaña **ISO Images**, desde hay pulsar el botón **Cargar** y selecciona el archivo ISO descargado previamente desde tu equipo y espera a que finalice la transferencia.
-![Interfaz de proxmox](../assets/img/vir/prx-03.png){width="700"}
+![Interfaz de proxmox](../assets/img/02vir/prx-03.png){width="700"}
 4. Haz clic en **Create VM** en la parte superior derecha, para iniciar el asistente.
-![Interfaz de proxmox](../assets/img/vir/prx-02a.png)
+![Interfaz de proxmox](../assets/img/02vir/prx-02a.png)
 5. Sigue el asistente, introduciendo un nombre para la máquina virtual, en **OS**, selecciona la imagen ISO previamente subida, en **System**, deja la configuración predeterminada o ajusta los parámetros según tus necesidades. Configura el tamaño del disco virtual de 100GB, la cantidad de procesadores virtuales en **CPU**, la memoria RAM en **Memory** y la interfaz de red en **Network** y por último revisa el resumen de configuración, haz clic en **Finish** para crear la máquina virtual y marca la opción **Start after created** si deseas iniciar la máquina automáticamente.
 
 | | | | | | | | |
 |---|---|---||---|---|---|---|
-| ![Interfaz de proxmox](../assets/img/vir/prx-04.png) | ![Interfaz de proxmox](../assets/img/vir/prx-05.png) | ![Interfaz de proxmox](../assets/img/vir/prx-06.png) |![Interfaz de proxmox](../assets/img/vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/vir/prx-09.png) |![Interfaz de proxmox](../assets/img/vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/vir/prx-11.png) | 
+| ![Interfaz de proxmox](../assets/img/02vir/prx-04.png) | ![Interfaz de proxmox](../assets/img/02vir/prx-05.png) | ![Interfaz de proxmox](../assets/img/02vir/prx-06.png) |![Interfaz de proxmox](../assets/img/02vir/prx-07.png) | ![Interfaz de proxmox](../assets/img/02vir/prx-08.png) | ![Interfaz de proxmox](../assets/img/02vir/prx-09.png) |![Interfaz de proxmox](../assets/img/02vir/prx-10.png) | ![Interfaz de proxmox](../assets/img/02vir/prx-11.png) | 
 
 Para iniciar selecciona la máquina virtual creada en el panel lateral y haz clic en **Start**. A continuación accede a la consola mediante **Console**.
-![Interfaz de proxmox](../assets/img/vir/prx-12.png){width="700"}
+![Interfaz de proxmox](../assets/img/02vir/prx-12.png){width="700"}
 
 ## 6. Clúster
 Un **clúster** es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado.
@@ -190,7 +190,7 @@ En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde un
 **Crear el clúster**
 
 1. En el primer nodo (ejemplo **PVE1**), ve a `Datacenter > Cluster` y haz clic en **Crear Cluster**. Asigna un nombre al clúster. Una vez creado, pulsa en **Información de unión** y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
-![Interfaz de proxmox](../assets/img/vir/prx-13.png){width="700"}
+![Interfaz de proxmox](../assets/img/02vir/prx-13.png){width="700"}
 3. En el segundo nodo (**PVE2**), ve también a `Datacenter > Cluster`, haz clic en **Unirse al Clusterr** y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.
 
 !!! info "Desde /Datacenter → Cluster/ se crea o se une a un clúster. Una vez configurado, es posible **migrar máquinas virtuales entre nodos** del clúster."

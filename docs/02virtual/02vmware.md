@@ -28,7 +28,7 @@ Software de **virtualización** que permite ejecutar uno o varios sistemas opera
 
 |  |  |  |
 |---|---|---|
-|![VMware](../assets/img/vir/vmw-01.png) | ![VMware](../assets/img/vir/vmw-02.png)| ![VMware](../assets/img/vir/vmw-03.png)|
+|![VMware](../assets/img/02vir/vmw-01.png) | ![VMware](../assets/img/02vir/vmw-02.png)| ![VMware](../assets/img/02vir/vmw-03.png)|
 
 ## 2. Instalación 
 
@@ -36,11 +36,11 @@ Haz doble clic en el archivo descargado (ej. `VMware-Workstation-Full-XX.X.X-XXX
 
 |  |  |  |
 |---|---|---|
-|![VMware](../assets/img/vir/vmw-04.png) | ![VMware](../assets/img/vir/vmw-05.png)| ![VMware](../assets/img/vir/vmw-06.png)|
+|![VMware](../assets/img/02vir/vmw-04.png) | ![VMware](../assets/img/02vir/vmw-05.png)| ![VMware](../assets/img/02vir/vmw-06.png)|
 
 Una vez finalice abre el programa.
 
-![VMware](../assets/img/vir/vmw-07.png) 
+![VMware](../assets/img/02vir/vmw-07.png) 
 
 **Interfaz de VirtualBox**
 
@@ -63,7 +63,7 @@ Para este manual vamos a crear una máquina virtual de **Ubuntu Desktop 26**, lo
 **Paso 1 — Descargar la ISO de Ubuntu**
 Ve a [https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop){target=_blank}, descarga la imagen ISO de Ubuntu Desktop 26.04 LTS y guarda el archivo `.iso` en una carpeta donde guardes todas las ISOS (ej. `Y:\ISOs\ubuntu-desktop.iso`)
 
-![VMware](../assets/img/vir/vmw-10.png)
+![VMware](../assets/img/02vir/vmw-10.png)
 <br>
 
 **Paso 2 — Crear máquina virtual**
@@ -77,7 +77,7 @@ Recuerda estos datos, los necesitarás para iniciar sesión en Ubuntu.
 
 |  |  |  | 
 |---|---|---|
-|![VMware](../assets/img/vir/vmw-11.png) | ![VMware](../assets/img/vir/vmw-12.png)| ![VMware](../assets/img/vir/vmw-13.png)|
+|![VMware](../assets/img/02vir/vmw-11.png) | ![VMware](../assets/img/02vir/vmw-12.png)| ![VMware](../assets/img/02vir/vmw-13.png)|
 
 
 **Paso 5 — Nombre y ubicación de la VM** Como nombre de máquina escribir el `estándar de clase`, y recomendable guardar la máquina en un **disco externo** donde haya una carpeta con el nombre de VMware y dentro otra carpeta con el nombre de la máquina, donde se crearán todos los archivos de configuración.
@@ -96,22 +96,22 @@ Recuerda estos datos, los necesitarás para iniciar sesión en Ubuntu.
 
 |  |  |  | 
 |---|---|---|
-|![VMware](../assets/img/vir/vmw-14.png) | ![VMware](../assets/img/vir/vmw-15.png)| ![VMware](../assets/img/vir/vmw-16.png)|
+|![VMware](../assets/img/02vir/vmw-14.png) | ![VMware](../assets/img/02vir/vmw-15.png)| ![VMware](../assets/img/02vir/vmw-16.png)|
 
-![VMware](../assets/img/vir/vmw-17.png) 
+![VMware](../assets/img/02vir/vmw-17.png) 
 
 **Paso 8 — Instalación de Ubuntu Server** La VM arrancará automáticamente desde la ISO. Sigue el asistente de instalación:
 
 |  |  |  |  |  |  
 |---|---|---|---|---|
-|![VMware](../assets/img/vir/vmw-18.png) | ![VMware](../assets/img/vir/vmw-19.png)| ![VMware](../assets/img/vir/vmw-20.png)|![VMware](../assets/img/vir/vmw-21.png)| ![VMware](../assets/img/vir/vmw-22.png)|
-|![VMware](../assets/img/vir/vmw-23.png) | ![VMware](../assets/img/vir/vmw-24.png)| ![VMware](../assets/img/vir/vmw-25.png)|![VMware](../assets/img/vir/vmw-26.png)| ![VMware](../assets/img/vir/vmw-27.png)|
-|![VMware](../assets/img/vir/vmw-28.png) | ![VMware](../assets/img/vir/vmw-29.png)| ![VMware](../assets/img/vir/vmw-30.png)|![VMware](../assets/img/vir/vmw-31.png)| ![VMware](../assets/img/vir/vmw-32.png)|
-|![VMware](../assets/img/vir/vmw-33.png) | ![VMware](../assets/img/vir/vmw-34.png)||| |
+|![VMware](../assets/img/02vir/vmw-18.png) | ![VMware](../assets/img/02vir/vmw-19.png)| ![VMware](../assets/img/02vir/vmw-20.png)|![VMware](../assets/img/02vir/vmw-21.png)| ![VMware](../assets/img/02vir/vmw-22.png)|
+|![VMware](../assets/img/02vir/vmw-23.png) | ![VMware](../assets/img/02vir/vmw-24.png)| ![VMware](../assets/img/02vir/vmw-25.png)|![VMware](../assets/img/02vir/vmw-26.png)| ![VMware](../assets/img/02vir/vmw-27.png)|
+|![VMware](../assets/img/02vir/vmw-28.png) | ![VMware](../assets/img/02vir/vmw-29.png)| ![VMware](../assets/img/02vir/vmw-30.png)|![VMware](../assets/img/02vir/vmw-31.png)| ![VMware](../assets/img/02vir/vmw-32.png)|
+|![VMware](../assets/img/02vir/vmw-33.png) | ![VMware](../assets/img/02vir/vmw-34.png)||| |
 
 **Paso 9 — Primer arranque de Ubuntu** La VM reiniciará y expulsará la ISO automáticamente y aparecerá el login.
 
-![VMware](../assets/img/vir/vmw-35.png) 
+![VMware](../assets/img/02vir/vmw-35.png) 
 
 **Paso 10 — Primeros comandos útiles**
 ```bash
@@ -121,11 +121,11 @@ df -h                                                         # Comprobar espaci
 lsb_release -a                                                # Ver la versión de Ubuntu instalada
 sudo poweroff                                                 # Apagar de forma segura
 ```
-![VMware](../assets/img/vir/vmw-36.png) 
+![VMware](../assets/img/02vir/vmw-36.png) 
 
 ## 4. Operaciones básicas
 
-![VMware](../assets/img/vir/vmw-37.png) 
+![VMware](../assets/img/02vir/vmw-37.png) 
 
 ### Instantáneas
 Los **snapshots** son una de las funciones más útiles de VMware. Guardan el estado completo de la VM en un momento determinado.
