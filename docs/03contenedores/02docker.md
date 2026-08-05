@@ -1,6 +1,6 @@
 # 🐳 Docker: 
 
-## ¿Qué es WSL?
+## Windows Subsystem for Linux
 **WSL (Windows Subsystem for Linux)** es una característica de Windows que permite ejecutar un entorno Linux real (no una simulación) directamente sobre Windows, sin necesidad de una máquina virtual ni de arranque dual. Gracias a WSL es posible usar herramientas de línea de comandos de Linux, ejecutar scripts Bash y trabajar con aplicaciones Linux integradas en el flujo de trabajo de Windows.
 
 Con **WSL2** (la versión actual), no se trata de un simulador de comandos ni de una imitación de Linux. Por debajo corre un **kernel Linux auténtico**, integrado con Windows de forma muy eficiente. Cuando abres una terminal de Ubuntu en WSL, estás usando Linux real, no una versión "de mentira".
@@ -92,25 +92,6 @@ winget install Docker.DockerDesktop
 
 ![terminal](../assets/img/03cont/con-07.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 👉👉👉 
 ## Portainer
 Sustituye los comandos de terminal por un panel visual desde el que se pueden administrar **contenedores**, **imágenes**, **redes** y **volúmenes** de forma intuitiva. Es especialmente útil en entornos de desarrollo y aprendizaje, ya que permite ver el estado del sistema en tiempo real sin necesidad de recordar comandos.
 
@@ -121,15 +102,13 @@ Sustituye los comandos de terminal por un panel visual desde el que se pueden ad
 
 **INSTALACIÓN**
 
-La forma más sencilla de instalar Portainer en Docker Desktop es a través de las extensiones. Hay que abrir Docker Desktop, ir a la sección **Extensions** en el menú lateral izquierdo y buscar «Portainer» en el buscador. Al hacer clic en instalar, la aplicación descarga la imagen necesaria y configura el contenedor de gestión automáticamente.
+La forma más sencilla de instalar Portainer en Docker Desktop es a través de las extensiones. Hay que abrir Docker Desktop, ir a la sección **Extensions** en el menú lateral izquierdo y buscar **«Portainer»** en el buscador. Al hacer clic en instalar, la aplicación descarga la imagen necesaria y configura el contenedor de gestión automáticamente.
 
 ||||
 ||||
 |![terminal](../assets/img/03cont/con-11.png)|![terminal](../assets/img/03cont/con-12.png)|![terminal](../assets/img/03cont/con-13.png)|
  
  
-### **Funcionalidades principales**
- 
 
 
 
@@ -138,23 +117,23 @@ La forma más sencilla de instalar Portainer en Docker Desktop es a través de l
 
 
 
+## 👉👉👉
 
-## Ejercicio: Programar en Contenedores Docker con VS Code
+## Docker con VS Code
+A continuación, se muestra una guía con tres formas de programar directamente dentro de contenedores Docker utilizando Visual Studio Code para aislar dependencias.
 
-**🎬 Enlace al video original:** [https://youtu.be/9_WkqhLMUZA](https://youtu.be/9_WkqhLMUZA)
+1. Manual 
+2. Con ciertos plugins de VSC **23.15min**
 
-Este ejercicio te guiará a través de las tres formas de programar directamente dentro de contenedores Docker utilizando Visual Studio Code para aislar dependencias.
 
----
+!!! warning "Requisitos Previos"
+    1. **Docker Desktop:** Instalado y en ejecución.
+    2. **Visual Studio Code:** Con las extensiones:
+          - `Docker` (de Microsoft)
+          - `Dev Containers` (de Microsoft)
 
-## Requisitos Previos
 
-1. **Docker Desktop:** Instalado y en ejecución.
-2. **Visual Studio Code:** Con las extensiones:
-   - `Docker` (de Microsoft)
-   - `Dev Containers` (de Microsoft)
 
----
 
 ## Paso 1: Configuración del Proyecto Base (FastAPI)
 
@@ -295,8 +274,7 @@ Para proyectos nuevos donde quieres que VS Code configure todo el ambiente autom
 
 
 
-
-# Visual Studio Code usando WSL y Docker
+## 👉👉👉 Visual Studio Code usando WSL y Docker
 
 Una vez instalado **WSL**, configurado **Ubuntu** y teniendo **Docker Desktop** integrado con **Visual Studio Code**, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.
 
@@ -472,7 +450,7 @@ Se ha aprendido a:
 title: "Docker: VSC"
 weight: 3
 ---
-# Ejercicio: Programar en Contenedores Docker con VS Code
+## 👉👉👉  Ejercicio: Programar en Contenedores Docker con VS Code
 
 **🎬 Enlace al video original:** [https://youtu.be/9_WkqhLMUZA](https://youtu.be/9_WkqhLMUZA)
 
@@ -629,7 +607,7 @@ Para proyectos nuevos donde quieres que VS Code configure todo el ambiente autom
 
 
 
-# Visual Studio Code usando WSL y Docker
+## 👉👉👉  Visual Studio Code usando WSL y Docker
 
 Una vez instalado **WSL**, configurado **Ubuntu** y teniendo **Docker Desktop** integrado con **Visual Studio Code**, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.
 
@@ -716,7 +694,7 @@ docker run hello-world
 
 ------------------------------------------------------------------------
 
-# 2. Uso de contenedores Docker desde Visual Studio Code
+## 👉👉👉  2. Uso de contenedores Docker desde Visual Studio Code
 
 Los contenedores permiten ejecutar aplicaciones en entornos aislados,
 reproducibles y portables.
@@ -790,7 +768,7 @@ Salida esperada:
 
 ------------------------------------------------------------------------
 
-# Resumen
+## 👉👉👉  Resumen
 
 Se ha aprendido a:
 
@@ -799,3 +777,7 @@ Se ha aprendido a:
 -   Crear un Dockerfile
 -   Construir una imagen
 -   Ejecutar un contenedor
+
+
+## Recursos
+- [🎬 Enlace al video original:**](https://youtu.be/9_WkqhLMUZA){target="_blank"}
