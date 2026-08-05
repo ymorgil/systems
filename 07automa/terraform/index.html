@@ -1,0 +1,4238 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/07automa/terraform/">
+      
+      
+        <link rel="prev" href="../vagrant/">
+      
+      
+        <link rel="next" href="../../08ia/impacto-ia-sistemas/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Terraform - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#terraform-infraestructura-como-codigo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Terraform
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05bash-estructuras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-terraform-y-el-paradigma-de-infraestructura-como-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Terraform y el paradigma de infraestructura como código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-paradigma-declarativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El paradigma declarativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-lenguaje-hcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El lenguaje HCL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-providers-el-puente-hacia-cada-plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Providers: el puente hacia cada plataforma
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ciclo-de-vida-init-plan-apply-destroy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ciclo de vida: init, plan, apply, destroy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ciclo de vida: init, plan, apply, destroy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terraform-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform plan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform apply
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-destroy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform destroy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-el-estado-tfstate-y-backends-remotos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. El estado: .tfstate y backends remotos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. El estado: .tfstate y backends remotos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-el-estado-local-no-basta-en-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué el estado local no basta en equipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-variables-y-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Variables y outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-modulos-reutilizables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Módulos reutilizables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-terraform-frente-a-ansible-declarativo-vs-procedimental-aprovisionamiento-vs-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Terraform frente a Ansible: declarativo vs procedimental, aprovisionamiento vs configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-ejemplo-completo-desplegar-una-instancia-ec2-en-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Ejemplo completo: desplegar una instancia EC2 en AWS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-comandos-basicos-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Comandos básicos adicionales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-terraform-y-el-paradigma-de-infraestructura-como-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Terraform y el paradigma de infraestructura como código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-paradigma-declarativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El paradigma declarativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-lenguaje-hcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El lenguaje HCL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-providers-el-puente-hacia-cada-plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Providers: el puente hacia cada plataforma
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ciclo-de-vida-init-plan-apply-destroy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ciclo de vida: init, plan, apply, destroy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ciclo de vida: init, plan, apply, destroy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terraform-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform plan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform apply
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-destroy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        terraform destroy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-el-estado-tfstate-y-backends-remotos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. El estado: .tfstate y backends remotos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. El estado: .tfstate y backends remotos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-el-estado-local-no-basta-en-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué el estado local no basta en equipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-variables-y-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Variables y outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-modulos-reutilizables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Módulos reutilizables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-terraform-frente-a-ansible-declarativo-vs-procedimental-aprovisionamiento-vs-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Terraform frente a Ansible: declarativo vs procedimental, aprovisionamiento vs configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-ejemplo-completo-desplegar-una-instancia-ec2-en-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Ejemplo completo: desplegar una instancia EC2 en AWS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-comandos-basicos-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Comandos básicos adicionales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="terraform-infraestructura-como-codigo"><strong>🏗️ Terraform · Infraestructura como código</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/terraform-ciclo.svg" data-desc-position="bottom"><img alt="Ciclo de vida de Terraform: init, plan, apply y destroy" src="../../assets/img/06auto-monit/terraform-ciclo.svg"></a></p>
+<h2 id="1-que-es-terraform-y-el-paradigma-de-infraestructura-como-codigo">1. Qué es Terraform y el paradigma de infraestructura como código</h2>
+<p><strong>Terraform</strong>, desarrollado por HashiCorp, es una herramienta que permite describir infraestructura completa —máquinas virtuales, redes, discos, balanceadores de carga, bases de datos gestionadas, reglas de firewall— en ficheros de texto declarativos, y aplicar esa descripción para crear, modificar o eliminar recursos reales en un proveedor cloud o en un centro de datos on-premise.</p>
+<p>Esta forma de trabajar se conoce como <strong>Infraestructura como Código</strong> (<em>Infrastructure as Code</em>, IaC): en lugar de crear una máquina virtual haciendo clic en la consola web de un proveedor cloud, se escribe un fichero que la describe, se versiona ese fichero en Git exactamente igual que se versiona el código de una aplicación, y una herramienta se encarga de traducir esa descripción en llamadas reales a la API del proveedor.</p>
+<div class="admonition tip">
+<p class="admonition-title">Por qué no basta con la consola web</p>
+<p>Crear infraestructura manualmente desde la consola web de un proveedor cloud funciona bien la primera vez, pero falla exactamente en los mismos puntos que fallaba la configuración manual de servidores antes de Ansible: no queda documentado qué se creó ni con qué parámetros exactos, no es reproducible en otra cuenta o región, y no hay forma sencilla de saber qué ha cambiado respecto a la semana anterior. Terraform resuelve esto igual que Ansible resuelve la configuración de software: con un fichero de texto versionable que describe el estado deseado.</p>
+</div>
+<h2 id="2-el-paradigma-declarativo">2. El paradigma declarativo</h2>
+<p>Terraform es <strong>declarativo</strong>: el fichero <code>.tf</code> describe <strong>qué</strong> infraestructura debe existir, no la secuencia de pasos para crearla. Es responsabilidad de Terraform calcular el orden de creación, detectar dependencias entre recursos y decidir qué operaciones (crear, modificar, destruir) son necesarias para pasar del estado actual al estado descrito.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">"aws_instance"</span><span class="w"> </span><span class="nv">"servidor_web"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">"ami-0abcdef1234567890"</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"t3.micro"</span>
+
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"servidor-web-produccion"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Este bloque no dice "conéctate a AWS, crea una instancia, espera a que arranque, asígnale una etiqueta": simplemente declara que debe existir una instancia con esas características. Si el bloque ya existe y no ha cambiado, Terraform no hace nada al volver a aplicarlo — la misma idea de fondo que la idempotencia de Ansible, pero aplicada a la creación de infraestructura en lugar de a la configuración de software dentro de ella.</p>
+<h2 id="3-el-lenguaje-hcl">3. El lenguaje HCL</h2>
+<p>Terraform usa su propio lenguaje, <strong>HCL</strong> (<em>HashiCorp Configuration Language</em>), diseñado para ser más legible que JSON pero igual de fácil de procesar por una máquina. Los bloques principales que aparecen en cualquier proyecto Terraform son:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"hashicorp/aws"</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"~&gt; 5.0"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">provider</span><span class="w"> </span><span class="nv">"aws"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"eu-west-1"</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">"aws_instance"</span><span class="w"> </span><span class="nv">"web"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="nv">var.ami_id</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.tipo_instancia</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"tipo_instancia"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Tipo de instancia EC2"</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"t3.micro"</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">"ip_publica"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.web.public_ip</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>terraform</code></strong>: bloque de configuración del propio proyecto (versión requerida, providers necesarios, backend de estado).</li>
+<li><strong><code>provider</code></strong>: configura el proveedor concreto (credenciales, región).</li>
+<li><strong><code>resource</code></strong>: declara un recurso a crear (una instancia, una red, un disco...). El formato es <code>resource "tipo" "nombre_local"</code>.</li>
+<li><strong><code>variable</code></strong>: parámetro de entrada que hace el módulo reutilizable sin tocar el código.</li>
+<li><strong><code>output</code></strong>: valor de salida que Terraform expone tras aplicar los cambios (por ejemplo, la IP pública asignada).</li>
+</ul>
+<h2 id="4-providers-el-puente-hacia-cada-plataforma">4. Providers: el puente hacia cada plataforma</h2>
+<p>Un <strong>provider</strong> es un plugin que traduce los bloques HCL en llamadas concretas a la API de una plataforma. Terraform en sí mismo no sabe nada de AWS, Azure o Proxmox: todo ese conocimiento vive en el provider correspondiente, que se descarga durante <code>terraform init</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Plataforma</th>
+<th>Recursos típicos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hashicorp/aws</code></td>
+<td>Amazon Web Services</td>
+<td><code>aws_instance</code>, <code>aws_vpc</code>, <code>aws_s3_bucket</code>, <code>aws_security_group</code></td>
+</tr>
+<tr>
+<td><code>hashicorp/azurerm</code></td>
+<td>Microsoft Azure</td>
+<td><code>azurerm_virtual_machine</code>, <code>azurerm_resource_group</code></td>
+</tr>
+<tr>
+<td><code>hashicorp/google</code></td>
+<td>Google Cloud Platform</td>
+<td><code>google_compute_instance</code>, <code>google_storage_bucket</code></td>
+</tr>
+<tr>
+<td><code>telmate/proxmox</code></td>
+<td>Proxmox VE (virtualización on-premise)</td>
+<td><code>proxmox_vm_qemu</code></td>
+</tr>
+<tr>
+<td><code>hashicorp/kubernetes</code></td>
+<td>Clústeres Kubernetes</td>
+<td><code>kubernetes_deployment</code>, <code>kubernetes_service</code></td>
+</tr>
+<tr>
+<td><code>cloudflare/cloudflare</code></td>
+<td>DNS y CDN de Cloudflare</td>
+<td><code>cloudflare_record</code>, <code>cloudflare_zone</code></td>
+</tr>
+</tbody>
+</table>
+<p>Un mismo proyecto puede combinar varios providers a la vez —por ejemplo, crear una instancia en AWS y, en el mismo <code>apply</code>, registrar su IP en un DNS gestionado por Cloudflare— porque cada <code>resource</code> especifica su propio tipo y Terraform resuelve las dependencias entre ambos automáticamente si un recurso referencia el atributo de otro.</p>
+<div class="admonition note">
+<p class="admonition-title">Proxmox como ejemplo on-premise</p>
+<p>Aunque Terraform nació muy ligado a los grandes proveedores cloud, también se usa extensamente en centros de datos propios. El provider de <strong>Proxmox VE</strong> permite declarar máquinas virtuales KVM directamente contra un clúster Proxmox local, lo cual es especialmente relevante en un contexto de administración de sistemas educativo o de pequeña/mediana empresa que no dependa de un hyperscaler.</p>
+</div>
+<h2 id="5-ciclo-de-vida-init-plan-apply-destroy">5. Ciclo de vida: init, plan, apply, destroy</h2>
+<p>El flujo de trabajo de Terraform se articula en cuatro comandos que se ejecutan siempre en el mismo orden lógico:</p>
+<h3 id="terraform-init"><code>terraform init</code></h3>
+<p>Prepara el directorio de trabajo: descarga los providers declarados en el bloque <code>terraform</code>, descarga los módulos externos referenciados, y configura el backend donde se guardará el estado. Se ejecuta una vez al empezar el proyecto y cada vez que cambian los providers o el backend.</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>init
+</code></pre></div>
+<h3 id="terraform-plan"><code>terraform plan</code></h3>
+<p>Compara la configuración declarada en los ficheros <code>.tf</code> con el estado actual registrado (<code>.tfstate</code>) y con la infraestructura real, y muestra un <strong>plan de ejecución</strong>: qué recursos se crearían, cuáles se modificarían y cuáles se eliminarían, sin aplicar ningún cambio todavía.</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>plan<span class="w"> </span>-out<span class="o">=</span>plan.tfplan
+</code></pre></div>
+<p>La salida usa un convenio de símbolos que conviene reconocer de un vistazo: <code>+</code> para crear, <code>-</code> para eliminar, <code>~</code> para modificar in situ, y <code>-/+</code> para recrear (eliminar y volver a crear porque el cambio no admite modificación en caliente).</p>
+<h3 id="terraform-apply"><code>terraform apply</code></h3>
+<p>Ejecuta el plan calculado, realizando las llamadas reales a la API del provider para crear, modificar o eliminar los recursos necesarios, y actualiza el fichero de estado con el resultado.</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>apply<span class="w"> </span>plan.tfplan
+</code></pre></div>
+<p>Sin un plan guardado previamente, <code>terraform apply</code> calcula el plan en el momento y pide confirmación explícita (escribir <code>yes</code>) antes de aplicar los cambios — una salvaguarda deliberada frente a aplicar cambios no revisados en infraestructura real.</p>
+<h3 id="terraform-destroy"><code>terraform destroy</code></h3>
+<p>Elimina todos los recursos que Terraform tiene registrados en el estado para ese directorio de trabajo. Es una operación destructiva y, salvo que se use <code>-target</code>, afecta a <strong>toda</strong> la infraestructura gestionada por ese estado.</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>destroy
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title"><code>terraform destroy</code> no pregunta dos veces</p>
+<p>Al igual que <code>vagrant destroy</code>, esta operación es irreversible desde el punto de vista de Terraform: una vez aplicada, los recursos reales desaparecen del proveedor. La diferencia con Vagrant es la escala del daño potencial — mientras que una VM de Vagrant es un entorno de desarrollo desechable, un <code>terraform destroy</code> accidental sobre el estado equivocado puede eliminar infraestructura de producción. Por eso es habitual restringir en el propio backend quién tiene permisos para ejecutar <code>apply</code> o <code>destroy</code> sobre los entornos críticos.</p>
+</div>
+<h2 id="6-el-estado-tfstate-y-backends-remotos">6. El estado: <code>.tfstate</code> y backends remotos</h2>
+<p>El <strong>estado</strong> es, posiblemente, el concepto más delicado de entender en Terraform y el que más lo diferencia de una herramienta de aprovisionamiento sin memoria. Cada vez que se ejecuta <code>terraform apply</code>, Terraform escribe en un fichero (<code>terraform.tfstate</code>, en formato JSON) qué recursos existen, con qué identificadores reales del proveedor y con qué atributos — es el "mapa" que conecta cada bloque <code>resource</code> del código con el objeto real correspondiente en AWS, Azure o donde sea.</p>
+<p>Sin este fichero, Terraform no tendría forma de saber que el bloque <code>aws_instance.web</code> del código corresponde a la instancia con ID <code>i-0abc123</code> ya creada en AWS, y en el siguiente <code>plan</code> intentaría crearla de nuevo en lugar de detectar que ya existe.</p>
+<h3 id="por-que-el-estado-local-no-basta-en-equipo">Por qué el estado local no basta en equipo</h3>
+<p>Guardar <code>terraform.tfstate</code> como un fichero local en el portátil de cada persona genera un problema evidente: si dos personas del equipo aplican cambios de forma independiente, cada una tiene una versión distinta del estado, y no hay forma de evitar que se pisen los cambios mutuamente.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/terraform-estado.svg" data-desc-position="bottom"><img alt="Estado remoto de Terraform coordinando el trabajo de varios ingenieros sobre la misma infraestructura" src="../../assets/img/06auto-monit/terraform-estado.svg"></a></p>
+<p>La solución es un <strong>backend remoto</strong>: el estado se guarda en un almacenamiento compartido (S3 con bloqueo por DynamoDB, Azure Blob Storage, Google Cloud Storage, o el propio <strong>Terraform Cloud/HCP Terraform</strong> de HashiCorp) que además implementa un mecanismo de bloqueo (<em>locking</em>): mientras una persona está aplicando cambios, cualquier otra que intente ejecutar <code>apply</code> sobre el mismo estado recibe un aviso de bloqueo, evitando condiciones de carrera.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">"s3"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">"miempresa-terraform-state"</span>
+<span class="w">    </span><span class="na">key</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">"produccion/red/terraform.tfstate"</span>
+<span class="w">    </span><span class="na">region</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">"eu-west-1"</span>
+<span class="w">    </span><span class="na">dynamodb_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"terraform-locks"</span>
+<span class="w">    </span><span class="na">encrypt</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">El .tfstate contiene información sensible</p>
+<p>El fichero de estado incluye, en muchos casos, atributos sensibles de los recursos (contraseñas generadas, claves privadas, cadenas de conexión) en texto plano dentro del JSON. Por eso nunca debe versionarse en Git sin cifrar, y los backends remotos recomendados (S3 con <code>encrypt = true</code>, Terraform Cloud) cifran el estado en reposo.</p>
+</div>
+<h2 id="7-variables-y-outputs">7. Variables y outputs</h2>
+<p>Igual que las plantillas Jinja2 de Ansible evitan repetir configuración fija para cada host, las <strong>variables</strong> de Terraform permiten parametrizar un mismo conjunto de ficheros <code>.tf</code> para distintos entornos (desarrollo, preproducción, producción) sin duplicar código:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">variable</span><span class="w"> </span><span class="nv">"entorno"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Nombre del entorno de despliegue"</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"tipo_instancia"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"t3.micro"</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"numero_instancias"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">number</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Los valores se pueden fijar de varias formas, con un orden de precedencia bien definido: por línea de comandos (<code>-var="entorno=produccion"</code>), por fichero (<code>terraform.tfvars</code> o <code>*.auto.tfvars</code>), por variables de entorno (<code>TF_VAR_entorno</code>), o dejando el valor por defecto del propio bloque <code>variable</code>.</p>
+<p>Los <strong>outputs</strong>, por su parte, exponen valores calculados tras el <code>apply</code> —útiles tanto para consultarlos manualmente como para encadenarlos a otras herramientas (por ejemplo, pasar la IP de una instancia recién creada a un inventario de Ansible generado automáticamente)—:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">output</span><span class="w"> </span><span class="nv">"ip_publica_web"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"IP pública de la instancia web"</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.web.public_ip</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">"endpoint_bd"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_instance.principal.endpoint</span>
+<span class="w">  </span><span class="na">sensitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El atributo <code>sensitive = true</code> evita que ese valor se muestre en texto plano en la salida de la terminal durante un <code>plan</code> o <code>apply</code>, aunque sigue quedando almacenado dentro del <code>.tfstate</code>.</p>
+<h2 id="8-modulos-reutilizables">8. Módulos reutilizables</h2>
+<p>Un <strong>módulo</strong> es un conjunto de ficheros <code>.tf</code> agrupados en una carpeta, pensado para reutilizarse desde distintos proyectos o distintos entornos del mismo proyecto — el equivalente directo, en el mundo de Terraform, a lo que es un rol en Ansible.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/terraform-modulos.svg" data-desc-position="bottom"><img alt="Módulos reutilizables de Terraform: el root module invoca módulos de red, cómputo y base de datos" src="../../assets/img/06auto-monit/terraform-modulos.svg"></a></p>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">"servidor_web"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">"./modulos/instancia-ec2"</span>
+<span class="w">  </span><span class="na">tipo_instancia</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"t3.small"</span>
+<span class="w">  </span><span class="na">entorno</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">"produccion"</span>
+<span class="w">  </span><span class="na">numero_instancias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">"base_datos"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">"./modulos/rds-postgres"</span>
+<span class="w">  </span><span class="na">entorno</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"produccion"</span>
+<span class="w">  </span><span class="na">tamano_disco_gb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El proyecto raíz (<em>root module</em>) invoca módulos hijos pasándoles variables como parámetros, exactamente igual que una función recibe argumentos en cualquier lenguaje de programación. Los módulos pueden ser locales (una carpeta dentro del propio repositorio), o publicados en el <a href="https://registry.terraform.io/" target="_blank">Terraform Registry</a>, el catálogo público equivalente a Ansible Galaxy pero para módulos de infraestructura.</p>
+<h2 id="9-terraform-frente-a-ansible-declarativo-vs-procedimental-aprovisionamiento-vs-configuracion">9. Terraform frente a Ansible: declarativo vs procedimental, aprovisionamiento vs configuración</h2>
+<p>Aunque ambas herramientas usan lenguajes declarativos y ambas evitan la configuración manual, resuelven problemas distintos y complementarios:</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Terraform</th>
+<th>Ansible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué gestiona</td>
+<td>La existencia de recursos de infraestructura (VMs, redes, discos, DNS...)</td>
+<td>El estado del software dentro de sistemas ya existentes</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>Mantiene un fichero de estado explícito (<code>.tfstate</code>) que rastrea cada recurso</td>
+<td>No mantiene estado propio: cada ejecución comprueba el sistema real en el momento</td>
+</tr>
+<tr>
+<td>Modelo mental</td>
+<td>"Que exista esta infraestructura"</td>
+<td>"Que este sistema tenga esta configuración"</td>
+</tr>
+<tr>
+<td>Cuándo actúa</td>
+<td>Al crear, redimensionar o eliminar recursos</td>
+<td>En cualquier momento, tantas veces como haga falta, sin relación con cuándo se creó el recurso</td>
+</tr>
+<tr>
+<td>Ejemplo típico</td>
+<td>Crear una instancia EC2, una VPC y un grupo de seguridad</td>
+<td>Instalar Nginx y desplegar su configuración dentro de esa instancia ya creada</td>
+</tr>
+<tr>
+<td>Consecuencia de borrar el fichero de estado/config</td>
+<td>Terraform "olvida" qué gestiona; puede intentar recrear recursos ya existentes</td>
+<td>Ansible simplemente re-evalúa el sistema real la próxima vez, sin pérdida de información</td>
+</tr>
+</tbody>
+</table>
+<p>La combinación más habitual en proyectos reales sigue el orden: <strong>Terraform aprovisiona</strong> (la máquina virtual o instancia pasa a existir, con red y disco), y <strong>Ansible configura</strong> (se instala y ajusta el software dentro de esa máquina ya existente). Intentar que Terraform gestione la configuración interna de un sistema operativo (instalar paquetes, editar ficheros de configuración) es forzar la herramienta fuera de su propósito; lo mismo ocurre a la inversa si se intenta usar Ansible para crear la VPC de una cuenta de AWS desde cero sin usar sus módulos de cloud, en lugar de dejar esa tarea a Terraform.</p>
+<h2 id="10-ejemplo-completo-desplegar-una-instancia-ec2-en-aws">10. Ejemplo completo: desplegar una instancia EC2 en AWS</h2>
+<p>El siguiente proyecto combina provider, variables, un recurso de red mínimo, la instancia y un output, formando un ejemplo completo y funcional:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># main.tf</span>
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">required_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&gt;= 1.5.0"</span>
+
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"hashicorp/aws"</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"~&gt; 5.0"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">"s3"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"miempresa-terraform-state"</span>
+<span class="w">    </span><span class="na">key</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"practica/ec2/terraform.tfstate"</span>
+<span class="w">    </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"eu-west-1"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">provider</span><span class="w"> </span><span class="nv">"aws"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.region</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">"aws_security_group"</span><span class="w"> </span><span class="nv">"web_sg"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"sg-servidor-web"</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Permite trafico HTTP y SSH"</span>
+
+<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">22</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">22</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp"</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"0.0.0.0/0"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp"</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"0.0.0.0/0"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">egress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"-1"</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"0.0.0.0/0"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">"aws_instance"</span><span class="w"> </span><span class="nv">"servidor_web"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.ami_id</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">var.tipo_instancia</span>
+<span class="w">  </span><span class="na">key_name</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="nv">var.nombre_clave_ssh</span>
+<span class="w">  </span><span class="na">vpc_security_group_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">aws_security_group.web_sg.id</span><span class="p">]</span>
+
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"servidor-web-${var.entorno}"</span>
+<span class="w">    </span><span class="na">Entorno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.entorno</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># variables.tf</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"region"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"eu-west-1"</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"ami_id"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AMI de Ubuntu Server 22.04 para la región elegida"</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"tipo_instancia"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"t3.micro"</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"nombre_clave_ssh"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Nombre del par de claves SSH ya creado en AWS"</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">"entorno"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desarrollo"</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">"ip_publica"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"IP publica asignada a la instancia"</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.servidor_web.public_ip</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">"id_instancia"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.servidor_web.id</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El flujo completo para desplegar esta infraestructura sería:</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>init
+terraform<span class="w"> </span>plan<span class="w"> </span>-var<span class="o">=</span><span class="s2">"ami_id=ami-0abcdef1234567890"</span><span class="w"> </span>-var<span class="o">=</span><span class="s2">"nombre_clave_ssh=clave-practica"</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>-var<span class="o">=</span><span class="s2">"ami_id=ami-0abcdef1234567890"</span><span class="w"> </span>-var<span class="o">=</span><span class="s2">"nombre_clave_ssh=clave-practica"</span>
+</code></pre></div>
+<p>Y una vez terminada la práctica o el entorno de pruebas, liberar los recursos (y dejar de pagar por ellos) con:</p>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>destroy<span class="w"> </span>-var<span class="o">=</span><span class="s2">"ami_id=ami-0abcdef1234567890"</span><span class="w"> </span>-var<span class="o">=</span><span class="s2">"nombre_clave_ssh=clave-practica"</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">El mismo patrón en Proxmox on-premise</p>
+<p>El mismo esquema —provider, security group equivalente, recurso de VM, variables y outputs— se aplica prácticamente igual usando el provider <code>telmate/proxmox</code>, cambiando <code>aws_instance</code> por <code>proxmox_vm_qemu</code> y <code>aws_security_group</code> por las reglas de firewall del propio Proxmox. La lógica de Terraform (init/plan/apply/destroy, estado, variables) es idéntica independientemente del proveedor de destino; lo único que cambia es el vocabulario de recursos que ofrece cada provider.</p>
+</div>
+<h2 id="11-comandos-basicos-adicionales">11. Comandos básicos adicionales</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>terraform init</code></td>
+<td>Inicializa el proyecto: descarga providers, módulos y configura el backend</td>
+</tr>
+<tr>
+<td><code>terraform validate</code></td>
+<td>Comprueba que la sintaxis HCL es correcta, sin consultar al proveedor</td>
+</tr>
+<tr>
+<td><code>terraform fmt</code></td>
+<td>Reformatea los ficheros <code>.tf</code> según el estilo estándar</td>
+</tr>
+<tr>
+<td><code>terraform plan</code></td>
+<td>Calcula y muestra los cambios pendientes sin aplicarlos</td>
+</tr>
+<tr>
+<td><code>terraform apply</code></td>
+<td>Aplica los cambios calculados en el plan</td>
+</tr>
+<tr>
+<td><code>terraform destroy</code></td>
+<td>Elimina toda la infraestructura gestionada por el estado actual</td>
+</tr>
+<tr>
+<td><code>terraform show</code></td>
+<td>Muestra el estado actual en formato legible</td>
+</tr>
+<tr>
+<td><code>terraform state list</code></td>
+<td>Lista todos los recursos registrados en el estado</td>
+</tr>
+<tr>
+<td><code>terraform state show &lt;recurso&gt;</code></td>
+<td>Muestra los atributos detallados de un recurso concreto del estado</td>
+</tr>
+<tr>
+<td><code>terraform output</code></td>
+<td>Muestra los valores de los outputs definidos</td>
+</tr>
+<tr>
+<td><code>terraform import &lt;recurso&gt; &lt;id&gt;</code></td>
+<td>Incorpora al estado un recurso creado manualmente fuera de Terraform</td>
+</tr>
+<tr>
+<td><code>terraform workspace list</code></td>
+<td>Lista los <em>workspaces</em> (entornos aislados dentro del mismo backend)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-buenas-practicas">12. Buenas prácticas</h2>
+<ul>
+<li><strong>Nunca editar el <code>.tfstate</code> a mano</strong>: cualquier cambio en el estado debe hacerse a través de comandos de Terraform (<code>terraform state mv</code>, <code>terraform import</code>), nunca editando el JSON directamente.</li>
+<li><strong>Usar siempre un backend remoto con bloqueo</strong> en cuanto trabaje más de una persona en el proyecto, incluso en entornos de prueba.</li>
+<li><strong>Revisar el <code>plan</code> antes de cada <code>apply</code></strong>, prestando especial atención a las líneas <code>-/+</code> (recrear), que implican destruir y volver a crear un recurso — a menudo con pérdida de datos si es una base de datos o un disco.</li>
+<li><strong>Separar el estado por entorno</strong> (desarrollo, preproducción, producción), normalmente mediante <em>workspaces</em> o mediante backends distintos, para que un error en desarrollo no pueda afectar nunca a producción.</li>
+<li><strong>No versionar credenciales en los ficheros <code>.tf</code></strong>: usar variables de entorno, un gestor de secretos (Vault, AWS Secrets Manager) o ficheros <code>.tfvars</code> explícitamente excluidos del control de versiones.</li>
+<li><strong>Modularizar en cuanto se repita un mismo patrón de recursos</strong> dos o más veces (por ejemplo, una VPC por entorno): un módulo bien escrito una vez se reutiliza indefinidamente.</li>
+<li><strong>Fijar versiones de providers y de Terraform</strong> (<code>required_version</code>, <code>required_providers</code>) para que una actualización futura no cambie el comportamiento de un proyecto que llevaba tiempo estable.</li>
+</ul>
+<h2 id="ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno">Ansible vs Vagrant vs Terraform: cuándo usar cada uno</h2>
+<p>Desde la perspectiva de Terraform, su papel se limita deliberadamente a la capa de infraestructura, dejando la configuración interna de los sistemas a otras herramientas:</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Ansible</th>
+<th>Vagrant</th>
+<th>Terraform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Propósito principal</td>
+<td>Configurar software dentro de máquinas ya existentes</td>
+<td>Crear y gestionar entornos de desarrollo locales reproducibles</td>
+<td>Crear y gestionar infraestructura (VMs, redes, servicios cloud)</td>
+</tr>
+<tr>
+<td>Paradigma</td>
+<td>Declarativo por tareas (con orden de ejecución explícito)</td>
+<td>Declarativo sobre el propio entorno de desarrollo</td>
+<td>Declarativo puro, con grafo de dependencias resuelto automáticamente</td>
+</tr>
+<tr>
+<td>Mantiene estado propio</td>
+<td>No</td>
+<td>No (delega en el hipervisor)</td>
+<td>Sí, de forma explícita (<code>.tfstate</code>)</td>
+</tr>
+<tr>
+<td>Ámbito típico</td>
+<td>Cualquier servidor accesible por SSH, local o remoto</td>
+<td>El equipo local del desarrollador</td>
+<td>Cuentas cloud o centros de datos on-premise, en equipo</td>
+</tr>
+<tr>
+<td>Ejemplo típico de uso</td>
+<td>Instalar y configurar Nginx en 20 servidores</td>
+<td>Levantar un entorno de pruebas idéntico en el portátil de cada persona</td>
+<td>Crear la VPC, las instancias EC2 y el balanceador en AWS</td>
+</tr>
+<tr>
+<td>Relación entre ellas</td>
+<td>Puede ejecutarse tras un <code>terraform apply</code> para configurar lo recién creado</td>
+<td>Puede invocar Ansible como provisioner tras el <code>vagrant up</code></td>
+<td>Puede dejar la infraestructura lista para que Ansible la configure después</td>
+</tr>
+</tbody>
+</table>
+<p>La regla práctica que resume esta unidad completa: <strong>Terraform decide qué existe, Ansible decide cómo está configurado lo que existe, y Vagrant es el "Terraform" en miniatura para el entorno de desarrollo local de cada persona</strong>, antes incluso de llegar a tocar infraestructura real en la nube.</p>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>La documentación oficial de HashiCorp para Terraform es la referencia más fiable para cualquier duda concreta: la <a href="https://developer.hashicorp.com/terraform/intro" target="_blank">guía de introducción a Terraform</a> explica el paradigma IaC y el flujo de trabajo básico; la <a href="https://developer.hashicorp.com/terraform/language" target="_blank">documentación del lenguaje HCL y sus bloques</a> detalla la sintaxis de <code>resource</code>, <code>variable</code>, <code>module</code> y <code>output</code> vista en este apartado; y la <a href="https://developer.hashicorp.com/terraform/language/backend" target="_blank">documentación sobre backends y gestión del estado</a> profundiza en cómo configurar un backend remoto con bloqueo. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos. Como ejemplo práctico, <a href="https://github.com/jose-emilio" target="_blank">jose-emilio/terraform-on-aws</a> despliega infraestructura en AWS Academy con Terraform, útil para contrastar con los ejemplos de este apartado.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

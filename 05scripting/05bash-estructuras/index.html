@@ -1,0 +1,4387 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/05scripting/05bash-estructuras/">
+      
+      
+        <link rel="prev" href="../scriptingidp/">
+      
+      
+        <link rel="next" href="../04vscode-git/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Estructuras y funciones - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bash-estructuras-de-control-y-funciones" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estructuras y funciones
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-secuenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras secuenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-condicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras condicionales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras condicionales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-sentencia-if-elif-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sentencia if / elif / else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-test-mas-habituales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores de test más habituales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-sentencia-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sentencia case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-repetitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras repetitivas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras repetitivas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-until" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle until
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break-y-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        break y continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaracion-y-llamada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaración y llamada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-posicionales-dentro-de-una-funcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros posicionales dentro de una función
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-de-retorno-return-frente-a-echo-capturado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores de retorno: return frente a echo capturado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-locales-con-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables locales con local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#script-de-ejemplo-completo-las-cuatro-estructuras-combinadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de ejemplo completo: las cuatro estructuras combinadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-resumen-final-de-sintaxis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla resumen final de sintaxis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glosario-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Glosario rápido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-secuenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras secuenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-condicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras condicionales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras condicionales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-sentencia-if-elif-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sentencia if / elif / else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-test-mas-habituales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores de test más habituales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-sentencia-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sentencia case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-repetitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructuras repetitivas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras repetitivas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-bucle-until" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El bucle until
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break-y-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        break y continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaracion-y-llamada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaración y llamada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-posicionales-dentro-de-una-funcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros posicionales dentro de una función
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-de-retorno-return-frente-a-echo-capturado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores de retorno: return frente a echo capturado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-locales-con-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables locales con local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#script-de-ejemplo-completo-las-cuatro-estructuras-combinadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de ejemplo completo: las cuatro estructuras combinadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-resumen-final-de-sintaxis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla resumen final de sintaxis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glosario-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Glosario rápido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bash-estructuras-de-control-y-funciones"><strong>🐚 Bash · Estructuras de control y funciones</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/bash-flujo-control.svg" data-desc-position="bottom"><img alt="Los cuatro tipos de estructura de control en un script Bash: secuencial, condicional, repetitiva y función" src="../../assets/img/05script/bash-flujo-control.svg"></a></p>
+<p>Un script de Bash no es más que una lista de comandos guardada en un archivo, pero lo que convierte esa lista en un <strong>programa</strong> capaz de tomar decisiones y adaptarse a distintas situaciones son sus <strong>estructuras de control</strong>. Este apartado las presenta separadas por tipo —secuenciales, condicionales, repetitivas y funciones— porque cada una resuelve un problema distinto y conviene tenerlas bien diferenciadas antes de empezar a combinarlas en scripts reales de administración de sistemas.</p>
+<h2 id="estructuras-secuenciales">Estructuras secuenciales</h2>
+<p>Una estructura <strong>secuencial</strong> es, simplemente, la ejecución de instrucciones <strong>una detrás de otra, en el orden en que aparecen en el archivo</strong>, sin saltos ni repeticiones. Es la estructura por defecto de cualquier script: si no se usa ningún condicional ni ningún bucle, el intérprete de Bash lee el archivo de arriba abajo y ejecuta cada línea exactamente una vez.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Script secuencial: informe básico del sistema</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"== Informe del sistema =="</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Fecha: </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Usuario actual: </span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Directorio actual: </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Espacio en disco:"</span>
+df<span class="w"> </span>-h<span class="w"> </span>/
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"== Fin del informe =="</span>
+</code></pre></div>
+<p>Al ejecutar este script (<code>bash informe.sh</code>), Bash procesa cada línea en el orden exacto en que está escrita: primero imprime el título, luego la fecha, luego el usuario, y así sucesivamente hasta la última línea. No hay ninguna decisión ni ninguna repetición: <strong>cada instrucción se ejecuta una única vez</strong>, en el orden en que el autor la escribió.</p>
+<div class="admonition note">
+<p class="admonition-title">La secuencia también incluye el orden de las variables</p>
+<p>Un error habitual de quien empieza con Bash es usar una variable antes de haberla asignado (por ejemplo, <code>echo "Hola, $nombre"</code> antes de la línea <code>nombre="Ana"</code>). Como Bash ejecuta de forma secuencial y no "adivina" declaraciones futuras, en ese caso <code>$nombre</code> estaría vacía en el momento de imprimirse.</p>
+</div>
+<p>Esta estructura, aunque parezca trivial, es la base sobre la que se apoyan las otras tres: dentro de un <code>if</code>, de un <code>for</code> o del cuerpo de una función, el bloque de instrucciones que se ejecuta <strong>también es una secuencia</strong> de comandos, uno detrás de otro.</p>
+<h2 id="estructuras-condicionales">Estructuras condicionales</h2>
+<p>Una estructura <strong>condicional</strong> permite que el script tome un camino u otro <strong>según se cumpla o no una condición</strong>. Es la herramienta que convierte un script de "hacer siempre lo mismo" en un script que reacciona a la situación real del sistema (¿existe el archivo?, ¿el proceso sigue vivo?, ¿el disco está lleno?).</p>
+<h3 id="la-sentencia-if-elif-else">La sentencia if / elif / else</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Comprueba el espacio libre en la partición raíz</span>
+
+<span class="nv">uso</span><span class="o">=</span><span class="k">$(</span>df<span class="w"> </span>/<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $5}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'%'</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$uso</span><span class="s2">"</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"CRÍTICO: el disco está al </span><span class="si">${</span><span class="nv">uso</span><span class="si">}</span><span class="s2">% de uso"</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$uso</span><span class="s2">"</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">75</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"AVISO: el disco está al </span><span class="si">${</span><span class="nv">uso</span><span class="si">}</span><span class="s2">% de uso"</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"OK: el disco está al </span><span class="si">${</span><span class="nv">uso</span><span class="si">}</span><span class="s2">% de uso"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<p>La estructura evalúa las condiciones <strong>en orden</strong>: si la primera (<code>if</code>) es verdadera, ejecuta ese bloque y no comprueba las siguientes; si es falsa, pasa a la primera condición <code>elif</code> que encuentre; si ninguna se cumple, ejecuta el bloque <code>else</code>. Puede haber tantos <code>elif</code> como se necesiten, y tanto <code>elif</code> como <code>else</code> son opcionales.</p>
+<h3 id="operadores-de-test-mas-habituales">Operadores de test más habituales</h3>
+<p>Los corchetes <code>[ ]</code> son en realidad el comando <code>test</code> con una sintaxis alternativa. Los operadores más usados en administración de sistemas son:</p>
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Comprueba</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-eq</code></td>
+<td>Igualdad numérica</td>
+<td><code>[ "$a" -eq "$b" ]</code></td>
+</tr>
+<tr>
+<td><code>-ne</code></td>
+<td>Distinto numérico</td>
+<td><code>[ "$a" -ne "$b" ]</code></td>
+</tr>
+<tr>
+<td><code>-lt</code></td>
+<td>Menor que (numérico)</td>
+<td><code>[ "$a" -lt 10 ]</code></td>
+</tr>
+<tr>
+<td><code>-le</code></td>
+<td>Menor o igual (numérico)</td>
+<td><code>[ "$a" -le 10 ]</code></td>
+</tr>
+<tr>
+<td><code>-gt</code></td>
+<td>Mayor que (numérico)</td>
+<td><code>[ "$a" -gt 10 ]</code></td>
+</tr>
+<tr>
+<td><code>-ge</code></td>
+<td>Mayor o igual (numérico)</td>
+<td><code>[ "$a" -ge 10 ]</code></td>
+</tr>
+<tr>
+<td><code>=</code> / <code>==</code></td>
+<td>Igualdad de cadenas</td>
+<td><code>[ "$nombre" = "root" ]</code></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Distinto de cadenas</td>
+<td><code>[ "$nombre" != "root" ]</code></td>
+</tr>
+<tr>
+<td><code>-z</code></td>
+<td>Cadena vacía</td>
+<td><code>[ -z "$var" ]</code></td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>Cadena no vacía</td>
+<td><code>[ -n "$var" ]</code></td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>El archivo existe y es un archivo regular</td>
+<td><code>[ -f /etc/passwd ]</code></td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>El archivo existe y es un directorio</td>
+<td><code>[ -d /var/log ]</code></td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>La ruta existe (archivo o carpeta)</td>
+<td><code>[ -e /tmp/lock ]</code></td>
+</tr>
+<tr>
+<td><code>-r</code> / <code>-w</code> / <code>-x</code></td>
+<td>Existe y tiene permiso de lectura/escritura/ejecución</td>
+<td><code>[ -x script.sh ]</code></td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>El archivo existe y no está vacío</td>
+<td><code>[ -s backup.log ]</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">archivo</span><span class="o">=</span><span class="s2">"/etc/nginx/nginx.conf"</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$archivo</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"El archivo de configuración existe"</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="nv">$archivo</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Y además se puede leer"</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"No se encuentra </span><span class="nv">$archivo</span><span class="s2">"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<p>Los operadores lógicos combinan condiciones: <code>-a</code> (Y) y <code>-o</code> (O) dentro de un mismo <code>[ ]</code>, o bien <code>&amp;&amp;</code> y <code>||</code> entre corchetes separados (forma recomendada porque evita ambigüedades):</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$archivo</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="nv">$archivo</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Existe y se puede leer"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">[ ] frente a [[ ]]</p>
+<p><code>[ ]</code> es POSIX (funciona en cualquier shell compatible), pero <code>[[ ]]</code> es una extensión propia de Bash más segura y flexible: permite usar <code>&amp;&amp;</code>/<code>||</code> directamente dentro de los corchetes, soporta <em>pattern matching</em> (<code>[[ $archivo == *.log ]]</code>) y <strong>no requiere entrecomillar las variables</strong> para evitar errores si están vacías o contienen espacios. Si el script es exclusivamente para Bash (no necesita ser portable a <code>sh</code> o <code>dash</code>), <code>[[ ]]</code> es la opción recomendada.</p>
+</div>
+<h3 id="la-sentencia-case">La sentencia case</h3>
+<p><code>case</code> es la alternativa a encadenar muchos <code>elif</code> cuando se compara una misma variable contra varios valores posibles, similar al <code>switch</code> de otros lenguajes:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Selecciona una acción: start|stop|restart|status"</span>
+<span class="nb">read</span><span class="w"> </span>accion
+
+<span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$accion</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>start<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Iniciando el servicio..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>stop<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Deteniendo el servicio..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>restart<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Reiniciando el servicio..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>status<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Consultando el estado..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Acción no reconocida"</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
+<p>Cada bloque termina con <code>;;</code>, y el patrón <code>*)</code> al final actúa como un "en cualquier otro caso", igual que el <code>else</code> de un <code>if</code>. <code>case</code> también admite comodines y varios valores separados por <code>|</code> en un mismo patrón (<code>start|begin) ...;;</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Estructura</th>
+<th>Cuándo usarla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>if</code> / <code>elif</code> / <code>else</code></td>
+<td>Condiciones basadas en comparaciones, rangos o combinaciones lógicas</td>
+</tr>
+<tr>
+<td><code>case</code></td>
+<td>Comparar una única variable contra una lista cerrada de valores posibles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="estructuras-repetitivas">Estructuras repetitivas</h2>
+<p>Las estructuras <strong>repetitivas</strong> (bucles) ejecutan un mismo bloque de instrucciones varias veces, evitando repetir código a mano. Bash ofrece tres: <code>for</code>, <code>while</code> y <code>until</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/bash-bucles.svg" data-desc-position="bottom"><img alt="Comparación de for, while y until: número de vueltas fijo frente a condición evaluada en cada iteración" src="../../assets/img/05script/bash-bucles.svg"></a></p>
+<h3 id="el-bucle-for">El bucle for</h3>
+<p>Recorre una lista de elementos conocida de antemano: un rango de números, los elementos de un array, o la salida de un comando.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Recorre un rango de números</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..5<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Procesando elemento número </span><span class="nv">$i</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="c1"># Recorre una lista de valores explícita</span>
+<span class="k">for</span><span class="w"> </span>servicio<span class="w"> </span><span class="k">in</span><span class="w"> </span>nginx<span class="w"> </span>mysql<span class="w"> </span>ssh<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>--quiet<span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">: activo"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">: parado"</span>
+<span class="k">done</span>
+
+<span class="c1"># Sintaxis estilo C, útil para contadores con paso distinto de 1</span>
+<span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">2</span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Par: </span><span class="nv">$i</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="c1"># Recorre los archivos de un directorio</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>/var/log/*.log<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Log encontrado: </span><span class="nv">$f</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre></div>
+<h3 id="el-bucle-while">El bucle while</h3>
+<p>Repite el bloque <strong>mientras</strong> la condición evaluada al principio de cada vuelta sea verdadera. Se usa cuando no se sabe de antemano cuántas iteraciones harán falta.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Espera hasta que un servicio responda, con un máximo de 10 intentos</span>
+<span class="nv">intentos</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$intentos</span><span class="s2">"</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>http://localhost:8080<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"El servicio ya responde"</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Intento </span><span class="k">$((</span><span class="nv">intentos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="s2">: el servicio aún no responde"</span>
+<span class="w">    </span><span class="nv">intentos</span><span class="o">=</span><span class="k">$((</span><span class="nv">intentos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="w">    </span>sleep<span class="w"> </span><span class="m">2</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>Un patrón muy habitual en administración de sistemas es leer un archivo línea a línea con <code>while</code> combinado con <code>read</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>linea<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usuario detectado: </span><span class="nv">$linea</span><span class="s2">"</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/etc/passwd
+</code></pre></div>
+<h3 id="el-bucle-until">El bucle until</h3>
+<p>Es el inverso lógico de <code>while</code>: repite el bloque <strong>hasta que</strong> la condición se cumpla, es decir, mientras sea falsa.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Reintenta una conexión hasta que tenga éxito</span>
+<span class="nv">contador</span><span class="o">=</span><span class="m">1</span>
+<span class="k">until</span><span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Intento </span><span class="nv">$contador</span><span class="s2">: sin conexión todavía..."</span>
+<span class="w">    </span><span class="nv">contador</span><span class="o">=</span><span class="k">$((</span><span class="nv">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="w">    </span>sleep<span class="w"> </span><span class="m">3</span>
+<span class="k">done</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Conexión establecida tras </span><span class="nv">$contador</span><span class="s2"> intento(s)"</span>
+</code></pre></div>
+<h3 id="break-y-continue">break y continue</h3>
+<p>Ambas palabras clave alteran el flujo normal de un bucle desde dentro:</p>
+<ul>
+<li><strong><code>break</code></strong>: termina el bucle inmediatamente, saltando a la primera instrucción posterior al <code>done</code>.</li>
+<li><strong><code>continue</code></strong>: interrumpe la iteración actual y salta directamente a la siguiente vuelta del bucle, sin ejecutar el resto del cuerpo.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">for</span><span class="w"> </span>numero<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$numero</span><span class="s2">"</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Encontrado el 7, salimos del bucle"</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="k">$((</span><span class="nv">numero</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="k">))</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">continue</span><span class="w">   </span><span class="c1"># Se salta los números pares</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Número impar: </span><span class="nv">$numero</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Estructura</th>
+<th>Cuándo se evalúa la condición</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for</code></td>
+<td>Recorre una lista/rango ya conocido</td>
+<td>Número de iteraciones fijo o predecible</td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td>Antes de cada iteración; continúa si es verdadera</td>
+<td>Esperar a que algo ocurra, número de vueltas desconocido</td>
+</tr>
+<tr>
+<td><code>until</code></td>
+<td>Antes de cada iteración; continúa si es falsa</td>
+<td>Reintentar hasta lograr una condición de éxito</td>
+</tr>
+<tr>
+<td><code>break</code></td>
+<td>—</td>
+<td>Abandonar el bucle por completo</td>
+</tr>
+<tr>
+<td><code>continue</code></td>
+<td>—</td>
+<td>Saltar a la siguiente iteración sin terminar el bucle</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Cuidado con los bucles infinitos</p>
+<p><code>while true; do ... done</code> o un <code>until</code> cuya condición nunca cambia dentro del cuerpo del bucle son errores muy habituales que dejan un script colgado consumiendo CPU indefinidamente. Antes de lanzar un bucle de este tipo en un servidor de producción, asegúrate de que existe una condición de salida real (un <code>break</code>, un contador máximo de intentos, un <code>timeout</code>).</p>
+</div>
+<h2 id="funciones">Funciones</h2>
+<p>Una <strong>función</strong> agrupa un bloque de instrucciones bajo un nombre, permitiendo reutilizarlo tantas veces como se necesite sin copiar y pegar código. Es la herramienta que permite que un script crezca en tamaño y complejidad sin volverse ilegible.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/bash-funciones.svg" data-desc-position="bottom"><img alt="Llamada a una función con parámetros posicionales y las dos formas de devolver un resultado" src="../../assets/img/05script/bash-funciones.svg"></a></p>
+<h3 id="declaracion-y-llamada">Declaración y llamada</h3>
+<p>Hay dos sintaxis equivalentes para declarar una función en Bash:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Forma 1: con la palabra clave function (más explícita)</span>
+<span class="k">function</span><span class="w"> </span>saludar<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hola, bienvenido al script"</span>
+<span class="o">}</span>
+
+<span class="c1"># Forma 2: solo con paréntesis (más portable, estilo POSIX)</span>
+despedirse<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Adiós, hasta la próxima"</span>
+<span class="o">}</span>
+
+saludar
+despedirse
+</code></pre></div>
+<p>Una función debe <strong>declararse antes de ser llamada</strong> en el flujo secuencial del script: Bash lee de arriba abajo, así que si se invoca una función en la línea 5 pero se define en la línea 20, el script fallará con un error de "comando no encontrado".</p>
+<h3 id="parametros-posicionales-dentro-de-una-funcion">Parámetros posicionales dentro de una función</h3>
+<p>Al llamar a una función con argumentos, estos se reciben dentro de ella exactamente igual que los argumentos de línea de comandos de un script: <code>$1</code>, <code>$2</code>, etc.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+crear_usuario<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">nombre</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">edad</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Creando usuario: </span><span class="nv">$nombre</span><span class="s2"> (edad: </span><span class="nv">$edad</span><span class="s2">)"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Todos los argumentos recibidos: </span><span class="nv">$@</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Número de argumentos: </span><span class="nv">$#</span><span class="s2">"</span>
+<span class="o">}</span>
+
+crear_usuario<span class="w"> </span><span class="s2">"ana"</span><span class="w"> </span><span class="s2">"25"</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Variable especial</th>
+<th>Significado dentro de una función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$1</code>, <code>$2</code>, <code>$3</code>...</td>
+<td>Primer, segundo, tercer argumento recibido por la función</td>
+</tr>
+<tr>
+<td><code>$0</code></td>
+<td>Nombre del script (no cambia dentro de la función)</td>
+</tr>
+<tr>
+<td><code>$#</code></td>
+<td>Número total de argumentos recibidos</td>
+</tr>
+<tr>
+<td><code>$@</code></td>
+<td>Todos los argumentos, cada uno como una palabra independiente</td>
+</tr>
+<tr>
+<td><code>$*</code></td>
+<td>Todos los argumentos como una única cadena de texto</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Entre comillas, $@ y $* se comportan distinto</p>
+<p><code>"$@"</code> expande cada argumento como una palabra separada, preservando espacios internos de cada uno (el comportamiento casi siempre deseado al reenviar argumentos a otro comando). <code>"$*"</code> los concatena todos en una sola cadena separada por el primer carácter de <code>IFS</code>. La recomendación práctica es: usa siempre <code>"$@"</code> entre comillas dobles salvo que tengas una razón concreta para lo contrario.</p>
+</div>
+<h3 id="valores-de-retorno-return-frente-a-echo-capturado">Valores de retorno: return frente a echo capturado</h3>
+<p>Bash no permite que una función "devuelva" directamente una cadena de texto o un número complejo como en otros lenguajes. Existen dos mecanismos, con propósitos distintos:</p>
+<ul>
+<li><strong><code>return &lt;código&gt;</code></strong>: termina la función devolviendo un <strong>código de salida numérico entre 0 y 255</strong>, pensado para indicar éxito (<code>0</code>) o el tipo de error (<code>1</code>, <code>2</code>...). Se consulta inmediatamente después con la variable <code>$?</code>.</li>
+<li><strong><code>echo</code> capturado con <code>$(...)</code></strong>: si la función necesita devolver un <strong>dato</strong> (una cadena, un número, una ruta), la forma habitual es que la función lo imprima con <code>echo</code> y quien la llama capture esa salida con <code>$(nombre_funcion ...)</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># return: para indicar éxito/fracaso</span>
+comprobar_par<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="k">$((</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="k">))</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="c1"># éxito: es par</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># fracaso: es impar</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
+
+comprobar_par<span class="w"> </span><span class="m">8</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"8 es par"</span>
+<span class="k">fi</span>
+
+<span class="c1"># echo + captura: para devolver un valor</span>
+obtener_hostname_corto<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>hostname<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">'.'</span><span class="w"> </span>-f1<span class="k">)</span><span class="s2">"</span>
+<span class="o">}</span>
+
+<span class="nv">nombre_equipo</span><span class="o">=</span><span class="k">$(</span>obtener_hostname_corto<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"El equipo se llama: </span><span class="nv">$nombre_equipo</span><span class="s2">"</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Qué devuelve</th>
+<th>Cómo se recupera</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>return &lt;n&gt;</code></td>
+<td>Un código numérico de 0 a 255</td>
+<td><code>$?</code> justo después de la llamada</td>
+<td>Indicar éxito/error, tomar decisiones con <code>if función; then</code></td>
+</tr>
+<tr>
+<td><code>echo "valor"</code></td>
+<td>Cualquier cadena de texto</td>
+<td><code>variable=$(funcion)</code></td>
+<td>Obtener un dato calculado dentro de la función</td>
+</tr>
+</tbody>
+</table>
+<h3 id="variables-locales-con-local">Variables locales con local</h3>
+<p>Por defecto, cualquier variable definida dentro de una función es <strong>global</strong>: si una función modifica una variable con el mismo nombre que otra ya existente fuera de ella, la sobrescribe, lo que puede provocar errores muy difíciles de rastrear en scripts grandes. La palabra clave <code>local</code> restringe el alcance de la variable al cuerpo de la función:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">contador</span><span class="o">=</span><span class="m">100</span>
+
+modificar_local<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">contador</span><span class="o">=</span><span class="m">1</span>
+<span class="w">    </span><span class="nv">contador</span><span class="o">=</span><span class="k">$((</span><span class="nv">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Dentro de la función: </span><span class="nv">$contador</span><span class="s2">"</span>
+<span class="o">}</span>
+
+modificar_local
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Fuera de la función: </span><span class="nv">$contador</span><span class="s2">"</span>
+</code></pre></div>
+<p>Al ejecutar este script, dentro de la función se imprime <code>2</code>, pero fuera se sigue imprimiendo <code>100</code>: la variable <code>local</code> creada dentro de <code>modificar_local</code> es completamente independiente de la variable global del mismo nombre.</p>
+<div class="admonition warning">
+<p class="admonition-title">Olvidar local es una fuente clásica de bugs</p>
+<p>Un script con varias funciones que no usan <code>local</code> puede ver cómo una función "pisa" sin querer una variable que otra parte del script necesitaba conservar. La buena práctica es declarar como <code>local</code> <strong>toda</strong> variable que solo tenga sentido dentro de la función, y reservar las variables globales para datos que de verdad deban compartirse entre distintas partes del script.</p>
+</div>
+<h2 id="script-de-ejemplo-completo-las-cuatro-estructuras-combinadas">Script de ejemplo completo: las cuatro estructuras combinadas</h2>
+<p>El siguiente script combina las cuatro estructuras vistas en este apartado para resolver una tarea realista de administración: comprobar el estado de una lista de servicios del sistema y generar un pequeño informe.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># comprobar_servicios.sh</span>
+<span class="c1"># Combina estructura secuencial, condicional, repetitiva y funciones</span>
+
+<span class="c1"># --- Estructura secuencial: preparación inicial ---</span>
+<span class="nv">servicios</span><span class="o">=(</span><span class="s2">"ssh"</span><span class="w"> </span><span class="s2">"cron"</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w"> </span><span class="s2">"servicio_inexistente"</span><span class="o">)</span>
+<span class="nv">total_activos</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">total_caidos</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">fecha_informe</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span><span class="s2">"+%Y-%m-%d %H:%M"</span><span class="k">)</span>
+
+<span class="c1"># --- Función con parámetro posicional y valor de retorno vía return ---</span>
+comprobar_servicio<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">nombre</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>--quiet<span class="w"> </span><span class="s2">"</span><span class="nv">$nombre</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="c1"># activo</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># caído o inexistente</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="c1"># --- Función que devuelve un dato mediante echo capturado ---</span>
+formatear_linea<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">nombre</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">estado</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"  - </span><span class="si">${</span><span class="nv">nombre</span><span class="si">}</span><span class="s2">: </span><span class="si">${</span><span class="nv">estado</span><span class="si">}</span><span class="s2">"</span>
+<span class="o">}</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"== Informe de servicios (</span><span class="si">${</span><span class="nv">fecha_informe</span><span class="si">}</span><span class="s2">) =="</span>
+
+<span class="c1"># --- Estructura repetitiva: recorre todos los servicios de la lista ---</span>
+<span class="k">for</span><span class="w"> </span>servicio<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">servicios</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+
+<span class="w">    </span><span class="c1"># --- Estructura condicional: decide según el resultado de la función ---</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>comprobar_servicio<span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>formatear_linea<span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">"</span><span class="w"> </span><span class="s2">"ACTIVO"</span>
+<span class="w">        </span><span class="nv">total_activos</span><span class="o">=</span><span class="k">$((</span><span class="nv">total_activos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span>formatear_linea<span class="w"> </span><span class="s2">"</span><span class="nv">$servicio</span><span class="s2">"</span><span class="w"> </span><span class="s2">"CAÍDO o no instalado"</span>
+<span class="w">        </span><span class="nv">total_caidos</span><span class="o">=</span><span class="k">$((</span><span class="nv">total_caidos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="c1"># --- Estructura condicional final: resumen con case ---</span>
+<span class="nv">estado_global</span><span class="o">=</span><span class="s2">"desconocido"</span>
+<span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$total_caidos</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span><span class="m">0</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">estado_global</span><span class="o">=</span><span class="s2">"todo correcto"</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span><span class="m">1</span><span class="p">|</span><span class="m">2</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">estado_global</span><span class="o">=</span><span class="s2">"revisar con atención"</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">        </span><span class="nv">estado_global</span><span class="o">=</span><span class="s2">"crítico, intervención urgente"</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"----------------------------------------"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Activos: </span><span class="nv">$total_activos</span><span class="s2"> | Caídos: </span><span class="nv">$total_caidos</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Estado global: </span><span class="nv">$estado_global</span><span class="s2">"</span>
+</code></pre></div>
+<p>Este ejemplo recorre las cuatro piezas del temario en un único script realista: la <strong>secuencia</strong> inicial prepara las variables, el bucle <strong>for</strong> (repetitiva) recorre la lista de servicios, cada vuelta usa un <strong>if</strong> (condicional) para decidir qué hacer según el resultado de una <strong>función</strong> (<code>comprobar_servicio</code>, que usa <code>return</code> para señalar éxito/fracaso, y <code>formatear_linea</code>, que usa <code>echo</code> capturado indirectamente al imprimir directamente el resultado), y al final un <strong>case</strong> (otra estructura condicional) resume el resultado global.</p>
+<h2 id="tabla-resumen-final-de-sintaxis">Tabla resumen final de sintaxis</h2>
+<table>
+<thead>
+<tr>
+<th>Estructura</th>
+<th>Palabras clave</th>
+<th>Cierre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Condicional simple</td>
+<td><code>if</code> ... <code>then</code></td>
+<td><code>fi</code></td>
+</tr>
+<tr>
+<td>Condicional con alternativas</td>
+<td><code>if</code> ... <code>elif</code> ... <code>else</code></td>
+<td><code>fi</code></td>
+</tr>
+<tr>
+<td>Selección múltiple</td>
+<td><code>case</code> ... <code>in</code></td>
+<td><code>esac</code></td>
+</tr>
+<tr>
+<td>Bucle con lista conocida</td>
+<td><code>for</code> ... <code>in</code> ... <code>do</code></td>
+<td><code>done</code></td>
+</tr>
+<tr>
+<td>Bucle con condición previa</td>
+<td><code>while</code> ... <code>do</code></td>
+<td><code>done</code></td>
+</tr>
+<tr>
+<td>Bucle con condición invertida</td>
+<td><code>until</code> ... <code>do</code></td>
+<td><code>done</code></td>
+</tr>
+<tr>
+<td>Función (forma 1)</td>
+<td><code>function nombre { ... }</code></td>
+<td><code>}</code></td>
+</tr>
+<tr>
+<td>Función (forma 2, POSIX)</td>
+<td><code>nombre() { ... }</code></td>
+<td><code>}</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Indentación y legibilidad</p>
+<p>Bash no obliga a indentar el código como Python, pero un script sin indentación consistente es mucho más difícil de depurar cuando hay condicionales y bucles anidados. La convención más extendida es usar 2 ó 4 espacios por nivel de anidamiento y mantenerla igual en todo el proyecto.</p>
+</div>
+<h2 id="glosario-rapido">Glosario rápido</h2>
+<ul>
+<li><strong>Estructura secuencial</strong>: ejecución de instrucciones en el orden en que aparecen, sin saltos ni repeticiones.</li>
+<li><strong>Estructura condicional</strong>: bloque de código que se ejecuta solo si se cumple (o no) una condición (<code>if</code>, <code>case</code>).</li>
+<li><strong>Estructura repetitiva (bucle)</strong>: bloque de código que se ejecuta varias veces (<code>for</code>, <code>while</code>, <code>until</code>).</li>
+<li><strong>Función</strong>: bloque de código con nombre propio, reutilizable y que puede recibir parámetros.</li>
+<li><strong>Parámetro posicional</strong>: argumento recibido por un script o función, referenciado como <code>$1</code>, <code>$2</code>...</li>
+<li><strong>Variable local</strong>: variable cuyo alcance queda restringido al cuerpo de la función donde se declara con <code>local</code>.</li>
+<li><strong>Código de salida</strong>: valor numérico (0-255) que indica si un comando o función terminó con éxito (0) o con error (distinto de 0).</li>
+</ul>
+<h2 id="autoevaluacion-rapida">Autoevaluación rápida</h2>
+<ol>
+<li>¿Qué diferencia hay entre una estructura secuencial y el cuerpo de un bucle <code>for</code>? (apartado "Estructuras secuenciales")</li>
+<li>¿Cuándo usarías <code>case</code> en lugar de encadenar varios <code>elif</code>? (apartado "Estructuras condicionales")</li>
+<li>Escribe un bucle <code>until</code> que reintente una conexión con <code>ping</code> hasta que tenga éxito. (apartado "Estructuras repetitivas")</li>
+<li>¿Por qué <code>return</code> no sirve para devolver una cadena de texto desde una función, y qué alternativa existe? (apartado "Funciones")</li>
+<li>Explica, con un ejemplo, qué problema evita declarar una variable como <code>local</code> dentro de una función. (apartado "Funciones")</li>
+</ol>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>Este apartado se apoya en el manual oficial de Bash (<code>man bash</code>, sección <em>SHELL GRAMMAR</em> y <em>FUNCTIONS</em>) y en la <a href="https://mywiki.wooledge.org/BashGuide" target="_blank">Bash Guide de Greg's Wiki</a>, una referencia clásica y muy detallada sobre buenas prácticas de scripting en Bash, incluyendo el uso correcto de comillas, el comportamiento de <code>$@</code> frente a <code>$*</code> y los errores más comunes al combinar estructuras de control anidadas.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

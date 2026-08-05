@@ -1,0 +1,4094 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/12biu/ut03-temario/">
+      
+      
+        <link rel="prev" href="../ut02-rubrica/">
+      
+      
+        <link rel="next" href="../ut03-practica/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UT03 Integridad de los datos - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ut03-generacion-de-mecanismos-de-integridad-de-los-datos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UT03 Integridad de los datos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05bash-estructuras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#resultado-de-aprendizaje-y-criterios-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado de aprendizaje y criterios de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-calidad-del-dato-por-que-importa-mas-cuanto-mas-grande-es-el-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Calidad del dato: por qué importa más cuanto más grande es el sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sumas-de-verificacion-checksums-en-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sumas de verificación (checksums) en HDFS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-papel-del-servidor-antes-de-que-exista-un-checksum-que-comparar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El papel del servidor antes de que exista un checksum que comparar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-tolerancia-a-fallos-en-procesamiento-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Tolerancia a fallos en procesamiento batch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-tolerancia-a-fallos-en-procesamiento-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tolerancia a fallos en procesamiento streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-movimiento-de-datos-entre-clusteres-migracion-y-metadatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Movimiento de datos entre clústeres: migración y metadatos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cuantificando-la-sobrecarga-cuanto-cuesta-realmente-la-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cuantificando la sobrecarga: cuánto cuesta realmente la integridad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-algoritmos-de-suma-de-verificacion-no-todos-son-iguales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Algoritmos de suma de verificación: no todos son iguales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integridad-en-el-mundo-lakehouse-mas-alla-del-checksum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Integridad en el mundo Lakehouse: más allá del checksum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-calidad-de-contenido-en-codigo-un-ejemplo-con-great-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Calidad de contenido en código: un ejemplo con Great Expectations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-integridad-en-almacenamiento-de-objetos-el-caso-de-amazon-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Integridad en almacenamiento de objetos: el caso de Amazon S3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-opciones-habituales-de-distcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Opciones habituales de DistCp
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-checklist-de-buenas-practicas-de-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Checklist de buenas prácticas de integridad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ejemplo-de-sintesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ejemplo de síntesis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-resumen-de-mecanismos-de-integridad-por-capa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Resumen de mecanismos de integridad por capa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-glosario-rapido-de-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Glosario rápido de la unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#resultado-de-aprendizaje-y-criterios-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado de aprendizaje y criterios de evaluación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-calidad-del-dato-por-que-importa-mas-cuanto-mas-grande-es-el-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Calidad del dato: por qué importa más cuanto más grande es el sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sumas-de-verificacion-checksums-en-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sumas de verificación (checksums) en HDFS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-papel-del-servidor-antes-de-que-exista-un-checksum-que-comparar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El papel del servidor antes de que exista un checksum que comparar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-tolerancia-a-fallos-en-procesamiento-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Tolerancia a fallos en procesamiento batch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-tolerancia-a-fallos-en-procesamiento-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tolerancia a fallos en procesamiento streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-movimiento-de-datos-entre-clusteres-migracion-y-metadatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Movimiento de datos entre clústeres: migración y metadatos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cuantificando-la-sobrecarga-cuanto-cuesta-realmente-la-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cuantificando la sobrecarga: cuánto cuesta realmente la integridad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-algoritmos-de-suma-de-verificacion-no-todos-son-iguales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Algoritmos de suma de verificación: no todos son iguales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integridad-en-el-mundo-lakehouse-mas-alla-del-checksum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Integridad en el mundo Lakehouse: más allá del checksum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-calidad-de-contenido-en-codigo-un-ejemplo-con-great-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Calidad de contenido en código: un ejemplo con Great Expectations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-integridad-en-almacenamiento-de-objetos-el-caso-de-amazon-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Integridad en almacenamiento de objetos: el caso de Amazon S3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-opciones-habituales-de-distcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Opciones habituales de DistCp
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-checklist-de-buenas-practicas-de-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Checklist de buenas prácticas de integridad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ejemplo-de-sintesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ejemplo de síntesis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-resumen-de-mecanismos-de-integridad-por-capa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Resumen de mecanismos de integridad por capa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-glosario-rapido-de-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Glosario rápido de la unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ut03-generacion-de-mecanismos-de-integridad-de-los-datos"><strong>🛡️ UT03 · Generación de mecanismos de integridad de los datos</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/biu/ut03-diagrama.svg" data-desc-position="bottom"><img alt="Sumas de verificación y réplicas en un sistema de ficheros distribuido" src="../../assets/img/biu/ut03-diagrama.svg"></a></p>
+<h2 id="resultado-de-aprendizaje-y-criterios-de-evaluacion">Resultado de aprendizaje y criterios de evaluación</h2>
+<p><strong>RA3.</strong> Genera mecanismos de integridad de los datos, comprobando su mantenimiento en los sistemas de ficheros distribuidos y valorando la sobrecarga que conlleva en el tratamiento de los datos.</p>
+<p>Criterios de evaluación:</p>
+<p>a) Se ha valorado la importancia de la calidad de los datos en los sistemas de ficheros distribuidos.
+b) Se ha valorado que a mayor volumen de tratamiento de datos corresponde un mayor peligro relacionado con la integridad de los datos.
+c) Se ha reconocido que los sistemas de ficheros distribuidos implementan una suma de verificación para la comprobación de los contenidos de los archivos.
+d) Se ha reconocido el papel del servidor en los procesos previos a la suma de verificación.</p>
+<h2 id="1-calidad-del-dato-por-que-importa-mas-cuanto-mas-grande-es-el-sistema">1. Calidad del dato: por qué importa más cuanto más grande es el sistema</h2>
+<p>En una base de datos relacional pequeña, un error de calidad (un valor nulo inesperado, una fecha mal formada) suele detectarse rápido porque el volumen es manejable. En un sistema de ficheros distribuido que reparte petabytes entre cientos de máquinas, ese mismo error puede pasar desapercibido mucho tiempo y propagarse a todos los procesos que consuman ese dato aguas abajo (criterio a).</p>
+<p>Cuantas más máquinas, discos y transferencias de red intervienen, mayor es la superficie expuesta a fallos silenciosos: un sector de disco que se degrada, un bit que se invierte durante una transmisión, un proceso que se interrumpe a mitad de escritura (lo que a veces se llama <strong><em>bit rot</em></strong> o corrupción silenciosa). Esta es la razón técnica directa del criterio (b): "a mayor volumen, mayor riesgo para la integridad" no significa que los datos grandes sean menos fiables por naturaleza, sino que estadísticamente hay muchas más oportunidades de que algo falle en el camino cuando ese camino recorre miles de discos en lugar de uno solo.</p>
+<p>Las dimensiones habituales de calidad del dato son:</p>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Pregunta que responde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exactitud</td>
+<td>¿El valor almacenado refleja la realidad?</td>
+</tr>
+<tr>
+<td>Completitud</td>
+<td>¿Faltan valores que deberían existir?</td>
+</tr>
+<tr>
+<td>Consistencia</td>
+<td>¿El mismo dato tiene el mismo valor en todos los sistemas que lo usan?</td>
+</tr>
+<tr>
+<td>Actualidad</td>
+<td>¿El dato sigue siendo válido o ha quedado desactualizado?</td>
+</tr>
+<tr>
+<td>Unicidad</td>
+<td>¿Existen duplicados que distorsionen los análisis?</td>
+</tr>
+<tr>
+<td><strong>Integridad</strong></td>
+<td>¿El contenido del fichero es exactamente el que se escribió, bit a bit?</td>
+</tr>
+</tbody>
+</table>
+<p>Esta unidad se centra en la última —la integridad, la garantía técnica de que un fichero no se ha corrompido en el camino— sin perder de vista que en un proyecto real las seis dimensiones conviven: hoy en día es habitual complementar los checksums a nivel de bytes con herramientas de calidad a nivel de contenido, como <strong>Great Expectations</strong> o <strong>Deequ</strong> (de Amazon), que permiten definir reglas declarativas ("esta columna no debe tener nulos", "esta fecha debe estar en este rango") y ejecutarlas como parte del propio pipeline de Spark.</p>
+<h2 id="2-sumas-de-verificacion-checksums-en-hdfs">2. Sumas de verificación (<em>checksums</em>) en HDFS</h2>
+<p>HDFS no confía "a ciegas" en que un bloque de datos siga siendo el mismo que se escribió. Para comprobarlo, implementa <strong>sumas de verificación</strong> (criterio c):</p>
+<ul>
+<li>Al escribir un fichero, HDFS lo divide en bloques y, dentro de cada bloque, en trozos más pequeños (512 bytes por defecto). Para cada trozo calcula un <strong>CRC32C</strong> (<em>Cyclic Redundancy Check</em>), una "huella digital" del contenido.</li>
+<li>Estas sumas se almacenan junto al bloque, en un fichero de metadatos independiente.</li>
+<li>Al <strong>leer</strong> un bloque, HDFS recalcula el checksum del contenido leído y lo compara con el almacenado. Si no coincide, se descarta esa réplica y se sirve automáticamente otra de las réplicas sanas.</li>
+<li>Cada DataNode ejecuta además, en segundo plano, un <strong>Block Scanner</strong> periódico que recorre todos sus bloques comprobando sus checksums, para detectar corrupciones incluso en datos que nadie ha leído todavía.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comprobar el estado de salud de todos los ficheros de HDFS</span>
+hdfs<span class="w"> </span>fsck<span class="w"> </span>/datos<span class="w"> </span>--files<span class="w"> </span>--blocks
+
+<span class="c1"># Consultar la suma de verificación de un fichero concreto</span>
+hdfs<span class="w"> </span>dfs<span class="w"> </span>-checksum<span class="w"> </span>/datos/ventas/2026/enero.parquet
+</code></pre></div>
+<p>Este mecanismo tiene un coste: calcular y comparar checksums consume CPU y añade una pequeña sobrecarga a cada lectura y escritura. Esa sobrecarga es precisamente la que menciona el resultado de aprendizaje: un sistema que garantiza integridad nunca es gratis, y parte del trabajo de quien administra el clúster es equilibrar esa garantía frente al rendimiento.</p>
+<h2 id="3-el-papel-del-servidor-antes-de-que-exista-un-checksum-que-comparar">3. El papel del servidor antes de que exista un checksum que comparar</h2>
+<p>El criterio (d) señala un matiz que se suele pasar por alto: los checksums no aparecen de la nada, alguien tiene que generarlos y decidir dónde vive cada copia <strong>antes</strong> de que pueda comprobarse nada. Ese "alguien" es el propio servidor:</p>
+<ol>
+<li>El <strong>NameNode</strong> decide, según su política de colocación de bloques, en qué DataNodes se escribirá cada réplica, procurando que no todas queden en el mismo rack.</li>
+<li>El <strong>DataNode</strong> que recibe la escritura calcula el checksum inicial del bloque en el mismo momento en que lo persiste a disco.</li>
+<li>Solo a partir de ese momento existe una "verdad" contra la que comparar en futuras lecturas o verificaciones periódicas.</li>
+</ol>
+<p>Es decir: antes de poder verificar nada, el servidor ya ha tenido que tomar decisiones activas de diseño (dónde coloca las réplicas) y de cómputo (calcular el checksum inicial). Sin ese trabajo previo, el mecanismo de verificación no tendría contra qué comparar.</p>
+<h2 id="4-tolerancia-a-fallos-en-procesamiento-batch">4. Tolerancia a fallos en procesamiento batch</h2>
+<p>Cuando hablamos de integridad no solo hablamos del dato en reposo, sino también del dato <strong>mientras se está procesando</strong>. En un job batch (por ejemplo, un job de Spark que tarda dos horas), los datos ya están persistidos antes del cálculo y la demanda de respuesta en tiempo real es baja, por lo que se pueden tolerar ventanas de tiempo más amplias para reintentos y verificaciones, priorizando la precisión sobre la latencia.</p>
+<ul>
+<li><strong>Replicación de datos</strong>: mantener copias de la misma información en varios nodos permite una recuperación instantánea (el sistema redirige hacia una réplica disponible), a costa de consumo de almacenamiento y red para mantener las copias sincronizadas.</li>
+<li><strong>Checkpoint</strong>: un punto de consistencia del proceso batch. No guarda los datos en sí, sino el <em>estado</em>: hasta qué partición, fichero o rango se ha procesado con éxito. Permite reanudar sin reprocesar todo desde el principio.</li>
+<li><strong>Copy report</strong>: un respaldo de los resultados intermedios o finales de un job, que permite verificar o recuperar esos resultados antes de continuar si ocurre un fallo.</li>
+</ul>
+<p>Spark aplica estas mismas ideas de forma nativa: el <strong>linaje de un RDD</strong> (el historial de transformaciones que lo generó) actúa como un checkpoint implícito — si una partición se pierde, Spark la recalcula a partir de ese linaje en lugar de necesitar una copia física adicional, aunque para cadenas de transformación muy largas también se puede forzar un <code>checkpoint()</code> explícito que persiste el estado a disco y corta el linaje, evitando recalcular desde el origen.</p>
+<h2 id="5-tolerancia-a-fallos-en-procesamiento-streaming">5. Tolerancia a fallos en procesamiento streaming</h2>
+<p>En streaming, los datos se procesan en tiempo real sin un almacenamiento previo completo, priorizando la continuidad del flujo sobre la exactitud de eventos aislados. Los mecanismos de respaldo cambian de naturaleza:</p>
+<ul>
+<li><strong>Passive standby</strong>: el nodo maestro envía copias de seguridad periódicas a un nodo réplica inactivo. Admite grandes volúmenes, pero la recuperación tras un fallo es más lenta.</li>
+<li><strong>Active standby</strong>: el maestro replica continuamente al nodo de respaldo, que está listo para asumir el trabajo de inmediato. Reduce el tiempo de conmutación, a costa de más CPU y red.</li>
+<li><strong>Upstream backup</strong>: los nodos situados antes del nodo que procesa los datos guardan temporalmente la información y la reenvían si el nodo siguiente falla, actuando como un búfer resiliente.</li>
+<li><strong>Operator state management</strong>: cada operador copia su estado interno a nodos previos en el flujo; si falla, se restaura desde esas copias.</li>
+</ul>
+<p>Este es exactamente el mecanismo que usa <strong>Spark Structured Streaming</strong> con sus <em>checkpoints</em> en almacenamiento distribuido (HDFS o S3): cada micro-lote procesado registra su progreso (qué offsets de Kafka se han consumido, qué estado de agregación se ha acumulado), de modo que si el proceso se reinicia, retoma exactamente donde se quedó sin duplicar ni perder eventos.</p>
+<h2 id="6-movimiento-de-datos-entre-clusteres-migracion-y-metadatos">6. Movimiento de datos entre clústeres: migración y metadatos</h2>
+<p>Un clúster Hadoop rara vez vive aislado para siempre: se actualiza a una nueva versión, se migra a otro centro de datos, o se replica hacia un clúster de recuperación ante desastres. La herramienta nativa para copiar grandes volúmenes de datos entre clústeres es <strong>DistCp</strong> (<em>Distributed Copy</em>), que usa internamente un job MapReduce para paralelizar la copia entre múltiples nodos:</p>
+<div class="highlight"><pre><span></span><code>hadoop<span class="w"> </span>distcp<span class="w"> </span>hdfs://cluster-origen:9000/datos<span class="w"> </span>hdfs://cluster-destino:9000/datos
+</code></pre></div>
+<p>Durante una migración hay que prestar especial atención a los <strong>metadatos</strong>: el NameNode mantiene el árbol de directorios y la ubicación de bloques en un fichero <code>fsimage</code> (una fotografía del estado del sistema de ficheros) y un registro de cambios <code>edits log</code> (todas las operaciones desde la última fotografía); un proceso llamado <strong>Secondary NameNode</strong> fusiona periódicamente ambos en un checkpoint. Migrar solo los datos físicos sin migrar o regenerar correctamente estos metadatos dejaría un clúster con ficheros "huérfanos" o inaccesibles, aunque los bloques estén intactos.</p>
+<h2 id="7-cuantificando-la-sobrecarga-cuanto-cuesta-realmente-la-integridad">7. Cuantificando la sobrecarga: cuánto cuesta realmente la integridad</h2>
+<p>El resultado de aprendizaje pide explícitamente "valorar la sobrecarga que conlleva" garantizar la integridad, así que conviene hacerlo con números, no solo con la idea general de que "cuesta algo":</p>
+<table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Coste que añade</th>
+<th>Beneficio que aporta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Replicación x3 en HDFS</td>
+<td>~200% más almacenamiento que sin replicar</td>
+<td>Tolerancia a la pérdida simultánea de hasta 2 réplicas</td>
+</tr>
+<tr>
+<td>Checksum CRC32C por cada 512 bytes</td>
+<td>CPU adicional en cada lectura/escritura (típicamente un pequeño porcentaje del tiempo total de E/S)</td>
+<td>Detección temprana de corrupción silenciosa</td>
+</tr>
+<tr>
+<td>Block Scanner periódico</td>
+<td>Consumo de I/O en segundo plano en cada DataNode</td>
+<td>Detecta bloques corruptos que nadie ha leído todavía</td>
+</tr>
+<tr>
+<td>Checkpoint explícito en Spark</td>
+<td>Escritura a disco que corta el linaje del RDD</td>
+<td>Evita recomputar cadenas de transformación muy largas tras un fallo</td>
+</tr>
+<tr>
+<td>Transacciones ACID en Delta Lake/Iceberg</td>
+<td>Overhead de escritura del log de transacciones</td>
+<td>Nunca se lee una tabla a medio escribir; permite <em>time travel</em></td>
+</tr>
+</tbody>
+</table>
+<p>Ninguno de estos mecanismos es gratuito, y parte de la madurez de quien diseña un sistema Big Data consiste en elegir <strong>qué nivel de garantía necesita realmente cada conjunto de datos</strong>: no toda la información de una organización merece el mismo nivel (y el mismo coste) de protección. Un dato de log temporal, fácilmente regenerable, puede vivir con un factor de replicación menor que un dato financiero que debe conservarse con garantías legales durante años.</p>
+<h2 id="8-algoritmos-de-suma-de-verificacion-no-todos-son-iguales">8. Algoritmos de suma de verificación: no todos son iguales</h2>
+<p>El currículo se refiere de forma genérica a "sumas de verificación", pero en la práctica existen varias familias con propiedades distintas, y conviene saber en qué se diferencian:</p>
+<table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Uso típico</th>
+<th>Detecta manipulación intencionada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CRC32 / CRC32C</strong></td>
+<td>HDFS (verificación de bloques), Ethernet, ZIP</td>
+<td>No — solo detecta corrupción accidental</td>
+</tr>
+<tr>
+<td><strong>MD5</strong></td>
+<td>Verificación rápida de ficheros descargados</td>
+<td>No — se considera criptográficamente roto</td>
+</tr>
+<tr>
+<td><strong>SHA-256</strong></td>
+<td>Firmas digitales, verificación de imágenes de contenedores, ETags de S3 en subidas multi-parte</td>
+<td>Sí — resistente a colisiones intencionadas</td>
+</tr>
+</tbody>
+</table>
+<p>HDFS usa CRC32C porque su objetivo es detectar corrupción accidental de hardware al menor coste de CPU posible, no protegerse de un atacante que manipule el fichero deliberadamente; para ese segundo escenario (integridad frente a manipulación maliciosa) se recurre a algoritmos criptográficos como SHA-256, con un coste de cómputo mayor.</p>
+<h2 id="9-integridad-en-el-mundo-lakehouse-mas-alla-del-checksum">9. Integridad en el mundo Lakehouse: más allá del checksum</h2>
+<p>Los formatos de tabla modernos sobre almacenamiento de objetos —<strong>Delta Lake</strong>, <strong>Apache Iceberg</strong>, <strong>Apache Hudi</strong>— llevan la idea de integridad un paso más allá del checksum de bloque: añaden un <strong>log de transacciones</strong> que registra cada operación de escritura de forma atómica (ACID), de modo que una escritura a medias nunca deja la tabla en un estado inconsistente para quien la está leyendo al mismo tiempo. Además, mantienen un historial de versiones (<em>time travel</em>) que permite consultar el estado de una tabla tal y como estaba en un momento anterior, o revertir una escritura errónea sin restaurar un backup completo. Conceptualmente es la misma preocupación que resuelve un checksum de HDFS —garantizar que lo que se lee es exactamente lo que se esperaba encontrar—, pero resuelta a nivel de tabla completa en lugar de a nivel de bloque individual, y pensada para el mundo de almacenamiento de objetos donde ya no existe un NameNode central.</p>
+<h2 id="10-calidad-de-contenido-en-codigo-un-ejemplo-con-great-expectations">10. Calidad de contenido en código: un ejemplo con Great Expectations</h2>
+<p>La UT1 y este mismo temario mencionan que, junto al checksum a nivel de bytes, conviene validar la calidad del contenido con reglas declarativas. <strong>Great Expectations</strong> es la librería de referencia en el ecosistema Python/Spark para esto:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">great_expectations</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gx</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">gx</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">pandas_default</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"ventas.parquet"</span><span class="p">)</span>
+
+<span class="c1"># Definimos las "expectativas" sobre el contenido, no sobre los bytes</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">expect_column_values_to_not_be_null</span><span class="p">(</span><span class="s2">"id_venta"</span><span class="p">)</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">expect_column_values_to_be_between</span><span class="p">(</span><span class="s2">"importe"</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">expect_column_values_to_be_unique</span><span class="p">(</span><span class="s2">"id_venta"</span><span class="p">)</span>
+
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>  <span class="c1"># True si todas las reglas se cumplen</span>
+</code></pre></div>
+<p>Nótese la diferencia de naturaleza frente al checksum de HDFS: aquí no comprobamos si el fichero es <em>bit a bit</em> el que se escribió, comprobamos si su <em>contenido</em> tiene sentido de negocio. Ambas comprobaciones son complementarias y, en un pipeline maduro, ambas se ejecutan de forma automática: la primera la garantiza el propio sistema de ficheros distribuido; la segunda hay que programarla explícitamente como parte del pipeline de datos.</p>
+<h2 id="11-integridad-en-almacenamiento-de-objetos-el-caso-de-amazon-s3">11. Integridad en almacenamiento de objetos: el caso de Amazon S3</h2>
+<p>Buena parte de las arquitecturas actuales, como vimos en la UT1, ya no almacenan el dato en HDFS sino en almacenamiento de objetos cloud. Los mecanismos de integridad cambian de nombre, pero resuelven exactamente el mismo problema:</p>
+<table>
+<thead>
+<tr>
+<th>Mecanismo en HDFS</th>
+<th>Equivalente en S3</th>
+<th>Qué garantiza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Checksum de bloque (CRC32C)</td>
+<td><strong>ETag</strong> (hash MD5 del objeto, o de cada parte en subidas multi-parte)</td>
+<td>El objeto descargado es idéntico al subido</td>
+</tr>
+<tr>
+<td>Factor de replicación x3</td>
+<td><strong>Replicación entre zonas de disponibilidad</strong> (gestionada por AWS, de forma transparente)</td>
+<td>Durabilidad "de 11 nueves" ante fallo de disco o de zona</td>
+</tr>
+<tr>
+<td><code>hdfs fsck</code></td>
+<td><strong>S3 Object Lambda</strong> o validaciones de aplicación sobre eventos de S3</td>
+<td>Verificación de contenido bajo demanda</td>
+</tr>
+<tr>
+<td>Inmutabilidad de un bloque ya escrito</td>
+<td><strong>Versionado de objetos</strong> + <strong>Object Lock</strong> (modo WORM: <em>Write Once, Read Many</em>)</td>
+<td>Ningún proceso, ni siquiera con error humano, puede sobrescribir o borrar una versión bloqueada</td>
+</tr>
+</tbody>
+</table>
+<p>La lección de fondo, y la que conviene llevarse de esta unidad: el nombre concreto del mecanismo cambia según la tecnología de almacenamiento (HDFS, S3, Azure Blob...), pero el problema que resuelve —garantizar que lo que se lee es exactamente lo que se escribió, y poder recuperarse si no lo es— es universal en cualquier sistema de almacenamiento distribuido, sea on-premise o cloud.</p>
+<h2 id="12-autoevaluacion-rapida">12. Autoevaluación rápida</h2>
+<ol>
+<li>Explica con tus palabras por qué "a mayor volumen, mayor riesgo de integridad" no significa que el Big Data sea poco fiable. (apartado 1)</li>
+<li>¿Qué diferencia hay entre lo que verifica un checksum CRC32C y lo que verifica una regla de Great Expectations? (apartados 2 y 10)</li>
+<li>Describe, paso a paso, qué hace el servidor (NameNode + DataNode) antes de que exista un checksum contra el que comparar. (apartado 3)</li>
+<li>¿Qué mecanismo de tolerancia a fallos en streaming usarías si no puedes permitirte ni un segundo de interrupción, y cuál si el coste de infraestructura es la prioridad? (apartado 5)</li>
+<li>Si migraras un clúster copiando solo los discos físicos de los DataNodes, ¿qué fallaría y por qué? (apartado 6)</li>
+</ol>
+<h2 id="13-opciones-habituales-de-distcp">13. Opciones habituales de DistCp</h2>
+<p>El comando <code>distcp</code> visto en el apartado 6 admite varias opciones que conviene conocer antes de usarlo en un escenario real de migración:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Efecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-update</code></td>
+<td>Solo copia ficheros que no existen en destino o que han cambiado de tamaño</td>
+</tr>
+<tr>
+<td><code>-delete</code></td>
+<td>Borra en destino los ficheros que ya no existen en origen (sincronización exacta)</td>
+</tr>
+<tr>
+<td><code>-m &lt;n&gt;</code></td>
+<td>Número de mappers (grado de paralelismo) que se lanzan para la copia</td>
+</tr>
+<tr>
+<td><code>-skipcrccheck</code></td>
+<td>Omite la verificación de checksum tras la copia (desaconsejado salvo que se sepa muy bien por qué)</td>
+</tr>
+<tr>
+<td><code>-bandwidth &lt;MB&gt;</code></td>
+<td>Limita el ancho de banda usado por mapper, para no saturar la red de producción</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Migración incremental, sincronizando también los borrados, con 20 mappers</span>
+hadoop<span class="w"> </span>distcp<span class="w"> </span>-update<span class="w"> </span>-delete<span class="w"> </span>-m<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>hdfs://cluster-origen:9000/datos<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>hdfs://cluster-destino:9000/datos
+</code></pre></div>
+<p>La opción <code>-skipcrccheck</code> merece una mención especial: existe, pero desactivarla contradice directamente el espíritu de esta unidad. Se documenta aquí precisamente para remarcar que su uso debería ser una excepción justificada (por ejemplo, migrar entre clústeres con versiones de Hadoop que calculan el checksum de forma distinta y por tanto no son directamente comparables), nunca la opción por defecto.</p>
+<h2 id="14-checklist-de-buenas-practicas-de-integridad">14. Checklist de buenas prácticas de integridad</h2>
+<p>Una lista de comprobación rápida, útil tanto para la práctica de esta unidad como para cualquier despliegue real:</p>
+<ol>
+<li>¿Está definido y documentado el factor de replicación adecuado para cada tipo de dato (no todos necesitan el mismo)?</li>
+<li>¿Se revisa periódicamente la salida de <code>hdfs fsck</code> o el panel de bloques corruptos, en lugar de esperar a que un usuario reporte un error?</li>
+<li>¿Existen reglas de calidad de contenido (tipo Great Expectations) para los datasets críticos del negocio, no solo para los checksums de bytes?</li>
+<li>¿Se ha probado alguna vez, de forma controlada, qué ocurre si se pierde un nodo (como en la práctica de esta unidad), o se asume sin comprobar que "ya funcionará"?</li>
+<li>¿Está documentado el procedimiento de migración entre clústeres, incluyendo qué ocurre con los metadatos?</li>
+</ol>
+<h2 id="15-ejemplo-de-sintesis">15. Ejemplo de síntesis</h2>
+<div class="admonition example">
+<p class="admonition-title">Un bloque corrupto en producción</p>
+<p>Un clúster de 20 nodos procesa cada noche un job de Spark sobre datos almacenados en HDFS. Una madrugada, un sector de disco de uno de los DataNodes se degrada (el <em>fault</em>) y, al intentar leerse ese bloque durante el job (la <em>cause</em>), el checksum calculado no coincide con el almacenado (el <em>error</em>). HDFS detecta la discrepancia, descarta esa réplica, sirve automáticamente una de las otras dos copias sanas, y el NameNode ordena crear una nueva réplica en otro nodo para restablecer el factor de replicación. El job termina sin que nadie note nada salvo por una línea en el log del NameNode — y esa línea es, precisamente, la evidencia de que todo el mecanismo de integridad (checksums + réplicas + detección automática) ha funcionado exactamente como debía.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Un fallo en un pipeline de streaming</p>
+<p>Un pipeline de Spark Structured Streaming consume eventos de Kafka y calcula agregaciones cada minuto, escribiendo el resultado en una tabla Delta Lake en S3. El proceso se cae de forma inesperada (una actualización de la infraestructura reinicia el contenedor). Al reiniciarse, Spark lee el checkpoint guardado en S3, que registra hasta qué offset de cada partición de Kafka se había procesado con éxito. El proceso retoma exactamente desde ese punto: ni se duplican eventos ya agregados, ni se pierden eventos pendientes. Ninguna persona ha tenido que intervenir manualmente para decidir "por dónde continuar"; ese es, precisamente, el mecanismo de tolerancia a fallos en streaming (apartado 5) funcionando como está diseñado.</p>
+</div>
+<h2 id="16-resumen-de-mecanismos-de-integridad-por-capa">16. Resumen de mecanismos de integridad por capa</h2>
+<p>Como cierre de la unidad, un mapa completo de qué mecanismo protege cada capa del sistema, para tenerlo como referencia rápida durante la práctica:</p>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Mecanismo de integridad</th>
+<th>Criterio de evaluación relacionado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bytes almacenados en disco</td>
+<td>Checksum CRC32C por bloque</td>
+<td>c</td>
+</tr>
+<tr>
+<td>Colocación inicial de las réplicas</td>
+<td>Política de colocación del NameNode</td>
+<td>d</td>
+</tr>
+<tr>
+<td>Persistencia del checksum inicial</td>
+<td>Cálculo en el DataNode al escribir</td>
+<td>d</td>
+</tr>
+<tr>
+<td>Disponibilidad ante fallo de nodo</td>
+<td>Factor de replicación x3</td>
+<td>b, c</td>
+</tr>
+<tr>
+<td>Procesamiento batch interrumpido</td>
+<td>Checkpoint + linaje de RDD</td>
+<td>b</td>
+</tr>
+<tr>
+<td>Procesamiento streaming interrumpido</td>
+<td>Checkpoint de offsets (Kafka + Spark Structured Streaming)</td>
+<td>b</td>
+</tr>
+<tr>
+<td>Migración entre clústeres</td>
+<td>DistCp + verificación de checksum en destino</td>
+<td>c, d</td>
+</tr>
+<tr>
+<td>Metadatos del sistema de ficheros</td>
+<td><code>fsimage</code> + <code>edits log</code></td>
+<td>d</td>
+</tr>
+<tr>
+<td>Contenido con sentido de negocio</td>
+<td>Reglas declarativas (Great Expectations/Deequ)</td>
+<td>a</td>
+</tr>
+<tr>
+<td>Tabla completa en almacenamiento de objetos</td>
+<td>Log de transacciones ACID (Delta Lake/Iceberg)</td>
+<td>a, c</td>
+</tr>
+</tbody>
+</table>
+<p>Esta tabla resume, en una sola vista, la idea central de todo el temario: la integridad de un sistema Big Data no depende de un único mecanismo, sino de una cadena de mecanismos complementarios, cada uno responsable de una capa distinta, y todos con un coste que hay que saber justificar.</p>
+<h2 id="17-glosario-rapido-de-la-unidad">17. Glosario rápido de la unidad</h2>
+<ul>
+<li><strong>Bit rot</strong>: corrupción silenciosa de datos almacenados, sin que medie ningún error visible en el momento en que ocurre.</li>
+<li><strong>Checksum</strong>: valor calculado a partir del contenido de un dato, usado para detectar si ese contenido ha cambiado.</li>
+<li><strong>Rack awareness</strong>: política de HDFS que reparte las réplicas entre distintos racks físicos, no solo distintos nodos.</li>
+<li><strong>Fsck</strong>: comprobación del estado de salud (<em>file system check</em>) de un sistema de ficheros.</li>
+<li><strong>Fsimage / edits log</strong>: fotografía completa y registro incremental de cambios, respectivamente, de los metadatos de HDFS.</li>
+<li><strong>DistCp</strong>: herramienta de copia distribuida y paralela entre clústeres o rutas de HDFS.</li>
+<li><strong>ACID</strong>: conjunto de garantías (Atomicidad, Consistencia, Aislamiento, Durabilidad) que evitan estados intermedios inconsistentes en una transacción.</li>
+<li><strong>Time travel</strong>: capacidad de un formato de tabla moderno (Delta Lake, Iceberg) de consultar versiones anteriores de una tabla.</li>
+</ul>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>Puedes ampliar esta unidad con el artículo sobre <a href="https://demanejar.github.io/en/posts/hdfs-introduction/" target="_blank">HDFS de De Manejar</a>, centrado específicamente en su arquitectura de bloques y checksums, y con la documentación oficial de <a href="https://hadoop.apache.org/" target="_blank">Apache Hadoop</a> para consultar en detalle los parámetros de configuración de <code>hdfs-site.xml</code> relacionados con la replicación. El resto de enlaces está recopilado en la página de <a href="../99-recursos/">Recursos</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,4302 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/08ia/impacto-ia-sistemas/">
+      
+      
+        <link rel="prev" href="../../07automa/terraform/">
+      
+      
+        <link rel="next" href="../entrenar-llm-local/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Impacto de la IA en sistemas - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#la-inteligencia-artificial-en-la-administracion-de-sistemas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Impacto de la IA en sistemas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05bash-estructuras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#presentacion-un-cambio-de-herramienta-no-de-oficio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presentación: un cambio de herramienta, no de oficio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-como-cambia-la-ia-el-dia-a-dia-de-un-administrador-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Cómo cambia la IA el día a día de un administrador de sistemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Cómo cambia la IA el día a día de un administrador de sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatizacion-de-tareas-repetitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatización de tareas repetitivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-de-anomalias-y-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección de anomalías y AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generacion-y-depuracion-de-scripts-asistida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generación y depuración de scripts asistida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentación automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-herramientas-concretas-de-ia-aplicadas-a-sistemas-devops-y-redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Herramientas concretas de IA aplicadas a sistemas, DevOps y redes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Herramientas concretas de IA aplicadas a sistemas, DevOps y redes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asistentes-de-codigo-y-de-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asistentes de código y de terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatizacion-de-infraestructura-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatización de infraestructura con IA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorizacion-y-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitorización y AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatbots-de-infraestructura-e-integracion-via-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chatbots de infraestructura e integración vía MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-locales-y-on-premise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LLM locales y on-premise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-riesgos-y-limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Riesgos y limitaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Riesgos y limitaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alucinaciones-en-scripts-generados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alucinaciones en scripts generados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sobredependencia-y-perdida-de-criterio-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sobredependencia y pérdida de criterio técnico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seguridad-y-exfiltracion-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad y exfiltración de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sesgo-y-ruido-en-los-sistemas-de-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sesgo y ruido en los sistemas de AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-de-contexto-y-coste-economico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Límites de contexto y coste económico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-que-deberia-estudiar-un-alumno-de-asir-para-el-mercado-laboral-que-se-avecina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qué debería estudiar un alumno de ASIR para el mercado laboral que se avecina
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-comparativa-de-perfiles-profesionales-y-herramientas-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comparativa de perfiles profesionales y herramientas de IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reflexion-final-el-futuro-del-puesto-de-administrador-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reflexión final: el futuro del puesto de administrador de sistemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-caso-practico-de-laboratorio-desplegar-un-llm-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Caso práctico de laboratorio: desplegar un LLM local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-checklist-antes-de-aplicar-un-cambio-sugerido-por-ia-en-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Checklist antes de aplicar un cambio sugerido por IA en producción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-impacto-economico-y-organizativo-que-cambia-en-el-equipo-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Impacto económico y organizativo: qué cambia en el equipo de sistemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Impacto económico y organizativo: qué cambia en el equipo de sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-tamano-y-la-composicion-de-los-equipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El tamaño y la composición de los equipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-roles-hibridos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos roles híbridos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-coste-de-no-adoptarlo-tambien-existe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El coste de no adoptarlo también existe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-glosario-rapido-de-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Glosario rápido de la unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-resumen-que-apartado-del-temario-cubre-cada-bloque-de-contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Resumen: qué apartado del temario cubre cada bloque de contenido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#presentacion-un-cambio-de-herramienta-no-de-oficio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presentación: un cambio de herramienta, no de oficio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-como-cambia-la-ia-el-dia-a-dia-de-un-administrador-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Cómo cambia la IA el día a día de un administrador de sistemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Cómo cambia la IA el día a día de un administrador de sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatizacion-de-tareas-repetitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatización de tareas repetitivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-de-anomalias-y-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección de anomalías y AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generacion-y-depuracion-de-scripts-asistida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generación y depuración de scripts asistida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentación automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-herramientas-concretas-de-ia-aplicadas-a-sistemas-devops-y-redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Herramientas concretas de IA aplicadas a sistemas, DevOps y redes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Herramientas concretas de IA aplicadas a sistemas, DevOps y redes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asistentes-de-codigo-y-de-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asistentes de código y de terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatizacion-de-infraestructura-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatización de infraestructura con IA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorizacion-y-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitorización y AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatbots-de-infraestructura-e-integracion-via-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chatbots de infraestructura e integración vía MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-locales-y-on-premise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LLM locales y on-premise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-riesgos-y-limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Riesgos y limitaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Riesgos y limitaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alucinaciones-en-scripts-generados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alucinaciones en scripts generados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sobredependencia-y-perdida-de-criterio-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sobredependencia y pérdida de criterio técnico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seguridad-y-exfiltracion-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad y exfiltración de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sesgo-y-ruido-en-los-sistemas-de-aiops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sesgo y ruido en los sistemas de AIOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-de-contexto-y-coste-economico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Límites de contexto y coste económico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-que-deberia-estudiar-un-alumno-de-asir-para-el-mercado-laboral-que-se-avecina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qué debería estudiar un alumno de ASIR para el mercado laboral que se avecina
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-comparativa-de-perfiles-profesionales-y-herramientas-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comparativa de perfiles profesionales y herramientas de IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reflexion-final-el-futuro-del-puesto-de-administrador-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reflexión final: el futuro del puesto de administrador de sistemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-caso-practico-de-laboratorio-desplegar-un-llm-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Caso práctico de laboratorio: desplegar un LLM local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-checklist-antes-de-aplicar-un-cambio-sugerido-por-ia-en-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Checklist antes de aplicar un cambio sugerido por IA en producción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-impacto-economico-y-organizativo-que-cambia-en-el-equipo-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Impacto económico y organizativo: qué cambia en el equipo de sistemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Impacto económico y organizativo: qué cambia en el equipo de sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-tamano-y-la-composicion-de-los-equipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El tamaño y la composición de los equipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-roles-hibridos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos roles híbridos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-coste-de-no-adoptarlo-tambien-existe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El coste de no adoptarlo también existe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-glosario-rapido-de-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Glosario rápido de la unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Autoevaluación rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-resumen-que-apartado-del-temario-cubre-cada-bloque-de-contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Resumen: qué apartado del temario cubre cada bloque de contenido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="la-inteligencia-artificial-en-la-administracion-de-sistemas"><strong>🤖 La Inteligencia Artificial en la administración de sistemas</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/07ia/flujo-ia-sysadmin.svg" data-desc-position="bottom"><img alt="Ciclo de trabajo de un sysadmin asistido por IA: monitorización, detección de anomalía, sugerencia de IA, validación humana y aplicación del cambio" src="../../assets/img/07ia/flujo-ia-sysadmin.svg"></a></p>
+<h2 id="presentacion-un-cambio-de-herramienta-no-de-oficio">Presentación: un cambio de herramienta, no de oficio</h2>
+<p>Cada pocos años, la administración de sistemas incorpora una tecnología que cambia la forma de trabajar sin cambiar el fondo del oficio: la virtualización cambió cómo se aprovisionan servidores, la nube cambió quién es dueño del hardware, los contenedores cambiaron cómo se empaqueta el software. La Inteligencia Artificial generativa y los sistemas de <strong>AIOps</strong> (<em>Artificial Intelligence for IT Operations</em>) son la incorporación de esta década, y a diferencia de olas anteriores, esta vez el cambio no llega solo a la infraestructura que se administra, sino a las propias herramientas con las que se administra.</p>
+<p>Esto tiene una consecuencia directa para quien estudia Administración de Sistemas Informáticos en Red (ASIR) hoy: no basta con aprender a instalar un servidor, configurar una red o escribir un script de automatización. Hay que aprender a hacerlo <strong>con</strong> un asistente de IA a tu lado, sabiendo qué tareas puede acelerar, cuáles puede hacer mal de forma convincente, y qué parte del criterio profesional sigue siendo insustituible. Esta unidad no sustituye a ninguna de las anteriores del temario: las complementa, mostrando cómo la IA atraviesa transversalmente la virtualización, la nube, los contenedores, el scripting y la automatización que ya se han trabajado en los módulos previos.</p>
+<div class="admonition note">
+<p class="admonition-title">Qué NO es esta unidad</p>
+<p>Esta unidad no enseña a programar modelos de IA ni a entrenar redes neuronales — eso corresponde a otros módulos del ciclo formativo (Inteligencia Artificial y Big Data, si se cursa). Aquí el enfoque es el del <strong>administrador de sistemas que usa IA como herramienta</strong> para hacer mejor su trabajo diario, del mismo modo que ya usa un editor de texto, un gestor de configuración o una consola de monitorización.</p>
+</div>
+<p>La unidad se organiza en bloques que van de lo más práctico a lo más reflexivo: primero se describe cómo cambia el trabajo diario y con qué herramientas concretas; después se abordan los riesgos que exige tomar esa velocidad con precaución; a continuación se traduce todo ello en competencias concretas que conviene estudiar antes de salir al mercado laboral, con una comparativa de perfiles profesionales; y se cierra con un caso práctico de laboratorio, un checklist operativo, una lectura sobre el impacto organizativo y una reflexión final sobre qué parte del oficio va a seguir siendo, durante mucho tiempo, un trabajo de personas.</p>
+<h2 id="1-como-cambia-la-ia-el-dia-a-dia-de-un-administrador-de-sistemas">1. Cómo cambia la IA el día a día de un administrador de sistemas</h2>
+<h3 id="automatizacion-de-tareas-repetitivas">Automatización de tareas repetitivas</h3>
+<p>Buena parte del trabajo de un administrador de sistemas es, en esencia, repetitivo: revisar logs en busca de errores conocidos, reiniciar servicios que se han quedado colgados, aplicar parches de seguridad, comprobar que las copias de seguridad se han ejecutado correctamente, responder a las mismas preguntas de los usuarios una y otra vez. Los asistentes de IA no eliminan estas tareas, pero cambian <strong>quién las hace en primera instancia</strong>: un modelo de lenguaje puede leer miles de líneas de log en segundos y resumir "aquí hay tres eventos anómalos, el resto es ruido habitual", dejando al administrador la decisión final en lugar del rastreo manual.</p>
+<p>Esto conecta directamente con lo que ya se vio en las unidades de scripting y automatización (UT05 y UT06 de este mismo temario): un script en Bash o PowerShell sigue siendo la forma de ejecutar una tarea de forma repetible, pero ahora ese script puede generarse, revisarse y depurarse con ayuda de un asistente de IA, acelerando la fase de escritura sin eliminar la necesidad de entender lo que el script hace.</p>
+<h3 id="deteccion-de-anomalias-y-aiops">Detección de anomalías y AIOps</h3>
+<p>La segunda gran transformación es el paso de una <strong>monitorización basada en umbrales fijos</strong> ("avisa si la CPU supera el 90 %") a una <strong>monitorización basada en aprendizaje del comportamiento normal</strong> del sistema. Un modelo de IA entrenado con el histórico de métricas de una infraestructura aprende cuál es el patrón habitual de tráfico, uso de CPU o latencia en cada hora del día y cada día de la semana, y puede avisar de una desviación real (una fuga de memoria progresiva, un patrón de acceso propio de un ataque) mucho antes de que llegue a un umbral fijo, y con muchas menos falsas alarmas.</p>
+<p>Esta disciplina se conoce como <strong>AIOps</strong>, y su promesa concreta —respaldada por datos de la industria en 2025-2026— es reducir drásticamente el ruido de alertas (estudios de plataformas del sector hablan de reducciones de entre el 70 % y el 95 % en alertas irrelevantes) y acelerar el tiempo medio de resolución de incidentes graves (<em>MTTR</em>) entre un 20 % y un 40 %. No es magia: sigue haciendo falta un equipo con disciplina de monitorización previa, pero sobre esa base, la IA cambia sustancialmente el volumen de trabajo manual de vigilancia.</p>
+<h3 id="generacion-y-depuracion-de-scripts-asistida">Generación y depuración de scripts asistida</h3>
+<p>Escribir un playbook de Ansible, un script de PowerShell para gestionar usuarios de Active Directory, o una expresión regular compleja para parsear un log ya no empieza necesariamente en blanco: se empieza describiendo en lenguaje natural qué se necesita, y el asistente propone una primera versión que el administrador revisa, corrige y adapta. Lo mismo ocurre con la depuración: pegar un mensaje de error críptico en un asistente de IA y pedir una explicación suele ser más rápido que rastrear manualmente en foros y documentación, aunque —como se verá en la sección de riesgos— esa rapidez no está exenta de peligros si se usa sin criterio.</p>
+<h3 id="documentacion-automatica">Documentación automática</h3>
+<p>Una de las tareas que tradicionalmente se pospone "para cuando haya tiempo" es documentar: qué hace cada script, por qué se tomó una decisión de arquitectura, cómo se resolvió un incidente concreto. Los asistentes de IA integrados en editores de código y en sistemas de tickets pueden generar un primer borrador de esa documentación a partir del propio código o del historial de la incidencia, reduciendo la fricción que hace que la documentación técnica quede siempre desactualizada.</p>
+<div class="admonition tip">
+<p class="admonition-title">La IA como "becario incansable", no como sustituto</p>
+<p>Una forma útil de calibrar expectativas: piensa en el asistente de IA como en un becario con mucha memoria y ninguna experiencia de campo. Es rapidísimo generando un primer borrador (de un script, de un informe, de una respuesta a un ticket), pero no conoce las particularidades de tu infraestructura, no ha vivido el incidente que dejó ese servidor mal configurado hace dos años, y no asume responsabilidad si algo sale mal. Esa responsabilidad sigue siendo del administrador que revisa y aprueba el trabajo.</p>
+</div>
+<h2 id="2-herramientas-concretas-de-ia-aplicadas-a-sistemas-devops-y-redes">2. Herramientas concretas de IA aplicadas a sistemas, DevOps y redes</h2>
+<p>El ecosistema de herramientas es amplio y cambia con rapidez, pero se puede organizar en cinco grandes bloques según la función que cumplen.</p>
+<h3 id="asistentes-de-codigo-y-de-terminal">Asistentes de código y de terminal</h3>
+<ul>
+<li><strong>GitHub Copilot</strong>: el asistente de código más extendido, integrado en editores como Visual Studio Code. Sugiere líneas o bloques completos de código —incluidos scripts de shell, manifiestos YAML o configuraciones de infraestructura— a partir del contexto del archivo abierto y de comentarios en lenguaje natural. Su modo <em>chat</em> permite además pedir explicaciones de un fragmento de código o depurar un error sin salir del editor.</li>
+<li><strong>Asistentes de terminal</strong>: herramientas que se integran directamente en la línea de comandos y traducen una petición en lenguaje natural ("busca los procesos que más memoria consumen y mátalos si superan 2 GB") a un comando o script ejecutable, mostrando siempre el comando antes de lanzarlo.</li>
+</ul>
+<h3 id="automatizacion-de-infraestructura-con-ia">Automatización de infraestructura con IA</h3>
+<ul>
+<li><strong>Ansible Lightspeed</strong> (con IBM watsonx Code Assistant): un servicio, integrado en la extensión de Ansible para Visual Studio Code, especializado en generar y completar <em>playbooks</em> de Ansible a partir de comentarios en lenguaje natural. A diferencia de un asistente generalista como Copilot, está entrenado específicamente sobre contenido y patrones de Ansible, lo que en comparativas recientes le da una tasa de aceptación de sugerencias notablemente más alta que la de asistentes de propósito general para este caso de uso concreto, además de un modelo mucho más ligero (cientos de millones de parámetros frente a varios miles de millones) pensado para ejecutarse de forma eficiente.</li>
+<li><strong>Generación asistida de Terraform</strong>: de forma análoga a Ansible, los asistentes de código generalistas y algunos servicios específicos de los propios proveedores cloud ayudan a redactar módulos de Terraform, sugerir buenas prácticas de nomenclatura de recursos y detectar configuraciones inseguras antes de aplicarlas.</li>
+</ul>
+<h3 id="monitorizacion-y-aiops">Monitorización y AIOps</h3>
+<ul>
+<li><strong>Datadog Watchdog</strong>: motor de IA integrado en la plataforma de observabilidad Datadog que aplica aprendizaje automático no supervisado para detectar anomalías y valores atípicos en métricas, logs y trazas de forma automática, generar previsiones de saturación de recursos y realizar análisis automatizado de causa raíz (<em>root cause analysis</em>) cuando se produce un incidente.</li>
+<li><strong>Dynatrace Davis AI</strong>: motor de IA de Dynatrace que se apoya en un modelo de dependencias entre componentes construido de forma determinista (no solo por correlación estadística), lo que le permite señalar la causa raíz exacta de un incidente en entornos distribuidos complejos con alta precisión, un punto fuerte especialmente valorado en infraestructuras de gran tamaño.</li>
+<li>Otras plataformas de referencia en este espacio incluyen <strong>New Relic AIOps</strong>, <strong>Sysdig</strong> y los servicios nativos de los grandes proveedores cloud (como AWS DevOps Guru), todos ellos orientados a la misma idea: aplicar aprendizaje automático sobre telemetría para anticipar y diagnosticar incidentes antes de que impacten al usuario final.</li>
+</ul>
+<h3 id="chatbots-de-infraestructura-e-integracion-via-mcp">Chatbots de infraestructura e integración vía MCP</h3>
+<p>Cada vez es más habitual disponer de un chatbot conectado a las herramientas reales de la infraestructura (el clúster de Kubernetes, el inventario de Ansible, el sistema de tickets), capaz no solo de responder preguntas sino de ejecutar consultas o acciones controladas. La pieza técnica que ha hecho madurar esta integración es el <strong>Model Context Protocol (MCP)</strong>, un estándar abierto que define cómo un modelo de lenguaje puede descubrir y llamar a herramientas externas (una API de Kubernetes, una base de datos, un repositorio Git) de forma uniforme, sin tener que programar una integración distinta para cada asistente de IA. En 2026 existen ya varios cientos de servidores MCP públicos que cubren bases de datos, contenedores, control de versiones y APIs de todo tipo, y el propio protocolo ha evolucionado hacia una operación sin estado que facilita desplegar estos conectores en producción, detrás de balanceadores de carga convencionales, igual que cualquier otro servicio.</p>
+<h3 id="llm-locales-y-on-premise">LLM locales y on-premise</h3>
+<p>No todas las organizaciones pueden —ni deben— enviar sus logs, su topología de red o su código fuente a un servicio de IA en la nube. Para esos casos existe una familia creciente de <strong>modelos de lenguaje que se ejecutan en la propia infraestructura</strong> (locales u on-premise), entrenados o ajustados sobre modelos abiertos, que permiten disfrutar de asistencia de IA sin que ningún dato salga del perímetro de la organización. Esta opción es especialmente relevante en sectores regulados (banca, sanidad, administración pública) y en el propio entorno docente de un ciclo de ASIR, donde experimentar con un modelo local en una máquina virtual es también una forma excelente de entender, por dentro, qué recursos de cómputo (CPU, GPU, memoria) exige realmente ejecutar un modelo de IA.</p>
+<div class="admonition example">
+<p class="admonition-title">Un caso concreto: depurar un playbook con Ansible Lightspeed</p>
+<p>Un administrador necesita un playbook que instale y configure Nginx en un grupo de servidores Debian, abriendo el puerto 80 en el cortafuegos y arrancando el servicio. En lugar de partir de cero, escribe un comentario describiendo la tarea; Ansible Lightspeed sugiere las tareas YAML correspondientes (módulos <code>apt</code>, <code>ufw</code>, <code>service</code>), y el administrador revisa el resultado: comprueba que el nombre del paquete es correcto para la distribución de destino, que el puerto abierto es realmente el 80 y no otro por error de la sugerencia, y ejecuta el playbook primero contra una máquina de pruebas antes de aplicarlo al grupo completo de producción. La IA ha acelerado la fase de escritura; la validación en un entorno controlado sigue siendo responsabilidad del administrador.</p>
+</div>
+<h2 id="3-riesgos-y-limitaciones">3. Riesgos y limitaciones</h2>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/07ia/riesgos-capas-ia.svg" data-desc-position="bottom"><img alt="Riesgos de usar IA en sistemas: alucinaciones en scripts, exfiltración de datos, sobredependencia y sesgo en AIOps, con su mitigación" src="../../assets/img/07ia/riesgos-capas-ia.svg"></a></p>
+<p>Ningún beneficio anterior es gratuito. Usar IA en un entorno de sistemas introduce riesgos específicos que conviene conocer antes de integrarla en el flujo de trabajo real.</p>
+<h3 id="alucinaciones-en-scripts-generados">Alucinaciones en scripts generados</h3>
+<p>Un modelo de lenguaje no "sabe" que un comando existe: predice la secuencia de texto más probable dado el contexto, lo que en ocasiones produce comandos, <em>flags</em> o rutas que <strong>parecen correctos y no lo son</strong>. Un script generado por IA puede compilar o ejecutarse sin error aparente y aun así hacer algo distinto de lo previsto (borrar el directorio equivocado, aplicar una regla de cortafuegos demasiado permisiva). El peligro no es que la IA se equivoque —cualquier herramienta lo hace— sino que lo haga con una seguridad aparente que invita a confiar sin comprobar.</p>
+<h3 id="sobredependencia-y-perdida-de-criterio-tecnico">Sobredependencia y pérdida de criterio técnico</h3>
+<p>Si la generación de scripts y la resolución de incidencias se delega sistemáticamente en la IA sin dedicar tiempo a entender por qué la solución propuesta funciona, el administrador puede perder progresivamente la capacidad de diagnosticar un problema nuevo que la IA no ha visto antes o de detectar cuándo la sugerencia recibida es, precisamente, una alucinación. Esta erosión de criterio es más peligrosa cuanto menos experimentado es el profesional, lo que hace especialmente importante que un estudiante de ASIR aprenda primero los fundamentos (redes, sistemas operativos, scripting) y use la IA como acelerador, no como sustituto del aprendizaje.</p>
+<h3 id="seguridad-y-exfiltracion-de-datos">Seguridad y exfiltración de datos</h3>
+<p>Enviar logs, configuraciones de red, credenciales o fragmentos de código propietario a un servicio de IA en la nube implica, por definición, que esa información sale del perímetro de la organización. Muchas políticas de seguridad corporativas ya regulan explícitamente qué se puede pegar en un asistente de IA público y qué no. Esta es la razón de fondo por la que los LLM locales u on-premise, descritos en la sección anterior, han pasado de ser una curiosidad técnica a una necesidad de cumplimiento normativo en sectores con datos sensibles.</p>
+<h3 id="sesgo-y-ruido-en-los-sistemas-de-aiops">Sesgo y ruido en los sistemas de AIOps</h3>
+<p>Los motores de detección de anomalías aprenden del histórico de la infraestructura que monitorizan: si ese histórico incluye periodos anómalos (una incidencia mal resuelta, una campaña de tráfico atípica) sin etiquetar correctamente, el modelo puede terminar considerando "normal" algo que no lo es, o generando falsos positivos que erosionan la confianza del equipo en el sistema (el mismo problema de "fatiga de alertas" que se pretendía resolver). La auditoría periódica del modelo y el ajuste de umbrales siguen siendo tareas humanas.</p>
+<h3 id="limites-de-contexto-y-coste-economico">Límites de contexto y coste económico</h3>
+<p>Un aspecto más práctico, pero igualmente real, es que todo modelo de lenguaje tiene un límite de <strong>contexto</strong>: la cantidad de texto (código, logs, documentación) que puede tener en cuenta a la vez al generar una respuesta. Pedir a un asistente que analice un fichero de configuración completo de varios miles de líneas o un histórico de logs muy extenso puede superar ese límite, obligando a trocear la información o a resumirla antes de consultarla, con el riesgo de perder detalles relevantes en ese resumen previo. A esto se suma un factor económico: los servicios de IA en la nube suelen facturar por volumen de texto procesado (tokens), de modo que un uso intensivo y poco planificado —por ejemplo, pegar logs completos de forma repetida en lugar de filtrar antes lo relevante— tiene un coste que conviene presupuestar igual que cualquier otro servicio cloud del que ya se ha hablado en unidades anteriores de este temario.</p>
+<div class="admonition warning">
+<p class="admonition-title">La responsabilidad no se automatiza</p>
+<p>Ninguna herramienta de IA asume responsabilidad legal ni profesional por un cambio aplicado en producción. Si un script generado por IA borra datos por error o una regla de cortafuegos sugerida deja un servicio expuesto, la responsabilidad recae en quien aprobó y ejecutó ese cambio, no en la herramienta que lo sugirió. Este principio —validación humana obligatoria antes de tocar producción— es el hilo conductor de toda esta unidad.</p>
+</div>
+<h2 id="4-que-deberia-estudiar-un-alumno-de-asir-para-el-mercado-laboral-que-se-avecina">4. Qué debería estudiar un alumno de ASIR para el mercado laboral que se avecina</h2>
+<p>El impacto de la IA en el puesto de administrador de sistemas no es una amenaza abstracta: es un cambio concreto en qué competencias piden las ofertas de empleo del sector. Las siguientes son las que, con la información disponible en 2026, más peso están ganando:</p>
+<ol>
+<li><strong>Prompting técnico</strong>: saber formular una petición precisa a un asistente de IA (contexto, restricciones, formato de salida esperado) es ya una habilidad tan práctica como saber usar <code>grep</code> o <code>journalctl</code>. Un prompt vago produce una sugerencia vaga; un prompt que especifica sistema operativo, versión, restricciones de seguridad y formato de salida produce resultados directamente aprovechables.</li>
+<li><strong>Integración de APIs de IA</strong>: más allá de usar un chatbot desde una interfaz web, entender cómo se llama a la API de un modelo de lenguaje desde un script propio (por ejemplo, para generar automáticamente un resumen de incidencias semanales) es una competencia que empieza a distinguir a un perfil junior de uno con proyección.</li>
+<li><strong>Model Context Protocol (MCP)</strong>: entender el estándar que permite a un modelo de IA conectarse a herramientas reales de infraestructura —y ser capaz de configurar o incluso desarrollar un servidor MCP sencillo para una herramienta interna— es una de las competencias más demandadas emergentes de 2026, por ser la pieza que conecta la IA generativa con la automatización real de sistemas.</li>
+<li><strong>Contenedores y Kubernetes para desplegar modelos</strong>: los modelos de IA locales, igual que cualquier otra aplicación moderna, se despliegan habitualmente en contenedores. Los fundamentos de Docker y Kubernetes trabajados en la UT04 de este mismo temario son exactamente la base necesaria para desplegar y escalar un modelo de IA propio dentro de la organización.</li>
+<li><strong>Seguridad de sistemas con IA</strong>: entender los vectores de ataque específicos de la IA (inyección de <em>prompts</em>, envenenamiento de datos de entrenamiento, exfiltración a través de un asistente mal configurado) es ya parte del temario de ciberseguridad de cualquier ciclo de grado superior actualizado.</li>
+<li><strong>Automatización combinada: Ansible/Terraform + IA</strong>: no se trata de elegir entre automatización clásica e IA, sino de combinarlas — usar IA para generar y revisar el código de infraestructura, y las herramientas de automatización de siempre (trabajadas en la UT06) para aplicarlo de forma reproducible y auditable.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Por dónde empezar si solo hay tiempo para una cosa</p>
+<p>Si un estudiante de ASIR solo puede dedicar tiempo a una competencia de esta lista antes de las prácticas en empresa, la recomendación es el <strong>Model Context Protocol</strong>: es la pieza más nueva, la que menos se enseña todavía de forma estructurada en el aula, y la que conecta directamente con todo lo demás (automatización, contenedores, APIs).</p>
+</div>
+<h2 id="5-comparativa-de-perfiles-profesionales-y-herramientas-de-ia">5. Comparativa de perfiles profesionales y herramientas de IA</h2>
+<p>No todos los perfiles del sector necesitan dominar las mismas herramientas de IA con la misma profundidad. La siguiente tabla resume qué debería priorizar cada perfil profesional relacionado con la administración de sistemas.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/07ia/perfiles-herramientas-ia.svg" data-desc-position="bottom"><img alt="Comparación de tres perfiles profesionales -sysadmin clásico, DevOps/Cloud y ciberseguridad- y las herramientas de IA que cada uno debería dominar" src="../../assets/img/07ia/perfiles-herramientas-ia.svg"></a></p>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Herramientas de IA clave</th>
+<th>Prioridad de aprendizaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sysadmin clásico</strong></td>
+<td>Asistentes de shell/Copilot, Ansible Lightspeed, AIOps (Watchdog, Davis), chatbots de infraestructura</td>
+<td>Automatizar tareas repetitivas y acelerar el diagnóstico de incidencias sin perder el control operativo</td>
+</tr>
+<tr>
+<td><strong>DevOps / Cloud</strong></td>
+<td>Generación de IaC (Terraform + Copilot), MCP para orquestar APIs, pipelines CI/CD con revisión asistida por IA, Kubernetes para desplegar modelos propios</td>
+<td>Integrar la IA en el ciclo de vida completo del despliegue, desde el código hasta la observabilidad</td>
+</tr>
+<tr>
+<td><strong>Ciberseguridad</strong></td>
+<td>SIEM con IA, detección de amenazas basada en ML (EDR/XDR), asistentes para análisis de malware, LLM locales para datos sensibles</td>
+<td>Usar la IA para acelerar la detección y respuesta a incidentes, vigilando a la vez los riesgos que la propia IA introduce</td>
+</tr>
+</tbody>
+</table>
+<p>Los tres perfiles comparten, sin embargo, un núcleo común que no depende de la especialidad: <strong>prompting técnico preciso, validación humana de cualquier sugerencia antes de aplicarla en producción, y criterio claro sobre qué datos pueden salir de la organización hacia un servicio de IA en la nube</strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">De la teoría a la práctica: un incidente resuelto con los tres perfiles</p>
+<p>Un pico de latencia en una aplicación web dispara una alerta de Dynatrace Davis AI, que señala como causa probable un contenedor con fuga de memoria (perfil DevOps). El sysadmin clásico revisa la sugerencia, la valida en el clúster de pruebas y aplica el cambio con un playbook de Ansible revisado con Lightspeed. En paralelo, el equipo de ciberseguridad descarta, apoyándose en su SIEM con IA, que el pico se deba a un ataque de denegación de servicio en lugar de a un error de programación. Los tres perfiles han usado IA en un momento distinto del mismo incidente, cada uno con la herramienta adecuada a su función.</p>
+</div>
+<h2 id="6-reflexion-final-el-futuro-del-puesto-de-administrador-de-sistemas">6. Reflexión final: el futuro del puesto de administrador de sistemas</h2>
+<p>Es tentador leer todo lo anterior como una cuenta atrás hacia la desaparición del puesto de administrador de sistemas. La lectura más ajustada a lo que se observa en 2025-2026 es distinta: <strong>se automatiza la ejecución de tareas bien definidas y repetitivas, no el criterio necesario para decidir qué tarea hay que ejecutar, cuándo y con qué límites</strong>.</p>
+<p>Lo que previsiblemente seguirá automatizándose y acelerándose:</p>
+<ul>
+<li>La redacción de un primer borrador de script, playbook o configuración.</li>
+<li>La correlación de métricas y logs para detectar anomalías y sugerir una causa probable.</li>
+<li>La generación y actualización de documentación técnica.</li>
+<li>Las respuestas a incidencias repetitivas y bien documentadas (un "nivel 1" de soporte cada vez más automatizado).</li>
+</ul>
+<p>Lo que, con la tecnología actual, sigue exigiendo criterio humano:</p>
+<ul>
+<li>Decidir si una sugerencia de IA es segura de aplicar en un sistema concreto, con su historial y sus particularidades.</li>
+<li>Diagnosticar incidencias nuevas, no vistas antes, donde no existe un patrón histórico del que aprender.</li>
+<li>Tomar decisiones de arquitectura que implican compromisos entre coste, rendimiento, seguridad y mantenibilidad.</li>
+<li>Asumir la responsabilidad última de un cambio en producción y responder ante un fallo.</li>
+<li>Negociar con proveedores, priorizar incidencias según impacto de negocio y comunicar con claridad a perfiles no técnicos.</li>
+</ul>
+<p>El perfil profesional que mejor va a encajar en este contexto no es el que sabe escribir el script más rápido, sino el que entiende con suficiente profundidad los sistemas que administra como para <strong>supervisar con criterio</strong> lo que una IA propone, detectar cuándo se equivoca, y decidir con responsabilidad qué cambios llegan a producción. Precisamente por eso, la base de este ciclo formativo —sistemas operativos, redes, virtualización, scripting, automatización— no pierde valor: es la que permite distinguir una sugerencia útil de una alucinación convincente. La IA cambia las herramientas; no cambia la necesidad de entender, de fondo, cómo funciona un sistema.</p>
+<p>Conviene además no perder de vista que esta reflexión no es exclusiva del sector informático: la mayoría de profesiones que hoy trabajan con información —desde la abogacía hasta la ingeniería civil— están atravesando exactamente la misma transición, sustituyendo tareas mecánicas por supervisión de herramientas cada vez más capaces. Lo que distingue a la administración de sistemas es que, además de vivir ese cambio como cualquier otro sector, es uno de los pocos que además <strong>construye y mantiene la infraestructura que hace posible ejecutar esa misma IA</strong> en primer lugar: los servidores, las redes y los contenedores que alojan los modelos son, en última instancia, sistemas que alguien tiene que administrar. Esta unidad no cierra por tanto un tema aislado, sino que enlaza con el motivo por el que las unidades de virtualización, cloud y contenedores de este mismo temario van a seguir siendo relevantes durante muchos años: la IA necesita infraestructura, y esa infraestructura necesita administradores de sistemas que la entiendan de verdad.</p>
+<h2 id="7-caso-practico-de-laboratorio-desplegar-un-llm-local">7. Caso práctico de laboratorio: desplegar un LLM local</h2>
+<p>Una forma habitual de acercar todo lo anterior a la práctica de aula, sin depender de servicios de pago ni de conexión permanente a internet, es desplegar un modelo de lenguaje reducido en una máquina virtual del propio laboratorio, reutilizando exactamente lo trabajado en las unidades de virtualización y contenedores de este temario.</p>
+<ol>
+<li><strong>Aprovisionar la máquina</strong>: una máquina virtual (o un contenedor, si el modelo elegido es lo bastante ligero) con recursos suficientes de CPU y RAM; los modelos más pequeños y eficientes ya pueden ejecutarse de forma razonable sin necesitar GPU dedicada, aunque una GPU acelera notablemente la respuesta.</li>
+<li><strong>Instalar un motor de inferencia local</strong>: herramientas de código abierto permiten descargar un modelo ya entrenado (en formatos comprimidos y optimizados para ejecución local) y exponerlo mediante una API compatible con la que usan los asistentes de IA en la nube, de modo que el resto de herramientas (editores, scripts propios) pueden hablar con el modelo local exactamente igual que hablarían con un servicio externo.</li>
+<li><strong>Contenerizar el servicio</strong>: empaquetar el motor de inferencia en una imagen de contenedor propia permite versionarlo, desplegarlo de forma reproducible y, si el laboratorio dispone de un clúster de Kubernetes, escalarlo horizontalmente repartiendo peticiones entre varias réplicas.</li>
+<li><strong>Conectar herramientas mediante MCP</strong>: una vez el modelo responde localmente, se le puede dar acceso controlado a herramientas del propio laboratorio (un inventario de Ansible, una base de datos de prácticas) a través de un servidor MCP sencillo, cerrando el círculo completo: modelo local, sin fuga de datos, con capacidad real de ejecutar tareas de infraestructura.</li>
+<li><strong>Medir y comparar</strong>: comprobar cuánto tarda el modelo local en responder frente a un servicio en la nube, y qué calidad de sugerencia ofrece en tareas típicas (generar un playbook sencillo, explicar un mensaje de error), es un ejercicio que ayuda a entender de forma tangible el compromiso entre coste, privacidad y rendimiento que cualquier organización real tiene que resolver.</li>
+</ol>
+<p>Este ejercicio conecta de forma directa cuatro unidades del ciclo: virtualización o contenedores para alojar el modelo, redes para exponer su API de forma segura dentro del laboratorio, scripting para automatizar su despliegue, y esta propia unidad para entender por qué tiene sentido hacerlo en local en primer lugar.</p>
+<div class="admonition note">
+<p class="admonition-title">No hace falta la GPU más potente del mercado</p>
+<p>Un error habitual al plantear este ejercicio es asumir que hace falta hardware de gama alta. Existen modelos abiertos deliberadamente reducidos, pensados para ejecutarse en un portátil o una máquina virtual modesta, con una calidad de respuesta más que suficiente para tareas de administración de sistemas habituales (explicar un comando, generar un script sencillo, resumir un log). La elección del tamaño del modelo es, en sí misma, una decisión de arquitectura: más parámetros no siempre es la respuesta correcta si el caso de uso es acotado.</p>
+</div>
+<h2 id="8-checklist-antes-de-aplicar-un-cambio-sugerido-por-ia-en-produccion">8. Checklist antes de aplicar un cambio sugerido por IA en producción</h2>
+<p>Del mismo modo que otras unidades de este temario cierran con una lista de comprobación práctica, conviene fijar aquí los pasos mínimos antes de dar por buena cualquier sugerencia de IA que vaya a tocar un sistema real:</p>
+<ol>
+<li>¿Se ha entendido completamente lo que hace el script, playbook o comando sugerido, línea a línea, y no solo su propósito general?</li>
+<li>¿Se ha comprobado que los nombres de paquete, rutas, módulos o <em>flags</em> usados existen realmente en la versión concreta del sistema de destino?</li>
+<li>¿Se ha probado el cambio en un entorno de pruebas o en una máquina de descarte antes de aplicarlo al entorno de producción?</li>
+<li>¿Contiene el prompt o la conversación con la IA algún dato sensible (credenciales, IP internas, nombres de clientes) que no debería haber salido del perímetro de la organización?</li>
+<li>¿Existe un plan de reversión (snapshot, backup, rama de control de versiones) por si el cambio, una vez aplicado, produce un efecto no previsto?</li>
+<li>¿Queda constancia, en el sistema de control de versiones o en el registro de cambios, de que la sugerencia vino de una IA y de quién la validó?</li>
+</ol>
+<p>Si alguna respuesta es "no", ese es exactamente el punto en el que conviene detenerse antes de ejecutar el cambio, del mismo modo que en el resto de unidades de este temario se insiste en no dar un paso de despliegue por bueno sin haber comprobado antes el paso anterior.</p>
+<h2 id="9-impacto-economico-y-organizativo-que-cambia-en-el-equipo-de-sistemas">9. Impacto económico y organizativo: qué cambia en el equipo de sistemas</h2>
+<p>Más allá de la herramienta concreta, conviene entender qué cambia a nivel de organización cuando un equipo de sistemas incorpora IA de forma seria, porque son cambios que un estudiante de ASIR se va a encontrar directamente en sus primeras prácticas o su primer empleo.</p>
+<h3 id="el-tamano-y-la-composicion-de-los-equipos">El tamaño y la composición de los equipos</h3>
+<p>La automatización de tareas de "nivel 1" (reinicios, comprobaciones rutinarias, respuestas a incidencias ya documentadas) reduce la necesidad de un volumen grande de personal dedicado exclusivamente a tareas repetitivas de bajo valor añadido. A cambio, crece la demanda de perfiles capaces de <strong>supervisar, auditar y mejorar</strong> los propios sistemas de IA que hacen ese trabajo: alguien tiene que decidir qué umbrales usa el motor de AIOps, revisar por qué una alerta relevante no saltó, o mantener actualizado el servidor MCP que conecta el chatbot de infraestructura con el inventario real. El puesto no desaparece: se desplaza hacia arriba en la cadena de valor.</p>
+<h3 id="nuevos-roles-hibridos">Nuevos roles híbridos</h3>
+<p>Están consolidándose perfiles que no encajan del todo en las categorías clásicas de "sysadmin", "DevOps" o "ciberseguridad": el <strong>ingeniero de plataforma de IA</strong>, que se encarga de desplegar, monitorizar y dar soporte a los propios modelos de IA que usa el resto de la organización (los descritos en la sección de LLM locales), o el <strong>ingeniero de fiabilidad asistido por IA</strong> (<em>AI-augmented SRE</em>), que combina la disciplina clásica de <em>Site Reliability Engineering</em> con el uso intensivo de AIOps para reducir el tiempo de detección y resolución de incidentes. Ninguno de estos roles existía, con esta forma concreta, hace pocos años.</p>
+<h3 id="el-coste-de-no-adoptarlo-tambien-existe">El coste de no adoptarlo también existe</h3>
+<p>Es tentador analizar la adopción de IA solo en términos de riesgo (los descritos en el apartado 3), pero también existe un coste de <strong>no</strong> adoptarla: equipos que siguen dedicando horas a tareas que ya se automatizan en otras organizaciones del sector acaban compitiendo en desventaja, tanto en tiempo de resolución de incidencias como en capacidad de atender más infraestructura con el mismo número de personas. La decisión razonable no es "adoptar IA sí o no", sino "adoptarla con las salvaguardas del apartado 3 y el checklist del apartado 8".</p>
+<div class="admonition tip">
+<p class="admonition-title">Un consejo para las prácticas en empresa</p>
+<p>Si en las prácticas de la FCT (Formación en Centros de Trabajo) el estudiante se encuentra con que la empresa ya usa algún asistente de IA para tareas de sistemas, vale la pena preguntar explícitamente qué política interna existe sobre qué se puede y no se puede compartir con esa herramienta. La respuesta a esa pregunta suele revelar, mejor que cualquier explicación teórica, el nivel de madurez real de la organización en el uso de IA.</p>
+</div>
+<h2 id="10-glosario-rapido-de-la-unidad">10. Glosario rápido de la unidad</h2>
+<ul>
+<li><strong>AIOps</strong>: aplicación de IA y aprendizaje automático a la operación de sistemas (monitorización, detección de anomalías, diagnóstico automático).</li>
+<li><strong>Alucinación</strong>: respuesta de un modelo de IA que parece correcta y coherente pero es objetivamente falsa o inventada.</li>
+<li><strong>Human-in-the-loop</strong>: diseño de un proceso en el que una persona valida o aprueba las decisiones o acciones propuestas por un sistema automático antes de aplicarlas.</li>
+<li><strong>LLM (Large Language Model)</strong>: modelo de lenguaje de gran tamaño, la tecnología subyacente en los asistentes de IA generativa actuales.</li>
+<li><strong>MCP (Model Context Protocol)</strong>: estándar abierto que permite a un modelo de IA descubrir y usar herramientas externas (APIs, bases de datos, sistemas de infraestructura) de forma uniforme.</li>
+<li><strong>MTTR (Mean Time To Repair/Resolve)</strong>: tiempo medio que tarda un equipo en resolver un incidente desde que se detecta.</li>
+<li><strong>Prompt / prompting</strong>: instrucción en lenguaje natural que se da a un modelo de IA, y la disciplina de formularla con precisión para obtener mejores resultados.</li>
+<li><strong>Root cause analysis (RCA)</strong>: proceso de identificar la causa raíz de un incidente, cada vez más asistido por IA en plataformas de observabilidad.</li>
+</ul>
+<h2 id="11-autoevaluacion-rapida">11. Autoevaluación rápida</h2>
+<ol>
+<li>Explica con tus propias palabras la diferencia entre un asistente de código generalista (como GitHub Copilot) y uno especializado (como Ansible Lightspeed). (apartado 2)</li>
+<li>¿Por qué un motor de AIOps como Datadog Watchdog o Dynatrace Davis reduce el número de falsas alarmas frente a un sistema de umbrales fijos? (apartado 1)</li>
+<li>Describe un escenario en el que usar un LLM en la nube sería un riesgo de seguridad, y explica cómo mitigarlo. (apartado 3)</li>
+<li>¿Qué papel juega el Model Context Protocol (MCP) para que un chatbot de infraestructura pueda ejecutar acciones reales, y no solo responder preguntas? (apartados 2 y 4)</li>
+<li>Elige uno de los tres perfiles profesionales de la tabla comparativa (sysadmin, DevOps, ciberseguridad) y justifica por qué debería priorizar una herramienta de IA concreta frente a otra. (apartado 5)</li>
+<li>¿Qué tareas del administrador de sistemas crees que seguirán exigiendo criterio humano dentro de cinco años, y por qué? (apartado 6)</li>
+<li>Diseña, aunque sea a alto nivel, cómo desplegarías un LLM local en el laboratorio del ciclo, indicando qué unidades previas del temario reutilizarías. (apartado 7)</li>
+<li>De los seis puntos del checklist antes de aplicar un cambio sugerido por IA, ¿cuál crees que se salta con más frecuencia en un entorno real, y qué consecuencia podría tener? (apartado 8)</li>
+<li>¿Qué significa que "el puesto se desplaza hacia arriba en la cadena de valor" en lugar de desaparecer? Relaciónalo con un ejemplo concreto de tarea automatizada. (apartado 9)</li>
+</ol>
+<h2 id="12-resumen-que-apartado-del-temario-cubre-cada-bloque-de-contenido">12. Resumen: qué apartado del temario cubre cada bloque de contenido</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque de contenido</th>
+<th>Apartados relacionados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cambios en el día a día del administrador</td>
+<td>1 (automatización, AIOps, generación de scripts, documentación)</td>
+</tr>
+<tr>
+<td>Herramientas concretas de IA</td>
+<td>2 (asistentes, Ansible Lightspeed, AIOps, MCP, LLM locales)</td>
+</tr>
+<tr>
+<td>Riesgos y mitigación</td>
+<td>3 (alucinaciones, exfiltración, sobredependencia, sesgo)</td>
+</tr>
+<tr>
+<td>Competencias para el mercado laboral</td>
+<td>4 (prompting, APIs, MCP, contenedores, seguridad)</td>
+</tr>
+<tr>
+<td>Perfiles profesionales</td>
+<td>5 (sysadmin, DevOps, ciberseguridad)</td>
+</tr>
+<tr>
+<td>Futuro del puesto</td>
+<td>6 (qué se automatiza, qué exige criterio humano)</td>
+</tr>
+<tr>
+<td>Práctica de laboratorio</td>
+<td>7 (LLM local desplegado en el aula)</td>
+</tr>
+<tr>
+<td>Buenas prácticas antes de producción</td>
+<td>8 (checklist de validación)</td>
+</tr>
+<tr>
+<td>Impacto en el equipo y la organización</td>
+<td>9 (roles nuevos, coste de no adoptar IA)</td>
+</tr>
+</tbody>
+</table>
+<p>Esta tabla funciona como mapa de estudio: si al repasar la unidad hay dudas sobre un bloque concreto, aquí se indica exactamente a qué apartado volver.</p>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>Esta unidad se apoya en información pública sobre el estado del ecosistema de IA aplicada a sistemas y DevOps en 2025-2026. Para quien quiera profundizar, son recomendables el artículo comparativo <a href="https://lucaberton.com/blog/ansible-lightspeed-vs-github-copilot-automation-2026/" target="_blank">Ansible Lightspeed vs GitHub Copilot</a> sobre asistentes especializados frente a generalistas en automatización; la guía <a href="https://spacelift.io/blog/ansible-lightspeed" target="_blank">Ansible Lightspeed: AI-Powered Playbook Automation Guide</a> de Spacelift; el análisis <a href="https://devops-radar.com/ai-enhanced-monitoring-and-observability-mastering-datadog-watchdog-ai-dynatrace-davis-ai-new-relic-aiops-sysdig-for-real-world-devops-impact/" target="_blank">AI-Enhanced Monitoring and Observability: Datadog Watchdog AI, Dynatrace Davis AI y AIOps</a> sobre observabilidad asistida por IA; y la <a href="https://modelcontextprotocol.io/specification/2025-11-25" target="_blank">documentación oficial del Model Context Protocol</a>, el estándar que conecta modelos de IA con herramientas reales de infraestructura. </p>
+<div class="admonition tip">
+<p class="admonition-title">Cómo seguir el ritmo de un campo que cambia cada mes</p>
+<p>Ninguna lista de enlaces sobre IA envejece bien: nuevas versiones de estas herramientas, y herramientas nuevas que hoy no existen, aparecerán antes de que termine el curso. La recomendación de fondo, más duradera que cualquier enlace concreto, es seguir de cerca las notas de versión de los asistentes que ya se usan en el aula (el editor de código, la extensión de Ansible) y dedicar de vez en cuando media hora a probar una herramienta nueva del sector con un caso de prueba pequeño y controlado, exactamente con el mismo criterio de validación descrito en el checklist del apartado 8.</p>
+</div>
+<p>Con esto se cierra la unidad: de la monitorización asistida por IA a la reflexión sobre el futuro del puesto, pasando por las herramientas concretas, los riesgos y las competencias que conviene dominar antes de salir al mercado laboral.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

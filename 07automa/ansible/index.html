@@ -1,0 +1,4220 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/07automa/ansible/">
+      
+      
+        <link rel="prev" href="../../06monitor/elastic-stack/">
+      
+      
+        <link rel="next" href="../vagrant/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Ansible - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ansible-automatizacion-sin-agentes" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ansible
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05bash-estructuras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-ansible-y-que-problema-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Ansible y qué problema resuelve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-modelo-agentless-automatizacion-por-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El modelo agentless: automatización por SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-arquitectura-nodo-de-control-inventario-y-hosts-gestionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Arquitectura: nodo de control, inventario y hosts gestionados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Arquitectura: nodo de control, inventario y hosts gestionados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodo-de-control-control-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodo de control (control node)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inventario-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inventario (inventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-y-hosts-gestionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos y hosts gestionados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-lenguaje-playbooks-en-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El lenguaje: playbooks en YAML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conceptos-clave-tasks-handlers-variables-y-plantillas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Conceptos clave: tasks, handlers, variables y plantillas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Conceptos clave: tasks, handlers, variables y plantillas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantillas-jinja2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plantillas Jinja2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-idempotencia-la-garantia-que-hace-fiable-la-automatizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Idempotencia: la garantía que hace fiable la automatización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comparacion-con-otras-herramientas-de-gestion-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Comparación con otras herramientas de gestión de configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejemplo-completo-instalar-y-configurar-un-servidor-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejemplo completo: instalar y configurar un servidor Nginx
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-comandos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Comandos básicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-ansible-y-que-problema-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Ansible y qué problema resuelve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-modelo-agentless-automatizacion-por-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El modelo agentless: automatización por SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-arquitectura-nodo-de-control-inventario-y-hosts-gestionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Arquitectura: nodo de control, inventario y hosts gestionados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Arquitectura: nodo de control, inventario y hosts gestionados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodo-de-control-control-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodo de control (control node)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inventario-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inventario (inventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-y-hosts-gestionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos y hosts gestionados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-lenguaje-playbooks-en-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El lenguaje: playbooks en YAML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conceptos-clave-tasks-handlers-variables-y-plantillas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Conceptos clave: tasks, handlers, variables y plantillas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Conceptos clave: tasks, handlers, variables y plantillas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantillas-jinja2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plantillas Jinja2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-idempotencia-la-garantia-que-hace-fiable-la-automatizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Idempotencia: la garantía que hace fiable la automatización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comparacion-con-otras-herramientas-de-gestion-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Comparación con otras herramientas de gestión de configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejemplo-completo-instalar-y-configurar-un-servidor-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejemplo completo: instalar y configurar un servidor Nginx
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-comandos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Comandos básicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ansible-automatizacion-sin-agentes"><strong>🔧 Ansible · Automatización sin agentes</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/ansible-arquitectura.svg" data-desc-position="bottom"><img alt="Arquitectura agentless de Ansible: nodo de control, inventario y hosts gestionados por SSH" src="../../assets/img/06auto-monit/ansible-arquitectura.svg"></a></p>
+<h2 id="1-que-es-ansible-y-que-problema-resuelve">1. Qué es Ansible y qué problema resuelve</h2>
+<p>Cuando una infraestructura crece más allá de dos o tres servidores, mantenerlos configurados "a mano" deja de ser viable: instalar paquetes, copiar ficheros de configuración, crear usuarios o reiniciar servicios uno por uno es lento, propenso a errores y, sobre todo, <strong>no queda documentado en ningún sitio salvo en la cabeza de quien lo hizo</strong>. Esto es exactamente lo que en la unidad de contenedores y scripting ya se apuntaba como problema de fondo: la configuración manual no es reproducible ni auditable.</p>
+<p><strong>Ansible</strong> es una herramienta de automatización de TI, propiedad de Red Hat (IBM), que permite describir en ficheros de texto (YAML) el estado que debe tener un conjunto de máquinas —qué paquetes deben estar instalados, qué ficheros deben existir, qué servicios deben estar activos— y aplicar esa descripción de forma automática, repetible y auditable sobre tantos servidores como haga falta, ya sean dos o dos mil.</p>
+<p>Se usa fundamentalmente para tres tareas, que en la práctica se solapan constantemente:</p>
+<ul>
+<li><strong>Gestión de la configuración</strong>: mantener el estado deseado de servidores ya existentes (paquetes, usuarios, ficheros de configuración, servicios).</li>
+<li><strong>Aprovisionamiento</strong>: preparar un servidor desde cero tras crearlo (a menudo con Terraform o Vagrant, que veremos en los otros dos apartados de esta unidad).</li>
+<li><strong>Despliegue de aplicaciones</strong>: copiar código, reiniciar servicios, orquestar actualizaciones sin downtime.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Por qué "Ansible" y no un script de Bash</p>
+<p>Un script de Bash que instale Nginx en un servidor funciona la primera vez. El problema aparece cuando hay que ejecutarlo sobre 30 servidores con pequeñas diferencias entre sí, cuando hay que volver a ejecutarlo sin que rompa nada si ya se había ejecutado antes, o cuando alguien nuevo en el equipo necesita entender qué hace el script sin leerlo línea a línea. Ansible resuelve estos tres problemas mediante un lenguaje declarativo (YAML), la idempotencia como principio de diseño y una estructura de proyecto estandarizada (roles) que cualquier persona familiarizada con la herramienta puede leer.</p>
+</div>
+<h2 id="2-el-modelo-agentless-automatizacion-por-ssh">2. El modelo agentless: automatización por SSH</h2>
+<p>La característica que más distingue a Ansible de otras herramientas de gestión de configuración —Puppet, Chef, SaltStack— es que es <strong>agentless</strong>: no necesita instalar ni mantener ningún software residente (un "agente") en los servidores que gestiona. Le basta con que el host remoto tenga:</p>
+<ul>
+<li>Un cliente <strong>SSH</strong> accesible (el mismo protocolo que se usa para conectarse manualmente a un servidor).</li>
+<li>Un intérprete de <strong>Python</strong> instalado (en la mayoría de distribuciones Linux ya viene de fábrica).</li>
+</ul>
+<p>Con solo eso, Ansible puede conectarse, copiar un módulo Python al host remoto, ejecutarlo y recoger el resultado, todo a través del canal SSH ya existente. Esto tiene varias consecuencias prácticas importantes:</p>
+<ul>
+<li><strong>No hay que abrir puertos adicionales</strong> en el firewall: si ya se administra el servidor por SSH, Ansible ya puede llegar a él.</li>
+<li><strong>No hay agente que actualizar, romper o que consuma recursos en segundo plano</strong> en cada servidor gestionado.</li>
+<li>El <strong>nodo de control</strong> (la máquina desde la que se lanza Ansible) es el único sitio donde hay que instalar la herramienta.</li>
+<li>Añadir un nuevo servidor a la gestión es tan sencillo como añadir una línea al inventario; no hay que ir físicamente (ni remotamente) a instalar nada en él primero.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">SSH sin contraseña, la base de todo</p>
+<p>En la práctica, Ansible funciona mucho mejor si el nodo de control puede conectarse por SSH a los hosts gestionados sin que se le pida contraseña interactivamente, normalmente mediante autenticación por clave pública. Es exactamente el mismo mecanismo que se estudia al configurar acceso remoto seguro a servidores Linux: se genera un par de claves en el nodo de control y se distribuye la clave pública a los hosts gestionados (por ejemplo con <code>ssh-copy-id</code>).</p>
+</div>
+<h2 id="3-arquitectura-nodo-de-control-inventario-y-hosts-gestionados">3. Arquitectura: nodo de control, inventario y hosts gestionados</h2>
+<p>Una instalación de Ansible se organiza en torno a tres piezas, tal y como muestra el diagrama de esta sección:</p>
+<h3 id="nodo-de-control-control-node">Nodo de control (control node)</h3>
+<p>Es la máquina —puede ser un portátil, un servidor dedicado o una instancia en un pipeline de CI/CD— donde está instalado Ansible y desde donde se lanzan los comandos <code>ansible</code> y <code>ansible-playbook</code>. Ansible <strong>no funciona sobre Windows como nodo de control</strong> (aunque sí puede gestionar hosts Windows como destino mediante WinRM); en un entorno Windows se suele usar WSL2 para disponer de un nodo de control Linux.</p>
+<h3 id="inventario-inventory">Inventario (inventory)</h3>
+<p>Es el fichero (o conjunto de ficheros) que enumera los hosts que Ansible puede gestionar, agrupados de forma lógica. Puede ser tan simple como un fichero <code>.ini</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[web]</span>
+<span class="na">web01.midominio.local</span>
+<span class="na">web02.midominio.local</span>
+
+<span class="k">[db]</span>
+<span class="na">db01.midominio.local ansible_user</span><span class="o">=</span><span class="s">admin</span>
+
+<span class="k">[produccion:children]</span>
+<span class="na">web</span>
+<span class="na">db</span>
+</code></pre></div>
+<p>O su equivalente en YAML, más expresivo para añadir variables anidadas:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">all</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">children</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">web01.midominio.local</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">web02.midominio.local</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">db01.midominio.local</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">ansible_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+</code></pre></div>
+<p>En entornos cloud o muy dinámicos (donde las máquinas se crean y destruyen constantemente, por ejemplo tras un <code>terraform apply</code>) se usa <strong>inventario dinámico</strong>: un script o plugin que consulta la API del proveedor (AWS, Azure, Proxmox) y construye el inventario al vuelo, en lugar de mantenerlo escrito a mano.</p>
+<h3 id="modulos-y-hosts-gestionados">Módulos y hosts gestionados</h3>
+<p>Los <strong>módulos</strong> son las unidades de trabajo que Ansible ejecuta sobre cada host: pequeños programas Python (<code>apt</code>, <code>yum</code>, <code>copy</code>, <code>service</code>, <code>user</code>, <code>template</code>...) que reciben unos parámetros, comprueban el estado actual del sistema y aplican los cambios necesarios para alcanzar el estado declarado. Ansible incluye miles de módulos oficiales y de la comunidad, organizados en colecciones (<code>ansible.builtin</code>, <code>community.general</code>, <code>ansible.posix</code>...).</p>
+<p>Los <strong>hosts gestionados</strong> son los servidores de destino. No necesitan nada de Ansible instalado de forma permanente: durante la ejecución, Ansible copia temporalmente el módulo Python necesario, lo ejecuta y borra los ficheros temporales al terminar.</p>
+<h2 id="4-el-lenguaje-playbooks-en-yaml">4. El lenguaje: playbooks en YAML</h2>
+<p>Un <strong>playbook</strong> es el fichero YAML donde se describe qué se quiere conseguir. Se estructura en una lista de <strong>plays</strong>, y cada play aplica una lista de <strong>tasks</strong> (tareas) a un grupo de hosts del inventario.</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configurar servidor web</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">puerto_http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">    </span><span class="nt">documento_raiz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/www/html</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instalar Nginx</span>
+<span class="w">      </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">        </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Copiar página de bienvenida</span>
+<span class="w">      </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files/index.html</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">documento_raiz</span><span class="nv"> </span><span class="s">}}/index.html"</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Asegurar que Nginx está activo y habilitado</span>
+<span class="w">      </span><span class="nt">ansible.builtin.service</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>Elementos que aparecen en prácticamente cualquier playbook real:</p>
+<ul>
+<li><strong><code>hosts</code></strong>: el grupo del inventario (o host concreto) sobre el que se aplica el play.</li>
+<li><strong><code>become</code></strong>: indica que las tareas deben ejecutarse con privilegios elevados (equivalente a <code>sudo</code>).</li>
+<li><strong><code>vars</code></strong>: variables propias del play, referenciadas con la sintaxis <code>{{ variable }}</code> de Jinja2.</li>
+<li><strong><code>tasks</code></strong>: la lista ordenada de acciones, cada una invocando un módulo con sus parámetros.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">YAML es sensible a la indentación</p>
+<p>Un error habitual al empezar con Ansible no es conceptual sino de formato: YAML usa la indentación (espacios, nunca tabuladores) para representar la jerarquía. Un playbook que "no hace nada" o falla al arrancar suele deberse a una indentación incorrecta antes que a un error de lógica. Conviene validar la sintaxis con <code>ansible-playbook --syntax-check playbook.yml</code> antes de ejecutarlo de verdad.</p>
+</div>
+<h2 id="5-conceptos-clave-tasks-handlers-variables-y-plantillas">5. Conceptos clave: tasks, handlers, variables y plantillas</h2>
+<h3 id="tasks">Tasks</h3>
+<p>Cada <strong>task</strong> invoca un módulo con parámetros concretos. Ansible ejecuta las tareas de un play en orden, host por host (o en paralelo entre hosts, según el valor de <code>forks</code>), y se detiene en el primer error salvo que se indique lo contrario con <code>ignore_errors</code> o bloques <code>block</code>/<code>rescue</code>.</p>
+<h3 id="handlers">Handlers</h3>
+<p>Un <strong>handler</strong> es una tarea especial que solo se ejecuta si otra tarea la ha "notificado" (<code>notify</code>) y ha producido un cambio real. El caso típico es reiniciar un servicio solo cuando su configuración ha cambiado, evitando reinicios innecesarios en cada ejecución:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Desplegar configuración de Nginx</span>
+<span class="w">    </span><span class="nt">ansible.builtin.template</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx.conf.j2</span>
+<span class="w">      </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nginx/nginx.conf</span>
+<span class="w">    </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reiniciar nginx</span>
+
+<span class="nt">handlers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reiniciar nginx</span>
+<span class="w">    </span><span class="nt">ansible.builtin.service</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
+</code></pre></div>
+<p>Los handlers se ejecutan, como máximo una vez, al final del play, aunque varias tareas los hayan notificado.</p>
+<h3 id="roles">Roles</h3>
+<p>Un <strong>rol</strong> es la unidad de reutilización y organización en Ansible: agrupa tasks, handlers, variables, plantillas y ficheros relacionados con una función concreta (por ejemplo, "instalar y configurar Nginx") en una estructura de carpetas estandarizada que Ansible reconoce automáticamente.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/ansible-roles.svg" data-desc-position="bottom"><img alt="Estructura de un rol de Ansible: tasks, handlers y plantillas Jinja2" src="../../assets/img/06auto-monit/ansible-roles.svg"></a></p>
+<div class="highlight"><pre><span></span><code>roles/
+  nginx/
+    tasks/main.yml       # qué hacer
+    handlers/main.yml    # qué reiniciar si cambia algo
+    templates/           # ficheros .j2 (Jinja2) a renderizar
+    files/                # ficheros estáticos a copiar tal cual
+    vars/main.yml         # variables específicas del rol (alta prioridad)
+    defaults/main.yml     # variables por defecto (baja prioridad, sobreescribibles)
+    meta/main.yml         # dependencias de otros roles
+</code></pre></div>
+<p>Un playbook que use el rol queda extremadamente legible:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configurar servidores web</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">firewall</span>
+</code></pre></div>
+<h3 id="variables">Variables</h3>
+<p>Ansible admite variables definidas en múltiples sitios (inventario, playbook, rol, línea de comandos con <code>-e</code>), con un orden de precedencia bien definido. Las más específicas (por ejemplo, una variable fijada para un host concreto) siempre ganan a las más generales (una variable por defecto de un rol). Esto permite escribir roles genéricos y reutilizables, ajustando solo lo necesario por entorno (desarrollo, producción) o por host.</p>
+<h3 id="plantillas-jinja2">Plantillas Jinja2</h3>
+<p>Los ficheros de configuración rara vez son idénticos en todos los servidores: el puerto, el dominio o el número de workers pueden cambiar de uno a otro. Ansible resuelve esto con <strong>Jinja2</strong>, el mismo motor de plantillas que usa Flask, incrustando variables, condicionales y bucles dentro de un fichero de configuración:</p>
+<div class="highlight"><pre><span></span><code><span class="x">server {</span>
+<span class="x">    listen </span><span class="cp">{{</span> <span class="nv">puerto_http</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    server_name </span><span class="cp">{{</span> <span class="nv">dominio</span> <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="s1">'localhost'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    root </span><span class="cp">{{</span> <span class="nv">documento_raiz</span> <span class="cp">}}</span><span class="x">;</span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">ruta</span> <span class="k">in</span> <span class="nv">rutas_extra</span> <span class="cp">%}</span>
+<span class="x">    location </span><span class="cp">{{</span> <span class="nv">ruta.path</span> <span class="cp">}}</span><span class="x"> {</span>
+<span class="x">        proxy_pass </span><span class="cp">{{</span> <span class="nv">ruta.destino</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    }</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>El módulo <code>ansible.builtin.template</code> toma este fichero <code>.j2</code>, sustituye las variables por sus valores reales para ese host concreto y copia el resultado ya renderizado al destino.</p>
+<h2 id="6-idempotencia-la-garantia-que-hace-fiable-la-automatizacion">6. Idempotencia: la garantía que hace fiable la automatización</h2>
+<p>La <strong>idempotencia</strong> es, probablemente, el concepto más importante para entender por qué Ansible es fiable en producción: <strong>ejecutar el mismo playbook varias veces sobre el mismo host produce siempre el mismo resultado final</strong>, sin efectos secundarios acumulativos.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/ansible-idempotencia.svg" data-desc-position="bottom"><img alt="Idempotencia: la primera ejecución cambia el estado, las siguientes no hacen nada si ya está correcto" src="../../assets/img/06auto-monit/ansible-idempotencia.svg"></a></p>
+<p>Cada módulo de Ansible, antes de actuar, <strong>comprueba el estado actual del sistema</strong> y solo aplica un cambio si es necesario:</p>
+<ul>
+<li>Si se pide <code>state: present</code> para un paquete y ya está instalado, el módulo no hace nada y lo reporta como <code>ok</code> (sin cambios).</li>
+<li>Si el paquete no estaba instalado, lo instala y lo reporta como <code>changed</code>.</li>
+<li>Si se ejecuta el playbook una tercera, cuarta o enésima vez sobre el mismo host, el resultado siempre converge al mismo estado declarado.</li>
+</ul>
+<p>Esto contrasta con un script de Bash típico que ejecuta <code>apt install nginx</code> sin comprobar nada antes: si se ejecuta dos veces no suele romper nada grave, pero un script que haga <code>echo "linea" &gt;&gt; fichero.conf</code> sí duplicaría esa línea en cada ejecución. Escribir tareas idempotentes (usando los módulos adecuados en lugar de comandos de shell sueltos) es lo que permite ejecutar un playbook con total confianza, sin tener que recordar "si ya se aplicó antes o no".</p>
+<div class="admonition example">
+<p class="admonition-title">Cuando no queda más remedio que usar <code>command</code> o <code>shell</code></p>
+<p>A veces no existe un módulo específico para una acción concreta y hay que recurrir a los módulos genéricos <code>ansible.builtin.command</code> o <code>ansible.builtin.shell</code>, que ejecutan un comando arbitrario y <strong>no son idempotentes por sí mismos</strong> — se ejecutarían en cada pasada. La forma correcta de usarlos es acompañarlos de una condición <code>creates</code> o <code>removes</code> (que le dice a Ansible que omita la tarea si un fichero ya existe o no existe), o de una cláusula <code>when</code> que compruebe una condición previa.</p>
+</div>
+<h2 id="7-comparacion-con-otras-herramientas-de-gestion-de-configuracion">7. Comparación con otras herramientas de gestión de configuración</h2>
+<p>Ansible no es la única herramienta de este tipo. Puppet, Chef y SaltStack resuelven el mismo problema con arquitecturas distintas:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Ansible</th>
+<th>Puppet</th>
+<th>Chef</th>
+<th>SaltStack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquitectura</td>
+<td>Agentless (SSH)</td>
+<td>Agente + servidor maestro</td>
+<td>Agente + servidor maestro</td>
+<td>Agente (o agentless por SSH)</td>
+</tr>
+<tr>
+<td>Lenguaje</td>
+<td>YAML (declarativo)</td>
+<td>DSL propio (basado en Ruby)</td>
+<td>DSL propio (Ruby puro)</td>
+<td>YAML + Jinja2 (declarativo)</td>
+</tr>
+<tr>
+<td>Curva de aprendizaje</td>
+<td>Baja</td>
+<td>Media-alta</td>
+<td>Alta (requiere saber Ruby)</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>Modelo de ejecución</td>
+<td>Push (el control empuja cambios)</td>
+<td>Pull (el agente consulta periódicamente)</td>
+<td>Pull (el agente consulta periódicamente)</td>
+<td>Push o pull según configuración</td>
+</tr>
+<tr>
+<td>Rendimiento a gran escala</td>
+<td>Bueno, mejorable con <code>mitogen</code></td>
+<td>Muy bueno (diseñado para miles de nodos)</td>
+<td>Muy bueno</td>
+<td>Excelente (usa ZeroMQ)</td>
+</tr>
+<tr>
+<td>Mejor caso de uso</td>
+<td>Automatización general, orquestación puntual, equipos con SSH ya configurado</td>
+<td>Grandes infraestructuras con cumplimiento normativo estricto</td>
+<td>Infraestructuras muy complejas con equipos que ya saben Ruby</td>
+<td>Automatización a muy gran escala con eventos en tiempo real</td>
+</tr>
+</tbody>
+</table>
+<p>La razón principal por la que Ansible se ha vuelto tan popular en los últimos años es su <strong>sencillez de entrada</strong>: no requiere instalar nada en los hosts gestionados, se aprende en días (no en semanas) gracias a YAML, y su modelo <em>push</em> permite lanzar cambios bajo demanda sin esperar al siguiente ciclo de sincronización de un agente.</p>
+<h2 id="8-ejemplo-completo-instalar-y-configurar-un-servidor-nginx">8. Ejemplo completo: instalar y configurar un servidor Nginx</h2>
+<p>El siguiente playbook reúne los conceptos anteriores en un caso realista: instalar Nginx, desplegar una configuración personalizada mediante plantilla, publicar una página estática y garantizar que el servicio queda activo y persistente tras un reinicio.</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Desplegar servidor web Nginx</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">puerto_http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">    </span><span class="nt">dominio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">www.midominio.local</span>
+<span class="w">    </span><span class="nt">documento_raiz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/www/midominio</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Actualizar caché de paquetes</span>
+<span class="w">      </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">cache_valid_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instalar Nginx</span>
+<span class="w">      </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Crear directorio del sitio</span>
+<span class="w">      </span><span class="nt">ansible.builtin.file</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">documento_raiz</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">directory</span>
+<span class="w">        </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">www-data</span>
+<span class="w">        </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">www-data</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"0755"</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Desplegar página de inicio</span>
+<span class="w">      </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files/index.html</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">documento_raiz</span><span class="nv"> </span><span class="s">}}/index.html"</span>
+<span class="w">        </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">www-data</span>
+<span class="w">        </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">www-data</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Desplegar configuración del sitio</span>
+<span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">templates/sitio.conf.j2</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nginx/sites-available/midominio.conf</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"0644"</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reiniciar nginx</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Habilitar el sitio</span>
+<span class="w">      </span><span class="nt">ansible.builtin.file</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nginx/sites-available/midominio.conf</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nginx/sites-enabled/midominio.conf</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reiniciar nginx</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Abrir el puerto HTTP en el firewall</span>
+<span class="w">      </span><span class="nt">community.general.ufw</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">rule</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allow</span>
+<span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">puerto_http</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="w">        </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Asegurar que Nginx está activo y habilitado en el arranque</span>
+<span class="w">      </span><span class="nt">ansible.builtin.service</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reiniciar nginx</span>
+<span class="w">      </span><span class="nt">ansible.builtin.service</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
+</code></pre></div>
+<p>La plantilla <code>templates/sitio.conf.j2</code> referenciada usa las variables del play:</p>
+<div class="highlight"><pre><span></span><code><span class="x">server {</span>
+<span class="x">    listen </span><span class="cp">{{</span> <span class="nv">puerto_http</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    server_name </span><span class="cp">{{</span> <span class="nv">dominio</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    root </span><span class="cp">{{</span> <span class="nv">documento_raiz</span> <span class="cp">}}</span><span class="x">;</span>
+<span class="x">    index index.html;</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>Este playbook se lanzaría con:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory.ini<span class="w"> </span>nginx.yml
+</code></pre></div>
+<p>Y al ejecutarlo una segunda vez sobre el mismo host, todas las tareas aparecerían como <code>ok</code> (sin cambios) salvo que se hubiera modificado deliberadamente alguna variable o fichero de origen — la prueba práctica de que el playbook es idempotente.</p>
+<h2 id="9-comandos-basicos">9. Comandos básicos</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ansible all -i inventory.ini -m ping</code></td>
+<td>Comprueba la conectividad SSH y Python contra todo el inventario</td>
+</tr>
+<tr>
+<td><code>ansible web -i inventory.ini -a "uptime"</code></td>
+<td>Ejecuta un comando ad-hoc (módulo <code>command</code> implícito) sobre el grupo <code>web</code></td>
+</tr>
+<tr>
+<td><code>ansible-playbook -i inventory.ini nginx.yml</code></td>
+<td>Ejecuta un playbook completo</td>
+</tr>
+<tr>
+<td><code>ansible-playbook nginx.yml --check</code></td>
+<td>Modo simulación (<em>dry-run</em>): muestra qué cambiaría sin aplicarlo</td>
+</tr>
+<tr>
+<td><code>ansible-playbook nginx.yml --diff</code></td>
+<td>Muestra el contenido exacto que cambiaría en ficheros y plantillas</td>
+</tr>
+<tr>
+<td><code>ansible-playbook nginx.yml --limit web01</code></td>
+<td>Restringe la ejecución a un host concreto del grupo</td>
+</tr>
+<tr>
+<td><code>ansible-playbook nginx.yml --tags "config"</code></td>
+<td>Ejecuta solo las tareas etiquetadas con ese tag</td>
+</tr>
+<tr>
+<td><code>ansible-galaxy install geerlingguy.nginx</code></td>
+<td>Descarga un rol ya hecho desde Ansible Galaxy</td>
+</tr>
+<tr>
+<td><code>ansible-galaxy init roles/nginx</code></td>
+<td>Genera el esqueleto de carpetas de un rol nuevo</td>
+</tr>
+<tr>
+<td><code>ansible-doc -l</code></td>
+<td>Lista todos los módulos disponibles</td>
+</tr>
+<tr>
+<td><code>ansible-doc ansible.builtin.service</code></td>
+<td>Muestra la documentación y ejemplos de un módulo concreto</td>
+</tr>
+</tbody>
+</table>
+<p><code>ansible-galaxy</code> merece mención aparte: es el gestor de paquetes de Ansible, un repositorio público (similar en espíritu a lo que es npm para Node o PyPI para Python) donde la comunidad publica roles y colecciones ya probados, evitando reescribir desde cero tareas comunes como "instalar Docker" o "configurar un firewall básico".</p>
+<h2 id="10-buenas-practicas">10. Buenas prácticas</h2>
+<ul>
+<li><strong>Organizar el proyecto en roles desde el principio</strong>, aunque el playbook parezca pequeño: crece más rápido de lo esperado y migrar tareas sueltas a roles después cuesta más que empezar ya organizado.</li>
+<li><strong>No guardar contraseñas ni claves en texto plano</strong> en el repositorio: usar <strong>Ansible Vault</strong> (<code>ansible-vault encrypt secrets.yml</code>) para cifrar variables sensibles.</li>
+<li><strong>Usar <code>--check</code> y <code>--diff</code> antes de aplicar en producción</strong>, especialmente en cambios de configuración de red o de servicios críticos.</li>
+<li><strong>Fijar versiones de las colecciones y roles externos</strong> (en <code>requirements.yml</code>) para que una actualización de un rol de terceros no rompa un despliegue que llevaba meses funcionando.</li>
+<li><strong>Evitar <code>command</code> y <code>shell</code> cuando exista un módulo específico</strong>: los módulos son idempotentes y expresan mejor la intención que una línea de shell arbitraria.</li>
+<li><strong>Nombrar siempre las tareas con <code>name</code></strong> de forma descriptiva: el resultado de <code>ansible-playbook</code> se lee como una lista de pasos, y un nombre claro ahorra minutos de depuración a quien venga después (incluido uno mismo, seis meses más tarde).</li>
+<li><strong>Versionar el inventario y los playbooks en Git</strong>, igual que se versiona cualquier otro código: un playbook es, en última instancia, la documentación ejecutable de cómo está configurada la infraestructura.</li>
+</ul>
+<h2 id="ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno">Ansible vs Vagrant vs Terraform: cuándo usar cada uno</h2>
+<p>Estas tres herramientas conviven en muchos flujos de trabajo reales y conviene tener claro qué papel juega cada una, sin solaparlas innecesariamente:</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Ansible</th>
+<th>Vagrant</th>
+<th>Terraform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Propósito principal</td>
+<td>Configurar software dentro de máquinas ya existentes</td>
+<td>Crear y gestionar entornos de desarrollo locales reproducibles</td>
+<td>Crear y gestionar infraestructura (VMs, redes, servicios cloud)</td>
+</tr>
+<tr>
+<td>Paradigma</td>
+<td>Procedimental por tareas, pero con estado declarado</td>
+<td>Declarativo sobre el propio entorno de desarrollo</td>
+<td>Declarativo con estado persistente (<code>.tfstate</code>)</td>
+</tr>
+<tr>
+<td>Dónde actúa</td>
+<td>Sobre sistemas operativos ya arrancados (SSH)</td>
+<td>Sobre hipervisores locales (VirtualBox, libvirt...)</td>
+<td>Sobre APIs de proveedores cloud/on-premise</td>
+</tr>
+<tr>
+<td>Unidad de trabajo</td>
+<td>Playbook / rol</td>
+<td>Vagrantfile / box</td>
+<td>Módulo / recurso <code>.tf</code></td>
+</tr>
+<tr>
+<td>Ejemplo típico de uso</td>
+<td>Instalar y configurar Nginx en 20 servidores</td>
+<td>Levantar un clúster de pruebas idéntico en el portátil de cada desarrollador</td>
+<td>Crear la VPC, las instancias EC2 y el balanceador en AWS</td>
+</tr>
+<tr>
+<td>Relación entre ellas</td>
+<td>Puede ser el <em>provisioner</em> de Vagrant o ejecutarse tras un <code>terraform apply</code></td>
+<td>Puede invocar Ansible como provisioner tras el <code>vagrant up</code></td>
+<td>Puede dejar la infraestructura lista para que Ansible la configure después</td>
+</tr>
+</tbody>
+</table>
+<p>En la práctica, un flujo muy habitual es: <strong>Terraform</strong> crea la infraestructura (la VM o instancia existe), y <strong>Ansible</strong> entra después para instalar y configurar el software dentro de ella; <strong>Vagrant</strong> cubre el mismo papel que Terraform pero enfocado a entornos de desarrollo local desechables, no a infraestructura de producción en la nube.</p>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>La documentación oficial de Ansible es extensa y está muy bien organizada por tareas concretas: la <a href="https://docs.ansible.com/ansible/latest/playbook_guide/index.html" target="_blank">guía de introducción a playbooks</a> explica en detalle tasks, handlers y control de flujo; la <a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html" target="_blank">referencia de módulos integrados</a> permite consultar los parámetros exactos de cada módulo antes de usarlo; y la <a href="https://docs.ansible.com/ansible/latest/galaxy/user_guide.html" target="_blank">documentación de Ansible Galaxy</a> explica cómo publicar y reutilizar roles de la comunidad. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos. Como ejemplos reales de roles Ansible: <a href="https://github.com/mablanco" target="_blank">mablanco/ansible-lynis</a> automatiza una auditoría de seguridad con Lynis, y los playbooks de <a href="https://github.com/iesgn" target="_blank">iesgn</a> cubren despliegues educativos completos (OpenStack, servicios de red).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

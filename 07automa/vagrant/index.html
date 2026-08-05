@@ -1,0 +1,4116 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/07automa/vagrant/">
+      
+      
+        <link rel="prev" href="../ansible/">
+      
+      
+        <link rel="next" href="../terraform/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Vagrant - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vagrant-entornos-de-desarrollo-reproducibles" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vagrant
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting (bash)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting (bash)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/scriptingidp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05bash-estructuras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructuras y funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/04vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-vagrant-y-que-problema-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Vagrant y qué problema resuelve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-problema-de-fondo-reproducibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El problema de fondo: reproducibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-arquitectura-vagrantfile-providers-y-boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Arquitectura: Vagrantfile, providers y boxes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Arquitectura: Vagrantfile, providers y boxes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-vagrantfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Vagrantfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ciclo-de-vida-de-una-maquina-vagrant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ciclo de vida de una máquina Vagrant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-comandos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comandos básicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-provisioners-shell-y-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Provisioners: Shell y Ansible
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Provisioners: Shell y Ansible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shell-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shell provisioner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible provisioner
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-redes-en-vagrant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Redes en Vagrant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Redes en Vagrant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-forwarding-reenvio-de-puertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port forwarding (reenvío de puertos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#red-privada-private-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red privada (private network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#red-publica-public-network-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red pública (public network / bridge)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-carpetas-compartidas-synced-folders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Carpetas compartidas (synced folders)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ejemplo-completo-vagrantfile-con-multiples-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Ejemplo completo: Vagrantfile con múltiples máquinas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-vagrant-y-que-problema-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qué es Vagrant y qué problema resuelve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-problema-de-fondo-reproducibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El problema de fondo: reproducibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-arquitectura-vagrantfile-providers-y-boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Arquitectura: Vagrantfile, providers y boxes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Arquitectura: Vagrantfile, providers y boxes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-vagrantfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Vagrantfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ciclo-de-vida-de-una-maquina-vagrant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ciclo de vida de una máquina Vagrant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-comandos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comandos básicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-provisioners-shell-y-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Provisioners: Shell y Ansible
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Provisioners: Shell y Ansible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shell-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shell provisioner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible provisioner
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-redes-en-vagrant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Redes en Vagrant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Redes en Vagrant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-forwarding-reenvio-de-puertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port forwarding (reenvío de puertos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#red-privada-private-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red privada (private network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#red-publica-public-network-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red pública (public network / bridge)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-carpetas-compartidas-synced-folders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Carpetas compartidas (synced folders)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ejemplo-completo-vagrantfile-con-multiples-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Ejemplo completo: Vagrantfile con múltiples máquinas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible vs Vagrant vs Terraform: cuándo usar cada uno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para profundizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="vagrant-entornos-de-desarrollo-reproducibles"><strong>📦 Vagrant · Entornos de desarrollo reproducibles</strong></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/vagrant-arquitectura.svg" data-desc-position="bottom"><img alt="Arquitectura de Vagrant: del Vagrantfile a la máquina virtual funcionando" src="../../assets/img/06auto-monit/vagrant-arquitectura.svg"></a></p>
+<h2 id="1-que-es-vagrant-y-que-problema-resuelve">1. Qué es Vagrant y qué problema resuelve</h2>
+<p>Cualquiera que haya trabajado en un equipo de desarrollo ha vivido, en algún momento, la frase: <em>"en mi máquina funciona"</em>. Un desarrollador tiene una versión concreta de Python, otro tiene otra distinta; uno tiene una base de datos con una configuración específica, otro no la tiene instalada en absoluto; el servidor de producción usa Ubuntu 22.04 y el portátil de turno usa Windows con WSL mal configurado. El resultado es que un bug que "no existe" en el entorno de un desarrollador aparece en cuanto el código llega a otro entorno, incluida producción.</p>
+<p><strong>Vagrant</strong>, desarrollado por HashiCorp, es una herramienta que permite describir en un único fichero de texto (el <code>Vagrantfile</code>) cómo debe ser una máquina virtual de desarrollo —qué sistema operativo, cuánta memoria, qué redes, qué software debe llevar preinstalado— y compartir ese fichero con el resto del equipo. Cualquier persona que ejecute <code>vagrant up</code> sobre ese mismo fichero obtiene, en minutos, una máquina virtual idéntica a la de sus compañeros, sin importar si su sistema operativo anfitrión es Windows, macOS o Linux.</p>
+<div class="admonition tip">
+<p class="admonition-title">Vagrant no sustituye a Docker, lo complementa</p>
+<p>Es habitual confundir el papel de Vagrant con el de Docker. Docker virtualiza a nivel de proceso (contenedores que comparten el kernel del host), mientras que Vagrant orquesta <strong>máquinas virtuales completas</strong> con su propio kernel, gestionadas por un hipervisor. Vagrant es la herramienta adecuada cuando se necesita replicar un sistema operativo completo (por ejemplo, para practicar administración de sistemas, probar un playbook de Ansible contra una VM real, o simular una topología de red con varios servidores), mientras que Docker es más ligero cuando basta con aislar una aplicación y sus dependencias.</p>
+</div>
+<h2 id="2-el-problema-de-fondo-reproducibilidad">2. El problema de fondo: reproducibilidad</h2>
+<p>La reproducibilidad de un entorno depende de fijar, de forma explícita y versionable, un conjunto de decisiones que normalmente quedan implícitas:</p>
+<ul>
+<li><strong>Sistema operativo y versión exacta</strong> (no "Ubuntu", sino Ubuntu 22.04.4 concretamente).</li>
+<li><strong>Recursos asignados</strong> (memoria RAM, núcleos de CPU, disco).</li>
+<li><strong>Software preinstalado</strong> (paquetes, versiones de runtime, dependencias del sistema).</li>
+<li><strong>Configuración de red</strong> (qué puertos están expuestos, qué IP tiene la máquina).</li>
+<li><strong>Estado inicial de datos</strong> (una base de datos vacía, o con un volcado de ejemplo ya cargado).</li>
+</ul>
+<p>Vagrant no resuelve esto por sí mismo: se apoya en un <strong>hipervisor</strong> ya instalado en el equipo (VirtualBox es el más habitual, aunque también soporta VMware, libvirt/KVM o incluso proveedores de contenedores) y en una <strong>caja base</strong> (<em>box</em>) que ya trae un sistema operativo instalado. Lo que aporta Vagrant es la capa de orquestación: un único fichero de texto, versionable en Git junto al propio código del proyecto, que describe de forma completa y reproducible cómo construir ese entorno desde cero.</p>
+<h2 id="3-arquitectura-vagrantfile-providers-y-boxes">3. Arquitectura: Vagrantfile, providers y boxes</h2>
+<h3 id="el-vagrantfile">El Vagrantfile</h3>
+<p>Es un fichero escrito en <strong>Ruby</strong> (aunque en la mayoría de casos no hace falta saber Ruby, solo seguir la sintaxis declarativa habitual) que vive en la raíz del proyecto y describe la máquina o máquinas virtuales necesarias:</p>
+<div class="highlight"><pre><span></span><code><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">"2"</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ubuntu/jammy64"</span>
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"servidor-dev"</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"private_network"</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.56.10"</span>
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"forwarded_port"</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">"virtualbox"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+<span class="w">    </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2048"</span>
+<span class="w">    </span><span class="n">vb</span><span class="o">.</span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;&lt;-</span><span class="dl">SHELL</span>
+<span class="sh">    apt-get update</span>
+<span class="sh">    apt-get install -y nginx</span>
+<span class="dl">  SHELL</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Este fichero, al estar versionado junto al código del proyecto, hace que "clonar el repositorio y ejecutar <code>vagrant up</code>" sea, literalmente, todo lo que necesita una persona nueva en el equipo para tener un entorno de desarrollo funcional.</p>
+<h3 id="providers">Providers</h3>
+<p>Un <strong>provider</strong> es el hipervisor o plataforma de virtualización que realmente crea y ejecuta la máquina virtual. Vagrant no virtualiza nada por sí mismo: delega esa tarea en el provider configurado.</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Descripción</th>
+<th>Cuándo se usa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VirtualBox</strong></td>
+<td>Gratuito, multiplataforma, el más usado por defecto</td>
+<td>Entornos de desarrollo locales en Windows, macOS o Linux</td>
+</tr>
+<tr>
+<td><strong>VMware</strong> (Workstation/Fusion)</td>
+<td>De pago, más rendimiento y estabilidad</td>
+<td>Equipos que ya tienen licencia VMware</td>
+</tr>
+<tr>
+<td><strong>libvirt / KVM</strong></td>
+<td>Nativo de Linux, muy ligero</td>
+<td>Servidores Linux o desarrolladores que ya usan KVM</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Usa contenedores en lugar de VMs completas</td>
+<td>Cuando se quiere la sintaxis de Vagrant pero con el peso de un contenedor</td>
+</tr>
+<tr>
+<td><strong>Proveedores cloud</strong> (AWS, Azure)</td>
+<td>Complementos de terceros que crean instancias remotas</td>
+<td>Entornos de prueba efímeros en la nube, gestionados con la misma interfaz de Vagrant</td>
+</tr>
+</tbody>
+</table>
+<h3 id="boxes">Boxes</h3>
+<p>Una <strong>box</strong> es la imagen base empaquetada de una máquina virtual: un sistema operativo ya instalado y listo para arrancar, publicado normalmente en el catálogo público de <a href="https://portal.cloud.hashicorp.com/vagrant/discover" target="_blank">Vagrant Cloud</a>. Es el equivalente, conceptualmente, a una imagen base de Docker o a una AMI de AWS.</p>
+<div class="highlight"><pre><span></span><code>vagrant<span class="w"> </span>box<span class="w"> </span>add<span class="w"> </span>ubuntu/jammy64
+vagrant<span class="w"> </span>box<span class="w"> </span>list
+vagrant<span class="w"> </span>box<span class="w"> </span>remove<span class="w"> </span>ubuntu/jammy64
+</code></pre></div>
+<p>Descargar una box es una operación que se hace una sola vez por máquina anfitriona: Vagrant la guarda en caché local y la reutiliza para crear tantas VMs como haga falta a partir de ella, sin volver a descargarla.</p>
+<h2 id="4-ciclo-de-vida-de-una-maquina-vagrant">4. Ciclo de vida de una máquina Vagrant</h2>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/vagrant-ciclo-vida.svg" data-desc-position="bottom"><img alt="Ciclo de vida de una máquina Vagrant: init, up, halt, destroy" src="../../assets/img/06auto-monit/vagrant-ciclo-vida.svg"></a></p>
+<p>Una máquina Vagrant atraviesa un ciclo de vida bien definido, y cada fase tiene su comando asociado:</p>
+<ol>
+<li><strong><code>vagrant init &lt;box&gt;</code></strong>: genera un <code>Vagrantfile</code> de partida en el directorio actual, apuntando a la box indicada. Se ejecuta una sola vez al crear el proyecto.</li>
+<li><strong><code>vagrant up</code></strong>: descarga la box si no está en caché, crea la máquina virtual en el provider configurado, la arranca y ejecuta los <em>provisioners</em> definidos (instalación de software, scripts, Ansible...).</li>
+<li><strong>Máquina en ejecución</strong>: durante este estado se puede trabajar dentro de la VM, acceder por SSH, o volver a lanzar el aprovisionamiento.</li>
+<li><strong><code>vagrant halt</code></strong>: apaga la máquina de forma ordenada, conservando su disco. Es el equivalente a apagar un ordenador: al volver a hacer <code>vagrant up</code>, el estado del disco persiste.</li>
+<li><strong><code>vagrant destroy</code></strong>: elimina por completo la máquina virtual y sus discos asociados. A diferencia de <code>halt</code>, esta operación no es reversible: el siguiente <code>vagrant up</code> reconstruye la VM desde cero, aplicando de nuevo todo el aprovisionamiento.</li>
+</ol>
+<h2 id="5-comandos-basicos">5. Comandos básicos</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vagrant init &lt;box&gt;</code></td>
+<td>Crea un Vagrantfile de partida en el directorio actual</td>
+</tr>
+<tr>
+<td><code>vagrant up</code></td>
+<td>Crea (si no existe) y arranca la máquina virtual</td>
+</tr>
+<tr>
+<td><code>vagrant status</code></td>
+<td>Muestra el estado actual de la(s) máquina(s) definidas</td>
+</tr>
+<tr>
+<td><code>vagrant ssh</code></td>
+<td>Abre una sesión SSH interactiva dentro de la máquina</td>
+</tr>
+<tr>
+<td><code>vagrant ssh -c "comando"</code></td>
+<td>Ejecuta un comando puntual dentro de la VM sin sesión interactiva</td>
+</tr>
+<tr>
+<td><code>vagrant halt</code></td>
+<td>Apaga la máquina conservando el disco</td>
+</tr>
+<tr>
+<td><code>vagrant reload</code></td>
+<td>Reinicia la máquina, releyendo la configuración de red del Vagrantfile</td>
+</tr>
+<tr>
+<td><code>vagrant provision</code></td>
+<td>Vuelve a ejecutar los provisioners sin recrear la máquina</td>
+</tr>
+<tr>
+<td><code>vagrant reload --provision</code></td>
+<td>Reinicia y reaprovisiona en un solo paso (útil tras editar el Vagrantfile)</td>
+</tr>
+<tr>
+<td><code>vagrant suspend</code> / <code>vagrant resume</code></td>
+<td>Congela el estado de la VM en disco (como una hibernación) y lo restaura</td>
+</tr>
+<tr>
+<td><code>vagrant destroy</code></td>
+<td>Elimina la máquina virtual y sus discos</td>
+</tr>
+<tr>
+<td><code>vagrant box add &lt;box&gt;</code></td>
+<td>Descarga una box al caché local</td>
+</tr>
+<tr>
+<td><code>vagrant box list</code></td>
+<td>Lista las boxes ya descargadas</td>
+</tr>
+<tr>
+<td><code>vagrant global-status</code></td>
+<td>Lista todas las máquinas Vagrant activas en el sistema, de cualquier proyecto</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title"><code>vagrant destroy</code> no borra el Vagrantfile</p>
+<p>Es un error común pensar que <code>vagrant destroy</code> elimina el proyecto. Solo elimina la máquina virtual y sus discos: el <code>Vagrantfile</code> (la "receta") permanece intacto, y un <code>vagrant up</code> posterior reconstruye la máquina desde cero exactamente igual que la primera vez. Esta separación entre la receta (versionada en Git) y la instancia (efímera, recreable) es la misma idea de fondo que sostiene la infraestructura como código en Terraform.</p>
+</div>
+<h2 id="6-provisioners-shell-y-ansible">6. Provisioners: Shell y Ansible</h2>
+<p>Un <strong>provisioner</strong> es el mecanismo que instala software y aplica configuración dentro de la máquina, justo después de que arranque por primera vez (o cuando se ejecuta <code>vagrant provision</code>). Vagrant soporta varios tipos, siendo los más habituales:</p>
+<h3 id="shell-provisioner">Shell provisioner</h3>
+<p>El más simple: ejecuta un script o comandos de shell directamente dentro de la VM.</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;&lt;-</span><span class="dl">SHELL</span>
+<span class="sh">  apt-get update</span>
+<span class="sh">  apt-get install -y nginx git curl</span>
+<span class="sh">  systemctl enable nginx</span>
+<span class="dl">SHELL</span>
+</code></pre></div>
+<p>También puede apuntar a un script externo, lo cual mantiene el Vagrantfile más limpio:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w"> </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s2">"provision/instalar-nginx.sh"</span>
+</code></pre></div>
+<h3 id="ansible-provisioner">Ansible provisioner</h3>
+<p>Cuando la configuración necesaria es más compleja que unas pocas líneas de shell, tiene sentido delegarla en Ansible (visto en el apartado anterior de esta unidad), aprovechando toda su expresividad de roles, plantillas e idempotencia:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"ansible"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">ansible</span><span class="o">|</span>
+<span class="w">  </span><span class="n">ansible</span><span class="o">.</span><span class="n">playbook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"playbook.yml"</span>
+<span class="w">  </span><span class="n">ansible</span><span class="o">.</span><span class="n">inventory_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"inventory.ini"</span>
+<span class="w">  </span><span class="n">ansible</span><span class="o">.</span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"all"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Con esta configuración, cada <code>vagrant up</code> (o <code>vagrant provision</code>) ejecuta automáticamente el playbook indicado contra la máquina recién creada, combinando la reproducibilidad del entorno (Vagrant) con la potencia de gestión de configuración (Ansible) sin pasos manuales intermedios.</p>
+<div class="admonition example">
+<p class="admonition-title">Un flujo de trabajo real</p>
+<p>Un equipo docente prepara una práctica de administración de sistemas: el <code>Vagrantfile</code> levanta una VM con Ubuntu Server mínimo, y un playbook de Ansible (<code>provision/aula.yml</code>) instala Apache, crea los usuarios del alumnado y despliega los ficheros de la práctica. El alumnado solo necesita clonar el repositorio y ejecutar <code>vagrant up</code>: en unos minutos tiene, de forma idéntica en cualquier ordenador del aula, el mismo entorno que ha preparado el docente.</p>
+</div>
+<h2 id="7-redes-en-vagrant">7. Redes en Vagrant</h2>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/06auto-monit/vagrant-redes.svg" data-desc-position="bottom"><img alt="Modos de red en Vagrant: port forwarding, red privada y red pública" src="../../assets/img/06auto-monit/vagrant-redes.svg"></a></p>
+<p>Vagrant ofrece tres formas principales de conectar la máquina virtual con el exterior, configurables en el bloque <code>config.vm.network</code>:</p>
+<h3 id="port-forwarding-reenvio-de-puertos">Port forwarding (reenvío de puertos)</h3>
+<p>Redirige un puerto del anfitrión hacia un puerto de la máquina virtual. Es el modo más simple para acceder a un servicio (por ejemplo, un servidor web) desde el navegador del anfitrión sin tener que conocer la IP interna de la VM:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"forwarded_port"</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
+</code></pre></div>
+<p>Con esta línea, <code>http://localhost:8080</code> en el anfitrión llega al puerto 80 de la VM.</p>
+<h3 id="red-privada-private-network">Red privada (private network)</h3>
+<p>Asigna a la VM una IP dentro de una red aislada, visible solo desde el anfitrión y desde otras VMs del mismo proyecto Vagrant. Es el modo recomendado cuando hay que comunicar varias máquinas entre sí (por ejemplo, un servidor web y un servidor de base de datos) sin exponerlas a la red física:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"private_network"</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.56.10"</span>
+</code></pre></div>
+<h3 id="red-publica-public-network-bridge">Red pública (public network / bridge)</h3>
+<p>Conecta la VM directamente a la red física del anfitrión (modo <em>bridge</em>), obteniendo una IP de la misma red local (por ejemplo, del router de casa o del centro). Es útil cuando otros dispositivos de la red necesitan acceder directamente a la VM, pero expone la máquina fuera del propio equipo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"public_network"</span>
+</code></pre></div>
+<h2 id="8-carpetas-compartidas-synced-folders">8. Carpetas compartidas (synced folders)</h2>
+<p>Además de la red, Vagrant sincroniza automáticamente una carpeta del anfitrión con una carpeta dentro de la VM (por defecto, el propio directorio del proyecto se monta en <code>/vagrant</code> dentro de la máquina). Esto permite editar el código con el editor habitual en el sistema anfitrión mientras se ejecuta dentro de la máquina virtual:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span><span class="w"> </span><span class="s2">"./app"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/var/www/app"</span>
+</code></pre></div>
+<h2 id="9-ejemplo-completo-vagrantfile-con-multiples-maquinas">9. Ejemplo completo: Vagrantfile con múltiples máquinas</h2>
+<p>Es habitual necesitar más de una máquina virtual coordinada entre sí —por ejemplo, un balanceador, dos servidores web y un servidor de base de datos, simulando una arquitectura real dentro de un único portátil. Vagrant permite definir varias máquinas en el mismo <code>Vagrantfile</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">"2"</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
+
+<span class="w">  </span><span class="c1"># Servidor de base de datos</span>
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">"db"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">db</span><span class="o">|</span>
+<span class="w">    </span><span class="n">db</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ubuntu/jammy64"</span>
+<span class="w">    </span><span class="n">db</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"db"</span>
+<span class="w">    </span><span class="n">db</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"private_network"</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.56.10"</span>
+<span class="w">    </span><span class="n">db</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">"virtualbox"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+<span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1024"</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">db</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w"> </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s2">"provision/db.sh"</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="c1"># Dos servidores web idénticos</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">each</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">i</span><span class="o">|</span>
+<span class="w">    </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">"web</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">web</span><span class="o">|</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ubuntu/jammy64"</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"web</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"private_network"</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.56.</span><span class="si">#{</span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"forwarded_port"</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">"virtualbox"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+<span class="w">        </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1024"</span>
+<span class="w">      </span><span class="k">end</span>
+<span class="w">      </span><span class="n">web</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"ansible"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">ansible</span><span class="o">|</span>
+<span class="w">        </span><span class="n">ansible</span><span class="o">.</span><span class="n">playbook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"playbook-nginx.yml"</span>
+<span class="w">      </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="c1"># Balanceador de carga</span>
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">"lb"</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">lb</span><span class="o">|</span>
+<span class="w">    </span><span class="n">lb</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ubuntu/jammy64"</span>
+<span class="w">    </span><span class="n">lb</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lb"</span>
+<span class="w">    </span><span class="n">lb</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"private_network"</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.56.20"</span>
+<span class="w">    </span><span class="n">lb</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">"forwarded_port"</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
+<span class="w">    </span><span class="n">lb</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w"> </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s2">"provision/haproxy.sh"</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div>
+<p>Con este único fichero, <code>vagrant up</code> levanta las cuatro máquinas en orden, cada una con su propia IP privada y su propio aprovisionamiento. Se puede operar sobre una máquina concreta indicando su nombre:</p>
+<div class="highlight"><pre><span></span><code>vagrant<span class="w"> </span>up<span class="w"> </span>db
+vagrant<span class="w"> </span>ssh<span class="w"> </span>web1
+vagrant<span class="w"> </span>halt<span class="w"> </span>web2
+vagrant<span class="w"> </span>destroy<span class="w"> </span>lb
+</code></pre></div>
+<p>Y <code>vagrant status</code> mostrará el estado individual de cada una de las cuatro definiciones.</p>
+<h2 id="10-buenas-practicas">10. Buenas prácticas</h2>
+<ul>
+<li><strong>Versionar el Vagrantfile en Git junto al código del proyecto</strong>: es, junto con el propio código fuente, la documentación ejecutable de qué entorno necesita el proyecto para funcionar.</li>
+<li><strong>Usar boxes oficiales o muy conocidas</strong> (<code>ubuntu/jammy64</code>, <code>debian/bookworm64</code>, <code>generic/rocky9</code>) en lugar de boxes de procedencia dudosa: una box no deja de ser una imagen de sistema operativo completa, y ejecutar una de origen desconocido implica el mismo riesgo que ejecutar cualquier binario no verificado.</li>
+<li><strong>Fijar la versión de la box</strong> (<code>config.vm.box_version</code>) en proyectos que deban ser reproducibles a largo plazo, ya que las boxes "latest" pueden cambiar con el tiempo.</li>
+<li><strong>No asumir recursos infinitos</strong>: ajustar <code>vb.memory</code> y <code>vb.cpus</code> a lo que realmente necesita la práctica, especialmente en aulas donde varios estudiantes ejecutan VMs simultáneamente en equipos modestos.</li>
+<li><strong>Preferir el provisioner de Ansible sobre scripts de shell largos</strong> en cuanto la configuración supere una docena de líneas: gana en legibilidad, reutilización e idempotencia.</li>
+<li><strong>Destruir las máquinas que ya no se usan</strong> (<code>vagrant destroy</code>): a diferencia de un contenedor, una VM detenida sigue ocupando el disco completo asignado.</li>
+</ul>
+<h2 id="ansible-vs-vagrant-vs-terraform-cuando-usar-cada-uno">Ansible vs Vagrant vs Terraform: cuándo usar cada uno</h2>
+<p>Desde la perspectiva de Vagrant, conviene tener claro dónde termina su responsabilidad y dónde empieza la de las otras dos herramientas:</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Ansible</th>
+<th>Vagrant</th>
+<th>Terraform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Propósito principal</td>
+<td>Configurar software dentro de máquinas ya existentes</td>
+<td>Crear y gestionar entornos de desarrollo locales reproducibles</td>
+<td>Crear y gestionar infraestructura (VMs, redes, servicios cloud)</td>
+</tr>
+<tr>
+<td>Ámbito habitual</td>
+<td>Servidores ya provisionados, locales o en la nube</td>
+<td>El portátil o estación de trabajo de cada desarrollador</td>
+<td>Entornos cloud o de centro de datos, normalmente compartidos por un equipo</td>
+</tr>
+<tr>
+<td>Ciclo de vida típico</td>
+<td>Se ejecuta repetidamente sobre la misma infraestructura</td>
+<td>Se crea y destruye con frecuencia (<code>up</code> / <code>destroy</code>), es desechable por diseño</td>
+<td>Se mantiene "vivo" durante meses o años, con cambios incrementales</td>
+</tr>
+<tr>
+<td>Backend / estado</td>
+<td>No mantiene estado propio (actúa sobre el estado real del sistema)</td>
+<td>El estado lo gestiona el propio hipervisor (VirtualBox, etc.)</td>
+<td>Mantiene un fichero de estado (<code>.tfstate</code>) explícito</td>
+</tr>
+<tr>
+<td>Ejemplo típico de uso</td>
+<td>Instalar y configurar Nginx en 20 servidores</td>
+<td>Levantar un clúster de pruebas idéntico en el portátil de cada estudiante o desarrollador</td>
+<td>Crear la VPC, las instancias EC2 y el balanceador en AWS</td>
+</tr>
+</tbody>
+</table>
+<p>Vagrant es, en la práctica, la puerta de entrada más habitual para aprender Ansible: al no depender de una cuenta cloud ni de costes asociados, permite practicar playbooks completos contra máquinas virtuales reales en el propio ordenador, antes de aplicar exactamente los mismos playbooks contra infraestructura creada por Terraform en un proveedor cloud.</p>
+<h2 id="para-profundizar">Para profundizar</h2>
+<p>La documentación oficial de HashiCorp para Vagrant cubre en detalle cada pieza vista en este apartado: la <a href="https://developer.hashicorp.com/vagrant/docs/index" target="_blank">guía de introducción a Vagrant</a> explica la instalación y el flujo básico paso a paso; la <a href="https://developer.hashicorp.com/vagrant/docs/networking" target="_blank">referencia de configuración de red</a> detalla los tres modos de red vistos en el apartado 7; y la <a href="https://developer.hashicorp.com/vagrant/docs/provisioning" target="_blank">documentación de provisioners</a> recoge todas las opciones disponibles más allá de Shell y Ansible (Puppet, Chef, Docker). El resto de enlaces de referencia del módulo está recopilado en la página de Recursos.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
