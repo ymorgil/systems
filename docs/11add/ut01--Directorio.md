@@ -314,7 +314,7 @@ Una documentación mínima y razonable debería incluir:
 
 ## Para profundizar
 
-Esta unidad se ha construido a partir del material de clase de Administración de Sistemas Operativos 2025/26, incluyendo la resolución práctica de la actividad de directivas de grupo (GPO), servicio IIS y escritorio remoto sobre Windows Server, así como los manuales de referencia sobre LDAP en GNU/Linux y sobre la configuración de Samba4 como controlador de dominio recogidos en la unidad original. El resto de enlaces y materiales de apoyo está recopilado en la página de [Recursos](99-recursos.md).
+Esta unidad se ha construido a partir del material de clase de Administración de Sistemas Operativos 2025/26, incluyendo la resolución práctica de la actividad de directivas de grupo (GPO), servicio IIS y escritorio remoto sobre Windows Server, así como los manuales de referencia sobre LDAP en GNU/Linux y sobre la configuración de Samba4 como controlador de dominio recogidos en la unidad original. El resto de enlaces y materiales de apoyo está recopilado en la página de Recursos.
 
 ##
 ##
@@ -2054,24 +2054,23 @@ Resolución paso a paso de la actividad de Políticas de grupo (GPO).
 
 [Tarea 5.2: Políticas de grupo (GPO) de active directory, servicio de
 IIS y de escritorio remoto en Windows Server 2012 R2
-2](#tarea-5.2-políticas-de-grupo-gpo-de-active-directory-servicio-de-iis-y-de-escritorio-remoto-en-windows-server-2012-r2)
+2]
 
 [Tarea 5.2.1 Políticas de grupo en active directory
-2](#tarea-5.2.1-políticas-de-grupo-en-active-directory)
+2]
 
 [a) Establecer página de inicio en Internet Explorer.
-5](#establecer-página-de-inicio-en-internet-explorer.)
-
+5]
 [b) Establecer para los Profesores un límite en el almacenamiento de 40
 MB.
-10](#establecer-para-los-profesores-un-límite-en-el-almacenamiento-de-40-mb.)
+10]
 
 [c) Establecer para los Alumnos un límite en el almacenamiento de 20MB.
-13](#establecer-para-los-alumnos-unas-gpo.)
+13]
 
-[Tarea 5.2.2 IIS 14](#tarea-5.2.2-iis)
+[Tarea 5.2.2 IIS 14]
 
-[Tarea 5.2.3 Escritorio remoto 15](#tarea-5.2.3-escritorio-remoto)
+[Tarea 5.2.3 Escritorio remoto 15]
 
 # Tarea 5.2: Políticas de grupo (GPO) de active directory, servicio de IIS y de escritorio remoto en Windows Server 2012 R2
 

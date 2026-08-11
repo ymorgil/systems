@@ -418,7 +418,7 @@ Esta tabla funciona como mapa de estudio: ante cualquier duda sobre un criterio 
 
 ## Para profundizar
 
-Esta unidad se apoya en los apuntes de clase sobre servidores de impresión Windows/Linux, ampliados con la documentación oficial de [CUPS](https://www.cups.org/){:target="_blank"} y de los roles de impresión de Windows Server. El resto de enlaces de referencia del módulo está recopilado en la página de [Recursos](99-recursos.md).
+Esta unidad se apoya en los apuntes de clase sobre servidores de impresión Windows/Linux, ampliados con la documentación oficial de [CUPS](https://www.cups.org/){:target="_blank"} y de los roles de impresión de Windows Server. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos.
 
 ##
 ##

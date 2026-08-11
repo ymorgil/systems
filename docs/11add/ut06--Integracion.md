@@ -378,7 +378,7 @@ El último criterio de evaluación de esta unidad (h) exige documentar la config
 
 ## Para profundizar
 
-Esta unidad recopila y reorganiza el material de clase de Administración de Sistemas Operativos sobre interoperabilidad NFS/Samba, clustering, almacenamiento en red y virtualización con contenedores (Docker, Podman, Kubernetes y Proxmox VE). El resto de enlaces de referencia, manuales oficiales y vídeos citados a lo largo del temario está recopilado en la página de [Recursos](99-recursos.md). Para Proxmox, la colección [tteck/Proxmox](https://github.com/tteck){:target="_blank"} reúne scripts de automatización muy usados por la comunidad; para Docker/Kubernetes, los cursos de [iesgn](https://github.com/iesgn){:target="_blank"} son una referencia completa y abierta.
+Esta unidad recopila y reorganiza el material de clase de Administración de Sistemas Operativos sobre interoperabilidad NFS/Samba, clustering, almacenamiento en red y virtualización con contenedores (Docker, Podman, Kubernetes y Proxmox VE). El resto de enlaces de referencia, manuales oficiales y vídeos citados a lo largo del temario está recopilado en la página de Recursos. Para Proxmox, la colección [tteck/Proxmox](https://github.com/tteck){:target="_blank"} reúne scripts de automatización muy usados por la comunidad; para Docker/Kubernetes, los cursos de [iesgn](https://github.com/iesgn){:target="_blank"} son una referencia completa y abierta.
 
 ##
 ##
@@ -1968,29 +1968,25 @@ En un **cliente de Windows 11**
 
 [FAILOVER CLUSTER WS2022 2](#failover-cluster-ws2022)
 
-[Parte 1: Creación de las máquinas 2](#parte-1-creación-de-las-máquinas)
-
+[Parte 1: Creación de las máquinas 2]
 [Crear 3 clones de la máquina base WS2022
-3](#crear-3-clones-de-la-máquina-base-ws2022)
+3]
 
 [Parte 2: Configurar el controlador de dominio
-4](#parte-2-configurar-el-controlador-de-dominio)
+4]
 
-[Añadir roles y características: 4](#añadir-roles-y-características)
+[Añadir roles y características: 4]
+[Crear discos compartidos 6]
+[Parte 3: Actualizar NODO1 8]
+[Parte4: Actualizar NODO2 10]()
 
-[Crear discos compartidos 6](#crear-discos-compartidos)
+[Parte5: Crear Failover Cluster 12](#)
 
-[Parte 3: Actualizar NODO1 8](#parte-3-actualizar-nodo1)
+[Validar configuración 12](#)
 
-[Parte4: Actualizar NODO2 10](#parte4-actualizar-nodo2)
+[Crear clúster 13](#)
 
-[Parte5: Crear Failover Cluster 12](#parte5-crear-failover-cluster)
-
-[Validar configuración 12](#validar-configuración)
-
-[Crear clúster 13](#crear-clúster)
-
-[INSTALACIÓN DE TRUENASCORE 14](#instalación-de-truenascore)
+[INSTALACIÓN DE TRUENASCORE 14](#)
 
 # FAILOVER CLUSTER WS2022
 
@@ -2365,13 +2361,13 @@ Debemos realizar la siguiente configuración:
 
 # Contenido
 
-[**1. Introducción** 2](#introducción)
+[**1. Introducción** 2](#)
 
-[**2. Requisitos previos** 2](#requisitos-previos)
+[**2. Requisitos previos** 2](#)
 
-[**3. Instalación de Proxmox VE** 3](#instalación-de-proxmox-ve)
+[**3. Instalación de Proxmox VE** 3](#)
 
-[**4. Acceso a la interfaz web** 7](#acceso-a-la-interfaz-web)
+[**4. Acceso a la interfaz web** 7](#)
 
 # **1. Introducción**
 

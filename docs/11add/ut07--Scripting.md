@@ -424,7 +424,7 @@ fi
 
 ## Para profundizar
 
-Esta unidad se ha construido reorganizando el material de clase de scripting de ADD, con especial atención a los ejercicios de shell script de Adolfo Sanz De Diego (licencia CC-BY-SA) y a los supuestos prácticos de administración de cuentas en PowerShell/Active Directory trabajados en clase. Para la sintaxis de base de Bash (estructuras secuenciales, condicionales, repetitivas y funciones) y para el flujo de trabajo con VSCode y Git, consulta [Bash · Estructuras de control y funciones](../05scripting/05bash-estructuras.md) y [VSCode y control de versiones con Git](../05scripting/04vscode-git.md). El resto de enlaces de referencia está recopilado en la página de [Recursos](99-recursos.md).
+Esta unidad se ha construido reorganizando el material de clase de scripting de ADD, con especial atención a los ejercicios de shell script de Adolfo Sanz De Diego (licencia CC-BY-SA) y a los supuestos prácticos de administración de cuentas en PowerShell/Active Directory trabajados en clase. Para la sintaxis de base de Bash (estructuras secuenciales, condicionales, repetitivas y funciones) y para el flujo de trabajo con VSCode y Git, consulta [Bash · Estructuras de control y funciones](../05scripting/05bash-estructuras.md) y [VSCode y control de versiones con Git](../05scripting/04vscode-git.md). El resto de enlaces de referencia está recopilado en la página de Recursos.
 
 ##
 ##

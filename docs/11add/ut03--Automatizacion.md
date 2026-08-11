@@ -285,7 +285,7 @@ En Windows, `Export-ScheduledTask` genera automáticamente un XML con la definic
 
 ## Para profundizar
 
-Esta unidad se ha construido a partir de los apuntes de clase de Administración de Sistemas Operativos y de la práctica **SP31 - Automatización de tareas**, que trabaja sobre PowerShell (Windows Server), Manjaro y Fedora. El resto de enlaces de referencia del módulo está recopilado en la página de [Recursos](99-recursos.md).
+Esta unidad se ha construido a partir de los apuntes de clase de Administración de Sistemas Operativos y de la práctica **SP31 - Automatización de tareas**, que trabaja sobre PowerShell (Windows Server), Manjaro y Fedora. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos.
 
 ##
 ##
