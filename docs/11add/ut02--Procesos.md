@@ -372,7 +372,7 @@ El criterio (i) pide documentar los procesos habituales del sistema, su función
 
 ## Para profundizar
 
-Esta unidad se ha construido a partir del material de clase de Administración de Sistemas Operativos, con los apuntes ya recopilados en [Procesos del sistema](02-procesos-sistema.md), donde se conservan las actividades, la práctica de aula, la recuperación y la solución de referencia con capturas de PowerShell y terminal GNU/Linux. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos.
+Esta unidad se ha construido a partir del material de clase de Administración de Sistemas Operativos, con los apuntes ya recopilados en [Procesos del sistema], donde se conservan las actividades, la práctica de aula, la recuperación y la solución de referencia con capturas de PowerShell y terminal GNU/Linux. El resto de enlaces de referencia del módulo está recopilado en la página de Recursos.
 
 ##
 ##

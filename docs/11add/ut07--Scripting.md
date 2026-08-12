@@ -19,7 +19,7 @@ h) Se han consultado y utilizado librerías de funciones.
 i) Se han documentado los guiones creados.
 
 !!! note "Dónde encontrar la sintaxis básica"
-    Esta unidad da por conocida la sintaxis de las estructuras secuenciales, condicionales, repetitivas y de funciones de Bash (criterio a), así como el manejo de VSCode y Git para editar y versionar los guiones: ese contenido ya está desarrollado en detalle en [Bash · Estructuras de control y funciones](../05scripting/05bash-estructuras.md) y en [VSCode y control de versiones con Git](../05scripting/04vscode-git.md). Aquí el foco es distinto y complementario: **qué hace un administrador de sistemas** con un lenguaje de guiones una vez sabe programarlo — depurarlo, adaptarlo, documentarlo y usarlo para gestionar cuentas, procesos y servicios, tanto en sistemas libres como propietarios.
+    Esta unidad da por conocida la sintaxis de las estructuras secuenciales, condicionales, repetitivas y de funciones de Bash (criterio a), así como el manejo de VSCode y Git para editar y versionar los guiones: ese contenido ya está desarrollado en detalle en [Bash · Estructuras de control y funciones] y en [VSCode y control de versiones con Git]. Aquí el foco es distinto y complementario: **qué hace un administrador de sistemas** con un lenguaje de guiones una vez sabe programarlo — depurarlo, adaptarlo, documentarlo y usarlo para gestionar cuentas, procesos y servicios, tanto en sistemas libres como propietarios.
 
 ## 1. Scripting como herramienta de administración, no solo de programación
 
@@ -410,7 +410,7 @@ fi
 ```
 
 !!! tip "El control de versiones también es documentación"
-    Llevar el histórico de cambios de un script en un repositorio Git (visto con detalle en [VSCode y control de versiones con Git](../05scripting/04vscode-git.md)) es, en la práctica, la forma más robusta de documentar **por qué** un guion cambió de una versión a otra: el mensaje de cada commit explica la adaptación (criterio d) mejor que cualquier comentario suelto dentro del propio fichero.
+    Llevar el histórico de cambios de un script en un repositorio Git (visto con detalle en [VSCode y control de versiones con Git] es, en la práctica, la forma más robusta de documentar **por qué** un guion cambió de una versión a otra: el mensaje de cada commit explica la adaptación (criterio d) mejor que cualquier comentario suelto dentro del propio fichero.
 
 ## 10. Errores habituales al depurar y adaptar guiones de administración
 
@@ -424,7 +424,7 @@ fi
 
 ## Para profundizar
 
-Esta unidad se ha construido reorganizando el material de clase de scripting de ADD, con especial atención a los ejercicios de shell script de Adolfo Sanz De Diego (licencia CC-BY-SA) y a los supuestos prácticos de administración de cuentas en PowerShell/Active Directory trabajados en clase. Para la sintaxis de base de Bash (estructuras secuenciales, condicionales, repetitivas y funciones) y para el flujo de trabajo con VSCode y Git, consulta [Bash · Estructuras de control y funciones](../05scripting/05bash-estructuras.md) y [VSCode y control de versiones con Git](../05scripting/04vscode-git.md). El resto de enlaces de referencia está recopilado en la página de Recursos.
+Esta unidad se ha construido reorganizando el material de clase de scripting de ADD, con especial atención a los ejercicios de shell script de Adolfo Sanz De Diego (licencia CC-BY-SA) y a los supuestos prácticos de administración de cuentas en PowerShell/Active Directory trabajados en clase. Para la sintaxis de base de Bash (estructuras secuenciales, condicionales, repetitivas y funciones) y para el flujo de trabajo con VSCode y Git, consulta [Bash · Estructuras de control y funciones] y [VSCode y control de versiones con Git]. El resto de enlaces de referencia está recopilado en la página de Recursos.
 
 ##
 ##

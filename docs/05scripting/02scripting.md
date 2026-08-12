@@ -1,18 +1,5 @@
 # Guía de Scripting en Bash y PowerShell
 
----
-
-## Indíce
-### - [¿Qué es el Scripting en Bash?](#1-qué-es-el-scripting-en-bash)
-### - [Sintaxis Básica de Bash](#2-sintaxis-básica-de-bash)
-### - [Comandos Comunes de Bash](#3-comandos-comunes-de-bash)
-### - [Introducción al Scripting en PowerShell](#4-introducción-al-scripting-en-powershell)
-### - [Sintaxis Básica de PowerShell](#5-sintaxis-básica-de-powershell)
-### - [Comandos Comunes de PowerShell](#6-comandos-comunes-de-powershell)
-### - [Comparativa entre Bash y PowerShell](#7-comparativa-entre-bash-y-powershell)
-
----
-
 ## 1. ¿Qué es el Scripting en Bash?
 
 El **scripting en Bash** se refiere a la escritura de secuencias de comandos (scripts) en el lenguaje de shell de Bash. Bash es el intérprete de comandos predeterminado en la mayoría de las distribuciones de **Linux** y **Unix**. Los scripts de Bash permiten automatizar tareas repetitivas, administrar sistemas y ejecutar comandos del sistema operativo mediante secuencias programadas.
@@ -387,3 +374,6 @@ A continuación se muestra una breve comparación entre Bash y PowerShell, desta
 ### Conclusión
 - **Bash** es más adecuado para tareas en sistemas Unix/Linux y aquellos que prefieren la simplicidad y la velocidad.
 - **PowerShell** es más adecuado para usuarios de Windows o aquellos que trabajan en entornos de administración de sistemas complejos y necesitan trabajar con objetos y un ecosistema .NET.
+
+
+

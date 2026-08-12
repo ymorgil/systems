@@ -1,24 +1,24 @@
 # **🧰 VSCode y control de versiones con Git**
+Cualquier administrador de sistemas que escriba scripts —*ya sean de Bash, PowerShell o Python*— necesita dos herramientas que lo acompañarán en el día a día: 
 
-![Flujo de trabajo de Git: working directory, staging area, repositorio local y remoto](../assets/img/05script/git-flujo.svg)
-
-Cualquier administrador de sistemas que escriba scripts —ya sean de Bash, PowerShell o Python— necesita dos herramientas que lo acompañarán en el día a día: un **editor de código** que le facilite la vida (autocompletado, resaltado de sintaxis, terminal integrada) y un **sistema de control de versiones** que le permita guardar el historial de cambios, deshacer errores y colaborar con otras personas sin pisarse el trabajo. En este apartado se presenta **Visual Studio Code** (VSCode) como editor de referencia del módulo y **Git** como sistema de control de versiones, trabajado siempre desde la línea de comandos: entender qué hace cada comando de Git es lo que permite luego usar con criterio cualquier interfaz gráfica (la propia de VSCode, GitHub Desktop, GitKraken...), y no al revés.
-
-## 1. Visual Studio Code: instalación y primeros pasos
-
+1. Un **editor de código** que le facilite la vida (autocompletado, resaltado de sintaxis, terminal integrada) 
+> **Visual Studio Code** (VSCode) como editor de referencia del módulo
+2. Un **sistema de control de versiones** que le permita guardar el historial de cambios, deshacer errores y colaborar con otras personas sin pisarse el trabajo. 
+> **Git** como sistema de control de versiones, trabajado siempre desde la línea de comandos: entender qué hace cada comando de Git es lo que permite luego usar con criterio cualquier interfaz gráfica (la propia de VSCode, GitHub Desktop, GitKraken...), y no al revés.
+ 
+## 📟 Visual Studio Code
 **Visual Studio Code** es un editor de código gratuito y multiplataforma (Windows, Linux, macOS) desarrollado por Microsoft. A diferencia de un IDE pesado como Visual Studio o IntelliJ, VSCode nace como un editor ligero que se convierte en un entorno de desarrollo completo mediante **extensiones**: la base del programa es la misma para todo el mundo, y cada perfil (desarrollador web, científico de datos, administrador de sistemas) lo adapta instalando el conjunto de extensiones que necesita.
 
 ### Instalación
 
-- **Windows**: se descarga el instalador desde [code.visualstudio.com](https://code.visualstudio.com/){:target="_blank"} o se instala con el gestor de paquetes `winget install Microsoft.VisualStudioCode`.
-- **Linux (Debian/Ubuntu)**: `sudo apt install code` tras añadir el repositorio oficial de Microsoft, o descargando el paquete `.deb` directamente.
+- **Windows**: se descarga el instalador desde [code.visualstudio.com](https://code.visualstudio.com/){:target="_blank"} o se instala con el gestor de paquetes `winget install Microsoft.VisualStudioCode`{: .yercod }.
+- **Linux (Debian/Ubuntu)**: `sudo apt install code`{: .yercod } tras añadir el repositorio oficial de Microsoft, o descargando el paquete `.deb` directamente.
 - **macOS**: descarga directa del `.zip` desde la web oficial, o `brew install --cask visual-studio-code` si se usa Homebrew.
 
 !!! tip "Añadir VSCode al PATH"
     Durante la instalación en Windows, marca la casilla **"Add to PATH"**. Esto permite abrir cualquier carpeta directamente desde una terminal con el comando `code .` (el punto significa "la carpeta actual"), en lugar de tener que abrir VSCode y luego navegar manualmente hasta el proyecto.
 
-### Primer arranque y estructura de la ventana
-
+### Primeros pasos
 Al abrir VSCode por primera vez conviene familiarizarse con las zonas principales de la interfaz:
 
 - **Barra de actividad** (lateral izquierdo): iconos para cambiar entre el explorador de archivos, la búsqueda global, el control de código fuente (Git), depuración y extensiones.
@@ -27,10 +27,12 @@ Al abrir VSCode por primera vez conviene familiarizarse con las zonas principale
 - **Terminal integrada**: una consola completa (Bash, PowerShell, cmd...) empotrada en la parte inferior del editor.
 - **Panel de extensiones**: el mercado (*marketplace*) desde el que se instalan complementos.
 
-![Anatomía de la ventana de Visual Studio Code: barra de actividad, explorador, editor, terminal y extensiones](../assets/img/05script/vscode-layout.svg)
+![Anatomía de la ventana de Visual Studio Code: barra de actividad, explorador, editor, terminal y extensiones](../assets/img/05script/vscode-01-layout.svg)
 
-## 2. Extensiones recomendadas para sysadmin y scripting
+![Anatomía de la ventana de Visual Studio Code: barra de actividad, explorador, editor, terminal y extensiones](../assets/img/05script/scr-01.png){width="1000"}
 
+## 📟📟📟
+### Extensiones
 La potencia real de VSCode aparece al instalar extensiones orientadas al perfil de administración de sistemas. Se instalan desde el icono de piezas de puzzle de la barra de actividad, o con el comando `code --install-extension <id>` desde la terminal.
 
 | Extensión | Autor | Para qué sirve |
@@ -47,6 +49,7 @@ La potencia real de VSCode aparece al instalar extensiones orientadas al perfil 
 
 !!! note "Remote-SSH es la extensión más rentable para un sysadmin"
     En lugar de editar un script directamente en el servidor con `vi` o `nano` por SSH, o descargarlo, editarlo en local y volver a subirlo, **Remote-SSH** abre una sesión remota completa dentro de VSCode: el explorador de archivos, la terminal integrada y el editor operan directamente sobre el servidor remoto, con todas las ventajas de un editor moderno (autocompletado, extensiones) pero ejecutando todo en el propio destino.
+
 
 ## 3. La terminal integrada
 
@@ -97,6 +100,8 @@ Memorizar un puñado de atajos ahorra muchísimo tiempo frente a navegar todo co
     Si no recuerdas un atajo concreto, `Ctrl+Mayús+P` abre la paleta de comandos: escribiendo el nombre de la acción en lenguaje natural ("format document", "toggle terminal", "git: clone") aparecen las opciones disponibles junto con su atajo de teclado asociado, lo que además ayuda a aprenderlos con el tiempo.
 
 ## 6. Git: control de versiones desde la línea de comandos
+
+![Flujo de trabajo de Git: working directory, staging area, repositorio local y remoto](../assets/img/05script/git-01-flujo.svg)
 
 VSCode incluye una interfaz gráfica para Git (el icono de la rama en la barra de actividad), pero entender **los comandos de Git** es lo que de verdad permite trabajar con soltura, tanto en VSCode como en cualquier servidor remoto donde solo se disponga de una terminal. Git es un sistema de control de versiones **distribuido**: cada copia local del repositorio contiene el historial completo, no solo la versión actual de los archivos, lo que permite trabajar sin conexión y sincronizar los cambios cuando se desee.
 
