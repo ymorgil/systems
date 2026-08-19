@@ -124,7 +124,7 @@ Instalar [Visual Studio Code](https://code.visualstudio.com/){target="_blank"} s
 | **GitHub Pull Requests and Issues** | Si el proyecto está en un repo de GitHub, permite gestionar issues y PRs sin salir de VS Code — útil si evalúas entregas vía Git. |
 | **Markdown All in One** | Para que el alumnado edite el `README.md` del proyecto con tabla de contenidos y formato correcto. |
 
-### 1. VSC en Ubuntu (WSL)
+### VSC en Ubuntu (WSL)
 Trabajar desde Ubuntu dentro de WSL permite utilizar herramientas Linux reales, gestionar dependencias de forma más sencilla y ejecutar contenedores Docker en un entorno similar a producción.
 
 1. Abrir Ubuntu (WSL), crear un directorio **proyectos** (directorio de trabajo habrá una carpeta por cada práctica). Una vez ubicados en el directorio proyectos abrimos el visual code en dicha ubicación (recordar hay que tenerlo instalado en Ubuntu). Esto abre el Visual Studio Code lo conecta automáticamente con WSL y permite trabajar como si estuvieras en Linux real.
