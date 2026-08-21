@@ -80,5 +80,6 @@ Soy **Yeray Moreno**, docente de la familia profesional de Informática y Comuni
         <div><div style="font-size: 20px;">🏫</div><div style="font-size: 12px; font-weight: bold;">GESTIÓN DUAL / FEOE</div></div>
 </div>
 
+[-](https://ymorgil.github.io/formacion/){target="_blank"}
 
 *Última actualización: Julio 2026 · [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)*
