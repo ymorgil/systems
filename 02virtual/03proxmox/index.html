@@ -1,0 +1,4201 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/02virtual/03proxmox/">
+      
+      
+        <link rel="prev" href="../02vmware/">
+      
+      
+        <link rel="next" href="../../03contenedores/01docker/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Proxmox - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proxmox-ve" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Proxmox
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-proxmox-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proxmox VE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Proxmox VE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interfaz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-vs-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup vs Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Redes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Redes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bond
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VLANs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-maquinas-virtuales-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Máquinas virtuales (VM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Clúster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-plantillas-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Plantillas (template)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Plantillas (template)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-plantillas-de-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Plantillas de VM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Plantillas de VM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cloud-Init
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-plantillas-de-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Plantillas de contenedor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Recursos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/01vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/02bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/100-ejercicios-bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-proxmox-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proxmox VE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Proxmox VE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interfaz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-vs-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup vs Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-redes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Redes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Redes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bond
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VLANs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-maquinas-virtuales-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Máquinas virtuales (VM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Clúster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-plantillas-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Plantillas (template)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Plantillas (template)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-plantillas-de-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Plantillas de VM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Plantillas de VM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cloud-Init
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-plantillas-de-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Plantillas de contenedor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Recursos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="proxmox-ve">🖥️ Proxmox VE</h1>
+<h2 id="1-proxmox-ve">1. Proxmox VE</h2>
+<p>Plataforma completa de virtualización de código abierto que permite desplegar, gestionar y monitorizar fácilmente máquinas virtuales (<strong>VM</strong>) y contenedores ligeros (<strong>LXC</strong>) desde una interfaz web intuitiva. El sistema combina cómputo, almacenamiento y redes en una única solución lista para entornos empresariales, incluyendo herramientas nativas para crear clústeres, gestionar alta disponibilidad y realizar copias de seguridad de forma centralizada.</p>
+<h3 id="instalacion">Instalación</h3>
+<iframe src="https://docs.google.com/viewer?url=https://ymorgil.github.io/systems/assets/pdf/proxmox.pdf&amp;embedded=true" width="70%" height="700px" style="display: block; margin: 0 auto;"></iframe>
+
+<p><a class="md-button" href="../../assets/pdf/proxmox.pdf" style="display:table;margin:0 auto;">Descargar guía de instalación</a></p>
+<h3 id="interfaz">Interfaz</h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-01.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-01.png" width="900"></a></p>
+<table>
+<thead>
+<tr>
+<th>Concepto básicos</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PVE</strong></td>
+<td>Proxmox Virtual Environment: el sistema completo.</td>
+</tr>
+<tr>
+<td><strong>Nodo</strong></td>
+<td>Servidor físico que tiene Proxmox instalado.</td>
+</tr>
+<tr>
+<td><strong>Datacenter</strong></td>
+<td>Vista global de todos los nodos del clúster. Los cambios aquí se aplican a todos los nodos.</td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>Panel de monitorización del nodo.</td>
+</tr>
+<tr>
+<td><strong>8006</strong></td>
+<td>Puerto utilizado para el acceso web a la interfaz de Proxmox.</td>
+</tr>
+<tr>
+<td><strong>KVM</strong></td>
+<td>Máquinas virtuales completas que emulan hardware. Ideales para cualquier sistema operativo.</td>
+</tr>
+<tr>
+<td><strong>LXC</strong></td>
+<td>Contenedores ligeros basados en Linux que comparten el núcleo del host.</td>
+</tr>
+<tr>
+<td><strong>VMID</strong></td>
+<td>Número de identificación único asignado a cada máquina virtual o contenedor.</td>
+</tr>
+<tr>
+<td><strong>Clúster</strong></td>
+<td>Grupo de dos o más nodos administrados desde una única interfaz.</td>
+</tr>
+<tr>
+<td><strong>Quórum</strong></td>
+<td>Mayoría de nodos activos necesaria para que el clúster pueda tomar decisiones.</td>
+</tr>
+<tr>
+<td><strong>HA</strong></td>
+<td>Alta Disponibilidad. Permite reiniciar automáticamente servicios en otro nodo si uno falla.</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento local</strong></td>
+<td>No recomendado en entornos de alta disponibilidad. Utiliza discos internos del propio nodo.</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento en red</strong></td>
+<td>Recomendado. Utiliza almacenamiento compartido mediante NFS, iSCSI, Ceph, NAS, SAN, etc.</td>
+</tr>
+<tr>
+<td><strong>PBS</strong></td>
+<td>Proxmox Backup Server: herramienta para realizar copias de seguridad optimizadas.</td>
+</tr>
+<tr>
+<td><strong>Linux Bridge (vmbr)</strong></td>
+<td>Switch virtual que conecta la red física con las máquinas virtuales y contenedores.</td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>MFA (Multi-Factor Authentication o autenticación multifactor)</summary>
+<p>Sistema de seguridad que requiere que un usuario demuestre su identidad usando más de un método de autenticación antes de acceder a un sistema. Para activarlo en Proxmox:</p>
+<ol>
+<li>Entrar en la interfaz web de Proxmox, Ir a <strong>My Settings → TFA</strong>, En <strong>Permisos → Two Factor</strong> → <strong>Add</strong>.</li>
+<li>Elegir el tipo de MFA: <strong>TOTP</strong> (más habitual): códigos generados por aplicaciones como Google Authenticator.</li>
+<li>Al iniciar sesión de nuevo en Proxmox, además de la contraseña pedirá el código temporal de 6 dígitos generado por la aplicación. El token se renueva cada 30 segundos</li>
+</ol>
+</details>
+<h2 id="2-almacenamiento">2. Almacenamiento</h2>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-02.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-02.png" width="900"></a></p>
+<p>Es es el sistema que permite guardar todos los datos necesarios para el funcionamiento de la plataforma de virtualización. En él se almacenan las máquinas virtuales, contenedores, imágenes ISO, copias de seguridad, plantillas y otros recursos necesarios para la infraestructura. Este permite utilizar diferentes tipos de almacenamiento, tanto locales como remotos, adaptándose a las necesidades de cada entorno. Algunos ejemplos son discos locales, NFS, SMB/CIFS, iSCSI, Ceph o ZFS. Durante la instalación estándar de Proxmox suelen crearse <strong>dos almacenamientos</strong> principales, aunque ambos están ubicados en el mismo servidor físico, tienen funciones diferentes.</p>
+<ol>
+<li>
+<p><strong>local</strong> Corresponde al directorio <code>/var/lib/vz</code>. Cuando descargamos una imagen ISO de Ubuntu desde la interfaz web de Proxmox, esta se almacena aquí. Su función principal es almacenar archivos relacionados con la plataforma, como:</p>
+<ul>
+<li>Imágenes ISO.</li>
+<li>Copias de seguridad (Backups).</li>
+<li>Plantillas de contenedores.</li>
+</ul>
+</li>
+<li>
+<p><strong>local-lvm</strong> utiliza la tecnología LVM-Thin (Logical Volume Manager Thin Provisioning).Cuando se crea una nueva máquina virtual y se le asigna un disco de 50 GB, dicho disco se almacena normalmente en <code>local-lvm</code>. Su función principal es almacenar los discos virtuales de Máquinas virtuales (<strong>VM</strong>) y Contenedores <strong>LXC</strong>. Ventajas:</p>
+<ul>
+<li>Mejor aprovechamiento del espacio disponible.</li>
+<li>Soporte para snapshots.</li>
+<li>Mayor flexibilidad en la gestión del almacenamiento y creación rápida de discos virtuales</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>local</th>
+<th>local-lvm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipo de almacenamiento</td>
+<td>Directorio</td>
+<td>LVM-Thin</td>
+</tr>
+<tr>
+<td>Imágenes ISO</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Backups</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Plantillas</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Discos de VM</td>
+<td>No (por defecto)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Discos de contenedores</td>
+<td>No (por defecto)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Ubicación</td>
+<td>/var/lib/vz</td>
+<td>Volumen LVM</td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>Directorio vs Volumen lógico</summary>
+<p>Un <strong>directorio</strong> organiza archivos dentro de un sistema de archivos.</p>
+<p>Un <strong>volumen lógico LVM</strong> es una entidad de almacenamiento flexible y dinámica creada dentro de un grupo de volúmenes, mucho más versátil para entornos virtualizados.</p>
+</details>
+<div class="highlight"><pre><span></span><code>Redimensionado<span class="w"> </span>de<span class="w"> </span>volúmenes<span class="w"> </span>lógicos<span class="w"> </span><span class="o">(</span>LVM<span class="o">)</span>
+
+pvcreate<span class="w"> </span>/dev/sdX<span class="w">                               </span><span class="c1"># 1. Crear volumen físico</span>
+vgextend<span class="w"> </span>nombre-vg<span class="w"> </span>/dev/sdX<span class="w">                     </span><span class="c1"># 2. Extender el grupo de volúmenes </span>
+lvextend<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/ubuntu-vg/ubuntu-lv<span class="w">  </span><span class="c1"># 3. Extender el volumen lógico</span>
+resize2fs<span class="w"> </span>/dev/ubuntu-vg/ubuntu-lv<span class="w">              </span><span class="c1"># 4. Redimensionar el sistema de archivos</span>
+df<span class="w"> </span>-h<span class="w">                                           </span><span class="c1"># 5. Comprobar puntos de montaje</span>
+</code></pre></div>
+<h3 id="backup-vs-snapshot">Backup vs Snapshot</h3>
+<ul>
+<li>
+<p><strong>Backup (copia de seguridad)</strong> es una copia de los datos de un sistema que se guarda en otro lugar para poder recuperarlos si se pierden, se dañan o se borran. Se suele aplicar la regla de los 3 backups (<strong>Producción</strong>:copia en el propio entorno, <strong>Backup externo</strong>:en otro medio/red fuera de la infraestructura y <strong>Backup offsite</strong>:en otra geolocalización). Además Proxmox ofrece tres modos de copias:</p>
+<ul>
+<li><strong>Stop</strong> | Mayor consistencia, breve tiempo de inactividad</li>
+<li><strong>Suspend</strong> | Suspende la VM. No recomendado (mayor inactividad sin mejor consistencia)</li>
+<li><strong>Snapshot</strong> | Mínimo tiempo de inactividad. Pequeño riesgo de inconsistencia</li>
+</ul>
+</li>
+<li>
+<p><strong>Snapshot (instantánea)</strong> es una captura del estado de un sistema en un momento concreto. Guarda cómo estaba una máquina virtual, disco o sistema para poder volver a ese punto anterior. Se usa frecuentemente para volver rápidamente a un estado anterior y se hace antes de actualizar un servidor; si la actualización falla, vuelves al estado anterior.</p>
+</li>
+</ul>
+<details class="tip">
+<summary>Backup vs Snapshot</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Backup</th>
+<th>Snapshot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Qué es</strong></td>
+<td>Clon completo del disco</td>
+<td>Estado puntual de la VM</td>
+</tr>
+<tr>
+<td><strong>Es independiente de la VM</strong></td>
+<td>✅ Sí</td>
+<td>❌ No, forma parte de la VM</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Recuperación ante desastre</td>
+<td>Probar cambios y revertir rápido</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 id="3-redes">3. Redes</h2>
+<p>Proxmox usa el stack de red de Linux (a través de <code>/etc/network/interfaces</code>), pero la interfaz web (<strong>System → Network</strong>) los simplifica bastante. </p>
+<h3 id="bridge"><strong>Bridge</strong></h3>
+<p>Se utiliza de forma estándar para <strong>dar red</strong> a tus máquinas virtuales. Si tienes varias NICs físicas o quieres segmentar tráfico, puedes tener varios bridges. (ej: <code>vmbr0</code> para LAN, <code>vmbr1</code> para una red de almacenamiento/backup aislada). Funciona como un switch virtual por defecto, dentro de proxmox crea <strong>vmbr0</strong> durante la instalación, vinculado a la NIC física principal y conecta las interfaces físicas (NICs) del servidor con las interfaces virtuales de las VMs/LXC. Cada VM/LXC que quieras conectar a la red simplemente se "enchufa" a ese bridge, igual que enchufarías un cable a un switch físico. Configuración:
+</p><div class="highlight"><pre><span></span><code><span class="w">    </span>auto<span class="w"> </span>vmbr0
+<span class="w">    </span>iface<span class="w"> </span>vmbr0<span class="w"> </span>inet<span class="w"> </span>static
+<span class="w">        </span>address<span class="w"> </span><span class="m">192</span>.168.1.10/24
+<span class="w">        </span>gateway<span class="w"> </span><span class="m">192</span>.168.1.1
+<span class="w">        </span>bridge-ports<span class="w"> </span>eno1
+<span class="w">        </span>bridge-stp<span class="w"> </span>off
+<span class="w">        </span>bridge-fd<span class="w"> </span><span class="m">0</span>
+</code></pre></div><p></p>
+<hr>
+<h3 id="bond"><strong>Bond</strong></h3>
+<p>Se utiliza en <strong>entornos de producción</strong> donde la alta disponibilidad o el rendimiento de red importan (clústeres, almacenamiento compartido tipo Ceph/NFS, etc.). Modos destacados:</p>
+<ul>
+<li><strong><code>active-backup</code></strong> → Failover/conmutación por error. El adaptador secundario asume el rol si el principal falla. Se configura el maestro en <code>bond-primary</code>.</li>
+<li><strong><code>LACP (802.3ad)</code></strong> → Agrega múltiples enlaces para mayor ancho de banda y tolerancia a fallos. </li>
+<li><strong><code>balance-rr</code></strong> → Este modo distribuye los paquetes de datos de forma secuencial y rotatoria entre todas las interfaces activas.</li>
+<li><strong><code>balance-alb</code></strong> →  permite balancear el tráfico de tus máquinas virtuales en ambas direcciones sin tocar la configuración del switch.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Bonding en modo active-backup ---</span>
+<span class="c1"># Solo una interfaz está activa a la vez; si falla, la otra toma el relevo.</span>
+auto<span class="w"> </span>bond0
+iface<span class="w"> </span>bond0<span class="w"> </span>inet<span class="w"> </span>manual
+<span class="w">    </span>bond-slaves<span class="w"> </span>enp0s3<span class="w"> </span>enp0s8<span class="w">  </span><span class="c1"># Interfaces físicas esclavas del bond</span>
+<span class="w">    </span>bond-miimon<span class="w"> </span><span class="m">100</span><span class="w">            </span><span class="c1"># Comprobación de enlace cada 100 ms</span>
+<span class="w">    </span>bond-mode<span class="w"> </span>active-backup<span class="w">    </span><span class="c1"># Modo </span>
+<span class="w">    </span>bond-primary<span class="w"> </span>eno1<span class="w">          </span><span class="c1"># (Opcional) Fuerza eno1 interfaz preferida </span>
+<span class="w">    </span>bond-primary-reselect<span class="w"> </span>always<span class="w">  </span><span class="c1"># (Opcional) Vuelve a eno1 en cuanto esté disponible de nuevo</span>
+
+<span class="c1"># --- Bridge de Proxmox sobre el bond ---</span>
+auto<span class="w"> </span>vmbr0
+iface<span class="w"> </span>vmbr0<span class="w"> </span>inet<span class="w"> </span>static
+<span class="w">    </span>address<span class="w"> </span><span class="m">192</span>.168.1.10/24<span class="w">    </span><span class="c1"># IP fija del host</span>
+<span class="w">    </span>gateway<span class="w"> </span><span class="m">192</span>.168.1.1<span class="w">        </span><span class="c1"># Puerta de enlace por defecto</span>
+<span class="w">    </span>bridge-ports<span class="w"> </span>bond0<span class="w">         </span><span class="c1"># El bond0 es el puerto físico del bridge</span>
+<span class="w">    </span>bridge-stp<span class="w"> </span>off<span class="w">             </span><span class="c1"># STP desactivado (no es necesario con un solo bridge)</span>
+<span class="w">    </span>bridge-fd<span class="w"> </span><span class="m">0</span><span class="w">                </span><span class="c1"># Sin retardo de forwarding</span>
+</code></pre></div>
+<hr>
+<h3 id="vlans"><strong>VLANs</strong></h3>
+<p>Permiten segmentar el tráfico de red dentro de la misma infraestructura física, etiquetando los paquetes con un ID (1-4094). En Proxmox hay dos formas principales de trabajar con VLANs:</p>
+<p><strong>a) VLAN Aware Bridge (recomendado)</strong> Marcas el bridge como "VLAN aware" y luego, al configurar la red de cada VM/LXC, simplemente indicas el <strong>VLAN Tag</strong>. Proxmox se encarga de etiquetar el tráfico y esa VM queda aislada en esa VLAN, todo a través del mismo bridge. <strong>Ventaja:</strong> flexible, no necesitas crear un bridge por cada VLAN. Es el método más usado hoy en día.</p>
+<p><strong>b) Interfaces VLAN dedicadas</strong> Creas interfaz VLAN explícita tiene un bridge específico para ella, se usa cuando necesitas separar tráfico (gestión, almacenamiento, VMs de producción, DMZ, etc.) sin necesidad de switches físicos adicionales, siempre que tu switch físico soporte 802.1Q (<strong>trunking</strong>).
+</p><div class="highlight"><pre><span></span><code><span class="c1"># --- Bridge VLAN Aware sobre el bond ---</span>
+<span class="c1"># Un único bridge gestiona el tráfico de todas las VLANs.</span>
+auto<span class="w"> </span>vmbr0
+iface<span class="w"> </span>vmbr0<span class="w"> </span>inet<span class="w"> </span>static
+<span class="w">    </span>address<span class="w"> </span><span class="m">192</span>.168.1.10/24
+<span class="w">    </span>gateway<span class="w"> </span><span class="m">192</span>.168.1.1
+<span class="w">    </span>bridge-ports<span class="w"> </span>bond0<span class="w">          </span><span class="c1"># Puerto físico (o bond) que lleva el tráfico troncal (trunk)</span>
+<span class="w">    </span>bridge-stp<span class="w"> </span>off
+<span class="w">    </span>bridge-fd<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span>bridge-vlan-aware<span class="w"> </span>yes<span class="w">       </span><span class="c1"># Activa el modo VLAN aware en el bridge</span>
+<span class="w">    </span>bridge-vids<span class="w"> </span><span class="m">2</span>-4094<span class="w">          </span><span class="c1"># Rango de VLAN IDs permitidas a través del bridge</span>
+</code></pre></div><p></p>
+<hr>
+<div class="admonition abstract">
+<p class="admonition-title">Resumen</p>
+<ol>
+<li><strong>Bridge (Puente)</strong>: Conectar VMs/LXCs a la red, funcionando como un switch virtual.</li>
+<li><strong>Bond (Agregación de enlaces/ Bonding)</strong>: Hay redundancia/rendimiento de NICs físicas, funcionando como un cable doble de seguridad.</li>
+<li><strong>VLANs  (Redes de Área Local Virtuales)</strong>: Segmentar tráfico lógicamente, creando diferentes "carriles" en la misma autopista.</li>
+</ol>
+</div>
+<h2 id="4-maquinas-virtuales-vm">4. Máquinas virtuales (VM)</h2>
+<p>Una <strong>máquina virtual (VM)</strong> es un entorno informático que emula un ordenador completo mediante software, permitiendo instalar y ejecutar sistemas operativos de forma aislada sobre un servidor físico. Los pasos a seguir para crear e iniciar una máquina virtual en Proxmox VE son:</p>
+<ol>
+<li>Acceder a la interfaz web de Proxmox, selecciona el almacenamiento <strong>local (nombre_del_nodo)</strong> y accede a la pestaña <strong>ISO Images</strong>, desde hay pulsar el botón <strong>Cargar</strong> y selecciona el archivo ISO descargado previamente desde tu equipo y espera a que finalice la transferencia.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-03.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-03.png" width="700"></a></li>
+<li>Haz clic en <strong>Create VM</strong> en la parte superior derecha, para iniciar el asistente.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-02a.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-02a.png"></a></li>
+<li>Sigue el asistente, introduciendo un nombre para la máquina virtual, en <strong>OS</strong>, selecciona la imagen ISO previamente subida, en <strong>System</strong>, deja la configuración predeterminada o ajusta los parámetros según tus necesidades. Configura el tamaño del disco virtual de 100GB, la cantidad de procesadores virtuales en <strong>CPU</strong>, la memoria RAM en <strong>Memory</strong> y la interfaz de red en <strong>Network</strong> y por último revisa el resumen de configuración, haz clic en <strong>Finish</strong> para crear la máquina virtual y marca la opción <strong>Start after created</strong> si deseas iniciar la máquina automáticamente.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-04.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-04.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-05.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-05.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-06.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-06.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-07.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-07.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-08.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-08.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-09.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-09.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-10.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-10.png"></a></td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-11.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-11.png"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Para iniciar selecciona la máquina virtual creada en el panel lateral y haz clic en <strong>Start</strong>. A continuación accede a la consola mediante <strong>Console</strong>.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-12.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-12.png" width="700"></a></p>
+<h2 id="6-cluster">6. Clúster</h2>
+<p>Un <strong>clúster</strong> es un conjunto de varios servidores (nodos) que están interconectados y trabajan de forma coordinada como si fueran un único sistema. La idea principal es combinar los recursos de procesamiento, memoria y almacenamiento de todas las máquinas para ofrecer mayor capacidad, rendimiento y fiabilidad de la que tendría un solo servidor por separado.</p>
+<p>En el caso de Proxmox VE, un clúster permite gestionar todos los nodos desde una sola interfaz, migrar máquinas virtuales entre ellos y compartir configuraciones de red, almacenamiento y usuarios. Por ejemplo, imaginemos una empresa que tiene tres servidores físicos llamados PVE1, PVE2 y PVE3. Cada uno por separado podría alojar varias máquinas virtuales, pero si uno de ellos se sobrecarga o necesita mantenimiento, las VMs que contiene quedarían afectadas. Al unir los tres servidores en un clúster, el administrador puede ver y gestionar las VMs de los tres nodos desde un único panel, repartir la carga entre ellos y, si es necesario, mover una máquina virtual de PVE1 a PVE2 sin que los usuarios noten interrupción alguna.</p>
+<p><strong>Crear el clúster</strong></p>
+<ol>
+<li>En el primer nodo (ejemplo <strong>PVE1</strong>), ve a <code>Datacenter &gt; Cluster</code> y haz clic en <strong>Crear Cluster</strong>. Asigna un nombre al clúster. Una vez creado, pulsa en <strong>Información de unión</strong> y copia el código que aparece (contiene los datos necesarios para que otros nodos se unan).
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/02vir/prx-13.png" data-desc-position="bottom"><img alt="Interfaz de proxmox" src="../../assets/img/02vir/prx-13.png" width="700"></a></li>
+<li>En el segundo nodo (<strong>PVE2</strong>), ve también a <code>Datacenter &gt; Cluster</code>, haz clic en <strong>Unirse al Clusterr</strong> y pega el código copiado. Introduce la contraseña del nodo PVE1 cuando se solicite.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Desde /Datacenter → Cluster/ se crea o se une a un clúster. Una vez configurado, es posible <strong>migrar máquinas virtuales entre nodos</strong> del clúster.</p>
+</div>
+<details class="tip">
+<summary>Alta Disponibilidad (HA)</summary>
+<p>Precisamente, una de las grandes ventajas de tener varios nodos unidos en un clúster es que ya no dependemos de una única máquina física para mantener nuestros servicios en marcha. Esto da lugar al concepto de <strong>alta disponibilidad (HA)</strong>, característica que garantiza que los servicios y máquinas virtuales sigan funcionando aunque uno de ellos falle inesperadamente. Cuando se activa la <strong>HA en Proxmox</strong>, el sistema monitoriza constantemente el estado de los nodos; si detecta que uno deja de responder (por ejemplo, corte de energía), automáticamente reinicia las máquinas virtuales afectadas en otro nodo disponible del clúster, minimizando el tiempo de inactividad. Esto es fundamental en entornos de producción, donde una caída no planificada de un servicio puede suponer pérdidas económicas o de productividad, por lo que la alta disponibilidad actúa como una red de seguridad que aumenta la resiliencia de toda la infraestructura virtualizada.</p>
+</details>
+<h2 id="7-plantillas-template">7. Plantillas (template)</h2>
+<p>Máquina virtual (VM) o contenedor (CT) preconfigurado que se convierte en una imagen base de solo lectura, usada para crear nuevas VMs/CTs rápidamente por <strong>clonación</strong>, en lugar de instalar el sistema operativo desde cero cada vez. 
+Existen dos tipos principales en Proxmox:</p>
+<ol>
+<li><strong>Plantillas de VM (QEMU/KVM)</strong>: una máquina virtual completa convertida en plantilla.</li>
+<li><strong>Plantillas de contenedor (LXC)</strong>: imágenes de sistema de archivos descargadas desde el repositorio de plantillas de Proxmox (Debian, Ubuntu, Alpine, CentOS, etc.).</li>
+</ol>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li><strong>Rapidez</strong>: despliegue de nuevas VMs/CTs en segundos o minutos.</li>
+<li><strong>Consistencia</strong>: todas las VMs nacen desde la misma base, configuración estandarizada.</li>
+<li><strong>Automatización</strong>: combinadas con <strong>cloud-init o scripts</strong>, permiten despliegues totalmente automatizados (útil con Terraform, Ansible, etc.).</li>
+</ul>
+<div class="admonition success">
+<p class="admonition-title">Buenas prácticas</p>
+<ul>
+<li>Usa convenios de nombres claros (<code>tpl-debian12-base</code>, <code>tpl-ubuntu24-docker</code>).</li>
+<li>Mantén las plantillas <strong>actualizadas</strong> periódicamente (regenerarlas cuando haya cambios de versión del SO).</li>
+<li>Si usarás <em>linked clones</em> en producción, recuerda que <strong>no podrás eliminar la plantilla</strong> mientras existan clones enlazados activos.</li>
+<li>Documenta qué software/configuración trae cada plantilla.</li>
+<li>Considera tener una plantilla "mínima" (solo SO) y plantillas "especializadas" (con Docker, agentes de monitorización, etc.) según tus necesidades habituales.</li>
+</ul>
+</div>
+<h3 id="1-plantillas-de-vm">1. Plantillas de VM</h3>
+<p>Las plantillas de VM las creas tú mismo a partir de una VM ya instalada y configurada. Los paso son los siguientes:</p>
+<ol>
+<li><strong>Crear y configurar una VM</strong> con el SO deseado (instalar actualizaciones, agentes, software base,...).</li>
+<li><strong>Limpiar identificadores únicos</strong> (muy importante para evitar conflictos al clonar):<ul>
+<li>Eliminar <code>machine-id</code> (Linux): <strong><code>truncate -s0 /etc/machine-id</code></strong></li>
+<li>Limpiar claves SSH del host si se reutilizarán.</li>
+<li>Desinstalar <code>cloud-init</code> si no se va a usar, o configurarlo si sí.</li>
+</ul>
+</li>
+<li><strong>Apagar la VM</strong> (no puede convertirse en plantilla estando encendida).</li>
+<li><strong>Convertir en plantilla</strong>: (Proceso <em>irreversible</em> la VM original deja de poder arrancarse; queda como base de solo lectura para clonar)<ul>
+<li>Interfaz web: clic derecho sobre la VM → <strong>Convertir a plantilla</strong></li>
+<li>CLI: <code>qm template &lt;ID_VM&gt;</code></li>
+</ul>
+</li>
+</ol>
+<div class="admonition bug">
+<p class="admonition-title">Plantillas de Windows</p>
+<p>Recomendable instalar los controladores <strong>VirtIO</strong> para que Windows reconozca correctamente los dispositivos virtuales de Proxmox y obtenga un mejor rendimiento en disco, red y otros componentes. </p>
+<p>Una vez configurado el sistema, actualizado e instalado el software necesario, se debe ejecutar <strong>Sysprep</strong> con la opción Generalize, lo que elimina la información única de la instalación (SID, nombre del equipo y otros identificadores) para que cada nueva máquina creada desde la plantilla se configure como un sistema independiente durante su primer arranque. Tras finalizar Sysprep, se apaga la máquina virtual y se convierte en plantilla dentro de Proxmox.</p>
+<ul>
+<li>ISO de drivers VirtIO: <a href="https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers" target="_blank">pve.proxmox.com/wiki/Windows_VirtIO_Drivers</a></li>
+<li>Guía oficial Windows 10: <a href="https://pve.proxmox.com/wiki/Windows_10_guest_best_practices" target="_blank">pve.proxmox.com/wiki/Windows_10_guest_best_practices</a></li>
+<li><a href="https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation?view=windows-11" target="_blank">Generalizar con Sysprep</a></li>
+<li><a href="https://learn.microsoft.com/es-es/windows-hardware/manufacture/desktop/sysprep-command-line-options?view=windows-11" target="_blank">Opciones de línea de comandos Sysprep</a></li>
+</ul>
+</div>
+<p><strong>Utilizando la interfaz de linea de comando (CLI)</strong>
+</p><div class="highlight"><pre><span></span><code><span class="c1"># Clonación completa (full clone) - copia independiente - más lenta</span>
+qm<span class="w"> </span>clone<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="m">105</span><span class="w"> </span>--name<span class="w"> </span>servidor-web-01<span class="w"> </span>--full<span class="w">  </span>
+<span class="c1"># Clonación enlazada (linked clone) - Plantilla como base, ahorra espacio - Dependiente</span>
+qm<span class="w"> </span>clone<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="m">106</span><span class="w"> </span>--name<span class="w"> </span>servidor-web-02<span class="w">  </span>
+</code></pre></div><p></p>
+<h4 id="cloud-init">cloud-Init</h4>
+<p><strong><code>cloud-init</code></strong> es un paquete de software que automatiza la inicialización de las instancias de la nube durante el arranque del sistema. Cuando tu VM arranca por <strong>primera vez</strong>, se ejecuta cloud-init, es solo un comando que está integrado en la mayoría de las imágenes de VM en la nube. Se puede configurar para que realice una variedad de tareas. Algunos ejemplos de tareas que puede realizar son:</p>
+<ul>
+<li>Usuario y contraseña/clave SSH</li>
+<li>Hostname</li>
+<li>Instalación de paquetes en una instancia</li>
+<li>Configuración de red (IP estática o DHCP)</li>
+<li>Suprimir el comportamiento por defecto de la máquina virtual </li>
+<li>Scripts de arranque personalizados</li>
+</ul>
+<h3 id="2-plantillas-de-contenedor">2. Plantillas de contenedor</h3>
+<p>Proxmox ofrece un repositorio integrado con plantillas oficiales de distribuciones Linux. Se pueden descargar desde la interfaz web <code>Datacenter → [nodo] → local (almacenamiento) → Plantillas CT</code>
+Pulsa <strong>Plantillas</strong> y elige la distribución/versión (ej. <code>debian-12-standard</code>, <code>ubuntu-24.04-standard</code>), descargar y guardar como archivo <code>.tar.zst</code> en <code>/var/lib/vz/template/cache/</code>.</p>
+<p><strong>Utilizando la interfaz de linea de comando (CLI)</strong>
+</p><div class="highlight"><pre><span></span><code>pveam<span class="w"> </span>update<span class="w">            </span><span class="c1"># Actualizar el índice de plantillas disponibles</span>
+pveam<span class="w"> </span>available<span class="w">         </span><span class="c1"># Listar plantillas disponibles</span>
+pveam<span class="w"> </span>download<span class="w"> </span><span class="nb">local</span><span class="w"> </span>debian-12-standard_12.7-1_amd64.tar.zst<span class="w"> </span><span class="c1"># Descargar una plantilla</span>
+pveam<span class="w"> </span>list<span class="w"> </span><span class="nb">local</span><span class="w">        </span><span class="c1"># Listar plantillas ya descargadas</span>
+
+<span class="c1"># Creación de un LXC mediante plantilla</span>
+pct<span class="w"> </span>create<span class="w"> </span><span class="m">200</span><span class="w"> </span>local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--hostname<span class="w"> </span>mi-contenedor<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cores<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rootfs<span class="w"> </span>local-lvm:8<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--net0<span class="w"> </span><span class="nv">name</span><span class="o">=</span>eth0,bridge<span class="o">=</span>vmbr0,ip<span class="o">=</span>dhcp
+</code></pre></div><p></p>
+<div class="admonition abstract">
+<p class="admonition-title">Resumen de comandos</p>
+<ul>
+<li><strong>pveam update</strong>: Actualizar índice de plantillas LXC</li>
+<li><strong>pveam available</strong>: Ver plantillas LXC disponibles</li>
+<li><strong>pveam download local &lt;plantilla&gt;</strong>: Descargar plantilla LXC</li>
+<li><strong>pct create &lt;ID&gt; local:vztmpl/&lt;archivo&gt;</strong>: Crear CT desde plantilla</li>
+<li><strong>qm template &lt;ID&gt;</strong>: Convertir VM en plantilla</li>
+<li><strong>qm clone &lt;ID_origen&gt; &lt;ID_nuevo&gt; --full</strong>: Clonar (full)</li>
+<li><strong>qm clone &lt;ID_origen&gt; &lt;ID_nuevo&gt;</strong>: Clonar (linked)</li>
+</ul>
+</div>
+<h2 id="recursos">📚 Recursos</h2>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLznRNLIWBPwH5Li7Co2i57rUVhve7m_ZQ" target="_blank">📺 Virtualización con Proxmox</a></li>
+<li><a href="https://pve.proxmox.com/wiki/Proxmox_VE_API" target="_blank">Proxmox VE API - Proxmox VE</a></li>
+<li><a href="https://tteck.github.io/Proxmox/" target="_blank">Proxmox VE Helper-Scripts</a></li>
+<li><a href="https://somebooks.es/?s=+Scripts+para+Proxmox" target="_blank">Scripts para Proxmox - SomeBooks.es</a></li>
+<li><a href="http://vasilisc.com/proxmox-ve-api-pools" target="_blank">Proxmox VE API. Pools.</a></li>
+<li><a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html" target="_blank">Proxmox VE Administration Guide</a></li>
+<li><a href="https://tecnocratica.net/wikicratica/books/proxmox-ve/page/usar-el-api-de-proxmox-ve" target="_blank">Usar el API de Proxmox VE | Wikicrática</a></li>
+<li><a href="https://github.com/iesgn/curso_proxmox_cep" target="_blank">GitHub - iesgn/curso_proxmox_cep: Curso sobre Proxmox VE para el CEP.</a></li>
+<li><a href="https://www.nosolohacking.info/ofertas" target="_blank">Más cursos Windows Server, Linux, Hacking</a></li>
+<li><a href="https://pve.proxmox.com/wiki/Backup_and_Restore" target="_blank">Documentación oficial Backup Proxmox</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,4553 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/05scripting/01vscode-git/">
+      
+      
+        <link rel="prev" href="../../04cloud/ec2/">
+      
+      
+        <link rel="next" href="../02bash/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>VSCode y Git - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vscode-y-control-de-versiones-con-git" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VSCode y Git
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📟 Visual Studio Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📟 Visual Studio Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primeros pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extensiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminal-integrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminal integrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proyectos-y-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proyectos y carpetas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atajos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atajos útiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-control-de-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        😾 Git (Control de versiones)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="😾 Git (Control de versiones)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeros-pasos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primeros pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-ciclo-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ciclo básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ramas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ramas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolucion-de-conflictos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución de conflictos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorio remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐺 GITHUB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐺 GITHUB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-colaborativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo colaborativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 Markdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../100-ejercicios-bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01--Directorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Directorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02--Procesos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Procesos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03--Automatizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Automatización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04--Administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Administración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05--Impresion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06--Integracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07--Scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut07-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT07 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/z-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Almacenamiento y Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Ecosistema Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Integridad de los datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Monitorización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-temario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Big Data e Inteligencia de Negocio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/99-recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-digitalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-thd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut02-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT02 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut03-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT03 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut04-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT04 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-datos-seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut05-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT05 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-proyecto-transformacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Temario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Práctica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut06-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT06 Rúbrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/recursos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📟 Visual Studio Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📟 Visual Studio Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primeros pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extensiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminal-integrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminal integrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proyectos-y-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proyectos y carpetas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atajos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atajos útiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-control-de-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        😾 Git (Control de versiones)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="😾 Git (Control de versiones)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeros-pasos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primeros pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-ciclo-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ciclo básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ramas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ramas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolucion-de-conflictos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución de conflictos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorio remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐺 GITHUB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐺 GITHUB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-colaborativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo colaborativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 Markdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="vscode-y-control-de-versiones-con-git"><strong>🧰 VSCode y control de versiones con Git</strong></h1>
+<p>Cualquier administrador de sistemas que escriba scripts —<em>ya sean de Bash, PowerShell o Python</em>— necesita dos herramientas que lo acompañarán en el día a día: </p>
+<ol>
+<li>Un <strong>editor de código</strong> que le facilite la vida (autocompletado, resaltado de sintaxis, terminal integrada) <blockquote>
+<p><strong>Visual Studio Code</strong> (VSCode) como editor de referencia del módulo</p>
+</blockquote>
+</li>
+<li>Un <strong>sistema de control de versiones</strong> que le permita guardar el historial de cambios, deshacer errores y colaborar con otras personas sin pisarse el trabajo. <blockquote>
+<p><strong>Git</strong> como sistema de control de versiones, trabajado siempre desde la línea de comandos: entender qué hace cada comando de Git es lo que permite luego usar con criterio cualquier interfaz gráfica (la propia de VSCode, GitHub Desktop, GitKraken...), y no al revés.</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="visual-studio-code">📟 Visual Studio Code</h2>
+<p><strong>Visual Studio Code</strong> es un editor de código gratuito y multiplataforma (Windows, Linux, macOS) desarrollado por Microsoft. A diferencia de un IDE pesado como Visual Studio o IntelliJ, VSCode nace como un editor ligero que se convierte en un entorno de desarrollo completo mediante <strong>extensiones</strong>: la base del programa es la misma para todo el mundo, y cada perfil (desarrollador web, científico de datos, administrador de sistemas) lo adapta instalando el conjunto de extensiones que necesita.</p>
+<h3 id="primeros-pasos">Primeros pasos</h3>
+<ul>
+<li><strong>Windows</strong>: se descarga el instalador desde <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> o se instala con el gestor de paquetes <code class="yercod">winget install Microsoft.VisualStudioCode</code>.</li>
+<li><strong>Linux (Debian/Ubuntu)</strong>: <code class="yercod">sudo apt install code</code> tras añadir el repositorio oficial de Microsoft, o descargando el paquete <code>.deb</code> directamente.</li>
+<li><strong>macOS</strong>: descarga directa del <code>.zip</code> desde la web oficial, o <code>brew install --cask visual-studio-code</code> si se usa Homebrew.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Añadir VSCode al PATH</p>
+<p>Durante la instalación en Windows, marca la casilla <strong>"Add to PATH"</strong>. Esto permite abrir cualquier carpeta directamente desde una terminal con el comando <code>code .</code> (el punto significa "la carpeta actual"), en lugar de tener que abrir VSCode y luego navegar manualmente hasta el proyecto.</p>
+</div>
+<p>Al abrir VSCode por primera vez conviene familiarizarse con las zonas principales de la interfaz:</p>
+<ul>
+<li><strong>Barra de actividad</strong> (lateral izquierdo): iconos para cambiar entre el explorador de archivos, la búsqueda global, el control de código fuente (Git), depuración y extensiones.</li>
+<li><strong>Explorador</strong>: el árbol de carpetas y archivos del proyecto abierto.</li>
+<li><strong>Editor</strong>: la zona central, donde se edita el código; admite pestañas y divisiones en varias columnas.</li>
+<li><strong>Terminal integrada</strong>: una consola completa (Bash, PowerShell, cmd...) empotrada en la parte inferior del editor.</li>
+<li><strong>Panel de extensiones</strong>: el mercado (<em>marketplace</em>) desde el que se instalan complementos.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/vscode-01-layout.svg" data-desc-position="bottom"><img alt="Anatomía de la ventana de Visual Studio Code: barra de actividad, explorador, editor, terminal y extensiones" src="../../assets/img/05script/vscode-01-layout.svg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/img/05script/vscode-01.png" data-desc-position="bottom"><img alt="Anatomía de la ventana de Visual Studio Code: barra de actividad, explorador, editor, terminal y extensiones" src="../assets/img/05script/vscode-01.png" width="1000"></a></p>
+<h3 id="extensiones">Extensiones</h3>
+<p>La potencia real de VSCode aparece al instalar extensiones orientadas al perfil de administración de sistemas. Se instalan desde el icono de piezas de puzzle de la barra de actividad, o con el comando <code class="yercod">code --install-extension &lt;id&gt;</code> desde la terminal.</p>
+<table>
+<thead>
+<tr>
+<th>Extensión</th>
+<th>Autor</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Remote - SSH</strong></td>
+<td>Microsoft</td>
+<td>Conectarse y editar archivos directamente en un servidor remoto por SSH, como si fuera una carpeta local</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>Microsoft</td>
+<td>Autocompletado, linting, depuración y ejecución de scripts Python</td>
+</tr>
+<tr>
+<td><strong>PowerShell</strong></td>
+<td>Microsoft</td>
+<td>Resaltado de sintaxis, depuración y IntelliSense para scripts <code>.ps1</code></td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Microsoft</td>
+<td>Gestión de imágenes, contenedores y ficheros <code>Dockerfile</code>/<code>docker-compose.yml</code></td>
+</tr>
+<tr>
+<td><strong>YAML</strong></td>
+<td>Red Hat</td>
+<td>Validación y autocompletado para ficheros de configuración (Ansible, Kubernetes, mkdocs.yml)</td>
+</tr>
+<tr>
+<td><strong>Markdown All in One</strong></td>
+<td>Yu Zhang</td>
+<td>Vista previa, atajos y generación automática de índices para documentación en Markdown</td>
+</tr>
+<tr>
+<td><strong>Material Icon Theme</strong></td>
+<td>Philipp Kief</td>
+<td>Iconos distintivos por tipo de archivo, útil para localizar rápido en árboles de proyecto grandes</td>
+</tr>
+<tr>
+<td><strong>ShellCheck</strong></td>
+<td>Timon Wong</td>
+<td>Analiza scripts de Bash y avisa de errores y malas prácticas antes de ejecutarlos</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Remote-SSH es la extensión más rentable para un sysadmin</p>
+<p>En lugar de editar un script directamente en el servidor con <code>vi</code> o <code>nano</code> por SSH, o descargarlo, editarlo en local y volver a subirlo, <strong>Remote-SSH</strong> abre una sesión remota completa dentro de VSCode: el explorador de archivos, la terminal integrada y el editor operan directamente sobre el servidor remoto, con todas las ventajas de un editor moderno (autocompletado, extensiones) pero ejecutando todo en el propio destino.</p>
+</div>
+<h3 id="terminal-integrada">Terminal integrada</h3>
+<p>La terminal integrada de VSCode (<code>Ctrl+Ñ</code>) es tan importante como el editor: permite ejecutar scripts, comandos de Git o herramientas de línea de comandos sin salir de la ventana del editor.</p>
+<ul>
+<li>Se puede elegir el intérprete por defecto (Bash, PowerShell, WSL, Git Bash) desde el desplegable de la propia terminal o desde la paleta de comandos.</li>
+<li>Se pueden abrir <strong>varias terminales en paralelo</strong> (por ejemplo, una con Bash para lanzar el script y otra con <code>tail -f</code> para vigilar un log), organizadas en pestañas o divididas en paneles.</li>
+<li>El terminal hereda el directorio de trabajo del proyecto abierto, evitando tener que navegar con <code>cd</code> cada vez que se abre una ventana nueva.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Terminal dividida para depurar scripts</p>
+<p>Un flujo de trabajo habitual al depurar un script de administración es dividir la terminal integrada en dos paneles: en el de la izquierda se edita y ejecuta el script (<code class="yercod">./backup.sh</code> ), y en el de la derecha se deja corriendo <code class="yercod">journalctl -f</code>  o <code class="yercod">tail -f /var/log/syslog</code>  para ver en tiempo real el efecto de cada ejecución.</p>
+</div>
+<h3 id="proyectos-y-carpetas">Proyectos y carpetas</h3>
+<p>VSCode organiza el trabajo en torno a <strong>carpetas</strong>, no en torno a archivos sueltos ni a proyectos con configuración propietaria como otros IDEs:</p>
+<ul>
+<li><strong>Abrir una carpeta</strong>: <code>Archivo → Abrir carpeta...</code> o, desde la terminal, situarse en el directorio deseado y ejecutar <code class="yercod">code .</code>. Todo lo que haya dentro de esa carpeta —incluida una posible carpeta <code>.git</code>— pasa a formar parte del "espacio de trabajo".</li>
+<li><strong>Espacios de trabajo multi-raíz</strong>: permiten tener abiertas varias carpetas no relacionadas entre sí (por ejemplo, un repositorio de scripts de Bash y otro de manifiestos de Ansible) dentro de la misma ventana, guardando esa combinación en un fichero <code>.code-workspace</code>.</li>
+<li><strong>Configuración por proyecto</strong>: la carpeta oculta <code>.vscode/</code> dentro de un proyecto permite guardar ajustes específicos (<code>settings.json</code>), tareas automatizadas (<code>tasks.json</code>) y configuraciones de depuración (<code>launch.json</code>) que solo aplican a ese proyecto, sin afectar a la configuración global del editor.</li>
+</ul>
+<h3 id="atajos-utiles">Atajos útiles</h3>
+<p>Memorizar un puñado de atajos ahorra muchísimo tiempo frente a navegar todo con el ratón. Estos son los que más se usan en el trabajo diario de scripting:</p>
+<table>
+<thead>
+<tr>
+<th>Atajo (Windows/Linux)</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+P</code></td>
+<td>Buscador rápido de archivos por nombre</td>
+</tr>
+<tr>
+<td><code>Ctrl+Mayús+P</code></td>
+<td>Paleta de comandos (acceso a cualquier función del editor)</td>
+</tr>
+<tr>
+<td><code>Ctrl+ñ</code> / <code>Ctrl+``</code></td>
+<td>Mostrar u ocultar la terminal integrada</td>
+</tr>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>Mostrar u ocultar la barra lateral</td>
+</tr>
+<tr>
+<td><code>Ctrl+Mayús+K</code></td>
+<td>Eliminar la línea actual</td>
+</tr>
+<tr>
+<td><code>Alt+↑</code> / <code>Alt+↓</code></td>
+<td>Mover la línea actual arriba o abajo</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>Seleccionar la siguiente aparición de la palabra seleccionada (edición múltiple)</td>
+</tr>
+<tr>
+<td><code>F2</code></td>
+<td>Renombrar símbolo (variable, función) en todo el archivo</td>
+</tr>
+<tr>
+<td><code>Ctrl+/</code></td>
+<td>Comentar o descomentar la línea o selección actual</td>
+</tr>
+<tr>
+<td><code>Ctrl+Mayús+E</code></td>
+<td>Ir al explorador de archivos</td>
+</tr>
+<tr>
+<td><code>Ctrl+Mayús+G</code></td>
+<td>Ir al panel de control de código fuente (Git)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">La paleta de comandos es el atajo maestro</p>
+<p>Si no recuerdas un atajo concreto, <code>Ctrl+Mayús+P</code> abre la paleta de comandos: escribiendo el nombre de la acción en lenguaje natural ("format document", "toggle terminal", "git: clone") aparecen las opciones disponibles junto con su atajo de teclado asociado, lo que además ayuda a aprenderlos con el tiempo.</p>
+</div>
+<h2 id="git-control-de-versiones">😾 Git (Control de versiones)</h2>
+<p>Git es un sistema de <strong>control de versiones</strong> diseñado para rastrear y gestionar cambios en archivos y proyectos de manera eficiente.  Este ayuda a los desarrolladores y equipos a colaborar de manera eficiente, manteniendo un registro completo de los cambios realizados en un proyecto. Es ideal para proyectos de software, pero también se puede usar para gestionar cualquier tipo de archivo, como documentos, páginas web o incluso proyectos creativos. Su uso garantiza la trazabilidad, la seguridad de los datos y la colaboración efectiva entre equipos.</p>
+<p>Todo archivo bajo control de Git pasa por <strong>tres áreas</strong> conceptuales:</p>
+<ol>
+<li><strong>Working directory</strong> (directorio de trabajo): los archivos tal y como están en el disco, con los cambios que aún no se han "marcado" para guardar.</li>
+<li><strong>Staging area</strong> (área de preparación o índice): un espacio intermedio donde se colocan, con <code class="yercod">git add</code>, los cambios que se quieren incluir en el próximo commit.</li>
+<li><strong>Repositorio local</strong>: el historial de commits ya confirmados, almacenado en la carpeta oculta <code>.git/</code>.</li>
+</ol>
+<blockquote>
+<p>A esto se añade un cuarto elemento, el <strong>repositorio remoto</strong> (GitHub o GitLab), que sincroniza el historial local con una copia compartida a la que puede acceder el resto del equipo.</p>
+</blockquote>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-01-flujo.svg" data-desc-position="bottom"><img alt="Flujo de trabajo de Git: working directory, staging area, repositorio local y remoto" src="../../assets/img/05script/git-01-flujo.svg"></a></p>
+<h3 id="primeros-pasos_1">Primeros pasos</h3>
+<p>Para instalar Git, accede a la <a href="https://git-scm.com/" target="blank">web oficial de Git</a> y descárgalo según tu sistema operativo.
+Es recomendable comenzar trabajando con la terminal aunque VSCode incluye una <strong>interfaz gráfica</strong> para Git (icono de la rama en la barra de actividad), pero entender <strong>los comandos de Git</strong> es lo que de verdad permite trabajar con soltura, tanto en VSCode como en cualquier servidor remoto donde solo se disponga de una terminal. Git es un sistema de control de versiones <strong>distribuido</strong>: cada copia local del repositorio contiene el historial completo, no solo la versión actual de los archivos, lo que permite trabajar sin conexión y sincronizar los cambios cuando se desee. Hay otras alternativas GUI como <strong>GitKraken o SourceTree</strong>.</p>
+<p>Antes de comenzar comprobar la versión instalada con: <code class="yercod">git -v</code>. Después antes del primer commit, Git necesita saber quién eres (esta información queda registrada en cada commit que hagas):</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Tu Nombre"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"tu_correo@ejemplo.com"</span>
+
+<span class="c1"># Comprobar la configuración actual</span>
+git<span class="w"> </span>config<span class="w"> </span>--list
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">--global frente a configuración local</p>
+<ul>
+<li><code>--global</code> guarda la configuración para todos los repositorios del usuario en esa máquina (se almacena en <code>~/.gitconfig</code>). Si se omite <code>--global</code>, el ajuste solo aplica al repositorio en el que se ejecuta el comando.</li>
+</ul>
+</div>
+<h3 id="repositorios">Repositorios</h3>
+<p>Un <strong>repositorio</strong> en Git es una estructura que almacena el historial completo de un proyecto: cada cambio, versión y autor queda registrado mediante commits. Puede ser local (en tu equipo) o remoto (en GitHub, GitLab, etc.), permitiendo control de versiones, trabajo con ramas paralelas y colaboración distribuida entre varios desarrolladores.</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git init</code></td>
+<td>Inicializa un repositorio Git en el directorio actual. Al ejecutar Git crea una nueva carpeta oculta llamada <strong>.git</strong>, que contiene todos los archivos y configuraciones necesarias para hacer un seguimiento del historial de versiones. A partir de este momento, el directorio se convierte en un repositorio Git, y puedes comenzar a gestionar el código dentro de él. Este es el primer paso para iniciar el control de versiones de cualquier proyecto.</td>
+</tr>
+<tr>
+<td><code>git clone &lt;url&gt;</code></td>
+<td>Descarga una copia completa de un repositorio remoto existente, con todo su historial</td>
+</tr>
+<tr>
+<td><code>git clone &lt;url&gt; &lt;carpeta&gt;</code></td>
+<td>Igual que el anterior, pero guardando el resultado en una carpeta con el nombre indicado</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear un repositorio desde cero en la carpeta actual</span>
+git<span class="w"> </span>init
+
+<span class="c1"># Clonar un repositorio ya existente en GitHub</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/usuario/proyecto.git
+</code></pre></div>
+<h3 id="el-ciclo-basico">El ciclo básico</h3>
+<p>El ciclo básico de Git consta de tres pasos: </p>
+<ol>
+<li><code class="yercod">git status</code> para ver el estado de los archivos.</li>
+<li><code class="yercod">git add</code> para preparar los cambios en el área de <em>staging</em></li>
+<li><code class="yercod">git commit</code> para guardarlos permanentemente en el historial con un mensaje descriptivo que documente la modificación realizada.</li>
+</ol>
+<blockquote>
+<p>Este ciclo se repite cada vez que se realiza un avance significativo en el proyecto.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git status</code></td>
+<td>Muestra estado actual de tu repositorio. Al ejecutarlo, Git te mostrará información sobre los archivos que han sido modificados, los que están en el área de preparación <strong>(staging area)</strong> listos para ser commiteados, y los archivos que aún no han sido añadidos. También te indicará si hay algún cambio que aún no se ha guardado en el repositorio, proporcionándote una visión clara de lo que ha ocurrido hasta el momento.</td>
+</tr>
+<tr>
+<td><code>git add &lt;archivo&gt;</code></td>
+<td>Añadir archivos individuales al área de preparación, también conocida como staging area. Esto le indica a Git que deseas incluir esos archivos modificados en el siguiente commit. Es una forma de organizar qué cambios se registrarán, permitiendo un control más detallado sobre qué se guarda en cada momento. Si tienes varios archivos modificados pero solo deseas incluir algunos en el próximo commit, puedes añadirlos todos utilizando git add.</td>
+</tr>
+<tr>
+<td><code>git add .</code></td>
+<td>Añade todos los archivos modificados al área de preparación.</td>
+</tr>
+<tr>
+<td><code>git commit -m "mensaje"</code></td>
+<td>Este comando es utilizado para guardar los cambios en el repositorio. Al ejecutar git commit, Git toma todos los archivos que han sido añadidos al área de preparación mediante git add y los almacena en el historial del repositorio, creando un nuevo commit. El mensaje que proporcionas con -m debe ser una descripción breve pero clara de los cambios realizados. Este es un paso crucial en el proceso de control de versiones, ya que permite mantener un registro detallado de cada cambio en el proyecto.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Un buen <strong>mensaje de commit</strong> no describe <em>cómo</em> se ha programado, sino <strong>por qué</strong> era necesario el cambio</p>
+<ul>
+<li>Usa el <strong>modo imperativo</strong>: "Añade validación de entrada" en lugar de "Añadido" o "Añadiendo".</li>
+<li>Mantén la primera línea corta (menos de 50-72 caracteres) y, si hace falta más contexto, añade un párrafo explicativo tras una línea en blanco.</li>
+<li>Un commit debe representar <strong>un cambio lógico coherente</strong>, no una mezcla de cosas no relacionadas: es preferible hacer varios commits pequeños que uno enorme y difícil de revisar.</li>
+<li>
+<p>Evita mensajes genéricos como "cambios", "fix" o "wip" en el historial que se va a compartir o revisar.</p>
+<table>
+<thead>
+<tr>
+<th>Mensaje poco útil</th>
+<th>Mensaje recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fix</code></td>
+<td><code>Corrige el cálculo de la fecha de expiración del certificado</code></td>
+</tr>
+<tr>
+<td><code>cambios varios</code></td>
+<td><code>Añade rotación de logs y elimina credenciales del script</code></td>
+</tr>
+<tr>
+<td><code>wip</code></td>
+<td><code>Refactoriza la función de backup para aceptar rutas remotas</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>status
+git<span class="w"> </span>add<span class="w"> </span>script_backup.sh
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Añade script de copia de seguridad diaria"</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">git add . añade también lo que no querías</p>
+<p><code>git add .</code> es cómodo, pero añade indiscriminadamente todo lo que encuentre en la carpeta: archivos temporales, credenciales sueltas, carpetas de entornos virtuales... Antes de usarlo, revisa siempre <code>git status</code> y asegúrate de tener un <code>.gitignore</code> bien configurado.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">.gitignore</p>
+<p>No todos los archivos de una carpeta deben quedar bajo control de versiones: credenciales, entornos virtuales, archivos temporales o binarios generados no aportan valor al historial y solo lo ensucian. El fichero <code>.gitignore</code>, en la raíz del repositorio, lista patrones de archivos y carpetas que Git debe ignorar.</p>
+<p></p><div class="highlight"><pre><span></span><code># .gitignore para un proyecto de scripting mixto
+*.log
+*.tmp
+__pycache__/
+venv/
+.env
+.vscode/*
+!.vscode/settings.json
+</code></pre></div>
+Si un archivo ya se añadió a Git antes de incluirlo en <code>.gitignore</code>, seguirá controlado por Git aunque coincida con un patrón del fichero. Para dejar de rastrearlo sin borrarlo del disco: <code class="yercod">git rm --cached archivo</code>.<p></p>
+</div>
+<h3 id="ramas">Ramas</h3>
+<p>Imagina que tu proyecto es un árbol, el <strong>tronco</strong> sería la rama principal (<code>main</code> o <code>master</code>) y cada <strong>rama</strong> nueva es como una rama lateral donde puedes trabajar sin tocar el código principal (línea de desarrollo independiente). Esta rama es una <strong>copia</strong> del estado actual del proyecto y puedes trabajar ahí sin afectar otras ramas. Se usa para:</p>
+<ul>
+<li>Probar nuevas ideas o funciones sin romper el código que ya funciona.</li>
+<li>Trabajar en equipo, donde cada persona trabaja en su propia rama.</li>
+<li>Organizar el desarrollo, separando tareas como corregir errores o añadir mejoras.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-02-ramas.svg" data-desc-position="bottom"><img alt="Creación y fusión de una rama feature sobre main" src="../../assets/img/05script/git-02-ramas.svg"></a></p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git branch</code></td>
+<td>Lista las ramas existentes en el repositorio local</td>
+</tr>
+<tr>
+<td><code>git branch &lt;nombre&gt;</code></td>
+<td>Crea una rama nueva a partir del commit actual, sin cambiarse a ella</td>
+</tr>
+<tr>
+<td><code>git branch -d &lt;nombre&gt;</code></td>
+<td>Elimina una rama ya fusionada</td>
+</tr>
+<tr>
+<td><code>git branch -D &lt;nombre&gt;</code></td>
+<td>Fuerza la eliminación de una rama, aunque tenga cambios sin fusionar</td>
+</tr>
+<tr>
+<td><code>git branch -m nuevo_nombre</code></td>
+<td>Renombrar una rama</td>
+</tr>
+<tr>
+<td><code>git checkout &lt;nombre&gt;</code></td>
+<td>Cambia a la rama indicada (comando clásico, también sirve para restaurar archivos)</td>
+</tr>
+<tr>
+<td><code>git switch &lt;nombre&gt;</code></td>
+<td>Cambia a la rama indicada (comando moderno, pensado exclusivamente para ramas)</td>
+</tr>
+<tr>
+<td><code>git switch -c &lt;nombre&gt;</code></td>
+<td>Crea la rama y se cambia a ella en un solo paso</td>
+</tr>
+<tr>
+<td><code>git merge nombre_rama</code></td>
+<td>Fusiona la rama indicada con la rama actual.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resolucion-de-conflictos">Resolución de conflictos</h3>
+<p><code class="yercod">git merge</code> integra los cambios de una rama en la rama actual. </p>
+<p>Si las modificaciones están en líneas diferentes del mismo archivo, Git puede fusionar sin conflicto pero si ambas ramas han modificado las mismas líneas de un mismo archivo, Git no puede decidir automáticamente qué versión conservar y se produce un <strong>conflicto de fusión</strong>, Git marca directamente en el archivo afectado las dos versiones en pugna:</p>
+<div class="highlight"><pre><span></span><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+echo "Versión de la rama main"
+=======
+echo "Versión de la rama feature-login"
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-login
+</code></pre></div>
+<p>Pasos para resolverlo:</p>
+<ol>
+<li>Abrir el archivo en VSCode: la extensión de Git integrada resalta el conflicto y ofrece botones para "Aceptar cambio actual", "Aceptar cambio entrante" o "Aceptar ambos".</li>
+<li>Editar manualmente el archivo hasta dejar el contenido final correcto, eliminando las marcas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+<li>Marcar el conflicto como resuelto añadiéndolo al área de preparación: <code>git add archivo_en_conflicto.sh</code>.</li>
+<li>Completar la fusión con <code>git commit</code> (Git ya propone un mensaje por defecto para el commit de fusión).</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Los conflictos no son un error, son una pregunta</p>
+<p>Un conflicto de fusión no significa que algo se haya roto: significa que Git necesita que una persona decida entre dos cambios legítimos que no puede reconciliar por sí solo. Cuanto más pequeños y frecuentes sean los commits, y más se sincronice con <code>git pull</code> antes de empezar a trabajar, menos conflictos —y más sencillos— aparecerán.</p>
+</div>
+<h3 id="repositorio-remoto">Repositorio remoto</h3>
+<p>Un <strong>repositorio remoto</strong> es una copia del proyecto alojada en un servidor externo, como GitHub o GitLab, que permite colaborar con otras personas, compartir el código y mantener una copia de seguridad fuera del equipo local. Facilita sincronizar cambios entre distintos colaboradores y dispositivos, centralizando el historial del proyecto.</p>
+<ul>
+<li><strong><code>origin</code></strong> es el nombre por defecto que Git asigna al repositorio remoto principal cuando se clona o se vincula un proyecto. No es una palabra reservada, sino una convención: al hacer <code>git clone</code>, Git crea automáticamente ese alias apuntando a la URL remota, facilitando comandos como <code>git push origin main</code> sin escribir la URL completa cada vez.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git remote -v</code></td>
+<td>Muestra las URL remotas configuradas (normalmente <code>origin</code>)</td>
+</tr>
+<tr>
+<td><code>git remote add origin &lt;url&gt;</code></td>
+<td>Asocia un repositorio remoto a un repositorio local recién creado con <code>git init</code></td>
+</tr>
+<tr>
+<td><code>git push</code></td>
+<td>Sube los commits locales al repositorio remoto</td>
+</tr>
+<tr>
+<td><code>git push -u origin &lt;nombre rama&gt;</code></td>
+<td>Sube la rama y establece el seguimiento (<em>upstream</em>), necesario la <strong>primera vez</strong> que se sube una rama nueva</td>
+</tr>
+<tr>
+<td><code>git push origin --delete nombre_rama</code></td>
+<td>Eliminar una rama remota</td>
+</tr>
+<tr>
+<td><code>git pull</code></td>
+<td>Descarga los cambios del remoto y los fusiona en la rama local (equivale a <code>git fetch</code> + <code>git merge</code>)</td>
+</tr>
+<tr>
+<td><code>git pull origin nombre_rama</code></td>
+<td>Traer y fusionar cambios de una rama remota a tu rama local. (<strong>Descargar</strong>)</td>
+</tr>
+<tr>
+<td><code>git fetch</code></td>
+<td>Descarga los cambios del remoto sin fusionarlos todavía, para poder revisarlos antes</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-03-origin.jpg" data-desc-position="bottom"><img alt="Otigin" src="../../assets/img/05script/git-03-origin.jpg"></a></p>
+<div class="admonition warning">
+<p class="admonition-title">Cuidado con git push --force</p>
+<p><code>git push --force</code> sobrescribe el historial remoto con el historial local, <strong>incluso si eso hace desaparecer commits que ya habían subido otras personas</strong>. Nunca debe usarse sobre una rama compartida sin avisar al equipo. La alternativa más segura es <code>git push --force-with-lease</code>, que aborta la operación si detecta que el remoto tiene commits que tu copia local no conoce todavía.</p>
+</div>
+<h3 id="historial">Historial</h3>
+<p>El <strong>historial de Git</strong> registra todos los commits realizados en un proyecto, permitiendo consultar quién hizo cada cambio, cuándo y por qué. Sirve para rastrear la evolución del código, recuperar versiones anteriores, identificar el origen de errores y entender el contexto de las decisiones tomadas a lo largo del desarrollo.</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git log</code></td>
+<td>Muestra el historial completo de commits (autor, fecha, mensaje, hash)</td>
+</tr>
+<tr>
+<td><code>git log --oneline</code></td>
+<td>Una línea por commit, con el hash abreviado y el mensaje</td>
+</tr>
+<tr>
+<td><code>git log --graph --oneline --all</code></td>
+<td>Representación visual en texto de ramas y fusiones</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>Muestra las diferencias entre el directorio de trabajo y el área de preparación</td>
+</tr>
+<tr>
+<td><code>git diff --staged</code></td>
+<td>Muestra las diferencias ya preparadas para el próximo commit</td>
+</tr>
+<tr>
+<td><code>git show &lt;hash&gt;</code></td>
+<td>Muestra el contenido completo de un commit concreto</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Creación de alias que muestra los logs en formato de árbol</p>
+<p><code class="yercod">git config --global alias.tree "log --all --graph --pretty=oneline --decorate --oneline"</code></p>
+<ul>
+<li><code>--all</code>: Muestra el historial de todas las ramas, incluidas las ramas remotas y locales.</li>
+<li><code>--graph</code>: Representa gráficamente el historial de confirmaciones como un árbol con líneas que conectan las ramas y fusiones.</li>
+<li><code>--pretty=oneline</code>: Muestra cada commit en una sola línea, lo que proporciona un resumen compacto del historial.</li>
+<li><code>--decorate</code>: Añade información adicional sobre las referencias, como nombres de ramas o etiquetas, asociadas a cada commit.</li>
+<li><code>--oneline</code>: Es un atajo para combinar --pretty=oneline y limitar la salida del identificador de cada commit a su abreviatura.
+Para ejecutarlo, usa: <code class="yercod">git tree</code></li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-04-alias.png" data-desc-position="bottom"><img alt="Alias" src="../../assets/img/05script/git-04-alias.png"></a></p>
+</div>
+<h2 id="github">🐺 GITHUB</h2>
+<p>Plataforma de desarrollo colaborativo basada en la web que utiliza Git como sistema de control de versiones. Permite a los desarrolladores almacenar y gestionar proyectos de software, así como colaborar con otros usuarios. GitHub ofrece un entorno donde los usuarios pueden trabajar de manera conjunta en proyectos de código abierto y privado, facilitando la administración de versiones de código y el seguimiento de cambios realizados en el repositorio a lo largo del tiempo.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-05.png" data-desc-position="bottom"><img alt="Github" src="../../assets/img/05script/git-05.png"></a></p>
+<ol>
+<li><code>Overview</code>: <strong>Visión general</strong> del repositorio o perfil. En ella, puedes encontrar información importante sobre el proyecto, como una descripción, estadísticas clave, como el número de commits recientes, contribuciones y otros detalles relevantes. También puedes ver información de la comunidad y actividades recientes, como pull requests abiertos o cerrados, y issues.</li>
+<li><code>Repositories</code>: <strong>Lista de todos los repositorios</strong> que el usuario ha creado o en los que tiene participación. Cada repositorio se presenta con su nombre, una breve descripción, el estado actual (activo o archivado) y la fecha del último commit. Desde esta pestaña, los usuarios pueden acceder directamente a cualquiera de sus repositorios para explorar el código, realizar modificaciones o colaborar con otros.</li>
+<li><code>Projects</code>: <strong>Gestionan los proyectos</strong> dentro de GitHub. Los proyectos son tableros o listas de tareas que ayudan a organizar y seguir el progreso de un conjunto de issues o tareas dentro de un repositorio. Aquí, puedes crear un nuevo proyecto, añadir columnas (como "Pendiente", "En progreso", "Finalizado") y asociar issues o pull requests a esas columnas, facilitando así el seguimiento y la colaboración en tareas específicas.</li>
+<li><code>Packages</code>: <strong>Gestionar los paquetes o dependencias</strong> que se utilizan dentro del repositorio o que el repositorio mismo publica. GitHub permite almacenar y compartir paquetes de software, como bibliotecas o herramientas, mediante GitHub Packages. Esta sección ofrece un espacio para ver y gestionar los paquetes publicados, incluyendo las versiones disponibles y las configuraciones relacionadas con su uso.</li>
+<li><code>Stars</code>: <strong>Repositorios que te gustan</strong> o encuentras útiles. Al dar una estrella a un repositorio, lo estás marcando como favorito y lo añades a tu lista de repositorios favoritos. Esto sirve como una herramienta de organización personal, pero también permite a otros ver qué proyectos has encontrado interesantes o valiosos. Los repositorios con muchas estrellas suelen ser populares y bien valorados dentro de la comunidad de GitHub.</li>
+</ol>
+<h3 id="repositorios-remoto">Repositorios remoto</h3>
+<p>Un <strong>repositorio</strong> es un espacio donde se guarda el código de un proyecto junto con su historial de cambios. Gracias a los repositorios, podemos llevar un control detallado de todas las versiones y colaborar con otras personas de forma ordenada. Una vez creada la cuenta en GitHub, puedes crear todos los repositorios que desees, tanto públicos como privados.</p>
+<table>
+<thead>
+<tr>
+<th>Repositorio</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repositorio Local</td>
+<td>Se encuentra en tu propio ordenador. Aquí realizas tus cambios, añades archivos y guardas las versiones usando Git. Puedes trabajar sin conexión, y una vez que quieras compartir tu trabajo, sincronizas los cambios con un repositorio remoto.</td>
+</tr>
+<tr>
+<td>Repositorio Remoto</td>
+<td>Está alojado en un servidor, por ejemplo, en GitHub. Sirve para compartir tu proyecto con otros usuarios o para tener una copia de seguridad en la nube. Se conecta con el repositorio local para subir y descargar cambios.</td>
+</tr>
+<tr>
+<td>Repositorio Principal</td>
+<td>Con el mismo nombre que tu cuenta tiene un propósito especial, ya que puede ser utilizado para alojar una página web personal usando <strong>GitHub Pages</strong>, y también sirve como punto de referencia para otros proyectos que puedas tener. Además, cualquier cambio realizado en este repositorio principal se reflejará directamente en tu perfil de GitHub, lo que lo convierte en una vitrina de tu trabajo y contribuciones.  <code>https://github.com/&lt;usuario&gt;/&lt;repositorio&gt;</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>sincronización</strong> entre un repositorio local y su contraparte en GitHub permite mantener actualizados los cambios realizados en tu máquina con la copia almacenada en la nube, garantizando así un flujo de trabajo continuo y seguro. Este proceso facilita la colaboración entre varios desarrolladores, ya que todos pueden acceder a la última versión del proyecto y aportar modificaciones de forma coordinada. Además, ofrece ventajas como el respaldo automático de tu trabajo, la posibilidad de trabajar desde diferentes dispositivos sin perder cambios, el control de versiones para recuperar estados anteriores y la integración con herramientas de desarrollo.</p>
+<p>Pasos básicos para trabajar de manera eficiente:</p>
+<hr>
+<p><strong>⇒ 01 GITHUB</strong></p>
+<p>Crear una cuenta en GitHub es un proceso sencillo que te permite acceder a la plataforma de control de versiones y almacenamiento de código en la nube. Para ello, basta con visitar <a href="https://github.com" target="_blank">https://github.com</a> y pulsar en "<strong>Sign up</strong>", donde deberás proporcionar un nombre de usuario único, un correo electrónico válido y una contraseña segura. Una vez completados estos datos, GitHub te guiará a través de la verificación de tu correo electrónico y la configuración inicial de tu perfil, incluyendo opciones como la visibilidad de tus repositorios y preferencias de notificación. Tener una cuenta en GitHub te da acceso a crear repositorios, colaborar en proyectos de otros usuarios y utilizar herramientas de gestión de versiones de manera eficiente.</p>
+<hr>
+<p><strong>⇒ 02 AUTETIFICACIÓN SSH</strong></p>
+<p>La autenticación SSH con GitHub te permite establecer una conexión segura entre tu máquina local y GitHub sin necesidad de introducir tu usuario y contraseña en cada operación. Esto se logra mediante un par de claves criptográficas, una privada que se guarda en tu equipo y una pública que se asocia a tu cuenta de GitHub.</p>
+<ol>
+<li>Para comenzar, primero verifica si ya tienes un par de claves SSH existente ejecutando el comando <code class="yercod">ls -al ~/.ssh</code>. Si en la salida aparecen archivos como <code>id_ed25519</code> y <code>id_ed25519.pub</code> significa que ya tienes una clave generada y podrías reutilizarla. En caso contrario, debes generar un nuevo par de claves con <code class="yercod">ssh-keygen -t ed25519 -C "tuemail@example.com"</code>. Este comando crea una clave segura y la asocia a tu correo electrónico de GitHub. </li>
+<li>Una vez creada, es necesario añadir la clave privada al agente SSH para que se gestione automáticamente. Inicia el agente con <code class="yercod">eval "$(ssh-agent -s)"</code> y añade tu clave con <code class="yercod">ssh-add ~/.ssh/id_ed25519</code>. Después de esto, obtén el contenido de la clave pública usando <code class="yercod">cat ~/.ssh/id_ed25519.pub</code> y copia todo el texto que se muestre, que empezará por <code>ssh-ed25519</code>.</li>
+<li>El siguiente paso es registrar esta clave pública en GitHub. Para ello, inicia sesión, entra en <strong>Settings → SSH and GPG keys</strong>, pulsa en <strong>New SSH key</strong>, escribe un título descriptivo para identificar el dispositivo y pega la clave pública en el campo correspondiente. Guarda los cambios y la clave quedará vinculada a tu cuenta.</li>
+<li>Para verificar que la conexión funciona correctamente, utiliza <code class="yercod">ssh -T git@github.com</code>. Si todo está bien, recibirás un mensaje indicando que la autenticación fue exitosa.</li>
+</ol>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-06.jpg" data-desc-position="bottom"><img alt="Github" src="../../assets/img/05script/git-06.jpg"></a></p>
+<p>Para más información y detalles, consulta la documentación oficial de GitHub sobre <a href="https://docs.github.com/es/authentication/connecting-to-github-with-ssh" target="_blank">configuración de SSH</a> </p>
+<hr>
+<p><strong>⇒ 03 SINCRONIZAR REPOSITORIOS</strong></p>
+<p>Cuando ya tienes un repositorio local (<strong>con algún commit</strong>) y deseas subirlo a GitHub, primero es necesario crear un repositorio vacío en GitHub. Esto se hace desde la plataforma web pulsando en <strong>New repository</strong>, eligiendo un nombre para el repositorio y asegurándote de <strong>no</strong> añadir archivos como README, <code>.gitignore</code> o licencia si ya existen en tu proyecto local, para evitar conflictos. Una vez creado el repositorio en GitHub, obtienes la URL del mismo, esta se utiliza para enlazar tu repositorio local con el remoto mediante el comando <code>git remote add origin &lt;URL-del-repositorio&gt;</code>. </p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-07.jpg" data-desc-position="bottom"><img alt="Github" src="../../assets/img/05script/git-07.jpg"></a></p>
+<p>A partir de este momento,asegúrate de que tu rama principal se llama <code>main</code> con <code class="yercod">git branch -M main</code> y sube el contenido con <code class="yercod">git push -u origin main</code>. Es recomendable usar <code class="yercod">git push -u origin main</code> la primera vez para establecer la relación entre la rama local y la remota. Después de eso, podrás usar simplemente <code class="yercod">git push</code> para actualizar los cambios.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-08.jpg" data-desc-position="bottom"><img alt="Github" src="../../assets/img/05script/git-08.jpg"></a></p>
+<hr>
+<p><strong>RESUMEN</strong></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/05script/git-09.jpg" data-desc-position="bottom"><img alt="Github" src="../../assets/img/05script/git-09.jpg"></a></p>
+<h3 id="flujo-colaborativo">Flujo colaborativo</h3>
+<p>Conjunto de prácticas y herramientas que permiten a los desarrolladores trabajar de manera conjunta y eficiente en un proyecto, gestionando versiones, contribuciones y revisiones de código de forma ordenada. GitHub, al ser una plataforma basada en Git, facilita la colaboración en proyectos a través de repositorios remotos y diversas funcionalidades como pull requests, branches y revisiones de código. <strong>Procedimiento:</strong></p>
+<p><strong>1. Haz un "fork" del repositorio</strong> </p>
+<blockquote>
+<p>Significa crear una copia del repositorio original bajo tu cuenta de GitHub. Esto te permite experimentar y hacer cambios en el código sin modificar el proyecto original. Es un paso necesario para contribuir a proyectos de código abierto donde no tienes permisos directos de escritura.</p>
+</blockquote>
+<p><strong>2. Clona el fork en local</strong> </p>
+<blockquote>
+<p>Una vez que has hecho un fork, el siguiente paso es clonar el repositorio a tu máquina local con el comando <code class="yercod">git clone</code>. Esto crea una copia exacta de tu repositorio en tu computadora, permitiéndote realizar cambios de manera local antes de enviarlos de vuelta a GitHub.</p>
+</blockquote>
+<p><strong>3. Realiza cambios, añade commits y sube los cambios con <code>git push</code></strong></p>
+<blockquote>
+<p>Después de clonar el repositorio, puedes hacer cambios en el código. Una vez realizados los cambios, debes hacer un commit para guardarlos en tu repositorio local. Luego, subes esos cambios al repositorio remoto (tu fork) utilizando <code class="yercod">git push</code>. Esto permite que tus modificaciones estén disponibles en GitHub.</p>
+</blockquote>
+<p><strong>4. Sincroniza el fork si hay cambios en el repositorio original</strong></p>
+<blockquote>
+<p>Si otros colaboradores han realizado cambios en el repositorio original después de hacer tu fork, es importante mantener tu fork actualizado. Esto se hace sincronizando tu fork con el repositorio original mediante comandos como <code class="yercod">git fetch</code> y <code class="yercod">git merge</code>, para que puedas integrar los cambios más recientes antes de enviar tu <strong>pull request</strong>.</p>
+</blockquote>
+<p><strong>5. Propón cambios mediante un "pull request"</strong></p>
+<blockquote>
+<p>Una vez que hayas subido tus cambios a tu repositorio remoto, el siguiente paso es abrir un pull request (PR) en el repositorio original. Esto es una solicitud para que el propietario del repositorio revise tus cambios y los integre en el proyecto principal. El PR facilita la discusión y revisión del código propuesto.</p>
+</blockquote>
+<p><strong>6. El propietario del repositorio original revisará y aceptará los cambios</strong></p>
+<blockquote>
+<p>El propietario o mantenedor del repositorio original revisará los cambios propuestos en el pull request. Si todo está correcto, lo fusionará con la rama principal del repositorio. Si es necesario, puede pedir modificaciones adicionales antes de aceptar el PR. Una vez aprobado, los cambios se incorporan oficialmente al proyecto.</p>
+</blockquote>
+<h3 id="herramientas">Herramientas</h3>
+<p><strong>GUI</strong></p>
+<p>Permiten gestionar repositorios sin usar exclusivamente la línea de comandos. Facilitan tareas como crear commits, revisar el historial, resolver conflictos, manejar ramas y sincronizar con repositorios remotos en GitHub mediante botones, menús y paneles interactivos. Ejemplos populares incluyen GitHub Desktop, Sourcetree, GitKraken o la integración gráfica que ofrecen editores como Visual Studio Code. Estas herramientas son útiles para quienes están empezando o prefieren una experiencia visual, aunque conocer los comandos básicos de Git sigue siendo esencial para un control total del flujo de trabajo.</p>
+<ul>
+<li><a href="https://desktop.github.com/" target="_blank">GitHub Desktop</a> </li>
+<li><a href="https://www.gitkraken.com/" target="_blank">GitKraken</a> </li>
+<li><a href="https://www.sourcetreeapp.com/" target="_blank">SourceTree</a> </li>
+</ul>
+<h3 id="github-pages">GitHub Pages</h3>
+<p>Servicio gratuito que permite crear y alojar sitios web directamente desde un repositorio de GitHub. Es ideal para proyectos personales, blogs, portafolios y documentación técnica. Basta con configurar un repositorio con archivos estáticos (HTML, CSS, JavaScript) para que GitHub Pages aloje el contenido en línea, generando una URL bajo el dominio <strong><code>github.io</code></strong>. La publicación se gestiona desde el propio repositorio, lo que facilita el control de versiones, la colaboración y la automatización del despliegue.</p>
+<p><strong>Generadores de sitios estáticos compatibles</strong></p>
+<blockquote>
+<p><strong>Hugo</strong>: generador de sitios estáticos de código abierto que crea sitios web rápidos y eficientes a partir de contenido escrito en Markdown. Convierte esos archivos en páginas HTML completamente funcionales, destacando por su gran velocidad de compilación. Se usa habitualmente para blogs, documentación de proyectos y sitios personales, y se integra fácilmente con GitHub Pages, sin necesidad de servidores complejos: solo hay que generar los archivos estáticos y subirlos al repositorio.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>MkDocs</strong>: generador de sitios estáticos escrito en Python, orientado específicamente a documentación técnica a partir de archivos Markdown. Es muy popular junto al tema <strong>Material for MkDocs</strong>, y también se despliega sin problemas en GitHub Pages.</p>
+</blockquote>
+<h3 id="github-actions">GitHub Actions</h3>
+<p>Plataforma de integración y entrega continua (CI/CD) integrada directamente en GitHub que permite <strong>automatizar</strong> flujos de trabajo a partir de eventos del repositorio, como un <code>push</code>, un <code>pull request</code> o la creación de una nueva etiqueta. Cada flujo de trabajo se define mediante un archivo YAML ubicado en <strong><code>.github/workflows/</code></strong>, donde se especifican los eventos que lo activan (<strong><code>on</code></strong>) y la secuencia de tareas (<strong><code>jobs</code></strong>) que se ejecutan en máquinas virtuales proporcionadas por GitHub (runners).</p>
+<p>En el contexto de sitios estáticos, GitHub Actions es especialmente útil para automatizar el proceso de compilación y despliegue: cada vez que se sube un cambio al repositorio, un workflow puede instalar las dependencias necesarias, generar el sitio (por ejemplo, con <code>mkdocs build</code> o <code>hugo</code>) y publicar el resultado automáticamente en GitHub Pages, sin necesidad de hacerlo manualmente. Esto permite mantener la documentación siempre actualizada con cada commit, integrando control de versiones y publicación en un mismo flujo.</p>
+<p>Un ejemplo típico de workflow para desplegar un sitio MkDocs sería:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy MkDocs</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.x</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install mkdocs-material</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdocs gh-deploy --force</span>
+</code></pre></div>
+<h2 id="markdown">📄 Markdown</h2>
+<p>Lenguaje de marcado ligero diseñado para ser fácil de leer y escribir, utilizado principalmente para convertir texto plano en contenido estructurado que se puede convertir a HTML. Su sintaxis es simple y consiste en una serie de símbolos y caracteres especiales que permiten dar formato al texto, como encabezados, negritas, listas, enlaces, imágenes, entre otros, sin perder la legibilidad del texto original.</p>
+<p>Su uso es muy común en plataformas de colaboración en línea, como GitHub, Reddit, y muchas otras, donde los usuarios pueden escribir documentos, comentarios o documentación técnica de manera sencilla y efectiva. Los desarrolladores lo utilizan para escribir archivos README, documentación de proyectos o incluso para redactar mensajes en foros y blogs. La principal ventaja de Markdown es que, aunque se usa para generar contenido con formato, el texto es legible y fácilmente editable como texto plano. Además, se puede convertir de manera eficiente a otros formatos, como HTML, lo que lo convierte en una herramienta muy popular para crear contenido web.</p>
+<p><strong>SINTAXIS BÁSICAS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Markdown Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Heading</strong></td>
+<td><code># H1</code> <code>## H2</code> <code>### H3</code></td>
+</tr>
+<tr>
+<td><strong>Bold</strong></td>
+<td><code>**bold text**</code></td>
+</tr>
+<tr>
+<td><strong>Italic</strong></td>
+<td><code>*italicized text*</code></td>
+</tr>
+<tr>
+<td><strong>Blockquote</strong></td>
+<td><code>&gt; blockquote</code></td>
+</tr>
+<tr>
+<td><strong>Lista ordenada</strong></td>
+<td><code>1. First item</code><br><code>2. Second item</code><br><code>3. Third item</code></td>
+</tr>
+<tr>
+<td><strong>Lista desordenada</strong></td>
+<td><code>- First item</code><br><code>- Second item</code><br><code>- Third item</code></td>
+</tr>
+<tr>
+<td><strong>Código</strong></td>
+<td><code>`code`</code></td>
+</tr>
+<tr>
+<td><strong>Línea Horizontal</strong></td>
+<td><code>---</code></td>
+</tr>
+<tr>
+<td><strong>Enlace</strong></td>
+<td><code>[title](https://www.example.com)</code></td>
+</tr>
+<tr>
+<td><strong>Imagen</strong></td>
+<td><code>![alt text](image.jpg)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li><a href="https://git-scm.com/" target="_blank">Web oficial Git</a> </li>
+<li><a href="https://git-scm.com/book/es/v2" target="_blank">Libro de Git en español</a> </li>
+<li><a href="https://docs.github.com/" target="_blank">Documentación de GitHub</a> </li>
+<li><a href="https://docs.github.com/es/authentication/connecting-to-github-with-ssh" target="_blank">Configuración SSH</a> </li>
+<li><a href="https://pages.github.com/" target="_blank">GitHub Pages</a> </li>
+<li><a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> </li>
+<li><a href="https://github.com/mouredev/" target="_blank">Retos de programación de la comunidad</a> </li>
+<li><a href="https://docs.github.com/es/get-started/writing-on-github" target="_blank">Guía de Markdown en GitHub</a> </li>
+<li><a href="https://markdown.es/sintaxis-markdown/" target="_blank">Sintaxis de Markdown</a> </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
