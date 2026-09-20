@@ -4,9 +4,10 @@
     Diseñar, desplegar y documentar un servicio de directorio completo, aplicando todo el ciclo visto en el temario: instalación de un controlador de dominio, creación del esquema (OUs, usuarios, grupos), configuración de directivas de grupo (GPO), integración de un cliente Linux mediante los mecanismos de autenticación centralizada, y una segunda vía de despliegue basada en OpenLDAP/Samba4 sobre Linux. La práctica se estructura en **10 apartados obligatorios**, que en conjunto cubren los diez criterios de evaluación de la UT (a-j).
 
 !!! info "Materiales"
-    - Acceso a AWS Academy (o, alternativamente, VirtualBox/VMware con máquinas virtuales propias).
-    - Una imagen de **Windows Server** (2019/2022) para el controlador de dominio y un segundo Windows Server o Windows 10/11 como cliente.
-    - Una imagen de **Ubuntu Server/Desktop 24.04** para el cliente Linux.
+    - Acceso a AWS Academy 
+    - VMware con máquinas virtuales propias.
+    - Una imagen de **Windows Server** (2025) para el controlador de dominio y un segundo Windows Server o Windows 10/11 como cliente.
+    - Una imagen de **Ubuntu Server/Desktop 26** para Linux.
     - Cliente RDP (Escritorio remoto) y un cliente SSH (por ejemplo, Termius o el propio `ssh` de terminal).
     - Editor de texto en el cliente Linux para trabajar con ficheros LDIF (`vim` o similar).
 
