@@ -4,7 +4,7 @@
 
 ## Bienvenida
 
-Este bloque de apuntes corresponde al módulo profesional **Administración de Sistemas Operativos** (código **0374**, 8 créditos ECTS, 75 horas) del **Ciclo Formativo de Grado Superior en Administración de Sistemas Informáticos en Red (ASIR)**, regulado por el [Real Decreto 1629/2009, de 30 de octubre](https://www.boe.es/eli/es/rd/2009/10/30/1629){:target="_blank"}.
+Este bloque de apuntes corresponde al módulo profesional **Administración de Sistemas Operativos** del **Ciclo Formativo de Grado Superior en Administración de Sistemas Informáticos en Red (ASIR)**, regulado por el [Real Decreto 1629/2009, de 30 de octubre](https://www.boe.es/eli/es/rd/2009/10/30/1629){:target="_blank"}.
 
 A lo largo del módulo vamos a responder a una pregunta muy concreta: **¿cómo se administra, de principio a fin, el sistema operativo de una organización en red?** Para contestarla recorreremos todo el ciclo de la administración de sistemas: cómo se centraliza la gestión de usuarios y equipos mediante un servicio de directorio, cómo se controlan los procesos que se ejecutan en el sistema, cómo se automatizan las tareas repetitivas, cómo se administra un equipo en remoto con seguridad, cómo se gestionan los servidores de impresión, cómo se integran sistemas operativos libres y propietarios en un mismo escenario, y cómo se automatiza todo ello mediante lenguajes de guiones («scripting»).
 
@@ -22,17 +22,10 @@ El currículo oficial define **siete resultados de aprendizaje (RA)**, y en este
 | **UT6** | Integra sistemas operativos libres y propietarios, justificando y garantizando su interoperabilidad | NFS, Samba, contenedores (Docker/Podman), Kubernetes, clustering |
 | **UT7** | Utiliza lenguajes de guiones en sistemas operativos, describiendo su aplicación y administrando servicios | Depuración y adaptación de scripts, administración de cuentas/procesos/servicios mediante Bash y PowerShell |
 
-Para cada UT encontrarás siempre **tres documentos**:
+Para cada UT encontrarás siempre:
 
-1. **Temario**: el contenido teórico, con el nivel de un ciclo formativo de grado superior. No es una simple definición de conceptos: se explica el porqué de cada tecnología, sus alternativas y, cuando corresponde, la equivalencia entre el mundo Windows y el mundo GNU/Linux, ya que este módulo trabaja siempre ambos sistemas operativos en paralelo.
+1. **Temario**: contenido teórico, con el nivel de un ciclo formativo de grado superior. No es una simple definición de conceptos: se explica el porqué de cada tecnología, sus alternativas y, cuando corresponde, la equivalencia entre el mundo Windows y el mundo GNU/Linux, ya que este módulo trabaja siempre ambos sistemas operativos en paralelo.
 2. **Práctica**: una actividad guiada de **10 apartados obligatorios** para aplicar lo aprendido, con un enunciado, unos pasos orientativos y unos entregables concretos.
+<!--
 3. **Rúbrica**: los criterios con los que se evalúa la práctica y, por extensión, el grado de consecución del RA, siempre alineados con los criterios de evaluación oficiales del Real Decreto.
-
-## Cómo aprovechar estos apuntes
-
-Estos apuntes están pensados para leerse de forma secuencial (UT1 → UT7), aunque cada temario puede consultarse también de forma puntual como referencia técnica durante las prácticas de aula. La UT7 (scripting) se apoya en los fundamentos de Bash y Git ya explicados en la sección de [Scripting](../05scripting/05bash-estructuras.md), para evitar duplicar contenido: aquí el foco está en la aplicación del scripting a tareas concretas de administración de sistemas.
-
-Al final del bloque encontrarás una página de **recursos** con enlaces externos, la prueba de nivel y una chuleta de comandos Linux, para quien quiera repasar o profundizar más allá del temario.
-
-!!! note "Sobre las fuentes de este material"
-    Estos apuntes se han construido reorganizando y ampliando el material de clase real del módulo (presentaciones, enunciados de prácticas, recuperaciones y soluciones de los cursos 2024/25 y 2025/26), contrastado con el texto oficial del Real Decreto 1629/2009. Donde el contenido original de clase no cubría algún criterio de evaluación con suficiente detalle, se ha ampliado con documentación oficial de los fabricantes y proyectos citados (Microsoft, CUPS, WireGuard, Docker, Kubernetes...).
+-->
