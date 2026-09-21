@@ -11,9 +11,7 @@
     - Cliente RDP (Escritorio remoto) y un cliente SSH (por ejemplo, Termius o el propio `ssh` de terminal).
     - Editor de texto en el cliente Linux para trabajar con ficheros LDIF (`vim` o similar).
 
-## **Apartados**
-
-!!! bug "Implementación de un Dominio Windows en AWS"
+## **Implementación de un Dominio Windows en AWS**
 
 ### 1. Creación y configuración de las instancias.
 
@@ -49,7 +47,7 @@ Crear un script PowerShell que incluya un menú con las siguientes opciones:
 
 En este apartado se ha de poner enlace del código comentado del script que estará en el repositorio de github del módulo y capturas de ejemplo de la ejecución de cada opción.
 
-!!! bug "Implementación de un Dominio LDAP"
+## **Implementación de un Dominio LDAP**
 
 ### 6.	Creación de la estructura LDAP mediante LDIF.
 Crear mediante archivos `LDIF` la estructura base del dominio `nombre2026.ldap`. Esto incluye generar un árbol con dos **unidades organizativas** principales (Alumnado y Profesorado) y mostrar los archivos LDIF utilizando el editor de texto **vim**. 
@@ -80,8 +78,7 @@ Se tendrán que realizar todas las configuraciones necesarias en una máquina Ub
 1.	Primero, deberá iniciarse sesión en modo consola, explicando qué terminal se ha utilizado y el motivo. 
 2.	Posteriormente, se verificará el inicio de sesión en modo gráfico creando un archivo dentro del directorio personal del usuario del dominio, comprobando así que el home se crea correctamente y que la autenticación LDAP funciona en ambos entornos.
 
-!!! bug "Implementación de un Dominio Samba en Ubuntu"
-
+## **Implementación de un Dominio Samba en Ubuntu**
 
 ### 10.	Controlador de Dominio con Samba y unión de un Windows.
 Configurar un servidor Ubuntu como Controlador de Dominio Samba:
