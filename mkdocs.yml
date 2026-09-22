@@ -99,8 +99,8 @@ nav:
    #      - Recursos: 12biu/99-recursos.md
    - DJK:
         - Introducción: 13djk/00-introduccion.md
-   #      - UT01 Temario: 13djk/ut01-digitalizacion.md
-   #      - UT01 Práctica: 13djk/ut01-practica.md
+        #      - UT01 Temario: 13djk/ut01-digitalizacion.md
+        - UT01 Práctica: 13djk/ut01-practica.md
    #      - UT01 Rúbrica: 13djk/ut01-rubrica.md
    #      - UT02 Temario: 13djk/ut02-thd.md
    #      - UT02 Práctica: 13djk/ut02-practica.md
@@ -120,7 +120,13 @@ nav:
    #      - Recursos: 13djk/recursos.md
 
 plugins:
+   - meta
    - glightbox
+   - encryptcontent:
+        password_inventory:
+           add: !ENV PASS_ADD
+           biu: !ENV PASS_BIU
+           djk: !ENV PASS_DJK
 
 extra_css:
    - assets/css/extra.css

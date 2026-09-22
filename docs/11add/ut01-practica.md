@@ -26,7 +26,7 @@ Cada máquina debe crearse en la misma VPC, con subred adecuada y con conectivid
 ### 2.	Configuración del servidor Windows, *Dominio y DNS*
 En la instancia `WSnombreDC`, instalar el rol **Servicios de dominio de Active Directory (AD DS)** y se promover a controlador de dominio. El dominio raíz tendrá el formato: `nombre.aws`. Tras la instalación, se comprobará mediante símbolo de sistema que el sistema pertenece al dominio. Además, deberá configurarse una zona de búsqueda inversa en el servidor DNS y verificarse su funcionamiento mostrando en una misma captura una resolución directa y otra inversa mediante nslookup.
 
-- **Dos capturas**: Capturas del ipconfig /all y la captura de los dns inverso y directo
+- **Dos capturas**: Capturas del comando `date` seguido del `ipconfig /all` y la captura de los dns inverso y directo
 
 ### 3.	Unión de la segunda instancia Windows al dominio
 La instancia `WDnombreCLI` también debe configurarla para conectarse por RDP, deberá unirse al dominio creado previamente. Es necesario ajustar el **conjunto de opciones de DHCP** para que los equipos del dominio utilicen el DNS del controlador de dominio. La unión debe documentarse con capturas y explicación del procedimiento.
@@ -37,13 +37,12 @@ En la instancia `UDnombre`, creada con Ubuntu 26, debe conectarse mediante Termi
 ### 5.	Automatización.
 Crear un script PowerShell que incluya un menú con las siguientes opciones: 
 
-!!! seccess "Menu"
-    0 **Salir** del aplicativo
-
+!!! success ""
     1. Mostrar la **información del dominio** (nombre del equipo, nombre del dominio y número de OUs, grupos y usuarios)
     2.	Crear una **nueva Unidad Organizativ**a.
     4.	Crear un **nuevo grupo**.
     5.	Crear una **nueva cuenta de usuario** solicitando sus características, asignándolo a un grupo indicado por el usuario y obligando a cambiar la contraseña en el primer inicio de sesión.
+    6. **Salir** del aplicativo
 
 En este apartado se ha de poner enlace del código comentado del script que estará en el repositorio de github del módulo y capturas de ejemplo de la ejecución de cada opción.
 
@@ -59,7 +58,7 @@ Además, se deberán añadir cuatro **usuarios** genéricos (nombrealu1, nombrea
 ### 7.	Automatización en LDAP mediante un script shell.
 En este apartado se desarrollará un script llamado **nombreldap.sh** que incluya un menú interactivo con tres opciones:
 
-!!! seccess "Menu"
+!!! success ""
     1.	**Eliminar** correo de un usuario del dominio.
     2.	**Modificar** el correo de un usuario, solicitando los datos e incluyendo el valor “prueba@nombre2026.ldap” en una de las pruebas.
     3.	Realizar **búsquedas**, permitiendo consultar un usuario concreto o mostrar un listado de todos los usuarios mostrando únicamente nombre y correo.
@@ -81,9 +80,9 @@ Se tendrán que realizar todas las configuraciones necesarias en una máquina Ub
 ## **Implementación de un Dominio Samba en Ubuntu**
 
 ### 10.	Controlador de Dominio con Samba y unión de un Windows.
-Configurar un servidor Ubuntu como Controlador de Dominio Samba:
+Configurar un servidor Ubuntu como Controlador de Dominio Samba, con los siguientes datos:
 
-!!! info "Datos personalizados"
+!!! info ""
       - Nombre del controlador: nombre-dc-smb
       - Dominio DNS : nombre26.sistemas
       - Reino Kerberos: nombre26.sistemas

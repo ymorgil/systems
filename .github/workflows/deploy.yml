@@ -11,10 +11,14 @@ permissions:
 jobs:
    deploy:
       runs-on: ubuntu-latest
+      env:
+         PASS_ADD: ${{ secrets.PASS_ADD }}
+         PASS_BIU: ${{ secrets.PASS_BIU }}
+         PASS_DJK: ${{ secrets.PASS_DJK }}
       steps:
          - uses: actions/checkout@v3
          - uses: actions/setup-python@v4
            with:
               python-version: "3.x"
-         - run: pip install mkdocs mkdocs-material mkdocs-glightbox
+         - run: pip install mkdocs mkdocs-material mkdocs-glightbox mkdocs-encryptcontent-plugin
          - run: mkdocs gh-deploy --force

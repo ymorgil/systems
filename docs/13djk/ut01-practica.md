@@ -78,3 +78,86 @@ Recopilad todo el trabajo de los apartados 1 a 9 en un **documento único** (inf
 
 !!! tip "Si no encontráis una empresa real dispuesta a compartir información"
     El reto puede resolverse igualmente con una empresa **ficticia pero verosímil**, inventada por el grupo a partir de un sector productivo real (por ejemplo, "Peluquería Estilo Norte", una peluquería de barrio con tres empleadas y sin sistema de reservas digital). En ese caso, sustituid la investigación de datos reales del apartado 2 por una descripción detallada y coherente acordada por el grupo antes de empezar, manteniendo los 10 apartados, los mismos entregables y la entrega final en el taller de Moodle con evaluación entre iguales.
+
+
+## SP 1.1 Digitalización en los sectores productivos 80%
+
+El alumnado trabajará en grupos de 2 o 3 miembros marcados por el profesorado y seleccionarán un tipo de empresa o sector (e-commerce, manufactura, salud, retail, servicios financieros, etc.) para desarrollar un plan de transformación digital integral. Deberán aplicar los conceptos de digitalización vistos en clase, incluyendo la gestión de operaciones, la integración de tecnologías y la optimización de procesos. El trabajo culminará con una presentación de las propuestas de digitalización ante el resto de la clase. Apartados:
+
+## 1. Selección del sector y análisis de la empresa
+
+Cada grupo elegirá un sector o tipo de empresa (por ejemplo, tienda de ropa, clínica dental, fábrica de juguetes, etc.). Una vez elegido, deberán analizar las características actuales de su negocio, sus procesos de gestión y operación, y detectar oportunidades de digitalización.
+
+Ejemplo de sectores: peluquería, empresa de logística, empresa de gestión de eventos, cafetería, empresa de software…
+
+## 2. Identificación de áreas clave de mejora
+
+A partir del análisis del negocio, deberán identificar cuáles son las áreas clave que pueden ser mejoradas a través de la digitalización (operaciones, gestión de clientes, control de inventario, etc.).
+
+Ejemplo de áreas: administración de citas, gestión de stock, seguimiento de pedidos, experiencia del cliente, gestión de personal, etc.
+
+## 3. Propuesta de herramientas digitales
+
+Para cada área identificada, proponed herramientas digitales que podrían mejorar su funcionamiento. Justificad por qué esas herramientas son las más adecuadas para el sector y los procesos seleccionados. Puedes seleccionar herramientas para la gestión de citas, de stock, de relación con el cliente de automatización de procesos…
+
+## 4. Propuesta de tecnología en planta o negocio
+
+Además de las herramientas, pensad en cómo la empresa podría incorporar tecnologías avanzadas como IoT (Internet de las Cosas), inteligencia artificial (IA), blockchain o gemelos digitales en sus operaciones. Esta parte es clave para empresas de manufactura o servicios con operaciones físicas.
+
+## 5. Estrategia de mejora de la experiencia del cliente
+
+Diseñad un plan para mejorar la experiencia del cliente a través de la digitalización. Podéis considerar desde el uso de CRM para gestionar mejor las relaciones con los clientes, hasta la incorporación de e-commerce o la optimización de la atención al cliente mediante chatbots o IA.
+
+## 6. Toma de decisiones basada en datos
+
+Describid cómo la digitalización permitirá tomar decisiones más precisas y basadas en datos. Explicad cómo se puede integrar el análisis de datos en la empresa para obtener mejores resultados y cómo esto afectaría tanto a la eficiencia operativa como a la relación con los clientes.
+
+## 7. Gestión eficiente de activos
+
+Proponed cómo la empresa puede mejorar la gestión de sus activos mediante tecnologías digitales. Considerad la implementación de sistemas de mantenimiento predictivo, sensores IoT, y el uso de plataformas para la gestión eficiente de recursos y equipos.
+
+Ejemplo: Una fábrica puede utilizar sensores conectados para monitorear el estado de las máquinas y prever fallos, programando el mantenimiento preventivo con antelación.
+
+## 8. Reducción de costes y desperdicios
+
+Explicad cómo la transformación digital permitirá reducir costes operativos y desperdicios a través de la automatización, el uso eficiente de recursos y la optimización de procesos.
+
+Ejemplo: Automatización de procesos repetitivos, reducción de papel mediante sistemas ERP, optimización de inventarios para evitar exceso de stock.
+
+## 9. Plan de acción y prototipo
+
+Elaborad un plan de acción en el que integréis todas las mejoras propuestas. Si es posible, desarrollad un prototipo o representación visual (infografía, diagrama de flujo, mockups, etc.) de cómo se implementaría la digitalización en el negocio seleccionado.
+
+## 10. Presentación final
+
+Cada equipo deberá realizar una presentación digital de aproximadamente 10 minutos, donde exponga su propuesta de transformación digital integral. La presentación debe incluir:
+
+- Análisis del negocio actual y áreas de mejora.
+- Propuesta de herramientas digitales y tecnologías avanzadas.
+- Impacto esperado en la empresa: mejora en eficiencia, reducción de costes, experiencia del cliente, etc.
+- Prototipo o diagrama que ilustre la solución digital.
+
+Tras la presentación, el resto de los equipos podrá hacer preguntas y debatir sobre la viabilidad de las propuestas.
+
+---
+
+**EVALUACIÓN DEL RETO:**
+
+- Originalidad en la selección del sector.
+- Análisis exhaustivo de las áreas de mejora.
+- Propuesta de herramientas tecnológicas adecuadas.
+- Impacto previsto en términos de eficiencia y competitividad.
+- Calidad de la presentación y prototipo.
+
+**RECURSOS:**
+
+- Contenidos de la unidad de trabajo.
+- Conexión a internet.
+
+!!! bug ""
+    **CALIFICACIÓN Y DOCUMENTACIÓN:**
+
+    - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
+    - Para una calificación correcta se han de seguir las instrucciones del documento: “Pautas curso”, que se encuentra en el Campus.
+    - Recordar que el supuesto ha de tener una portada con los nombres y apellidos de los componentes del grupo.
+    - Entregar un documento “pdf” a través del Campus. El nombre del archivo debe ser: “`Grupo**_SP**`”.
