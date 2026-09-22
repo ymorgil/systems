@@ -95,7 +95,7 @@ Una vez instalado Samba y configurado el dominio, deben realizarse comprobacione
 
 Posteriormente, se añadirá un Windows 11 llamado `nombrewin11` al dominio Samba, verificando en ambos lados (cliente y servidor) que aparece correctamente unido y realizando un inicio de sesión en Windows con un usuario del dominio Samba. (Mismas capturas que en la presentación)
 
-!!! example "ENTREGABLES"
+!!! example "ENTREGA"
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento: “**Pautas del curso**”, que se encuentra en el apartado de recurso del Campus.
     - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”
