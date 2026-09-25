@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Idempotencia: mismo playbook, dos ejecuciones distintas</text>
+
+  <!-- Ejecucion 1 -->
+  <g>
+    <rect x="40" y="80" width="260" height="170" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="170" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">1ª ejecución</text>
+    <text x="170" y="135" text-anchor="middle" font-size="11" fill="#37474f">Estado inicial: Nginx</text>
+    <text x="170" y="152" text-anchor="middle" font-size="11" fill="#37474f">no instalado</text>
+    <text x="170" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">CHANGED</text>
+    <text x="170" y="200" text-anchor="middle" font-size="11" fill="#37474f">Se instala el paquete</text>
+    <text x="170" y="218" text-anchor="middle" font-size="11" fill="#37474f">y se activa el servicio</text>
+  </g>
+
+  <path d="M300 165 L345 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="322" y="150" text-anchor="middle" font-size="10" fill="#607d8b">re-ejecutar</text>
+
+  <!-- Ejecucion 2 -->
+  <g>
+    <rect x="350" y="80" width="260" height="170" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="480" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#00897b">2ª ejecución</text>
+    <text x="480" y="135" text-anchor="middle" font-size="11" fill="#37474f">Estado actual: Nginx</text>
+    <text x="480" y="152" text-anchor="middle" font-size="11" fill="#37474f">ya instalado y activo</text>
+    <text x="480" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#37474f">OK (sin cambios)</text>
+    <text x="480" y="200" text-anchor="middle" font-size="11" fill="#37474f">El módulo comprueba el</text>
+    <text x="480" y="218" text-anchor="middle" font-size="11" fill="#37474f">estado y no repite la acción</text>
+  </g>
+
+  <path d="M610 165 L655 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="632" y="150" text-anchor="middle" font-size="10" fill="#607d8b">re-ejecutar</text>
+
+  <!-- Resultado -->
+  <g>
+    <rect x="660" y="80" width="290" height="170" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="805" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">N ejecuciones</text>
+    <text x="805" y="140" text-anchor="middle" font-size="11" fill="#37474f">El resultado final es siempre</text>
+    <text x="805" y="158" text-anchor="middle" font-size="11" fill="#37474f">el mismo estado convergente,</text>
+    <text x="805" y="176" text-anchor="middle" font-size="11" fill="#37474f">sin efectos secundarios por</text>
+    <text x="805" y="194" text-anchor="middle" font-size="11" fill="#37474f">repetir la operación</text>
+    <text x="805" y="220" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">Estado deseado = estado real</text>
+  </g>
+
+  <text x="500" y="278" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">La idempotencia permite ejecutar un playbook tantas veces como se quiera de forma segura</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

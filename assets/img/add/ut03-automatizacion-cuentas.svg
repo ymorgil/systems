@@ -1,0 +1,72 @@
+<svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="320" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Flujo de automatización de cuentas de usuario</text>
+
+  <!-- Fichero de entrada -->
+  <g>
+    <rect x="40" y="90" width="150" height="140" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="115" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Listado (CSV/TXT)</text>
+    <text x="115" y="145" text-anchor="middle" font-size="11" fill="#37474f">usuario;nombre;</text>
+    <text x="115" y="162" text-anchor="middle" font-size="11" fill="#37474f">grupo;perfil</text>
+    <text x="115" y="185" text-anchor="middle" font-size="11" fill="#37474f">alumno01;...;1ºDAM</text>
+    <text x="115" y="202" text-anchor="middle" font-size="11" fill="#37474f">alumno02;...;1ºDAM</text>
+  </g>
+
+  <path d="M190 160 L235 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow5)"/>
+
+  <!-- Script -->
+  <g>
+    <rect x="240" y="80" width="180" height="160" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="330" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Script de alta</text>
+    <text x="330" y="132" text-anchor="middle" font-size="10" fill="#37474f">Linux: bucle +</text>
+    <text x="330" y="147" text-anchor="middle" font-size="10" fill="#37474f">useradd / passwd</text>
+    <text x="330" y="167" text-anchor="middle" font-size="10" fill="#37474f">Windows: bucle +</text>
+    <text x="330" y="182" text-anchor="middle" font-size="10" fill="#37474f">New-LocalUser /</text>
+    <text x="330" y="197" text-anchor="middle" font-size="10" fill="#37474f">New-ADUser</text>
+    <text x="330" y="217" text-anchor="middle" font-size="10" fill="#607d8b" font-style="italic">lectura línea a línea</text>
+  </g>
+
+  <path d="M420 160 L465 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow5)"/>
+
+  <!-- Restricciones -->
+  <g>
+    <rect x="470" y="80" width="180" height="160" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="560" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Restricciones</text>
+    <text x="560" y="132" text-anchor="middle" font-size="10" fill="#37474f">Contraseña temporal</text>
+    <text x="560" y="150" text-anchor="middle" font-size="10" fill="#37474f">Cambio obligatorio</text>
+    <text x="560" y="168" text-anchor="middle" font-size="10" fill="#37474f">en primer acceso</text>
+    <text x="560" y="188" text-anchor="middle" font-size="10" fill="#37474f">Grupo y permisos</text>
+    <text x="560" y="206" text-anchor="middle" font-size="10" fill="#37474f">mínimos necesarios</text>
+    <text x="560" y="224" text-anchor="middle" font-size="10" fill="#37474f">Cuenta con caducidad</text>
+  </g>
+
+  <path d="M650 160 L695 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow5)"/>
+
+  <!-- Resultado -->
+  <g>
+    <rect x="700" y="90" width="140" height="140" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="770" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Cuentas creadas</text>
+    <text x="770" y="145" text-anchor="middle" font-size="11" fill="#37474f">Home / perfil</text>
+    <text x="770" y="163" text-anchor="middle" font-size="11" fill="#37474f">Grupos asignados</text>
+    <text x="770" y="181" text-anchor="middle" font-size="11" fill="#37474f">Permisos aplicados</text>
+  </g>
+
+  <path d="M840 160 L885 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow5)"/>
+
+  <!-- Documentacion -->
+  <g>
+    <rect x="890" y="105" width="90" height="110" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="935" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">Log /</text>
+    <text x="935" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">informe</text>
+    <text x="935" y="180" text-anchor="middle" font-size="9" fill="#37474f">altas, bajas</text>
+    <text x="935" y="194" text-anchor="middle" font-size="9" fill="#37474f">y errores</text>
+  </g>
+
+  <text x="500" y="290" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">Criterio e): automatización de la administración de cuentas mediante script + restricciones de seguridad</text>
+
+  <defs>
+    <marker id="arrow5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

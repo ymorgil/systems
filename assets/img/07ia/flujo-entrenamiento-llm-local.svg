@@ -1,0 +1,76 @@
+<svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="320" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">De un modelo abierto a un LLM propio en el aula</text>
+
+  <!-- Modelo base -->
+  <g>
+    <rect x="15" y="90" width="175" height="150" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="102" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Modelo base</text>
+    <text x="102" y="146" text-anchor="middle" font-size="11" fill="#37474f">Llama, Qwen, Gemma,</text>
+    <text x="102" y="164" text-anchor="middle" font-size="11" fill="#37474f">Phi-4-mini...</text>
+    <text x="102" y="188" text-anchor="middle" font-size="11" fill="#37474f">Pesos abiertos</text>
+    <text x="102" y="206" text-anchor="middle" font-size="11" fill="#37474f">descargables</text>
+  </g>
+
+  <path d="M190 165 L226 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowT)"/>
+
+  <!-- Cuantizacion -->
+  <g>
+    <rect x="230" y="90" width="175" height="150" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="317" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Cuantización</text>
+    <text x="317" y="146" text-anchor="middle" font-size="11" fill="#37474f">Formato GGUF,</text>
+    <text x="317" y="164" text-anchor="middle" font-size="11" fill="#37474f">precisión a 4 bits</text>
+    <text x="317" y="188" text-anchor="middle" font-size="11" fill="#37474f">~ 1/4 del tamaño,</text>
+    <text x="317" y="206" text-anchor="middle" font-size="11" fill="#37474f">calidad casi intacta</text>
+  </g>
+
+  <path d="M405 165 L441 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowT)"/>
+
+  <!-- Servir en local -->
+  <g>
+    <rect x="445" y="80" width="185" height="170" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="537" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Servir en local</text>
+    <text x="537" y="136" text-anchor="middle" font-size="11" fill="#37474f">Ollama / llama.cpp /</text>
+    <text x="537" y="154" text-anchor="middle" font-size="11" fill="#37474f">LM Studio</text>
+    <text x="537" y="178" text-anchor="middle" font-size="11" fill="#37474f">API REST local</text>
+    <text x="537" y="196" text-anchor="middle" font-size="11" fill="#37474f">(localhost:11434)</text>
+    <text x="537" y="220" text-anchor="middle" font-size="11" fill="#37474f" font-style="italic">Sin conexión a internet</text>
+  </g>
+
+  <path d="M630 165 L666 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowT)"/>
+
+  <!-- Ajuste LoRA -->
+  <g>
+    <rect x="670" y="80" width="180" height="170" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="760" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Ajuste LoRA / QLoRA</text>
+    <text x="760" y="136" text-anchor="middle" font-size="11" fill="#37474f">Con el dataset propio</text>
+    <text x="760" y="154" text-anchor="middle" font-size="11" fill="#37474f">Local (lento) o GPU</text>
+    <text x="760" y="172" text-anchor="middle" font-size="11" fill="#37474f">gratuita en la nube</text>
+    <text x="760" y="196" text-anchor="middle" font-size="11" fill="#37474f">Unsloth / PEFT / TRL</text>
+    <text x="760" y="220" text-anchor="middle" font-size="11" fill="#37474f" font-style="italic">Adaptador de pocos MB</text>
+  </g>
+
+  <path d="M850 165 L886 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowT)"/>
+
+  <!-- Modelo ajustado -->
+  <g>
+    <rect x="890" y="95" width="95" height="140" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="937" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">Modelo</text>
+    <text x="937" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">ajustado</text>
+    <text x="937" y="172" text-anchor="middle" font-size="10" fill="#37474f">Fusionado y</text>
+    <text x="937" y="188" text-anchor="middle" font-size="10" fill="#37474f">servido de nuevo</text>
+    <text x="937" y="204" text-anchor="middle" font-size="10" fill="#37474f">en local</text>
+  </g>
+
+  <!-- dataset propio feeding into ajuste -->
+  <path d="M760 280 L760 250" stroke="#90a4ae" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#arrowT)"/>
+  <text x="760" y="298" text-anchor="middle" font-size="11" fill="#607d8b" font-style="italic">Dataset propio: apuntes convertidos en pares instrucción-respuesta</text>
+
+  <text x="500" y="20" text-anchor="middle" font-size="1" fill="none"> </text>
+
+  <defs>
+    <marker id="arrowT" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

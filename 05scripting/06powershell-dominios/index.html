@@ -1,0 +1,2653 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/05scripting/06powershell-dominios/">
+      
+      
+        <link rel="prev" href="../05powershell/">
+      
+      
+        <link rel="next" href="../100-ejercicios-bash/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Powershell-dominios - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/css/cards.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#powershell-en-dominios-ut01" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Powershell-dominios
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Powershell-dominios
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Powershell-dominios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-powershell-en-5-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. PowerShell en 5 ideas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. PowerShell en 5 ideas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#idea-1-los-comandos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 1 · Los comandos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-2-las-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 2 · Las variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-3-pedir-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 3 · Pedir datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-4-los-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 4 · Los parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-5-contar-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 5 · Contar resultados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-los-comandos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Los comandos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Los comandos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-la-ruta-dn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 La ruta (DN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-crear-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Crear un usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-esqueleto-del-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El esqueleto del menú
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-las-opciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Las opciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Las opciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-informacion-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 · Información del dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-crear-ou" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 · Crear OU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-crear-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 · Crear grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-crear-usuario-la-mas-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 · Crear usuario (la más completa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-salir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 · Salir
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Errores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-que-hay-que-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Qué hay que entregar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../100-ejercicios-bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11add/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-powershell-en-5-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. PowerShell en 5 ideas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. PowerShell en 5 ideas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#idea-1-los-comandos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 1 · Los comandos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-2-las-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 2 · Las variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-3-pedir-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 3 · Pedir datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-4-los-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 4 · Los parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idea-5-contar-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idea 5 · Contar resultados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-los-comandos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Los comandos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Los comandos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-la-ruta-dn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 La ruta (DN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-crear-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Crear un usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-el-esqueleto-del-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. El esqueleto del menú
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-las-opciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Las opciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Las opciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-informacion-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 · Información del dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-crear-ou" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 · Crear OU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-crear-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 · Crear grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-crear-usuario-la-mas-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 · Crear usuario (la más completa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-salir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 · Salir
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Errores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-que-hay-que-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Qué hay que entregar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="powershell-en-dominios-ut01">PowerShell en Dominios (UT01)</h1>
+<div class="admonition warning">
+<p class="admonition-title">Requisitos previos</p>
+<ul>
+<li>Trabajamos en el controlador de dominio <code>WSnombreDC</code> (ya promovido, apartado 2).</li>
+<li>Abrimos <strong>Windows PowerShell ISE</strong> o <strong>VS Code</strong> <em>como administrador</em>.</li>
+<li>El fichero se guarda con extensión <strong><code>.ps1</code></strong>, por ejemplo <code>nombre-menu-ad.ps1</code>.</li>
+</ul>
+</div>
+<blockquote>
+<p>La clave pedagógica: <strong>primero se prueba cada comando a mano en la consola</strong>, y solo cuando funciona se pega dentro del menú.</p>
+</blockquote>
+<h2 id="1-powershell-en-5-ideas">1. PowerShell en 5 ideas</h2>
+<h3 id="idea-1-los-comandos">Idea 1 · Los comandos</h3>
+<blockquote>
+<p><em>Verbo-Sustantivo</em></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Date</span>          <span class="c"># Get = obtener</span>
+<span class="nb">New-Item</span>          <span class="c"># New = crear</span>
+<span class="nb">Get-Help</span> <span class="nb">New-ADUser</span> <span class="n">-Examples</span>   <span class="c"># la ayuda con ejemplos: ¡el mejor amigo!</span>
+</code></pre></div>
+<p>Si sabes el verbo (<code>Get</code>, <code>New</code>, <code>Set</code>, <code>Remove</code>, <code>Add</code>) y el objeto (<code>ADUser</code>, <code>ADGroup</code>...), ya sabes el comando.</p>
+<h3 id="idea-2-las-variables">Idea 2 · Las variables</h3>
+<blockquote>
+<p>Empiezan por <code>$</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nv">$nombre</span> <span class="p">=</span> <span class="s2">"Ana"</span>
+<span class="nb">Write-Host</span> <span class="s2">"Hola $nombre"</span>     <span class="c"># Write-Host = mostrar por pantalla</span>
+</code></pre></div>
+<h3 id="idea-3-pedir-datos">Idea 3 · Pedir datos</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$ou</span> <span class="p">=</span> <span class="nb">Read-Host</span> <span class="s2">"Nombre de la nueva OU"</span>
+</code></pre></div>
+<p>Lo que escriba el usuario queda guardado en <code>$ou</code>.</p>
+<h3 id="idea-4-los-parametros">Idea 4 · Los parámetros</h3>
+<blockquote>
+<p>Van con guion</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nb">New-ADGroup</span> <span class="n">-Name</span> <span class="s2">"asir2"</span> <span class="n">-GroupScope</span> <span class="n">Global</span>
+</code></pre></div>
+<p>Cada <code>-Parametro valor</code> es como rellenar una casilla del asistente gráfico.</p>
+<h3 id="idea-5-contar-resultados">Idea 5 · Contar resultados</h3>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nb">Get-ADUser</span> <span class="n">-Filter</span> <span class="p">*).</span><span class="n">Count</span>     <span class="c"># cuántos usuarios hay</span>
+</code></pre></div>
+<p>Los paréntesis ejecutan primero el comando y <code>.Count</code> cuenta cuántos objetos devolvió.</p>
+<div class="admonition tip">
+<p class="admonition-title">Comentarios</p>
+<p>Todo lo que va detrás de <code>#</code> es un comentario. El enunciado pide el <strong>código comentado</strong>, así que cada bloque debe llevar su explicación con <code>#</code>.</p>
+</div>
+<hr>
+<h2 id="2-los-comandos">2. Los comandos</h2>
+<p>Primero cargamos el módulo (en el DC suele estar ya disponible):</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Para qué</th>
+<th>Comando</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre del equipo</td>
+<td><code>$env:COMPUTERNAME</code></td>
+<td><code>$env:COMPUTERNAME</code></td>
+</tr>
+<tr>
+<td>Datos del dominio</td>
+<td><code>Get-ADDomain</code></td>
+<td><code>(Get-ADDomain).DNSRoot</code> → <code>nombre.aws</code></td>
+</tr>
+<tr>
+<td>Listar OUs</td>
+<td><code>Get-ADOrganizationalUnit</code></td>
+<td><code>Get-ADOrganizationalUnit -Filter *</code></td>
+</tr>
+<tr>
+<td>Listar grupos</td>
+<td><code>Get-ADGroup</code></td>
+<td><code>Get-ADGroup -Filter *</code></td>
+</tr>
+<tr>
+<td>Listar usuarios</td>
+<td><code>Get-ADUser</code></td>
+<td><code>Get-ADUser -Filter *</code></td>
+</tr>
+<tr>
+<td>Crear OU</td>
+<td><code>New-ADOrganizationalUnit</code></td>
+<td><code>New-ADOrganizationalUnit -Name "Ventas"</code></td>
+</tr>
+<tr>
+<td>Crear grupo</td>
+<td><code>New-ADGroup</code></td>
+<td><code>New-ADGroup -Name "G_Ventas" -GroupScope Global</code></td>
+</tr>
+<tr>
+<td>Crear usuario</td>
+<td><code>New-ADUser</code></td>
+<td>ver abajo</td>
+</tr>
+<tr>
+<td>Meter usuario en grupo</td>
+<td><code>Add-ADGroupMember</code></td>
+<td><code>Add-ADGroupMember -Identity "G_Ventas" -Members "ana"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="21-la-ruta-dn">2.1 La <em>ruta</em> (DN)</h3>
+<p>En AD cada objeto vive en una "dirección" escrita al revés, de lo concreto a lo general:</p>
+<div class="highlight"><pre><span></span><code>OU=Ventas,DC=nombre,DC=aws
+</code></pre></div>
+<ul>
+<li><code>DC=nombre,DC=aws</code> → el dominio <code>nombre.aws</code></li>
+<li><code>OU=Ventas</code> → la unidad organizativa dentro del dominio</li>
+</ul>
+<p>No hace falta escribir la parte del dominio a mano, PowerShell nos la da:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$dominio</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADDomain</span><span class="p">).</span><span class="n">DistinguishedName</span>   <span class="c"># DC=nombre,DC=aws</span>
+<span class="nv">$ruta</span>    <span class="p">=</span> <span class="s2">"OU=Ventas,$dominio"</span>                <span class="c"># OU=Ventas,DC=nombre,DC=aws</span>
+</code></pre></div>
+<p>Esa <code>$ruta</code> es la que usaremos con el parámetro <strong><code>-Path</code></strong> para decir <em>dónde</em> se crea un grupo o un usuario.</p>
+<h3 id="22-crear-un-usuario">2.2 Crear un usuario</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$clave</span> <span class="p">=</span> <span class="nb">Read-Host</span> <span class="s2">"Contraseña inicial"</span> <span class="n">-AsSecureString</span>   <span class="c"># la pide oculta</span>
+
+<span class="nb">New-ADUser</span> <span class="n">-Name</span> <span class="s2">"Ana López"</span> <span class="p">`</span>
+           <span class="n">-SamAccountName</span> <span class="s2">"alopez"</span> <span class="p">`</span>
+           <span class="n">-UserPrincipalName</span> <span class="s2">"alopez@nombre.aws"</span> <span class="p">`</span>
+           <span class="n">-Path</span> <span class="s2">"OU=Ventas,DC=nombre,DC=aws"</span> <span class="p">`</span>
+           <span class="n">-AccountPassword</span> <span class="nv">$clave</span> <span class="p">`</span>
+           <span class="n">-Enabled</span> <span class="nv">$true</span> <span class="p">`</span>
+           <span class="n">-ChangePasswordAtLogon</span> <span class="nv">$true</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-Name</code></td>
+<td>Nombre visible</td>
+</tr>
+<tr>
+<td><code>-SamAccountName</code></td>
+<td>Nombre de inicio de sesión</td>
+</tr>
+<tr>
+<td><code>-AccountPassword</code></td>
+<td>Contraseña (tiene que ser <em>SecureString</em>, por eso <code>-AsSecureString</code>)</td>
+</tr>
+<tr>
+<td><code>-Enabled $true</code></td>
+<td>Si no se pone, <strong>la cuenta se crea deshabilitada</strong></td>
+</tr>
+<tr>
+<td><code>-ChangePasswordAtLogon $true</code></td>
+<td>Obliga a cambiar la contraseña en el primer inicio ✅ (lo pide el enunciado)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">El acento grave <code>`</code></p>
+<p>Sirve para partir una línea larga en varias. Debe ser <strong>lo último</strong> de la línea (sin espacios detrás).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Actividad de 10 minutos</p>
+<p>Antes de escribir el script, cada alumno/a ejecuta <strong>a mano</strong> en la consola: crear una OU de prueba, un grupo dentro de ella y un usuario metido en ese grupo. Comprueban en <em>Usuarios y equipos de Active Directory</em> que aparecen.</p>
+</div>
+<hr>
+<h2 id="3-el-esqueleto-del-menu">3. El esqueleto del menú</h2>
+<p>Un menú es siempre lo mismo: <strong>mostrar opciones → leer la elección → hacer algo → repetir hasta "Salir"</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">do</span> <span class="p">{</span>
+    <span class="c"># 1) Mostrar el menú</span>
+    <span class="nb">Write-Host</span> <span class="s2">"1. Información del dominio"</span>
+    <span class="nb">Write-Host</span> <span class="s2">"2. Crear OU"</span>
+    <span class="nb">Write-Host</span> <span class="s2">"3. Crear grupo"</span>
+    <span class="nb">Write-Host</span> <span class="s2">"4. Crear usuario"</span>
+    <span class="nb">Write-Host</span> <span class="s2">"5. Salir"</span>
+
+    <span class="c"># 2) Leer la opción</span>
+    <span class="nv">$opcion</span> <span class="p">=</span> <span class="nb">Read-Host</span> <span class="s2">"Elige una opción"</span>
+
+    <span class="c"># 3) Según la opción, hacer una cosa u otra</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nv">$opcion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s2">"1"</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Aquí irá la información"</span> <span class="p">}</span>
+        <span class="s2">"2"</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Aquí se creará la OU"</span> <span class="p">}</span>
+        <span class="s2">"3"</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Aquí se creará el grupo"</span> <span class="p">}</span>
+        <span class="s2">"4"</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Aquí se creará el usuario"</span> <span class="p">}</span>
+        <span class="s2">"5"</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Adiós"</span> <span class="p">}</span>
+        <span class="k">default</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">"Opción no válida"</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$opcion</span> <span class="o">-ne</span> <span class="s2">"5"</span><span class="p">)</span>    <span class="c"># 4) Repetir mientras la opción NO sea 5</span>
+</code></pre></div>
+<p>Tres piezas nuevas, nada más:</p>
+<table>
+<thead>
+<tr>
+<th>Pieza</th>
+<th>Se lee como</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>do { ... } while (condición)</code></td>
+<td>"Haz esto... y repítelo mientras se cumpla la condición"</td>
+</tr>
+<tr>
+<td><code>switch ($opcion) { "1" {...} }</code></td>
+<td>"Si la opción es 1, haz esto; si es 2, haz aquello..."</td>
+</tr>
+<tr>
+<td><code>-ne</code></td>
+<td>"no es igual" (<em>not equal</em>). También existen <code>-eq</code> (igual), <code>-gt</code> (mayor)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition success">
+<p class="admonition-title">Punto de control</p>
+<p>Ejecutad el esqueleto con <strong>F5</strong>. Si el menú aparece y se repite hasta pulsar 5, la parte "difícil" ya está hecha. Ahora solo hay que sustituir cada <code>Write-Host "Aquí..."</code> por los comandos del bloque 2.</p>
+</div>
+<hr>
+<h2 id="4-las-opciones">4. Las opciones</h2>
+<h3 id="1-informacion-del-dominio">1 · Información del dominio</h3>
+<p>Hay que mostrar <strong>5 datos</strong>. Cada uno sale de un comando de la tabla del bloque 2:</p>
+<ol>
+<li>Nombre del equipo → <code>$env:COMPUTERNAME</code></li>
+<li>Nombre del dominio → <code>(Get-ADDomain).DNSRoot</code></li>
+<li>Nº de OUs → <code>(Get-ADOrganizationalUnit -Filter *).Count</code></li>
+<li>Nº de grupos → lo mismo con <code>Get-ADGroup</code></li>
+<li>Nº de usuarios → lo mismo con <code>Get-ADUser</code></li>
+</ol>
+<p>Se muestran con <code>Write-Host "Texto: $variable"</code> o directamente <code>Write-Host "Usuarios: $((Get-ADUser -Filter *).Count)"</code>.</p>
+<div class="admonition note">
+<p>El truco <code>$( ... )</code> dentro de unas comillas permite <strong>meter un comando dentro de un texto</strong>.</p>
+</div>
+<h3 id="2-crear-ou">2 · Crear OU</h3>
+<ol>
+<li>Pedir el nombre con <code>Read-Host</code>.</li>
+<li>Crear la OU con <code>New-ADOrganizationalUnit -Name $nombre</code>.</li>
+<li>Mostrar un mensaje de confirmación.</li>
+</ol>
+<h3 id="3-crear-grupo">3 · Crear grupo</h3>
+<ol>
+<li>Pedir el nombre del grupo <strong>y</strong> la OU donde irá.</li>
+<li>Construir la ruta: <code>"OU=$ou,$dominio"</code> (bloque 2.1).</li>
+<li><code>New-ADGroup</code> con <code>-Name</code>, <code>-GroupScope Global</code> y <code>-Path</code>.</li>
+</ol>
+<h3 id="4-crear-usuario-la-mas-completa">4 · Crear usuario (la más completa)</h3>
+<ol>
+<li>Pedir: nombre, apellido, nombre de inicio de sesión, OU, grupo y contraseña (<code>-AsSecureString</code>).</li>
+<li>Crear el usuario con <code>New-ADUser</code> (bloque 2.2) <strong>sin olvidar</strong> <code>-Enabled $true</code> y <code>-ChangePasswordAtLogon $true</code>.</li>
+<li>Meterlo en el grupo con <code>Add-ADGroupMember</code>.</li>
+<li>Mensaje de confirmación.</li>
+</ol>
+<h3 id="5-salir">5 · Salir</h3>
+<p>No hace nada: el <code>while</code> ya se encarga de terminar el bucle.</p>
+<hr>
+<h2 id="5-errores">5. Errores</h2>
+<table>
+<thead>
+<tr>
+<th>Error / síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>"la ejecución de scripts está deshabilitada"</em></td>
+<td>Política de ejecución</td>
+<td><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></td>
+</tr>
+<tr>
+<td><em>"New-ADUser no se reconoce"</em></td>
+<td>Módulo no cargado / no es el DC</td>
+<td><code>Import-Module ActiveDirectory</code></td>
+</tr>
+<tr>
+<td><em>"Directory object not found"</em></td>
+<td>La ruta <code>-Path</code> está mal o la OU no existe</td>
+<td>Revisar <code>OU=...,DC=...,DC=...</code></td>
+</tr>
+<tr>
+<td><em>"The password does not meet the length, complexity..."</em></td>
+<td>Contraseña débil</td>
+<td>Usar mayúscula, minúscula, número y 8+ caracteres</td>
+</tr>
+<tr>
+<td>El usuario aparece con una flecha hacia abajo</td>
+<td>Cuenta deshabilitada</td>
+<td>Falta <code>-Enabled $true</code></td>
+</tr>
+<tr>
+<td>El menú no termina nunca</td>
+<td>La condición del <code>while</code> compara con otro número</td>
+<td>Revisar <code>while ($opcion -ne "5")</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-que-hay-que-entregar">6. Qué hay que entregar</h2>
+<ul>
+<li>[ ] El script <strong>comentado</strong> subido al repositorio de GitHub del módulo y su <strong>enlace</strong> en el PDF.</li>
+<li>[ ] Una <strong>captura por cada opción</strong> del menú funcionando.</li>
+<li>[ ] Una captura en <em>Usuarios y equipos de AD</em> donde se vean la OU, el grupo y el usuario creados.</li>
+<li>[ ] Comprobación del cambio de contraseña forzado (primer inicio de sesión o pestaña <em>Cuenta</em> del usuario).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
