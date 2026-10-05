@@ -1,65 +1,125 @@
-# **🧪 UT02 · Práctica: planificación de procesos y gestión con línea de comandos en Windows y Linux**
+# 🧪 Supuesto Práctico UT02 *Procesos del sistema* { .card }
 
-## Objetivo
+!!! info "OBJETIVOS"
+    Administrar los procesos y servicios del sistema, tanto en Windows (PowerShell y CMD) como en GNU/Linux (Bash, `ps`, `pstree`, `top`, `htop`, `systemd` y `journald`), aplicando criterios de seguridad y eficiencia: identificar procesos y su jerarquía, crearlos y terminarlos, modificar su prioridad, enviarles señales y consultar sus registros. En la segunda parte se da el salto del equipo individual a la **monitorización centralizada**, desplegando Nagios y la pila Prometheus + Grafana para vigilar varios equipos de la red. La práctica se estructura en **10 apartados obligatorios**: 3 de procesos en Windows, 3 de procesos en GNU/Linux y 4 de monitorización.
 
-Aplicar los algoritmos clásicos de planificación de procesos sobre una tabla de ejemplo, y practicar el control y seguimiento de procesos y servicios mediante herramientas gráficas y de línea de comandos, tanto en Windows (PowerShell) como en GNU/Linux (Bash), incluyendo la identificación de procesos huérfanos y zombis y la gestión de prioridades y señales. La práctica se estructura en **10 apartados obligatorios**, alineados con los criterios de evaluación de la UT (estados y ciclo de vida, planificación, hilos, creación/terminación de procesos, registro en el sistema de archivos, herramientas de control, arranque del sistema y seguridad).
+!!! info "RECURSOS"
+    - VMware con máquinas virtuales propias.
+    - Un **Windows 10/11** como equipo cliente (`WCnombre`), con PowerShell en modo administrador.
+    - Un **Ubuntu Desktop 24.04** o superior (`UDnombre`) con `htop`, `gparted` y Firefox instalados.
+    - Un **Ubuntu Server 24.04** o superior (`USnombre`) que hará de **servidor de monitorización**.
+    - Acceso a Internet para instalar paquetes, Docker (opcional) y un cliente SSH (por ejemplo, Termius o el propio `ssh` de terminal).
 
-## Materiales
+## **Gestión de procesos en Windows**
 
-- Una máquina virtual Windows (con PowerShell en modo administrador) y una máquina virtual GNU/Linux (Ubuntu Desktop o Server, o Fedora), con acceso a terminal.
-- `htop` instalado en la máquina Linux (`apt install htop` o equivalente).
-- Un editor de texto para redactar los diagramas de planificación y las respuestas teóricas.
-- Carpeta con el nombre del alumnado creada en la raíz del sistema (Windows), para que aparezca en el prompt de PowerShell.
+!!! info ""
+    Todos los apartados de este bloque se realizan con **PowerShell en modo administrador**. Para que tu nombre aparezca en el prompt, crea en la raíz del sistema una carpeta con tu nombre (`C:\nombre`), accede a ella y ejecuta los comandos desde esa ruta. En cada captura debe verse el **comando** y su **resultado**.
 
-## Estructura obligatoria de la práctica
+### 1. Consulta e identificación de procesos
+Obtener información de los procesos en ejecución del equipo `WCnombre` mediante `Get-Process`, `Get-CimInstance` y la tubería de PowerShell. Cada opción se resuelve con **una sola línea de comandos**:
 
-### 1. Planificación por el algoritmo de prioridad expropiativo
+!!! success ""
+    1. **Programas de inicio de sesión**: mostrar primero el **número** de programas que se ejecutan al iniciar sesión y, a continuación, el **listado** con su nombre y ubicación.
+    2. **Proceso que más CPU consume**: mostrarlo en **formato lista** con todos los valores de sus propiedades.
+    3. **Procesos agrupados por nombre**: mostrar dos columnas (nombre y número de instancias), ordenadas por el número y limitadas a los **5 grupos** con más procesos.
+    4. **Hilos de un proceso**: abrir Chrome (o Edge) con varias pestañas y mostrar, para cada uno de sus procesos, su PID y su **número de hilos**, terminando con el total de hilos del navegador.
 
-A partir de una tabla de procesos con instante de llegada, prioridad y ráfaga de CPU, planifica su ejecución aplicando el algoritmo de **prioridad expropiativo**. Entrega el diagrama de Gantt resultante y la evolución de la cola de listos en cada instante en que se produce un cambio (llegada de un proceso nuevo o expropiación).
+### 2. Creación, prioridad y terminación de procesos
+Crear, modificar y terminar procesos desde PowerShell y desde el Símbolo del sistema (CMD):
 
-### 2. Planificación por el algoritmo SRT (Shortest Remaining Time)
+!!! success ""
+    1. **Crear procesos**: lanzar con `Start-Process` **tres instancias** del Bloc de notas y listar únicamente esos procesos mostrando su PID y su hora de inicio.
+    2. **Cambiar la prioridad**: asignar a una de las instancias la prioridad **Alta** y a otra **Por debajo de lo normal**, y comprobarlo listando las tres con la columna `PriorityClass`.
+    3. **Terminar por consumo de memoria**: detener el proceso con **mayor PID** de entre los **10 procesos que menos memoria consumen**. Se harán tres líneas (listar, eliminar y volver a listar), pero solo puntúa la segunda, que debe resolverse en **una única línea** sin usar el resultado de la primera.
+    4. **Terminar desde CMD**: con `tasklist` filtrar los Bloc de notas que queden en ejecución y terminarlos, junto con sus procesos hijos, de forma forzada con `taskkill`. Comprobar el resultado.
 
-Sobre la misma tabla de procesos del apartado 1, planifica su ejecución con el algoritmo **SRT expropiativo**. Entrega el diagrama de Gantt y la cola de listos en cada instante relevante, y compara en un breve párrafo los resultados (tiempo medio de espera y de retorno) frente al algoritmo de prioridad del apartado anterior.
+### 3. Gestión de servicios en Windows
+Consultar y administrar servicios mediante los cmdlets `*-Service` y `Get-CimInstance Win32_Service`:
 
-### 3. Identificación de programas de inicio de sesión en Windows
+!!! success ""
+    1. **Servicios de datos activos**: contar y mostrar el listado de los servicios cuyo nombre para mostrar contenga la palabra **datos** y que además estén **en ejecución**.
+    2. **Servicios por estado**: agrupar todos los servicios del equipo por su estado, mostrando el número de servicios de cada grupo.
+    3. **Servicios automáticos detenidos**: listar los servicios con tipo de inicio **Automático** que actualmente **no** estén en ejecución (nombre, nombre para mostrar y estado).
+    4. **Administrar un servicio**: con el servicio de cola de impresión (`Spooler`), mostrar sus **servicios dependientes**, detenerlo, cambiar su tipo de inicio a **Manual**, volver a iniciarlo y comprobar en una última línea su nombre, estado y tipo de inicio.
 
-Con PowerShell, cuenta y muestra los programas que se ejecutan al iniciar sesión en el equipo. Presenta primero el número total y, a continuación, el listado completo con su nombre y ubicación.
+## **Gestión de procesos en GNU/Linux**
 
-### 4. Gestión de procesos por consumo de memoria en Windows
+### 4. Identificación de procesos y jerarquía
+En el equipo `UDnombre`, trabajar con `ps`, `pgrep` y `pstree`. Ejecutar **Firefox en segundo plano** antes de empezar; cada opción se resuelve con una línea de comandos y puede mostrarse en una captura final:
 
-Detén el proceso de mayor PID entre los 10 procesos que **menos** memoria consumen, en tres pasos: (1) listar esos 10 procesos, (2) eliminar el de mayor PID mediante una única línea de comando, (3) repetir el listado para comprobar el resultado. Documenta cada paso con su salida.
+!!! success ""
+    1. **Opciones de `ps`**: explicar qué es el PID y el PPID, y qué diferencia hay entre las opciones `a`, `x` y `-e`, mostrando el **número de procesos** que devuelve cada una y un ejemplo con columnas personalizadas (`-o pid,ppid,stat,ni,cmd`).
+    2. **PID mediante `pstree`**: obtener el PID de Firefox **filtrando** el resultado de `pstree`.
+    3. **Procesos padres**: a partir de ese PID, obtener con `pstree` todos los PID de sus **procesos padres** hasta `systemd`.
+    4. **Procesos hijos**: obtener los PID de sus **procesos hijos ordenados por PID** y, en otra línea, devolver el **número de procesos hijos** que tiene el proceso principal.
 
-### 5. Agrupación de procesos y servicios en Windows
+### 5. Prioridades y señales
+En el equipo `UDnombre`, gestionar la prioridad y el estado de un proceso gráfico con `nice`, `renice`, `top`, `htop` y `kill`:
 
-Muestra los procesos agrupados por nombre (columnas nombre y número de instancias), ordenados por el número de instancias y limitados a los 5 grupos con más procesos. A continuación, cuenta y muestra los servicios relacionados con la palabra **datos** que además estén en estado activo.
+!!! success ""
+    1. **Lanzar con prioridad**: ejecutar `gparted` en segundo plano con un valor nice de **-10**, indicando su número de trabajo y su PID.
+    2. **Cambiar la prioridad**: subirla a la **más alta posible sin** usar `top` ni `htop`, y después bajarla a la **más baja posible con `top`**, mostrando captura del proceso en ambos casos.
+    3. **Pausar y reanudar**: pausar `gparted` enviándole una señal desde **`htop`**, comprobar con `ps` que su estado es `T`, e indicar **dos maneras** distintas de que el proceso detenido continúe en segundo plano, explicando y mostrando cada una por separado.
+    4. **Procesos prioritarios**: contar y, a continuación, listar todos los procesos del sistema que tengan una **prioridad mayor que la normal**.
 
-### 6. Identificación de PID, jerarquía de procesos y prioridad en GNU/Linux
+### 6. Trabajos, servicios y registros del sistema
+En el equipo `USnombre` (Ubuntu Server), trabajar con el control de trabajos de la shell, `systemctl` y `journalctl`:
 
-En una máquina GNU/Linux: explica qué es el PID de un proceso y qué diferencia hay entre las opciones `a e` y `x` de `ps`, con un ejemplo y una captura. A continuación, ejecuta `gparted` en segundo plano, indica su número de trabajo y su PID, y cambia su prioridad a la más alta posible usando `top` y a la más baja posible usando `htop`, documentando cada cambio con capturas.
+!!! success ""
+    1. **Primer y segundo plano**: lanzar **5 procesos** en segundo plano y listarlos explicando el significado de los símbolos `+` y `-`. Pasar a primer plano el **tercero**, detenerlo y volver a mostrar la lista.
+    2. **Señales**: lanzar `sleep 600` en segundo plano, **detenerlo mediante una señal** y comprobar con `ps` que está detenido; después, sin pasarlo a primer plano, **terminarlo de forma inmediata** también con una señal.
+    3. **Servicios `systemd`**: contar los servicios en estado `running`, `exited` y `failed`, y mostrar las **dependencias** del servicio `ssh`.
+    4. **Script de registros**: crear el script `nombrelogs.sh` que reciba como parámetro un nivel de severidad (`emergente`, `alerta`, `crítico`, `error`, `advertencia`, `noticia`, `información` o `depuración`), muestre por consola la **cantidad de registros de este mes** de dicho nivel y genere en el directorio personal de quien lo ejecuta un **archivo** con el listado de esos registros. Debe validar el parámetro recibido.
 
-### 7. Nice, PRI y prioridad de procesos
+En este último punto se ha de mostrar el código comentado del script, un ejemplo de uso explicado y el contenido del archivo generado.
 
-Explica qué es el número **nice** de un proceso, qué rango de valores admite, quién puede modificarlo y en qué se diferencia de **PRI**. A continuación, cuenta y lista los procesos del sistema que tienen una prioridad mayor que la normal, usando el comando o herramienta que consideres más adecuada.
+## **Monitorización de sistemas**
 
-### 8. Procesos huérfanos y zombis: identificación con `pstree`
+!!! info ""
+      - Servidor de monitorización: `USnombre` · IP estática: 172.16.2xx.50
+      - Equipo Linux monitorizado: `UDnombre` · IP: 172.16.2xx.60
+      - Equipo Windows monitorizado: `WCnombre` · IP: 172.16.2xx.70
+      - Usuario administrador de las consolas web: `nombreadmin`
 
-Ejecuta `gparted` (o cualquier aplicación gráfica disponible) en segundo plano y, mediante `pstree`, obtén: el PID del proceso filtrando el resultado, los PID de sus procesos padres, los PID de sus procesos hijos ordenados por PID, y el número total de procesos hijos del proceso principal. Adicionalmente, provoca de forma controlada un proceso huérfano (lanzando un proceso hijo y terminando su padre) y un proceso zombi (un proceso que termina sin que su padre recoja su estado con `wait()`), identifica ambos con `ps` y explica cómo los reconocerías en una salida real.
+### 7. Instalación de Nagios Core
+En el equipo `USnombre`, instalar **Nagios Core** (paquete `nagios4` o compilado desde el código fuente) junto con los plugins oficiales (`monitoring-plugins`) y dejar operativa su interfaz web:
 
-### 9. Primer y segundo plano, señales y servicios en Ubuntu Server
+!!! success ""
+    1. **Instalación**: instalar Nagios y sus plugins, y comprobar con `systemctl` que el servicio está activo y habilitado en el arranque.
+    2. **Acceso web**: crear el usuario `nombreadmin` con `htpasswd` y acceder a la interfaz `http://172.16.2xx.50/nagios4`.
+    3. **Validación**: comprobar la configuración con `nagios4 -v` mostrando que no hay errores ni advertencias.
+    4. **Estado inicial**: mostrar en la vista *Hosts* y *Services* el propio servidor (`localhost`) con todas sus comprobaciones en estado **OK**.
 
-En un equipo Ubuntu Server: muestra una lista de 5 procesos en segundo plano (explicando el significado de los símbolos `+` y `-`), pasa a primer plano el tercero de la lista y detenlo; a continuación, lanza un proceso de larga duración (por ejemplo `sleep 600`) en segundo plano, detenlo mediante señales y comprueba el resultado, y termínalo de forma inmediata sin pasarlo a primer plano. Finalmente, escribe un script con un menú de opciones (`loaded`, `active`, `inactive`, `dead`, `running`) que liste los servicios `systemd` que cumplen la condición elegida.
+### 8. Monitorización de equipos con Nagios
+Añadir a Nagios los equipos `UDnombre` y `WCnombre`, de forma que se supervise tanto su disponibilidad como el estado de sus procesos:
 
-### 10. Secuencia de arranque, registro de logs y seguridad ante procesos no identificados
+!!! success ""
+    1. **Host Linux con NRPE**: instalar en `UDnombre` el agente **NRPE** y definir en Nagios un host con los servicios de **carga del sistema**, **uso del disco raíz** y **número total de procesos**.
+    2. **Host Windows**: definir el equipo `WCnombre` en Nagios y comprobar su disponibilidad mediante `ping` y el puerto **3389 (RDP)**.
+    3. **Vigilancia de un proceso**: crear un servicio con `check_procs` que pase a **CRITICAL** cuando el proceso `firefox` no esté en ejecución en `UDnombre`. Mostrar el cambio de estado al cerrar y volver a abrir Firefox.
+    4. **Mapa y evidencias**: mostrar el mapa de red (*Map*) con los tres equipos y la vista *Services* con todas las comprobaciones.
 
-Documenta con tus propias palabras la secuencia de arranque de la máquina GNU/Linux utilizada (BIOS/UEFI, cargador de arranque, kernel, `systemd` como PID 1, arranque de servicios y entorno de usuario), apoyándote en `systemctl list-units` y en `journalctl -b`. Escribe además un script en Bash que reciba año, mes y día por parámetro y devuelva el número de registros de error por cada nivel de severidad de `journald` (emergencia, alerta, crítico, error, advertencia, aviso, información, depuración) ocurridos desde esa fecha hasta la actual, validando los datos de entrada. Cierra el apartado con un breve checklist de seguridad: qué comprobarías si detectas, en cualquiera de las dos máquinas, un proceso que no reconoces.
+En este apartado se han de mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
 
-## Entregables
+### 9. Instalación de Prometheus y Grafana
+En el equipo `USnombre`, desplegar la pila **Prometheus + node_exporter + Grafana**, mediante paquetes del sistema o mediante **Docker Compose**:
 
-1. Diagramas de Gantt y colas de listos de los apartados 1 y 2, con la comparación de tiempos medios.
-2. Capturas de PowerShell de los apartados 3, 4 y 5, con los comandos utilizados junto a cada resultado.
-3. Capturas de terminal GNU/Linux de los apartados 6 a 9, incluyendo la salida de `pstree`, `top`/`htop` y el script de servicios.
-4. Script en Bash del apartado 10, junto con su salida de ejemplo y el checklist de seguridad redactado.
-5. Documento único en PDF con todos los apartados numerados del 1 al 10, entregado a través del campus virtual.
+!!! success ""
+    1. **Prometheus**: instalarlo y acceder a su interfaz en el puerto **9090**, mostrando en *Status → Targets* que el propio Prometheus está en estado **UP**.
+    2. **node_exporter**: instalarlo en `USnombre`, añadirlo al fichero `prometheus.yml` y comprobar que el nuevo target aparece **UP**.
+    3. **Grafana**: instalarlo, acceder por el puerto **3000**, cambiar la contraseña por defecto y crear el usuario `nombreadmin`.
+    4. **Origen de datos**: añadir Prometheus como *Data source* en Grafana e importar el dashboard **Node Exporter Full (ID 1860)**, mostrando las métricas del servidor.
 
-!!! tip "Antes de entregar"
-    Repasa que cada uno de los 10 apartados tenga, al menos, una captura o evidencia y el comando exacto ejecutado (no solo la descripción de lo que "habría que hacer"). Si trabajas en PowerShell, comprueba que el prompt muestra la carpeta con tu nombre, tal y como se pide en el apartado 3; si trabajas en Linux, verifica que las capturas de `pstree`, `top` y `htop` sean legibles y correspondan realmente al proceso indicado en el enunciado (`gparted` u otra aplicación equivalente).
+### 10. Añadir equipos y crear gráficas específicas en Grafana
+Ampliar la monitorización a los equipos de la red y construir un dashboard propio llamado **`nombre-dashboard`**:
+
+!!! success ""
+    1. **Añadir equipos**: instalar `node_exporter` en `UDnombre` y **windows_exporter** en `WCnombre` (puerto 9182), añadirlos a `prometheus.yml` y comprobar que los tres targets están **UP**.
+    2. **Gráfica de CPU**: crear un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, indicando la consulta **PromQL** utilizada.
+    3. **Gráficas de memoria y red**: crear un panel de **memoria disponible (%)** y otro de **tráfico de red** (recibido y enviado) de `UDnombre`.
+    4. **Prueba de carga**: generar carga de CPU en `UDnombre` (por ejemplo con `stress` o `yes > /dev/null &`) y mostrar en el dashboard el pico producido y su desaparición tras **terminar el proceso con una señal**.
+
+!!! example "ENTREGA"
+    - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
+    - Para una calificación correcta se han de seguir las instrucciones del documento: “**Pautas del curso**”, que se encuentra en el apartado de recurso del Campus.
+    - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”
