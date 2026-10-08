@@ -1,0 +1,72 @@
+<svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="320" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Arquitectura del Elastic Stack (ELK)</text>
+
+  <!-- Sources -->
+  <g>
+    <rect x="30" y="90" width="170" height="170" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="115" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Fuentes</text>
+    <rect x="45" y="128" width="140" height="30" rx="6" fill="#ffffff" stroke="#00897b" stroke-width="1.2"/>
+    <text x="115" y="148" text-anchor="middle" font-size="10" fill="#37474f">Logs de aplicación</text>
+    <rect x="45" y="165" width="140" height="30" rx="6" fill="#ffffff" stroke="#00897b" stroke-width="1.2"/>
+    <text x="115" y="185" text-anchor="middle" font-size="10" fill="#37474f">syslog / journald</text>
+    <rect x="45" y="202" width="140" height="30" rx="6" fill="#ffffff" stroke="#00897b" stroke-width="1.2"/>
+    <text x="115" y="222" text-anchor="middle" font-size="10" fill="#37474f">Métricas del sistema</text>
+  </g>
+
+  <path d="M200 175 L240 175" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Beats -->
+  <g>
+    <rect x="245" y="110" width="150" height="130" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="320" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">Beats</text>
+    <text x="320" y="160" text-anchor="middle" font-size="9" fill="#37474f">Filebeat</text>
+    <text x="320" y="177" text-anchor="middle" font-size="9" fill="#37474f">Metricbeat</text>
+    <text x="320" y="194" text-anchor="middle" font-size="9" fill="#37474f">Packetbeat</text>
+    <text x="320" y="211" text-anchor="middle" font-size="9" fill="#37474f">agentes ligeros</text>
+  </g>
+
+  <path d="M395 175 L435 175" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Logstash -->
+  <g>
+    <rect x="440" y="90" width="180" height="170" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="530" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Logstash</text>
+    <text x="530" y="140" text-anchor="middle" font-size="10" fill="#37474f">(opcional)</text>
+    <text x="530" y="165" text-anchor="middle" font-size="10" fill="#37474f">input → filter → output</text>
+    <text x="530" y="185" text-anchor="middle" font-size="10" fill="#37474f">parseo grok, enriquecido</text>
+    <text x="530" y="205" text-anchor="middle" font-size="10" fill="#37474f">transformaciones pesadas</text>
+  </g>
+
+  <path d="M620 175 L660 175" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Elasticsearch -->
+  <g>
+    <rect x="665" y="80" width="180" height="190" rx="14" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+    <text x="755" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#1565c0">Elasticsearch</text>
+    <text x="755" y="130" text-anchor="middle" font-size="10" fill="#37474f">Índices invertidos</text>
+    <text x="755" y="150" text-anchor="middle" font-size="10" fill="#37474f">Shards / réplicas</text>
+    <text x="755" y="170" text-anchor="middle" font-size="10" fill="#37474f">Búsqueda full-text</text>
+    <text x="755" y="190" text-anchor="middle" font-size="10" fill="#37474f">Agregaciones</text>
+    <text x="755" y="210" text-anchor="middle" font-size="10" fill="#37474f">API REST</text>
+  </g>
+
+  <path d="M845 175 L885 175" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Kibana -->
+  <g>
+    <rect x="890" y="110" width="90" height="130" rx="14" fill="#fce4ec" stroke="#ad1457" stroke-width="2"/>
+    <text x="935" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#ad1457">Kibana</text>
+    <text x="935" y="165" text-anchor="middle" font-size="9" fill="#37474f">Discover</text>
+    <text x="935" y="182" text-anchor="middle" font-size="9" fill="#37474f">Dashboards</text>
+    <text x="935" y="199" text-anchor="middle" font-size="9" fill="#37474f">Alerting</text>
+  </g>
+
+  <text x="500" y="298" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">Los Beats pueden enviar directo a Elasticsearch; Logstash entra cuando hace falta transformar de verdad</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

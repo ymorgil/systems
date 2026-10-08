@@ -1,0 +1,2085 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ymorgil.github.io/systems/11add/ut04-practica/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>[Protected] 🧪 UT04 · Práctica: acceso remoto seguro entre sistemas heterogéneos con SSH y WireGuard - Repositorio de Yeray Moreno</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/css/cards.css">
+    
+      <link rel="stylesheet" href="../../assets/css/seccion.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ut04-practica-acceso-remoto-seguro-entre-sistemas-heterogeneos-con-ssh-y-wireguard" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-header__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Repositorio de Yeray Moreno
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [Protected] 🧪 UT04 · Práctica: acceso remoto seguro entre sistemas heterogéneos con SSH y WireGuard
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green" aria-label="Modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Repositorio de Yeray Moreno" class="md-nav__button md-logo" aria-label="Repositorio de Yeray Moreno" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    Repositorio de Yeray Moreno
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curso 26/27
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Curso 26/27
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/01Pautas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pautas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/02maquinasbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Máquinas base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01curso/03Veyon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veyon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/01introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/02vmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02virtual/03proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/01docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/02docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker práctico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03contenedores/03kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/01introcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/02aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04cloud/ec2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/01vscode-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode y Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/02bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/05powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/06powershell-dominios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Powershell-dominios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05scripting/100-ejercicios-bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitorización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/prometheus-grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus y Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06monitor/elastic-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack (ELK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automatización
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vagrant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07automa/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inteligencia Artificial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inteligencia Artificial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/impacto-ia-sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impacto de la IA en sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08ia/entrenar-llm-local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrenar LLM local
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [Protected] Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [Protected] UT01 Práctica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ut02-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [Protected] UT02 Práctica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12biu/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DJK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DJK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/00-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-practica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Práctica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13djk/ut01-rubrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT01 Rúbrica
+  
+
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-obligatoria-de-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura obligatoria de la práctica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura obligatoria de la práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-despliegue-del-escenario-y-plan-de-direccionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Despliegue del escenario y plan de direccionamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-instalacion-y-configuracion-de-ssh-con-autenticacion-por-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Instalación y configuración de SSH con autenticación por clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tunel-ssh-a-un-servicio-no-cifrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Túnel SSH a un servicio no cifrado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configuracion-de-una-vpn-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuración de una VPN WireGuard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-interfaz-de-gestion-de-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Interfaz de gestión de WireGuard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-acceso-remoto-en-windows-rdp-y-winrm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Acceso remoto en Windows: RDP y WinRM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-creacion-de-cuentas-de-acceso-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Creación de cuentas de acceso remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-pruebas-cruzadas-entre-sistemas-heterogeneos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pruebas cruzadas entre sistemas heterogéneos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-cifrado-y-verificacion-de-la-informacion-transferida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cifrado y verificación de la información transferida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-documentacion-final-del-entorno-administrado-en-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Documentación final del entorno administrado en remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entregables
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div id="mkdocs-encrypted-content" style="display:none">BqZeJ95Wp5Few66LRWCEvw==;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</div>
+<div id="mkdocs-decrypted-content" style="display:none">
+    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
+        <h1>This content is protected with AES encryption. </h1>
+        <p>Contact your administrator for access to this page.</p>
+        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="Password">
+        
+        <p id="mkdocs-decrypt-msg"></p>
+    </form>
+</div>
+
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "systems/11add/ut04-practica/";
+var decryption_failure_message = "Invalid password.";
+var encryptcontent_keystore = ["gNygMxHbW/+d7Wqw8BLwRA==;9RjfoOBGM/yICAjiDzC8YY4grLomBtjJEOevg7uI5v/nU4Vkg210laGRFa8UupI+Ll8qQuvaLYViojglKUhTNFOeSrx7BBA0DdypqvQrIcp8LyKw01Ntyf3lpBJT4BeF;IzDgBzkWzYLhFAOYg2zgQQ=="];
+var encryptcontent_obfuscate = 0;
+
+const encryptcontent_event = new Event("encryptcontent_event");
+var encryptcontent_done = false;
+</script>
+<script type="module">
+if (!window.hasOwnProperty("init_decryptor")) {
+    import("../../assets/javascripts/decrypt-contents.js");
+} else {
+    init_decryptor();
+}
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/javascripts/nav-toggle.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

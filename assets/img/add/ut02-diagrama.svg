@@ -1,0 +1,69 @@
+<svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="320" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Ciclo de vida de un proceso (modelo de 5 estados)</text>
+
+  <!-- Nuevo -->
+  <g>
+    <rect x="30" y="130" width="140" height="70" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="100" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">Nuevo</text>
+    <text x="100" y="180" text-anchor="middle" font-size="10" fill="#37474f">admisión</text>
+  </g>
+
+  <path d="M170 165 L245 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Listo -->
+  <g>
+    <rect x="250" y="130" width="140" height="70" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="320" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#00897b">Listo</text>
+    <text x="320" y="180" text-anchor="middle" font-size="10" fill="#37474f">cola de listos</text>
+  </g>
+
+  <!-- Listo -> Ejecucion -->
+  <path d="M390 155 L465 155" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="425" y="145" text-anchor="middle" font-size="10" fill="#607d8b">despacho</text>
+
+  <!-- Ejecucion -->
+  <g>
+    <rect x="470" y="130" width="140" height="70" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="540" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">Ejecución</text>
+    <text x="540" y="180" text-anchor="middle" font-size="10" fill="#37474f">usa la CPU</text>
+  </g>
+
+  <!-- Ejecucion -> Listo (expropiacion / fin quantum) -->
+  <path d="M540 130 C 500 90, 380 90, 320 128" stroke="#90a4ae" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="430" y="85" text-anchor="middle" font-size="10" fill="#607d8b">fin de quantum / expropiación</text>
+
+  <!-- Ejecucion -> Bloqueado -->
+  <path d="M540 200 L540 240 L610 240" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="565" y="260" text-anchor="middle" font-size="10" fill="#607d8b">espera de E/S</text>
+
+  <!-- Bloqueado -->
+  <g>
+    <rect x="615" y="205" width="150" height="70" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="690" y="235" text-anchor="middle" font-size="14" font-weight="700" fill="#00897b">Bloqueado</text>
+    <text x="690" y="255" text-anchor="middle" font-size="10" fill="#37474f">espera un evento</text>
+  </g>
+
+  <!-- Bloqueado -> Listo -->
+  <path d="M690 205 C 660 150, 400 130, 330 130" stroke="#90a4ae" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="560" y="115" text-anchor="middle" font-size="10" fill="#607d8b">evento completado</text>
+
+  <!-- Ejecucion -> Terminado -->
+  <path d="M610 145 L855 145" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="730" y="135" text-anchor="middle" font-size="10" fill="#607d8b">fin del proceso</text>
+
+  <!-- Terminado -->
+  <g>
+    <rect x="860" y="110" width="120" height="70" rx="14" fill="#eceff1" stroke="#37474f" stroke-width="2"/>
+    <text x="920" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#37474f">Terminado</text>
+    <text x="920" y="160" text-anchor="middle" font-size="10" fill="#37474f">libera recursos</text>
+  </g>
+
+  <text x="500" y="300" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">UT02 · Procesos del sistema — el planificador decide las transiciones entre Listo y Ejecución</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="340" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Arquitectura del ejercicio: el modelo vive siempre en el equipo del aula</text>
+
+  <!-- PC del aula -->
+  <g>
+    <rect x="30" y="80" width="200" height="140" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="130" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">PC del aula</text>
+    <text x="130" y="138" text-anchor="middle" font-size="11" fill="#37474f">CPU, 8-16 GB RAM</text>
+    <text x="130" y="156" text-anchor="middle" font-size="11" fill="#37474f">Sin GPU dedicada</text>
+    <text x="130" y="180" text-anchor="middle" font-size="11" fill="#37474f" font-style="italic">Sin conexión</text>
+    <text x="130" y="196" text-anchor="middle" font-size="11" fill="#37474f" font-style="italic">obligatoria</text>
+  </g>
+
+  <path d="M230 150 L266 150" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowA)"/>
+
+  <!-- Motor de inferencia -->
+  <g>
+    <rect x="270" y="65" width="230" height="170" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="385" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Motor de inferencia local</text>
+    <text x="385" y="122" text-anchor="middle" font-size="11" fill="#37474f">Ollama / llama.cpp / LM Studio</text>
+    <text x="385" y="144" text-anchor="middle" font-size="11" fill="#37474f">Modelo GGUF cuantizado</text>
+    <text x="385" y="166" text-anchor="middle" font-size="11" fill="#37474f">API REST local</text>
+    <text x="385" y="184" text-anchor="middle" font-size="11" fill="#37474f">(localhost:11434)</text>
+    <text x="385" y="208" text-anchor="middle" font-size="10" fill="#607d8b" font-style="italic">Aquí se fusiona el adaptador</text>
+  </g>
+
+  <path d="M500 150 L536 150" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrowA)"/>
+
+  <!-- Cliente -->
+  <g>
+    <rect x="540" y="80" width="200" height="140" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="640" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Cliente</text>
+    <text x="640" y="138" text-anchor="middle" font-size="11" fill="#37474f">Chat web local</text>
+    <text x="640" y="156" text-anchor="middle" font-size="11" fill="#37474f">Editor de código</text>
+    <text x="640" y="174" text-anchor="middle" font-size="11" fill="#37474f">Script propio del</text>
+    <text x="640" y="192" text-anchor="middle" font-size="11" fill="#37474f">alumnado</text>
+  </g>
+
+  <!-- Dataset y ajuste -->
+  <g>
+    <rect x="270" y="255" width="230" height="70" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="385" y="280" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">Dataset propio</text>
+    <text x="385" y="300" text-anchor="middle" font-size="10" fill="#37474f">Apuntes en Markdown → pares</text>
+    <text x="385" y="315" text-anchor="middle" font-size="10" fill="#37474f">instrucción-respuesta (.jsonl)</text>
+  </g>
+
+  <path d="M500 290 L570 290 L570 250" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrowA)"/>
+
+  <g>
+    <rect x="575" y="245" width="220" height="80" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="685" y="270" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">Ajuste LoRA / QLoRA</text>
+    <text x="685" y="292" text-anchor="middle" font-size="10" fill="#37474f">Local (lento, CPU) o GPU</text>
+    <text x="685" y="308" text-anchor="middle" font-size="10" fill="#37474f">gratuita en la nube (Colab)</text>
+  </g>
+
+  <path d="M685 245 L685 200 L500 200" stroke="#90a4ae" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#arrowA)"/>
+  <text x="820" y="245" text-anchor="middle" font-size="10" fill="#607d8b" font-style="italic">Adaptador de</text>
+  <text x="820" y="260" text-anchor="middle" font-size="10" fill="#607d8b" font-style="italic">pocos MB</text>
+
+  <text x="500" y="18" text-anchor="middle" font-size="1" fill="none"> </text>
+
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>
