@@ -19,7 +19,7 @@
 !!! info ""
     Todos los apartados de este bloque se realizan con **PowerShell en modo administrador**. Para que tu nombre aparezca en el prompt, crea en la raíz del sistema una carpeta con tu nombre (`C:\nombre`), accede a ella y ejecuta los comandos desde esa ruta. En cada captura debe verse el **comando** y su **resultado**. Recuerda captura del comando y del resultado.
 
-### 1. Consulta e identificación de procesos
+### 1. Identificación de procesos
 Obtener información de los procesos en ejecución del equipo `WCnombre` mediante comandos y la tuberías de PowerShell:
 
 **1.1 Programas de inicio de sesión** mostrar primero el **número** de programas que se ejecutan al iniciar sesión y, a continuación, el **listado** con su nombre y ubicación.
@@ -42,7 +42,7 @@ Obtener información de los procesos en ejecución del equipo `WCnombre` mediant
 **2.4 Terminar desde CMD**: con `tasklist` filtrar los Bloc de notas que queden en ejecución y terminarlos, junto con sus procesos hijos, de forma forzada con `taskkill`. Comprobar el resultado.
 
 
-### 3. Gestión de servicios en Windows
+### 3. Gestión de servicios
 
 **3.1 Servicios de datos activos**: contar y mostrar el listado de los servicios cuyo nombre para mostrar contenga la palabra **datos** y que además estén **en ejecución**.
 
@@ -56,55 +56,86 @@ Obtener información de los procesos en ejecución del equipo `WCnombre` mediant
 
 ## **Procesos en GNU/Linux** { .seccion }
 
-## continuará...
+### 4. Procesos y jerarquía
+**4.1 Opciones de `ps`**: explicar qué es el PID y el PPID, y qué diferencia hay entre las opciones `a`, `x` y `-e`, mostrando el **número de procesos** que devuelve cada una con un ejemplo con columnas personalizadas (`-o pid,ppid,stat,ni,cmd`).
 
-<!-- OCULTO HASTA TERMINAR
+Ejecutar **Firefox en segundo plano** antes de empezar, cada opción se resuelve con una línea de comandos y puede mostrarse en una captura final:
 
-### 4. Identificación de procesos y jerarquía
-En el equipo `UDnombre`, trabajar con `ps`, `pgrep` y `pstree`. Ejecutar **Firefox en segundo plano** antes de empezar; cada opción se resuelve con una línea de comandos y puede mostrarse en una captura final:
+**4.2 PID mediante `pstree`**: obtener el PID de Firefox **filtrando** el resultado de `pstree`.
 
-!!! success ""
-    1. **Opciones de `ps`**: explicar qué es el PID y el PPID, y qué diferencia hay entre las opciones `a`, `x` y `-e`, mostrando el **número de procesos** que devuelve cada una y un ejemplo con columnas personalizadas (`-o pid,ppid,stat,ni,cmd`).
-    2. **PID mediante `pstree`**: obtener el PID de Firefox **filtrando** el resultado de `pstree`.
-    3. **Procesos padres**: a partir de ese PID, obtener con `pstree` todos los PID de sus **procesos padres** hasta `systemd`.
-    4. **Procesos hijos**: obtener los PID de sus **procesos hijos ordenados por PID** y, en otra línea, devolver el **número de procesos hijos** que tiene el proceso principal.
+**4.3 Procesos padres**: a partir de ese PID, obtener con `pstree` todos los PID de sus **procesos padres** hasta `systemd`.
+
+**4.4 Procesos hijos**: obtener los PID de sus **procesos hijos ordenados por PID** y, en otra línea, devolver el **número de procesos hijos** que tiene el proceso principal.
 
 ### 5. Prioridades y señales
-En el equipo `UDnombre`, gestionar la prioridad y el estado de un proceso gráfico con `nice`, `renice`, `top`, `htop` y `kill`:
+**5.1 Lanzar con prioridad**: ejecutar `gparted` en segundo plano con un valor nice de **-10**, indicando su número de trabajo y su PID.
+    
+**5.2 Cambiar la prioridad**: subirla a la **más alta posible sin** usar `top` ni `htop`, y después bajarla a la **más baja posible con `top`**, mostrando captura del proceso en ambos casos.
 
-!!! success ""
-    1. **Lanzar con prioridad**: ejecutar `gparted` en segundo plano con un valor nice de **-10**, indicando su número de trabajo y su PID.
-    2. **Cambiar la prioridad**: subirla a la **más alta posible sin** usar `top` ni `htop`, y después bajarla a la **más baja posible con `top`**, mostrando captura del proceso en ambos casos.
-    3. **Pausar y reanudar**: pausar `gparted` enviándole una señal desde **`htop`**, comprobar con `ps` que su estado es `T`, e indicar **dos maneras** distintas de que el proceso detenido continúe en segundo plano, explicando y mostrando cada una por separado.
-    4. **Procesos prioritarios**: contar y, a continuación, listar todos los procesos del sistema que tengan una **prioridad mayor que la normal**.
+**5.3 Pausar y reanudar**: pausar `gparted` enviándole una señal desde **`htop`**, comprobar con `ps` su estado, e indicar **dos maneras** distintas de que el proceso detenido continúe en segundo plano, explicando y mostrando cada una por separado.
 
-### 6. Trabajos, servicios y registros del sistema
-En el equipo `USnombre` (Ubuntu Server), trabajar con el control de trabajos de la shell, `systemctl` y `journalctl`:
+**5.4 Procesos prioritarios**: contar y, a continuación, listar todos los procesos del sistema que tengan una **prioridad mayor que la normal**.
 
-!!! success ""
-    1. **Primer y segundo plano**: lanzar **5 procesos** en segundo plano y listarlos explicando el significado de los símbolos `+` y `-`. Pasar a primer plano el **tercero**, detenerlo y volver a mostrar la lista.
-    2. **Señales**: lanzar `sleep 600` en segundo plano, **detenerlo mediante una señal** y comprobar con `ps` que está detenido; después, sin pasarlo a primer plano, **terminarlo de forma inmediata** también con una señal.
-    3. **Servicios `systemd`**: contar los servicios en estado `running`, `exited` y `failed`, y mostrar las **dependencias** del servicio `ssh`.
-    4. **Script de registros**: crear el script `nombrelogs.sh` que reciba como parámetro un nivel de severidad (`emergente`, `alerta`, `crítico`, `error`, `advertencia`, `noticia`, `información` o `depuración`), muestre por consola la **cantidad de registros de este mes** de dicho nivel y genere en el directorio personal de quien lo ejecuta un **archivo** con el listado de esos registros. Debe validar el parámetro recibido.
+### 6. Trabajos y servicios
+En (Ubuntu Server):
 
-En este último punto se ha de mostrar el código comentado del script, un ejemplo de uso explicado y el contenido del archivo generado.
+**6.1 Primer y segundo plano**: lanzar **5 procesos** en segundo plano y listarlos explicando el significado de los símbolos `+` y `-`. Pasar a primer plano el **tercero**, detenerlo y volver a mostrar la lista.
+
+**6.2 Señales**: lanzar `sleep 600` en segundo plano, **detenerlo mediante una señal** y comprobar con `ps` que está detenido; después, sin pasarlo a primer plano, **terminarlo de forma inmediata** también con una señal.
+
+**6.3 Servicios `systemd`**: contar los servicios en estado `running`, `exited` y `failed`, y mostrar las **dependencias** del servicio `ssh`.
+
+**6.4 Script de registros**: crear el script `nombrelogs.sh` que reciba como parámetro un nivel de severidad (`emergente`, `alerta`, `crítico`, `error`, `advertencia`, `noticia`, `información` o `depuración`), muestre por consola la **cantidad de registros de este mes** de dicho nivel y genere en el directorio personal de quien lo ejecuta un **archivo** con el listado de esos registros. Debe validar el parámetro recibido.
+
+En este último punto se ha de mostrar el código comentado del script, enlace al repositorio, un ejemplo de uso explicado y el contenido del archivo generado.
 
 ## **Monitorización de sistemas**  { .seccion }
-
 !!! info ""
       - Servidor de monitorización: `USnombre` · IP estática: 172.16.2xx.50
       - Equipo Linux monitorizado: `UDnombre` · IP: 172.16.2xx.60
       - Equipo Windows monitorizado: `WCnombre` · IP: 172.16.2xx.70
       - Usuario administrador de las consolas web: `nombreadmin`
 
-### 7. Instalación de Nagios Core
-En el equipo `USnombre`, instalar **Nagios Core** (paquete `nagios4` o compilado desde el código fuente) junto con los plugins oficiales (`monitoring-plugins`) y dejar operativa su interfaz web:
+### 7. Nagios Core
+En (Ubuntu Server):
 
-!!! success ""
-    1. **Instalación**: instalar Nagios y sus plugins, y comprobar con `systemctl` que el servicio está activo y habilitado en el arranque.
-    2. **Acceso web**: crear el usuario `nombreadmin` con `htpasswd` y acceder a la interfaz `http://172.16.2xx.50/nagios4`.
-    3. **Validación**: comprobar la configuración con `nagios4 -v` mostrando que no hay errores ni advertencias.
-    4. **Estado inicial**: mostrar en la vista *Hosts* y *Services* el propio servidor (`localhost`) con todas sus comprobaciones en estado **OK**.
+**7.1 Instalación y acceso web**: instalar **Nagios Core** junto con los plugins oficiales (`monitoring-plugins`), comprobar con `systemctl` que el servicio está **activo y habilitado** en el arranque, crear el usuario `nombreadmin` con `htpasswd` y acceder a la interfaz `http://172.16.2xx.50/nagios4`.
+
+**7.2 Validación y estado inicial**: comprobar la configuración con `nagios4 -v` mostrando que **no hay errores ni advertencias**, y mostrar en las vistas *Hosts* y *Services* el propio servidor (`localhost`) con todas sus comprobaciones en estado **OK**.
+
+<!-- OCULTO HASTA TERMINAR
+
+### 8. Monitorización con Nagios
+Añadir dos equipos Ubuntu y Windows :
+
+**8.1 Definición de hosts**: instalar en `Ubuntu` el agente **NRPE** y definir en Nagios un host con los servicios de **carga del sistema**, **uso del disco raíz** y **número total de procesos**. Definir también el equipo `Windows` y comprobar su disponibilidad mediante `ping` y el puerto **3389 (RDP)**. Mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
+
+**8.2 Vigilancia de un proceso**: crear un servicio con `check_procs` que pase a **CRITICAL** cuando el proceso `firefox` no esté en ejecución en `Ubuntu`, mostrando el cambio de estado al cerrar y volver a abrir Firefox. Mostrar el mapa de red (*Map*) con los **tres equipos** y la vista *Services* con todas las comprobaciones.
+
+### 9. Prometheus y Grafana
+En `USnombre` (Ubuntu Server), mediante paquetes del sistema o mediante **Docker Compose**:
+
+**9.1 Prometheus y node_exporter**: instalar **Prometheus** y acceder a su interfaz en el puerto **9090**. Instalar **node_exporter**, añadirlo al fichero `prometheus.yml` y comprobar en *Status → Targets* que tanto Prometheus como node_exporter están en estado **UP**.
+
+**9.2 Grafana**: instalar **Grafana**, acceder por el puerto **3000**, cambiar la contraseña por defecto y crear el usuario `nombreadmin`. Añadir Prometheus como *Data source* e importar el dashboard **Node Exporter Full (ID 1860)**, mostrando las métricas del servidor.
+
+### 10. Gráficas en Grafana
+En `USnombre` (Ubuntu Server), ampliar la monitorización y crear el dashboard **`nombre-dashboard`**:
+
+**10.1 Equipos y paneles**: instalar `node_exporter` en `UDnombre` y **windows_exporter** en `WCnombre` (puerto **9182**), añadirlos a `prometheus.yml` y comprobar que los **tres targets** están **UP**. Crear un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, y otros dos de **memoria disponible (%)** y **tráfico de red** (recibido y enviado) de `UDnombre`, indicando las consultas **PromQL** utilizadas.
+
+**10.2 Prueba de carga**: generar carga de CPU en `UDnombre` (por ejemplo con `stress` o `yes > /dev/null &`) y mostrar en el dashboard el **pico producido** y su desaparición tras **terminar el proceso con una señal**.
+
+
+
+
+
+
+## continuará...
+
+<!-- OCULTO HASTA TERMINAR
+
+
 
 ### 8. Monitorización de equipos con Nagios
 Añadir a Nagios los equipos `UDnombre` y `WCnombre`, de forma que se supervise tanto su disponibilidad como el estado de sus procesos:

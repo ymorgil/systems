@@ -50,7 +50,22 @@ Start-Service Spooler
 Get-Service Spooler | Select-Object Name, Status, StartType
 
 
+# 4.1
+# PID: identificador único del proceso | PPID: PID de su proceso padre
+ps a --no-headers | wc -l      # a: procesos de todos los usuarios con terminal
+ps x --no-headers | wc -l      # x: procesos del usuario actual, con o sin terminal
+ps -e --no-headers | wc -l     # -e: todos los procesos del sistema
+ps -eo pid,ppid,stat,ni,cmd
 
+# 4.2
+pstree -p | grep -o 'firefox([0-9]*)' | head -1 | grep -o '[0-9]*'
 
+# 4.3
+PID=$(pstree -p | grep -o 'firefox([0-9]*)' | head -1 | grep -o '[0-9]*')
+pstree -sp $PID | head -1 | sed "s/($PID).*//" | grep -oP '\(\K[0-9]+(?=\))'
+
+# 4.4
+pstree -pT $PID | grep -oP '\(\K[0-9]+(?=\))' | grep -vx $PID | sort -n
+pstree -pT $PID | grep -oP '\(\K[0-9]+(?=\))' | grep -vx $PID | wc -l
 
 # **📋 UT02 · Rúbrica de evaluación**
