@@ -1,48 +1,64 @@
 # 🧪 Supuesto Práctico UT02 *Procesos del sistema* { .card }
 
 !!! info "OBJETIVOS"
-    Administrar los procesos y servicios del sistema, tanto en Windows (PowerShell y CMD) como en GNU/Linux (Bash, `ps`, `pstree`, `top`, `htop`, `systemd` y `journald`), aplicando criterios de seguridad y eficiencia: identificar procesos y su jerarquía, crearlos y terminarlos, modificar su prioridad, enviarles señales y consultar sus registros. En la segunda parte se da el salto del equipo individual a la **monitorización centralizada**, desplegando Nagios y la pila Prometheus + Grafana para vigilar varios equipos de la red. La práctica se estructura en **10 apartados obligatorios**: 3 de procesos en Windows, 3 de procesos en GNU/Linux y 4 de monitorización.
+    Administrar los procesos y servicios del sistema, tanto en Windows (PowerShell y CMD) como en GNU/Linux (Bash, `ps`, `pstree`, `top`, `htop`, `systemd` y `journald`), aplicando criterios de seguridad y eficiencia: identificar procesos y su jerarquía, crearlos y terminarlos, modificar su prioridad, enviarles señales y consultar sus registros. 
+
+    En la segunda parte se da el salto del equipo individual a la **monitorización centralizada**, desplegando Nagios y la pila Prometheus + Grafana para vigilar varios equipos de la red. 
+    
+    La práctica se estructura en **10 apartados obligatorios**: 3 de procesos en Windows, 3 de procesos en GNU/Linux y 4 de monitorización.
 
 !!! info "RECURSOS"
-    - VMware con máquinas virtuales propias.
-    - Un **Windows 10/11** como equipo cliente (`WCnombre`), con PowerShell en modo administrador.
-    - Un **Ubuntu Desktop 24.04** o superior (`UDnombre`) con `htop`, `gparted` y Firefox instalados.
-    - Un **Ubuntu Server 24.04** o superior (`USnombre`) que hará de **servidor de monitorización**.
-    - Acceso a Internet para instalar paquetes, Docker (opcional) y un cliente SSH (por ejemplo, Termius o el propio `ssh` de terminal).
+    - VMware con máquinas virtuales propias
+    - Un **Windows 11** como equipo cliente (`WCnombre`)
+    - Un **Ubuntu Desktop 26.04** o superior (`UDnombre`) 
+    - Un **Ubuntu Server 26.04** o superior (`USnombre`)
+    - Acceso a Internet para instalar paquetes
 
-## **Gestión de procesos en Windows**
+## **Procesos en Windows 11** { .seccion }
 
 !!! info ""
-    Todos los apartados de este bloque se realizan con **PowerShell en modo administrador**. Para que tu nombre aparezca en el prompt, crea en la raíz del sistema una carpeta con tu nombre (`C:\nombre`), accede a ella y ejecuta los comandos desde esa ruta. En cada captura debe verse el **comando** y su **resultado**.
+    Todos los apartados de este bloque se realizan con **PowerShell en modo administrador**. Para que tu nombre aparezca en el prompt, crea en la raíz del sistema una carpeta con tu nombre (`C:\nombre`), accede a ella y ejecuta los comandos desde esa ruta. En cada captura debe verse el **comando** y su **resultado**. Recuerda captura del comando y del resultado.
 
 ### 1. Consulta e identificación de procesos
-Obtener información de los procesos en ejecución del equipo `WCnombre` mediante `Get-Process`, `Get-CimInstance` y la tubería de PowerShell. Cada opción se resuelve con **una sola línea de comandos**:
+Obtener información de los procesos en ejecución del equipo `WCnombre` mediante comandos y la tuberías de PowerShell:
 
-!!! success ""
-    1. **Programas de inicio de sesión**: mostrar primero el **número** de programas que se ejecutan al iniciar sesión y, a continuación, el **listado** con su nombre y ubicación.
-    2. **Proceso que más CPU consume**: mostrarlo en **formato lista** con todos los valores de sus propiedades.
-    3. **Procesos agrupados por nombre**: mostrar dos columnas (nombre y número de instancias), ordenadas por el número y limitadas a los **5 grupos** con más procesos.
-    4. **Hilos de un proceso**: abrir Chrome (o Edge) con varias pestañas y mostrar, para cada uno de sus procesos, su PID y su **número de hilos**, terminando con el total de hilos del navegador.
+**1.1 Programas de inicio de sesión** mostrar primero el **número** de programas que se ejecutan al iniciar sesión y, a continuación, el **listado** con su nombre y ubicación.
+
+**1.2 Proceso que más CPU consume**  mostrarlo en **formato lista** con todos los valores de sus propiedades.
+
+**1.3 Procesos agrupados por nombre**: mostrar dos columnas (nombre y número de instancias), ordenadas por el número y limitadas a los **5 grupos** con más procesos.
+
+**1.4 Hilos de un proceso**: abrir Chrome (o Edge) con varias pestañas y mostrar, para cada uno de sus procesos, su PID y su **número de hilos**, terminando con el total de hilos del navegador.
+
 
 ### 2. Creación, prioridad y terminación de procesos
-Crear, modificar y terminar procesos desde PowerShell y desde el Símbolo del sistema (CMD):
 
-!!! success ""
-    1. **Crear procesos**: lanzar con `Start-Process` **tres instancias** del Bloc de notas y listar únicamente esos procesos mostrando su PID y su hora de inicio.
-    2. **Cambiar la prioridad**: asignar a una de las instancias la prioridad **Alta** y a otra **Por debajo de lo normal**, y comprobarlo listando las tres con la columna `PriorityClass`.
-    3. **Terminar por consumo de memoria**: detener el proceso con **mayor PID** de entre los **10 procesos que menos memoria consumen**. Se harán tres líneas (listar, eliminar y volver a listar), pero solo puntúa la segunda, que debe resolverse en **una única línea** sin usar el resultado de la primera.
-    4. **Terminar desde CMD**: con `tasklist` filtrar los Bloc de notas que queden en ejecución y terminarlos, junto con sus procesos hijos, de forma forzada con `taskkill`. Comprobar el resultado.
+**2.1 Crear procesos**: lanzar con `Start-Process` **tres instancias** del Bloc de notas y listar únicamente esos procesos mostrando su PID y su hora de inicio. *(UNA LÍNEA)*
+
+**2.2 Cambiar la prioridad**: asignar a una de las instancias la prioridad **Alta** y a otra **Por debajo de lo normal**, y comprobarlo listando las tres con la columna `PriorityClass`. *(UNA LÍNEA)*
+
+**2.3 Terminar por consumo de memoria**: detener el proceso con **mayor PID** de entre los **10 procesos que menos memoria consumen**. Se harán tres líneas (listar, eliminar y volver a listar), pero solo puntúa la segunda, que debe resolverse en **una única línea** sin usar el resultado de la primera.
+
+**2.4 Terminar desde CMD**: con `tasklist` filtrar los Bloc de notas que queden en ejecución y terminarlos, junto con sus procesos hijos, de forma forzada con `taskkill`. Comprobar el resultado.
+
 
 ### 3. Gestión de servicios en Windows
-Consultar y administrar servicios mediante los cmdlets `*-Service` y `Get-CimInstance Win32_Service`:
 
-!!! success ""
-    1. **Servicios de datos activos**: contar y mostrar el listado de los servicios cuyo nombre para mostrar contenga la palabra **datos** y que además estén **en ejecución**.
-    2. **Servicios por estado**: agrupar todos los servicios del equipo por su estado, mostrando el número de servicios de cada grupo.
-    3. **Servicios automáticos detenidos**: listar los servicios con tipo de inicio **Automático** que actualmente **no** estén en ejecución (nombre, nombre para mostrar y estado).
-    4. **Administrar un servicio**: con el servicio de cola de impresión (`Spooler`), mostrar sus **servicios dependientes**, detenerlo, cambiar su tipo de inicio a **Manual**, volver a iniciarlo y comprobar en una última línea su nombre, estado y tipo de inicio.
+**3.1 Servicios de datos activos**: contar y mostrar el listado de los servicios cuyo nombre para mostrar contenga la palabra **datos** y que además estén **en ejecución**.
 
-## **Gestión de procesos en GNU/Linux**
+**3.2 Servicios por estado**: agrupar todos los servicios del equipo por su estado, mostrando el número de servicios de cada grupo.
+
+**3.3 Servicios automáticos detenidos**: listar los servicios con tipo de inicio **Automático** que actualmente **no** estén en ejecución (nombre, nombre para mostrar y estado).
+
+**3.4 Administrar un servicio**: con el servicio de cola de impresión (`Spooler`), mostrar sus **servicios dependientes**, detenerlo, cambiar su tipo de inicio a **Manual**, volver a iniciarlo y comprobar en una última línea su nombre, estado y tipo de inicio. Si dicho servicio da errores elegir otro y explicarlo.
+
+
+
+## **Procesos en GNU/Linux** { .seccion }
+
+## continuará...
+
+<!-- OCULTO HASTA TERMINAR
 
 ### 4. Identificación de procesos y jerarquía
 En el equipo `UDnombre`, trabajar con `ps`, `pgrep` y `pstree`. Ejecutar **Firefox en segundo plano** antes de empezar; cada opción se resuelve con una línea de comandos y puede mostrarse en una captura final:
@@ -73,7 +89,7 @@ En el equipo `USnombre` (Ubuntu Server), trabajar con el control de trabajos de 
 
 En este último punto se ha de mostrar el código comentado del script, un ejemplo de uso explicado y el contenido del archivo generado.
 
-## **Monitorización de sistemas**
+## **Monitorización de sistemas**  { .seccion }
 
 !!! info ""
       - Servidor de monitorización: `USnombre` · IP estática: 172.16.2xx.50
@@ -123,3 +139,4 @@ Ampliar la monitorización a los equipos de la red y construir un dashboard prop
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento: “**Pautas del curso**”, que se encuentra en el apartado de recurso del Campus.
     - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”
+-->
