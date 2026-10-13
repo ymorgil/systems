@@ -97,77 +97,30 @@ En este último punto se ha de mostrar el código comentado del script, enlace a
       - Usuario administrador de las consolas web: `nombreadmin`
 
 ### 7. Nagios Core
-En (Ubuntu Server):
+**7.1 Instalación y acceso web**: instalar **Nagios Core** en ``Ubuntu Server`` junto con los plugins oficiales, comprobar con `systemctl` que el servicio está **activo y habilitado** en el arranque, crear el usuario `nombreadmin` con `htpasswd` y acceder a la interfaz `http://172.16.2xx.50/nagios4`.
 
-**7.1 Instalación y acceso web**: instalar **Nagios Core** junto con los plugins oficiales (`monitoring-plugins`), comprobar con `systemctl` que el servicio está **activo y habilitado** en el arranque, crear el usuario `nombreadmin` con `htpasswd` y acceder a la interfaz `http://172.16.2xx.50/nagios4`.
-
-**7.2 Validación y estado inicial**: comprobar la configuración con `nagios4 -v` mostrando que **no hay errores ni advertencias**, y mostrar en las vistas *Hosts* y *Services* el propio servidor (`localhost`) con todas sus comprobaciones en estado **OK**.
-
-<!-- OCULTO HASTA TERMINAR
+**7.2 Validación y estado inicial**: comprobar la configuración con mostrando que **no hay errores ni advertencias**, y mostrar en las vistas *Hosts* y *Services* el propio servidor (`localhost`) con todas sus comprobaciones en estado **OK**.
 
 ### 8. Monitorización con Nagios
-Añadir dos equipos Ubuntu y Windows :
+**8.1 Ubuntu**: instalar el agente **NRPE** y definir en Nagios un host con los servicios de **carga del sistema**, **uso del disco raíz** y **número total de procesos**. Mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
 
-**8.1 Definición de hosts**: instalar en `Ubuntu` el agente **NRPE** y definir en Nagios un host con los servicios de **carga del sistema**, **uso del disco raíz** y **número total de procesos**. Definir también el equipo `Windows` y comprobar su disponibilidad mediante `ping` y el puerto **3389 (RDP)**. Mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
+**8.2 Windows** Comprobar su disponibilidad mediante `ping` y el puerto **3389 (RDP)**. Mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
 
-**8.2 Vigilancia de un proceso**: crear un servicio con `check_procs` que pase a **CRITICAL** cuando el proceso `firefox` no esté en ejecución en `Ubuntu`, mostrando el cambio de estado al cerrar y volver a abrir Firefox. Mostrar el mapa de red (*Map*) con los **tres equipos** y la vista *Services* con todas las comprobaciones.
 
-### 9. Prometheus y Grafana
-En `USnombre` (Ubuntu Server), mediante paquetes del sistema o mediante **Docker Compose**:
+### 9. Prometheus
 
 **9.1 Prometheus y node_exporter**: instalar **Prometheus** y acceder a su interfaz en el puerto **9090**. Instalar **node_exporter**, añadirlo al fichero `prometheus.yml` y comprobar en *Status → Targets* que tanto Prometheus como node_exporter están en estado **UP**.
 
-**9.2 Grafana**: instalar **Grafana**, acceder por el puerto **3000**, cambiar la contraseña por defecto y crear el usuario `nombreadmin`. Añadir Prometheus como *Data source* e importar el dashboard **Node Exporter Full (ID 1860)**, mostrando las métricas del servidor.
-
-### 10. Gráficas en Grafana
-En `USnombre` (Ubuntu Server), ampliar la monitorización y crear el dashboard **`nombre-dashboard`**:
-
-**10.1 Equipos y paneles**: instalar `node_exporter` en `UDnombre` y **windows_exporter** en `WCnombre` (puerto **9182**), añadirlos a `prometheus.yml` y comprobar que los **tres targets** están **UP**. Crear un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, y otros dos de **memoria disponible (%)** y **tráfico de red** (recibido y enviado) de `UDnombre`, indicando las consultas **PromQL** utilizadas.
-
-**10.2 Prueba de carga**: generar carga de CPU en `UDnombre` (por ejemplo con `stress` o `yes > /dev/null &`) y mostrar en el dashboard el **pico producido** y su desaparición tras **terminar el proceso con una señal**.
+**10.1 Equipos y paneles**: instalar `node_exporter` en `UDnombre` y **windows_exporter** en `WCnombre` (puerto **9182**), añadirlos a `prometheus.yml` y comprobar que los **tres targets** están **UP**.
 
 
+### 10. Grafana
+**10.1 Grafana**: instalar **Grafana**, acceder por el puerto **3000**, cambiar la contraseña por defecto y crear el usuario `nombreadmin`. Añadir Prometheus como *Data source* e importar el dashboard **Node Exporter Full (ID 1860)**, mostrando las métricas del servidor.
 
+**10.2 Dashboard**: crear el dashboard `nombre-dashboard` con un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, y otros dos de **memoria disponible (%)** y **tráfico de red** (recibido y enviado) de `UDnombre`, indicando las consultas **PromQL** utilizadas.
 
-
-
-## continuará...
-
-<!-- OCULTO HASTA TERMINAR
-
-
-
-### 8. Monitorización de equipos con Nagios
-Añadir a Nagios los equipos `UDnombre` y `WCnombre`, de forma que se supervise tanto su disponibilidad como el estado de sus procesos:
-
-!!! success ""
-    1. **Host Linux con NRPE**: instalar en `UDnombre` el agente **NRPE** y definir en Nagios un host con los servicios de **carga del sistema**, **uso del disco raíz** y **número total de procesos**.
-    2. **Host Windows**: definir el equipo `WCnombre` en Nagios y comprobar su disponibilidad mediante `ping` y el puerto **3389 (RDP)**.
-    3. **Vigilancia de un proceso**: crear un servicio con `check_procs` que pase a **CRITICAL** cuando el proceso `firefox` no esté en ejecución en `UDnombre`. Mostrar el cambio de estado al cerrar y volver a abrir Firefox.
-    4. **Mapa y evidencias**: mostrar el mapa de red (*Map*) con los tres equipos y la vista *Services* con todas las comprobaciones.
-
-En este apartado se han de mostrar los ficheros `.cfg` creados en el servidor y el `nrpe.cfg` del equipo monitorizado.
-
-### 9. Instalación de Prometheus y Grafana
-En el equipo `USnombre`, desplegar la pila **Prometheus + node_exporter + Grafana**, mediante paquetes del sistema o mediante **Docker Compose**:
-
-!!! success ""
-    1. **Prometheus**: instalarlo y acceder a su interfaz en el puerto **9090**, mostrando en *Status → Targets* que el propio Prometheus está en estado **UP**.
-    2. **node_exporter**: instalarlo en `USnombre`, añadirlo al fichero `prometheus.yml` y comprobar que el nuevo target aparece **UP**.
-    3. **Grafana**: instalarlo, acceder por el puerto **3000**, cambiar la contraseña por defecto y crear el usuario `nombreadmin`.
-    4. **Origen de datos**: añadir Prometheus como *Data source* en Grafana e importar el dashboard **Node Exporter Full (ID 1860)**, mostrando las métricas del servidor.
-
-### 10. Añadir equipos y crear gráficas específicas en Grafana
-Ampliar la monitorización a los equipos de la red y construir un dashboard propio llamado **`nombre-dashboard`**:
-
-!!! success ""
-    1. **Añadir equipos**: instalar `node_exporter` en `UDnombre` y **windows_exporter** en `WCnombre` (puerto 9182), añadirlos a `prometheus.yml` y comprobar que los tres targets están **UP**.
-    2. **Gráfica de CPU**: crear un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, indicando la consulta **PromQL** utilizada.
-    3. **Gráficas de memoria y red**: crear un panel de **memoria disponible (%)** y otro de **tráfico de red** (recibido y enviado) de `UDnombre`.
-    4. **Prueba de carga**: generar carga de CPU en `UDnombre` (por ejemplo con `stress` o `yes > /dev/null &`) y mostrar en el dashboard el pico producido y su desaparición tras **terminar el proceso con una señal**.
 
 !!! example "ENTREGA"
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento: “**Pautas del curso**”, que se encuentra en el apartado de recurso del Campus.
     - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”
--->
