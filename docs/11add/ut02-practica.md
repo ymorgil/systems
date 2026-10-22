@@ -119,7 +119,6 @@ En este último punto se ha de mostrar el código comentado del script, enlace a
 
 **10.2 Dashboard**: crear el dashboard `nombre-dashboard` con un panel con el **porcentaje de uso de CPU** de `UDnombre` y `WCnombre` en la misma gráfica, y otros dos de **memoria disponible (%)** y **tráfico de red** (recibido y enviado) de `UDnombre`, indicando las consultas **PromQL** utilizadas.
 
-
 !!! example "ENTREGA"
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento: “**Pautas del curso**”, que se encuentra en el apartado de recurso del Campus.
