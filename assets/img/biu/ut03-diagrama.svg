@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Integridad de los datos en un sistema de ficheros distribuido</text>
+
+  <!-- Cliente -->
+  <g>
+    <rect x="40" y="110" width="130" height="80" rx="10" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="105" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Cliente</text>
+    <text x="105" y="165" text-anchor="middle" font-size="11" fill="#37474f">escribe fichero</text>
+  </g>
+  <path d="M170 150 L215 150" stroke="#90a4ae" stroke-width="3" marker-end="url(#a3)"/>
+
+  <!-- NameNode -->
+  <g>
+    <rect x="220" y="60" width="150" height="70" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="295" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">NameNode</text>
+    <text x="295" y="110" text-anchor="middle" font-size="11" fill="#37474f">metadatos + bloques</text>
+  </g>
+
+  <path d="M295 130 L295 165" stroke="#90a4ae" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- DataNodes con checksum -->
+  <g>
+    <rect x="400" y="150" width="150" height="110" rx="10" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="475" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#5e35b1">DataNode 1</text>
+    <text x="475" y="198" text-anchor="middle" font-size="11" fill="#37474f">Bloque A</text>
+    <text x="475" y="216" text-anchor="middle" font-size="11" fill="#37474f" font-family="monospace">CRC: 4f2a91</text>
+    <text x="475" y="238" text-anchor="middle" font-size="10" fill="#43a047">✔ verificado</text>
+  </g>
+
+  <g>
+    <rect x="580" y="150" width="150" height="110" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="655" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">DataNode 2</text>
+    <text x="655" y="198" text-anchor="middle" font-size="11" fill="#37474f">Bloque A (réplica)</text>
+    <text x="655" y="216" text-anchor="middle" font-size="11" fill="#37474f" font-family="monospace">CRC: 4f2a91</text>
+    <text x="655" y="238" text-anchor="middle" font-size="10" fill="#43a047">✔ verificado</text>
+  </g>
+
+  <g>
+    <rect x="760" y="150" width="160" height="110" rx="10" fill="#fdecea" stroke="#e53935" stroke-width="2"/>
+    <text x="840" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#e53935">DataNode 3</text>
+    <text x="840" y="198" text-anchor="middle" font-size="11" fill="#37474f">Bloque A (corrupto)</text>
+    <text x="840" y="216" text-anchor="middle" font-size="11" fill="#37474f" font-family="monospace">CRC: 9b0e77</text>
+    <text x="840" y="238" text-anchor="middle" font-size="10" fill="#e53935">✘ re-replicar</text>
+  </g>
+
+  <path d="M370 100 L475 155" stroke="#90a4ae" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M370 105 L655 155" stroke="#90a4ae" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M370 110 L840 155" stroke="#90a4ae" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <text x="500" y="285" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">UT3 · Sumas de verificación (checksums), réplicas y detección de bloques corruptos en HDFS</text>
+
+  <defs>
+    <marker id="a3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

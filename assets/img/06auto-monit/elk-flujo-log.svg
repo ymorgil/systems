@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">De una línea de log a un documento buscable en Kibana</text>
+
+  <g>
+    <rect x="30" y="100" width="200" height="120" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="130" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#00897b">Línea de log cruda</text>
+    <text x="130" y="155" text-anchor="middle" font-size="9" fill="#37474f">2026-07-11 10:03:12</text>
+    <text x="130" y="172" text-anchor="middle" font-size="9" fill="#37474f">ERROR api timeout</text>
+    <text x="130" y="189" text-anchor="middle" font-size="9" fill="#37474f">user=42 dur=3200ms</text>
+  </g>
+
+  <path d="M230 160 L270 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="275" y="100" width="200" height="120" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="375" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#ef6c00">Filebeat / Logstash</text>
+    <text x="375" y="155" text-anchor="middle" font-size="9" fill="#37474f">Parseo grok/dissect</text>
+    <text x="375" y="172" text-anchor="middle" font-size="9" fill="#37474f">Extrae campos:</text>
+    <text x="375" y="189" text-anchor="middle" font-size="9" fill="#37474f">nivel, usuario, duración</text>
+  </g>
+
+  <path d="M475 160 L515 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="520" y="100" width="220" height="120" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="630" y="122" text-anchor="middle" font-size="11" font-weight="700" fill="#5e35b1">Documento JSON</text>
+    <text x="630" y="145" text-anchor="middle" font-size="8" fill="#37474f">{ "level":"ERROR",</text>
+    <text x="630" y="160" text-anchor="middle" font-size="8" fill="#37474f">  "user":42,</text>
+    <text x="630" y="175" text-anchor="middle" font-size="8" fill="#37474f">  "duration_ms":3200,</text>
+    <text x="630" y="190" text-anchor="middle" font-size="8" fill="#37474f">  "@timestamp":"..." }</text>
+  </g>
+
+  <path d="M740 160 L780 160" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="785" y="100" width="185" height="120" rx="14" fill="#fce4ec" stroke="#ad1457" stroke-width="2"/>
+    <text x="877" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#ad1457">Kibana Discover</text>
+    <text x="877" y="155" text-anchor="middle" font-size="9" fill="#37474f">level:ERROR AND</text>
+    <text x="877" y="172" text-anchor="middle" font-size="9" fill="#37474f">duration_ms&gt;3000</text>
+    <text x="877" y="189" text-anchor="middle" font-size="9" fill="#37474f">búsqueda instantánea</text>
+  </g>
+
+  <text x="500" y="270" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">Sin campos estructurados, un log sigue siendo texto plano difícil de agregar o filtrar</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>
