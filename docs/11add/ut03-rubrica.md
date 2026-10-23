@@ -1,97 +1,110 @@
 # **📋 UT03 · Rúbrica de evaluación**
 
-Rúbrica de comprobación de la práctica *Automatización de tareas de mantenimiento con cron y el Programador de tareas*. Para cada uno de los 10 apartados obligatorios se comprueban **4 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
+Rúbrica de comprobación de la práctica *Automatización de tareas de mantenimiento*. Para cada uno de los 5 apartados se comprueban **2 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
 
-### Apartado 1 · Diagnóstico previo del sistema
-
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Se ejecutan y documentan `uname -a` y `lsb_release -a` en Linux | | |
-| 2 | Se ejecuta y documenta `systeminfo` en Windows | | |
-| 3 | Se adjuntan capturas del estado inicial de ambos sistemas | | |
-| 4 | Se indican los recursos disponibles (memoria, versión) de cada máquina | | |
-
-### Apartado 2 · Creación de un script de mantenimiento en GNU/Linux
+### Apartado 1 · Vista personalizada de advertencias en el Visor de eventos
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | El script recorre todos los archivos de `/var/log` | | |
-| 2 | Filtra correctamente las líneas con "error" o "fail" | | |
-| 3 | El informe generado indica de qué archivo original proviene cada bloque | | |
-| 4 | Se adjunta captura de una ejecución manual con resultados reales o forzados | | |
+| 1 | La vista `nombrewarning` filtra los niveles Advertencia y Error de los últimos 30 días en los registros de Windows | | |
+| 2 | Se adjunta captura de la vista con al menos un evento (forzado con `eventcreate` u otro método si era necesario) | | |
 
-### Apartado 3 · Planificación periódica con cron
+### Apartado 2 · Script de inicios de sesión entre dos fechas
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Existen las carpetas `bacnombre` y `scrnombre` en la raíz | | |
-| 2 | La tarea cron está programada con periodicidad semanal | | |
-| 3 | El nombre de la copia sigue el formato `CopDifSem-<nº semana>` | | |
-| 4 | Se documentan y explican los cinco campos de la entrada crontab | | |
+| 1 | El script recibe las dos fechas con `param()` y filtra el registro Seguridad (ID 4624) con `Get-WinEvent`, excluyendo a SYSTEM | | |
+| 2 | Se adjunta captura con al menos 7 registros que muestran día, hora y usuario | | |
 
-### Apartado 4 · Planificación con anacron y con at
+### Apartado 3 · Script con menú de registros de eventos
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Existe una tarea mensual de anacron que limpia copias diferenciales antiguas | | |
-| 2 | Existe una tarea mensual de anacron de copia total `CopTot-<mes-año>` | | |
-| 3 | Se programa una ejecución puntual con `at` | | |
-| 4 | Se explica la diferencia entre cron, anacron y at | | |
+| 1 | El menú se genera dinámicamente (`Get-EventLog -List` / `Get-WinEvent -ListLog`), numera cada tipo y sale con 0 | | |
+| 2 | Al elegir un tipo muestra el número total de eventos y los 12 últimos registros (captura con al menos dos tipos) | | |
 
-### Apartado 5 · Comprobación forzada de las tareas planificadas en Linux
+### Apartado 4 · Script de desinstalación de programas desde un listado
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Se fuerza el cambio de fecha por CLI y se documenta el comando usado | | |
-| 2 | Se muestra `bacnombre` en formato largo con al menos 3 copias | | |
-| 3 | Se muestran los ficheros de marca de tiempo de anacron | | |
-| 4 | Se explica por qué el cambio de fecha provoca la ejecución de las tareas | | |
+| 1 | El script lee `programas.txt` de su propio directorio y desinstala cada programa (`apt purge`/`apt remove`), avisando si no está instalado | | |
+| 2 | Se adjuntan capturas del fichero, de la ejecución y de la comprobación antes/después (`dpkg -l`) | | |
 
-### Apartado 6 · Planificación gráfica con el Programador de tareas de Windows
+### Apartado 5 · Creación de un script de mantenimiento en GNU/Linux
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Se crea gráficamente la tarea de limpieza del escritorio al iniciar sesión | | |
-| 2 | Se crea una segunda tarea de elección libre, justificada | | |
-| 3 | Se documentan con capturas General, Desencadenadores y Acciones de ambas | | |
-| 4 | Se documentan las Condiciones aplicadas a cada tarea | | |
+| 1 | El script recorre `/var/log` y filtra las líneas con "error" o "fail" (`grep`/`awk`) | | |
+| 2 | El informe indica el archivo de origen de cada bloque y se adjunta captura de una ejecución manual | | |
 
-### Apartado 7 · Planificación por PowerShell en Windows
+<!--
+APARTADOS OCULTOS (6-14): no se evalúan en esta versión del supuesto.
 
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Se usan `New-ScheduledTaskAction`, `New-ScheduledTaskTrigger` y `New-ScheduledTaskPrincipal` | | |
-| 2 | Una de las tareas inicia PowerShell ISE un minuto después de iniciar sesión | | |
-| 3 | Se adjunta el código completo comentado | | |
-| 4 | Se adjunta captura de `Get-ScheduledTask` mostrando ambas tareas registradas | | |
-
-### Apartado 8 · Automatización de la creación de cuentas de usuario
+### Apartado 6 · Diagnóstico previo del sistema
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | El script lee el listado CSV de materiales correctamente | | |
-| 2 | Se crean automáticamente todas las cuentas del listado | | |
-| 3 | Cada cuenta queda asignada a su grupo correspondiente | | |
-| 4 | Se verifica el resultado listando cuentas y grupos creados | | |
+| 1 | En Linux se documentan `uname -a`, `lsb_release -a` y `/proc/meminfo` | | |
+| 2 | En Windows se documentan `systeminfo` y `Get-CimInstance Win32_OperatingSystem` (o `wmic os get`) | | |
 
-### Apartado 9 · Restricciones de seguridad aplicadas
+### Apartado 7 · Planificación periódica con cron
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Cada cuenta tiene una contraseña temporal distinta | | |
-| 2 | Se obliga a cambiar la contraseña en el primer inicio de sesión | | |
-| 3 | Se establece una fecha de caducidad para las cuentas | | |
-| 4 | Se justifica por escrito el riesgo que mitiga cada restricción | | |
+| 1 | Con `crontab -e` se programa la copia diferencial semanal `CopDifSem-<nº semana>` en `bacnombre` | | |
+| 2 | Se documentan y explican los cinco campos de la entrada crontab | | |
 
-### Apartado 10 · Documentación final de las tareas automáticas
+### Apartado 8 · Planificación con anacron y con at
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Existe una ficha de documentación por cada tarea (mínimo 6) | | |
-| 2 | Cada ficha indica sistema, mecanismo, desencadenador y acción | | |
-| 3 | Cada ficha indica el usuario de ejecución y la ubicación del log/evidencia | | |
-| 4 | Se adjunta el XML exportado con `Export-ScheduledTask` de al menos una tarea | | |
+| 1 | En `/etc/anacrontab` hay dos tareas mensuales: limpieza de diferenciales y copia total `CopTot-<mes-año>` | | |
+| 2 | Se programa una ejecución puntual con `at` y se explica la diferencia entre cron, anacron y at | | |
+
+### Apartado 9 · Comprobación forzada de las tareas planificadas en Linux
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Se cambia la fecha por CLI (`date -s` / `timedatectl`) y se documenta el comando usado | | |
+| 2 | Se muestra `ls -l` de `bacnombre` con al menos 3 copias y las marcas de tiempo de `/var/spool/anacron` | | |
+
+### Apartado 10 · Planificación gráfica con el Programador de tareas de Windows
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Se crean gráficamente la tarea de limpieza del escritorio y una tarea libre, con el desencadenador justificado | | |
+| 2 | Se documentan con capturas las pestañas General, Desencadenadores, Acciones y Condiciones de ambas | | |
+
+### Apartado 11 · Planificación por PowerShell en Windows
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Se usan `New-ScheduledTaskAction`, `New-ScheduledTaskTrigger`, `New-ScheduledTaskPrincipal` y `Register-ScheduledTask`, y una tarea inicia PowerShell ISE con un minuto de retardo | | |
+| 2 | Se adjunta el código comentado y captura de `Get-ScheduledTask` con ambas tareas registradas | | |
+
+### Apartado 12 · Automatización de la creación de cuentas de usuario
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | El script lee el CSV y crea todas las cuentas en su grupo (`useradd`/`chpasswd` o `New-LocalUser`/`New-ADUser`) | | |
+| 2 | Se verifica el resultado listando las cuentas creadas y sus grupos | | |
+
+### Apartado 13 · Restricciones de seguridad aplicadas
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Cada cuenta tiene contraseña temporal distinta y cambio obligatorio en el primer inicio (`chage -d 0` / `-ChangePasswordAtLogon`) | | |
+| 2 | Se establece la caducidad de las cuentas y se justifica el riesgo que mitiga cada restricción | | |
+
+### Apartado 14 · Documentación final de las tareas automáticas
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Hay una ficha por tarea (mínimo 6) con sistema, mecanismo, desencadenador, acción, usuario y evidencia | | |
+| 2 | Se adjunta el XML exportado con `Export-ScheduledTask` de al menos una tarea | | |
+
+-->
 
 ## Calificación
 
-Cada elemento marcado "Sí" suma un punto (máximo 40 puntos). La calificación sobre 10 se obtiene dividiendo el total entre 4. Para superar la unidad es necesario alcanzar al menos 20 de los 40 elementos y tener, como mínimo, 2 de los 4 elementos marcados en cada uno de los 10 apartados (ningún apartado puede quedar completamente vacío).
+Cada elemento marcado "Sí" suma un punto (máximo 10 puntos), que es directamente la calificación sobre 10. Para superar la unidad es necesario alcanzar al menos 5 de los 10 elementos y tener, como mínimo, 1 de los 2 elementos marcados en cada uno de los 5 apartados (ningún apartado puede quedar completamente vacío).
