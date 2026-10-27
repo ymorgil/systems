@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Contrato de un plugin Nagios: entrada, salida y código</text>
+
+  <g>
+    <rect x="40" y="90" width="260" height="150" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="170" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">Ejecución</text>
+    <text x="170" y="145" text-anchor="middle" font-size="10" fill="#37474f">check_disk -w 80% -c 90% -p /</text>
+    <text x="170" y="170" text-anchor="middle" font-size="10" fill="#37474f">-w = umbral warning</text>
+    <text x="170" y="188" text-anchor="middle" font-size="10" fill="#37474f">-c = umbral critical</text>
+    <text x="170" y="206" text-anchor="middle" font-size="10" fill="#37474f">-p = ruta a comprobar</text>
+  </g>
+
+  <path d="M300 165 L340 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="345" y="90" width="280" height="150" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="485" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#5e35b1">Salida estándar (stdout)</text>
+    <text x="485" y="148" text-anchor="middle" font-size="10" fill="#37474f">DISK OK - free space: / 45%</text>
+    <text x="485" y="168" text-anchor="middle" font-size="10" fill="#37474f">|/=12000MB;16000;18000;0;20000</text>
+    <text x="485" y="195" text-anchor="middle" font-size="9" fill="#607d8b">texto + datos de rendimiento</text>
+  </g>
+
+  <path d="M625 165 L665 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="670" y="90" width="290" height="150" rx="14" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+    <text x="815" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#ef6c00">Código de salida</text>
+    <text x="815" y="148" text-anchor="middle" font-size="10" fill="#37474f">0 OK · 1 WARNING</text>
+    <text x="815" y="168" text-anchor="middle" font-size="10" fill="#37474f">2 CRITICAL · 3 UNKNOWN</text>
+    <text x="815" y="195" text-anchor="middle" font-size="9" fill="#607d8b">Nagios Core solo lee este número</text>
+  </g>
+
+  <text x="500" y="270" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">Cualquier script que respete este contrato puede convertirse en un plugin de Nagios</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

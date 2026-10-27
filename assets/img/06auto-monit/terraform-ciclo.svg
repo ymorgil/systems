@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="320" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Ciclo de vida de Terraform: init → plan → apply → destroy</text>
+
+  <!-- init -->
+  <g>
+    <rect x="30" y="90" width="200" height="150" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="130" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">terraform init</text>
+    <text x="130" y="150" text-anchor="middle" font-size="11" fill="#37474f">Descarga providers</text>
+    <text x="130" y="170" text-anchor="middle" font-size="11" fill="#37474f">Inicializa backend</text>
+    <text x="130" y="190" text-anchor="middle" font-size="11" fill="#37474f">Prepara módulos</text>
+  </g>
+
+  <path d="M230 165 L270 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- plan -->
+  <g>
+    <rect x="275" y="90" width="200" height="150" rx="14" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="375" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#00897b">terraform plan</text>
+    <text x="375" y="150" text-anchor="middle" font-size="11" fill="#37474f">Compara .tf con</text>
+    <text x="375" y="170" text-anchor="middle" font-size="11" fill="#37474f">el .tfstate actual</text>
+    <text x="375" y="190" text-anchor="middle" font-size="11" fill="#37474f">Muestra el diff</text>
+  </g>
+
+  <path d="M475 165 L515 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- apply -->
+  <g>
+    <rect x="520" y="90" width="200" height="150" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="620" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">terraform apply</text>
+    <text x="620" y="150" text-anchor="middle" font-size="11" fill="#37474f">Crea/modifica los</text>
+    <text x="620" y="170" text-anchor="middle" font-size="11" fill="#37474f">recursos reales</text>
+    <text x="620" y="190" text-anchor="middle" font-size="11" fill="#37474f">Actualiza el estado</text>
+  </g>
+
+  <path d="M720 165 L760 165" stroke="#90a4ae" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- destroy -->
+  <g>
+    <rect x="765" y="90" width="200" height="150" rx="14" fill="#fce4ec" stroke="#ad1457" stroke-width="2"/>
+    <text x="865" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#ad1457">terraform destroy</text>
+    <text x="865" y="150" text-anchor="middle" font-size="11" fill="#37474f">Elimina todos los</text>
+    <text x="865" y="170" text-anchor="middle" font-size="11" fill="#37474f">recursos gestionados</text>
+    <text x="865" y="190" text-anchor="middle" font-size="11" fill="#37474f">por ese estado</text>
+  </g>
+
+  <!-- feedback loop -->
+  <path d="M620 240 C 620 270, 375 270, 375 240" stroke="#90a4ae" stroke-width="2" fill="none" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="500" y="280" text-anchor="middle" font-size="10" fill="#607d8b" font-style="italic">Cambios en el .tf vuelven a pasar por plan antes de un nuevo apply</text>
+
+  <text x="500" y="300" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">El .tfstate es la fuente de verdad que conecta el código con la infraestructura real</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+  </defs>
+</svg>

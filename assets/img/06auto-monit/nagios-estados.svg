@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Ciclo de estados de un check en Nagios</text>
+
+  <g>
+    <rect x="40" y="100" width="180" height="100" rx="14" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+    <text x="130" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#2e7d32">OK</text>
+    <text x="130" y="160" text-anchor="middle" font-size="10" fill="#37474f">Exit code 0</text>
+  </g>
+
+  <path d="M220 130 L260 110" stroke="#f9a825" stroke-width="3" marker-end="url(#a1)"/>
+  <path d="M260 190 L220 170" stroke="#2e7d32" stroke-width="3" marker-end="url(#a2)"/>
+
+  <g>
+    <rect x="265" y="90" width="180" height="100" rx="14" fill="#fff8e1" stroke="#f9a825" stroke-width="2"/>
+    <text x="355" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#f57f17">WARNING</text>
+    <text x="355" y="150" text-anchor="middle" font-size="10" fill="#37474f">Exit code 1</text>
+  </g>
+
+  <path d="M445 130 L485 130" stroke="#ad1457" stroke-width="3" marker-end="url(#a3)"/>
+  <path d="M485 170 L445 170" stroke="#2e7d32" stroke-width="3" marker-end="url(#a2)"/>
+
+  <g>
+    <rect x="490" y="90" width="180" height="100" rx="14" fill="#fce4ec" stroke="#ad1457" stroke-width="2"/>
+    <text x="580" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#ad1457">CRITICAL</text>
+    <text x="580" y="150" text-anchor="middle" font-size="10" fill="#37474f">Exit code 2</text>
+  </g>
+
+  <g>
+    <rect x="715" y="100" width="220" height="100" rx="14" fill="#eceff1" stroke="#546e7a" stroke-width="2"/>
+    <text x="825" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#546e7a">UNKNOWN</text>
+    <text x="825" y="150" text-anchor="middle" font-size="10" fill="#37474f">Exit code 3</text>
+    <text x="825" y="168" text-anchor="middle" font-size="9" fill="#607d8b">(plugin no responde)</text>
+  </g>
+
+  <text x="500" y="240" text-anchor="middle" font-size="11" fill="#607d8b">SOFT state: cambio provisional, se repite el check antes de confirmar</text>
+  <text x="500" y="260" text-anchor="middle" font-size="11" fill="#607d8b">HARD state: confirmado tras max_check_attempts → dispara notificación</text>
+
+  <defs>
+    <marker id="a1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#f9a825"/></marker>
+    <marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2e7d32"/></marker>
+    <marker id="a3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#ad1457"/></marker>
+  </defs>
+</svg>
