@@ -1,6 +1,6 @@
 # **📋 UT03 · Rúbrica de evaluación**
 
-Rúbrica de comprobación de la práctica *Automatización de tareas de mantenimiento*. Para cada uno de los 5 apartados se comprueban **2 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
+Rúbrica de comprobación de la práctica *Automatización de tareas de mantenimiento*. Para cada uno de los 10 apartados se comprueban **2 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
 
 ### Apartado 1 · Vista personalizada de advertencias en el Visor de eventos
 
@@ -37,74 +37,41 @@ Rúbrica de comprobación de la práctica *Automatización de tareas de mantenim
 | 1 | El script recorre `/var/log` y filtra las líneas con "error" o "fail" (`grep`/`awk`) | | |
 | 2 | El informe indica el archivo de origen de cada bloque y se adjunta captura de una ejecución manual | | |
 
-<!--
-APARTADOS OCULTOS (6-14): no se evalúan en esta versión del supuesto.
-
-### Apartado 6 · Diagnóstico previo del sistema
+### Apartado 6 · Programación de tareas en Windows Server
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | En Linux se documentan `uname -a`, `lsb_release -a` y `/proc/meminfo` | | |
-| 2 | En Windows se documentan `systeminfo` y `Get-CimInstance Win32_OperatingSystem` (o `wmic os get`) | | |
+| 1 | Se crea una tarea con la interfaz gráfica y otra solo con PowerShell (`New-ScheduledTaskAction`, `New-ScheduledTaskTrigger`, `Register-ScheduledTask`), ambas justificadas | | |
+| 2 | Se muestra el estado *Ready* de la tarea gráfica en el Programador de tareas y el de la otra con `Get-ScheduledTask` | | |
 
-### Apartado 7 · Planificación periódica con cron
-
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Con `crontab -e` se programa la copia diferencial semanal `CopDifSem-<nº semana>` en `bacnombre` | | |
-| 2 | Se documentan y explican los cinco campos de la entrada crontab | | |
-
-### Apartado 8 · Planificación con anacron y con at
+### Apartado 7 · Monitorización del espacio en disco con cron
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | En `/etc/anacrontab` hay dos tareas mensuales: limpieza de diferenciales y copia total `CopTot-<mes-año>` | | |
-| 2 | Se programa una ejecución puntual con `at` y se explica la diferencia entre cron, anacron y at | | |
+| 1 | El script usa `df` y registra fecha, hora, partición y porcentaje cuando se supera el 80 % | | |
+| 2 | La entrada de `crontab -e` es correcta (`*/15 8-14 * * 1-5` o equivalente), se explican sus campos y se muestran líneas nuevas en el registro | | |
 
-### Apartado 9 · Comprobación forzada de las tareas planificadas en Linux
-
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Se cambia la fecha por CLI (`date -s` / `timedatectl`) y se documenta el comando usado | | |
-| 2 | Se muestra `ls -l` de `bacnombre` con al menos 3 copias y las marcas de tiempo de `/var/spool/anacron` | | |
-
-### Apartado 10 · Planificación gráfica con el Programador de tareas de Windows
+### Apartado 8 · Copias de seguridad con cron y anacron
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Se crean gráficamente la tarea de limpieza del escritorio y una tarea libre, con el desencadenador justificado | | |
-| 2 | Se documentan con capturas las pestañas General, Desencadenadores, Acciones y Condiciones de ambas | | |
+| 1 | Existen `/bacnombre` y `/scrnombre`; `crontab` hace la diferencial semanal `CopDifSem-$(date +%V)` y `/etc/anacrontab` tiene la limpieza mensual de diferenciales y la total `CopTot-$(date +%B-%Y)` | | |
+| 2 | Se fuerza el cambio de fecha por CLI (`date -s`) explicándolo, y se muestran `ls -l` de `/bacnombre` con al menos 3 copias y las marcas de `/var/spool/anacron` | | |
 
-### Apartado 11 · Planificación por PowerShell en Windows
-
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Se usan `New-ScheduledTaskAction`, `New-ScheduledTaskTrigger`, `New-ScheduledTaskPrincipal` y `Register-ScheduledTask`, y una tarea inicia PowerShell ISE con un minuto de retardo | | |
-| 2 | Se adjunta el código comentado y captura de `Get-ScheduledTask` con ambas tareas registradas | | |
-
-### Apartado 12 · Automatización de la creación de cuentas de usuario
+### Apartado 9 · Sincronización de copias con rsync y un temporizador de systemd
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | El script lee el CSV y crea todas las cuentas en su grupo (`useradd`/`chpasswd` o `New-LocalUser`/`New-ADUser`) | | |
-| 2 | Se verifica el resultado listando las cuentas creadas y sus grupos | | |
+| 1 | El script usa `rsync -a --delete` hacia `/bacnombre/espejo`; el `.service` lo ejecuta y el `.timer` (`OnCalendar=*-*-* 22:00:00`) está habilitado y aparece en `systemctl list-timers` | | |
+| 2 | Se lanza el servicio (`systemctl start`) dos veces: la segunda solo transfiere cambios y refleja los borrados, y las ejecuciones aparecen en `journalctl` | | |
 
-### Apartado 13 · Restricciones de seguridad aplicadas
-
-| # | Elemento a comprobar | Sí | No |
-|---|---|---|---|
-| 1 | Cada cuenta tiene contraseña temporal distinta y cambio obligatorio en el primer inicio (`chage -d 0` / `-ChangePasswordAtLogon`) | | |
-| 2 | Se establece la caducidad de las cuentas y se justifica el riesgo que mitiga cada restricción | | |
-
-### Apartado 14 · Documentación final de las tareas automáticas
+### Apartado 10 · Prueba de estrés y monitorización con sysstat
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
-| 1 | Hay una ficha por tarea (mínimo 6) con sistema, mecanismo, desencadenador, acción, usuario y evidencia | | |
-| 2 | Se adjunta el XML exportado con `Export-ScheduledTask` de al menos una tarea | | |
-
--->
+| 1 | `sysstat` está activo y se lanza una prueba de estrés (`stress`/`stress-ng`) de al menos 5 minutos | | |
+| 2 | Se genera un JSON válido con CPU y memoria del periodo (`sadf -j` u otro método) y se interpretan los datos | | |
 
 ## Calificación
 
-Cada elemento marcado "Sí" suma un punto (máximo 10 puntos), que es directamente la calificación sobre 10. Para superar la unidad es necesario alcanzar al menos 5 de los 10 elementos y tener, como mínimo, 1 de los 2 elementos marcados en cada uno de los 5 apartados (ningún apartado puede quedar completamente vacío).
+Cada elemento marcado "Sí" suma un punto (máximo 20 puntos). La calificación sobre 10 se obtiene dividiendo el total entre 2. Para superar la unidad es necesario alcanzar al menos 10 de los 20 elementos y tener, como mínimo, 1 de los 2 elementos marcados en cada uno de los 10 apartados (ningún apartado puede quedar completamente vacío).
