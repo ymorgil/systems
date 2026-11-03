@@ -1,17 +1,24 @@
 # 🧪 Supuesto Práctico UT05 *Servidor de impresión compartido entre Windows y Linux* { .card }
 
-!!! info "OBJETIVOS"
-    Instalar, configurar y documentar un servidor de impresión completo en un escenario heterogéneo, aplicando todo el ciclo visto en el temario: gestión de impresoras integradas en el sistema operativo, servidor de impresión en entorno web, creación y clasificación de impresoras lógicas, grupos de impresión, gestión de colas por comandos y herramientas gráficas, y compartición de impresoras entre sistemas operativos diferentes.
+<div class="dos-columnas" markdown>
 
-    La práctica se estructura en **10 apartados obligatorios**, que se corresponden con los criterios de evaluación de la UT (b, c, d, e, f, g, h e i del RA5): 3 del servidor de impresión Windows, 2 del servidor CUPS y 5 de grupos de impresión, colas e interoperabilidad.
+!!! info "OBJETIVOS"
+    - Instalar y configurar un servidor de impresión en Windows Server.
+    - Crear, compartir y desplegar impresoras lógicas con PowerShell y GPO.
+    - Montar un servidor de impresión web con CUPS.
+    - Crear grupos de impresión (pools y clases).
+    - Gestionar colas por comandos y con herramientas gráficas.
+    - Compartir impresoras entre Windows y Linux con Samba.
 
 !!! info "RECURSOS"
-    - Red NAT `192.168.192.0/24` (o equivalente) con al menos tres máquinas virtuales.
-    - Un **Windows Server** (controlador de dominio con el rol de Servicios de impresión y documentos).
-    - Un **Ubuntu Server** con CUPS y Samba.
-    - Un **Ubuntu Desktop** y un **Windows 11/10** como clientes de prueba.
-    - Una impresora virtual PDF (por ejemplo CutePDF en Windows o la impresora PDF de CUPS en Linux), para no depender de hardware físico.
-    - Acceso a PowerShell en los equipos Windows y a terminal en los equipos Linux.
+    - Red NAT `192.168.192.0/24` (o equivalente).
+    - **Windows Server** (DC con Servicios de impresión y documentos).
+    - **Ubuntu Server** con CUPS y Samba.
+    - Clientes **Ubuntu Desktop** y **Windows 11/10**.
+    - Impresora virtual PDF (CutePDF o PDF de CUPS).
+    - PowerShell en Windows y terminal en Linux.
+
+</div>
 
 ## **Servidor de impresión Windows** { .seccion }
 

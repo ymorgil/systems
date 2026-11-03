@@ -1,16 +1,24 @@
 # 🧪 Supuesto Práctico UT06 *Interoperabilidad y contenedores* { .card }
 
-!!! info "OBJETIVOS"
-    Diseñar, desplegar y documentar un escenario heterogéneo completo en el que sistemas Windows y Linux comparten recursos en red mediante **NFS** y **Samba** con distintos niveles de seguridad de acceso, verificar la conectividad entre todos los equipos implicados, y desplegar servicios en **contenedores Docker** orquestados con **Kubernetes**.
+<div class="dos-columnas" markdown>
 
-    La práctica se estructura en **10 apartados obligatorios**, que cubren de forma conjunta los ocho criterios de evaluación de la RA6 (identificación de la necesidad de compartir recursos, niveles de seguridad, comprobación de conectividad, descripción funcional, instalación y configuración, verificación del funcionamiento, trabajo en grupo entre sistemas operativos distintos y documentación): 3 de escenario y NFS, 2 de Samba, 3 de contenedores y orquestación, y 2 de alta disponibilidad y documentación.
+!!! info "OBJETIVOS"
+    - Diseñar un escenario heterogéneo y comprobar su conectividad.
+    - Compartir recursos con **NFS** y **Samba** con distintos niveles de acceso.
+    - Desplegar servicios en contenedores **Docker**.
+    - Construir imágenes propias con un `Dockerfile`.
+    - Orquestar contenedores con **Kubernetes**.
+    - Crear un clúster de conmutación por error.
 
 !!! info "RECURSOS"
-    - Al menos una máquina virtual **Ubuntu Server** (servidor NFS/Samba/Docker).
-    - Al menos una máquina virtual **Ubuntu Desktop** y una **Windows 11** (clientes).
-    - Acceso a Internet para descargar paquetes e imágenes Docker.
-    - `kubectl` y `minikube` instalados en el servidor o en un equipo dedicado para la parte de Kubernetes.
-    - Red interna en modo NAT o adaptador puente, con un rango común para todos los equipos (por ejemplo `172.29.xx.0/24`, donde *xx* es el número asignado a cada alumno).
+    - **Ubuntu Server** (NFS, Samba y Docker).
+    - Clientes **Ubuntu Desktop** y **Windows 11**.
+    - Red NAT o puente común (`172.29.xx.0/24`).
+    - `kubectl` y `minikube`.
+    - Escenario Windows Server con dos nodos.
+    - Acceso a Internet para paquetes e imágenes.
+
+</div>
 
 ## **Escenario y compartición con NFS** { .seccion }
 

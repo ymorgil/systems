@@ -1,15 +1,23 @@
 # 🧪 Supuesto Práctico UT07 *Administración de cuentas y servicios mediante scripts* { .card }
 
-!!! info "OBJETIVOS"
-    Diseñar, depurar, adaptar y documentar un conjunto de guiones de administración de sistemas que resuelvan un mismo problema —alta y baja de usuarios, gestión de un servicio y automatización de una tarea repetitiva— primero en **Bash** y después en **PowerShell**, aplicando las técnicas de depuración vistas en el temario y reutilizando funciones a través de librerías propias.
+<div class="dos-columnas" markdown>
 
-    La práctica se estructura en **10 apartados obligatorios**, que cubren de forma conjunta los nueve criterios de evaluación del RA7: 3 de gestión de cuentas en Bash, 2 de gestión de cuentas en PowerShell, 2 de administración de servicios y 3 de reutilización, planificación y documentación.
+!!! info "OBJETIVOS"
+    - Automatizar altas y bajas de usuarios en **Bash** y **PowerShell**.
+    - Depurar scripts con `bash -n`, `bash -x` y *breakpoints*.
+    - Administrar servicios mediante scripts.
+    - Reutilizar código con librerías y módulos propios.
+    - Planificar la ejecución de scripts.
+    - Documentar los scripts con cabeceras y ayuda.
 
 !!! info "RECURSOS"
-    - Una máquina virtual GNU/Linux (o WSL) con Bash y acceso de administración (`sudo`).
-    - Una máquina virtual Windows con PowerShell 5.1 o superior y, si es posible, un controlador de dominio con el módulo `ActiveDirectory` (puede sustituirse por `Microsoft.PowerShell.LocalAccounts` si no se dispone de dominio).
-    - Editor de texto con resaltado de sintaxis (VSCode recomendado) o PowerShell ISE.
-    - Un fichero de datos propio (mínimo 5 registros) con nombre, apellidos y login para las altas masivas.
+    - GNU/Linux (o WSL) con Bash y `sudo`.
+    - Windows con PowerShell 5.1 o superior.
+    - Módulo `ActiveDirectory` o `LocalAccounts`.
+    - VSCode o PowerShell ISE.
+    - Fichero de datos propio (mínimo 5 registros).
+
+</div>
 
 ## **Gestión de cuentas en Bash** { .seccion }
 

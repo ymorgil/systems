@@ -1,123 +1,67 @@
-# 🧪 Supuesto Práctico UT04 *Acceso remoto seguro con SSH y WireGuard* { .card }
+# 🧪 Supuesto Práctico UT04 *Escritorio remoto, acceso remoto y VPN* { .card }
+
+<div class="dos-columnas" markdown>
 
 !!! info "OBJETIVOS"
-    Configurar y probar, de extremo a extremo, un entorno de administración remota que combine un servidor GNU/Linux y un servidor Windows, aplicando los criterios de evaluación del RA4: distinguir servicios orientados y no orientados a sesión, instalar y asegurar SSH con autenticación por clave, abrir un túnel SSH a un servicio que no viaja cifrado, desplegar una VPN WireGuard como capa adicional de cifrado, habilitar el acceso remoto nativo de Windows (RDP y WinRM), crear cuentas de acceso remoto con permisos mínimos y comprobar la conectividad entre sistemas operativos distintos.
-
-    La práctica se estructura en **10 apartados obligatorios**: 3 de escenario y SSH, 2 de VPN WireGuard, 2 de acceso remoto en Windows y cuentas, y 3 de pruebas cruzadas, cifrado y documentación.
+    - Publicar aplicaciones con RemoteApp de Remote Desktop Services.
+    - Desplegar instancias Windows y Ubuntu en AWS.
+    - Configurar y asegurar un servidor SSH en Windows.
+    - Ejecutar aplicaciones gráficas remotas con reenvío X11.
+    - Crear túneles SSH hacia servicios no cifrados.
+    - Usar RustDesk y Guacamole para el acceso remoto.
+    - Montar una VPN WireGuard y gestionarla con WireGuard-UI.
 
 !!! info "RECURSOS"
-    - Una máquina virtual (o instancia cloud) con **Ubuntu Server 24.04 LTS**.
-    - Una máquina virtual (o instancia cloud) con **Windows Server 2022**.
-    - Un cliente adicional con GNU/Linux de escritorio (Ubuntu Desktop, Manjaro...) y, si es posible, un dispositivo móvil (Android/iOS).
-    - Acceso a Proxmox, VirtualBox, VMware o un proveedor cloud (AWS, Azure) para desplegar las máquinas anteriores.
-    - Cliente SSH (OpenSSH o PuTTY), cliente WireGuard y, opcionalmente, MySQL Server para el ejercicio del túnel.
+    - Windows Server 2025 y cliente Windows 11 locales.
+    - Cuenta de AWS (Windows Server 2022 y Ubuntu Server 26.04 LTS).
+    - Cliente Ubuntu Desktop 26.04.
+    - Dispositivo móvil Android/iOS (real o emulado).
+    - Servidor Proxmox para el contenedor LXC.
+    - PuTTY, Xming, RustDesk, Guacamole y WireGuard.
+    - Visual Studio Code y MySQL Server.
 
-## **Escenario y SSH** { .seccion }
+</div>
 
-### 1. Despliegue del escenario y plan de direccionamiento
+## **Remote Desktop Services** { .seccion }
 
-**1.1 Máquinas base**: levanta las dos máquinas base (Ubuntu Server y Windows Server) en la misma red interna y anota sus direcciones IP.
+### 1. Visual Studio Code como RemoteApp con Remote Desktop Services
+En un **Windows Server 2025** local, instala y configura el rol **Remote Desktop Services** para que los usuarios puedan utilizar **Visual Studio Code** como aplicación **RemoteApp** a través del navegador web. Realiza una implementación de escritorio basada en sesiones que incluya, como mínimo, los servicios de Agente de conexión a Escritorio remoto, Acceso web a Escritorio remoto y Host de sesión de Escritorio remoto, y comprueba que todos quedan en funcionamiento. A continuación, instala Visual Studio Code en el servidor para todos los usuarios, crea una colección de sesiones y publica la aplicación como RemoteApp, asignando el acceso a un grupo de usuarios concreto. Instala también en el servidor el rol de servidor web (IIS) con un sitio preparado para alojar los ficheros de la práctica. Desde un equipo cliente **Windows 11** local, accede con el navegador al portal de Acceso web a Escritorio remoto, inicia sesión con un usuario autorizado y abre Visual Studio Code. Desde esa aplicación remota, crea una pequeña web con un mensaje de «Hola mundo» y guárdala en la carpeta del sitio web del servidor, de modo que todo el trabajo se haga desde el cliente, sin iniciar sesión directamente en el servidor. Por último, abre la web publicada desde el navegador del cliente. Documenta con capturas todos los pasos: la instalación del rol, la colección, la publicación de la RemoteApp, el acceso al portal, Visual Studio Code en funcionamiento y la web «Hola mundo» mostrada en el navegador del cliente.
 
-**1.2 Tabla de roles**: documenta en una tabla el rol de cada equipo (servidor SSH, servidor RDP/WinRM, servidor WireGuard).
+## **Acceso y administración remota** { .seccion }
 
-**1.3 Cliente de pruebas**: define qué equipo actuará de cliente de escritorio para las pruebas cruzadas del apartado 8.
+### 2. Servidor SSH en una instancia Windows Server de AWS
+Crea una instancia de **Windows Server 2022** en AWS y realiza una conexión remota por SSH desde un cliente **Windows 11** local. En primer lugar, comprueba que la característica OpenSSH está instalada en ambos equipos y configura el servidor SSH para que arranque al iniciar Windows, de forma que el acceso remoto siga disponible tras cualquier reinicio de la instancia; demuestra con PowerShell que tanto el cliente como el servidor SSH están activos. A continuación, configura el firewall de Windows para permitir el acceso al servidor SSH creando o ajustando la regla de entrada correspondiente; recuerda que configurar no es desactivar, por lo que el firewall debe permanecer activo en todos sus perfiles. Revisa también el grupo de seguridad de la instancia en AWS, ya que sin la regla de entrada adecuada la conexión nunca llegará al servidor. Después, modifica la configuración estándar de SSH en Windows editando el fichero `sshd_config` para cambiar el puerto del **22** al **2222**, reinicia el servicio y actualiza tanto el firewall como el grupo de seguridad. Comprueba que las conexiones funcionan correctamente con el nuevo puerto. Una vez dentro, ejecuta `fastfetch` y presenta la comprobación como una doble pantalla en el cliente: a la izquierda, la terminal del cliente con su `fastfetch`, y a la derecha, la sesión SSH con el `fastfetch` del servidor.
 
-### 2. Instalación y configuración de SSH con autenticación por clave
+Ejemplo de comprobación (conexión de Windows a Ubuntu): a la izquierda, el equipo cliente; a la derecha, el equipo al que se accede.
 
-**2.1 Instalación y claves**: en el servidor Ubuntu, instala `openssh-server` y genera en el cliente un par de claves con `ssh-keygen`.
+![Ejemplo de comprobación de una conexión remota de Windows a Ubuntu](../assets/img/add/sp04-001.png)
 
-**2.2 Autenticación por clave**: copia la clave pública al servidor con `scp` o `ssh-copy-id`, añádela a `~/.ssh/authorized_keys` y comprueba que la conexión ya no solicita contraseña.
+### 3. Firefox remoto con Xming y reenvío X11
+Crea una instancia de **Ubuntu Server 26.04 LTS** en AWS e instala en ella el navegador **Firefox**. Desde un cliente **Windows 11** local, conéctate a la instancia utilizando **Xming** como servidor gráfico y el reenvío X11 mediante SSH. Prepara primero la instancia: Ubuntu Server no incluye entorno gráfico, de modo que, además de Firefox, deberás instalar los paquetes mínimos necesarios para el reenvío (por ejemplo, `xauth`) y comprobar en `sshd_config` que la opción `X11Forwarding` está habilitada. En el cliente, instala y arranca Xming y configura tu cliente SSH (PuTTY o el cliente OpenSSH de Windows) para que active el reenvío X11 y dirija la salida gráfica hacia el servidor X local. Una vez establecida la conexión, comprueba que la variable `DISPLAY` está definida en la sesión remota y ejecuta una aplicación gráfica en la instancia, por ejemplo `firefox`, para comprobar que la interfaz se muestra correctamente en tu sistema Windows aunque el programa se esté ejecutando realmente en AWS. Incluye una captura de la aplicación en funcionamiento en la que se aprecie que la ventana pertenece a la instancia remota y explica brevemente el proceso realizado, indicando qué papel cumple cada componente (Xming, SSH y la aplicación remota) y por qué el tráfico gráfico viaja cifrado dentro de la conexión SSH.
 
-**2.3 Endurecimiento de `sshd_config`**: cambia el puerto por defecto (por ejemplo, a 2222), fija `PermitRootLogin no`, `PasswordAuthentication no` y restringe el acceso con `AllowUsers` al usuario y la subred del aula.
+### 4. Túnel SSH con PuTTY hacia MySQL
+Desde un cliente **Windows 11** local, crea un túnel SSH con **PuTTY** hacia la instancia de **Ubuntu Server** de AWS que redirija el puerto **3306** (origen, en el cliente) hacia el puerto **5252** (destino) del servidor remoto, donde se está ejecutando MySQL. En la instancia, instala MySQL Server, cambia su puerto de escucha al 5252 y crea una base de datos de prueba con una tabla de usuarios y un usuario con permisos sobre ella. Ten en cuenta que el puerto 5252 no debe abrirse en el grupo de seguridad de AWS: la única vía de acceso a la base de datos será el propio túnel, que viaja cifrado por SSH. En PuTTY, configura la sesión hacia la instancia con su clave y añade en la sección *Connection › SSH › Tunnels* la redirección local correspondiente. Con el túnel establecido, conéctate desde el cliente a `127.0.0.1:3306` con un cliente MySQL (por ejemplo, MySQL Workbench o la línea de comandos) y comprueba el correcto funcionamiento del túnel accediendo a la base de datos y realizando una operación sencilla, como un `INSERT` en la tabla de usuarios, seguida de una consulta que muestre el registro insertado. Documenta los pasos realizados, la configuración del túnel en PuTTY, el comando SQL ejecutado y una captura del resultado obtenido, verificando también desde la propia instancia que el dato ha llegado correctamente a la base de datos.
 
-**2.4 Verificación**: reinicia el servicio y verifica la conexión con el nuevo puerto.
+### 5. Escritorio remoto con RustDesk
+Realiza una conexión remota desde un cliente **Ubuntu Desktop 26.04** a la instancia de **Ubuntu Server** de AWS con **RustDesk**, una herramienta moderna y de código abierto de acceso remoto y escritorio compartido. Como Ubuntu Server no incluye entorno gráfico, prepara primero en la instancia un escritorio ligero que RustDesk pueda compartir y comprueba que sus recursos son suficientes para usarlo con fluidez. Instala RustDesk en ambos equipos, revisa su configuración (identificador, contraseña de acceso permanente y permisos de control) y establece la conexión desde el cliente, verificando que puedes manejar el escritorio remoto con normalidad. Como comprobación, ejecuta `fastfetch` en ambos equipos y presenta una captura tomada desde el cliente con su terminal a la izquierda y, a la derecha, la ventana de RustDesk con el `fastfetch` del servidor. Redacta después una breve explicación del proceso de instalación, configuración y uso de la herramienta, destacando sus ventajas frente a otras soluciones como AnyDesk o TeamViewer: licencia y coste, código abierto, posibilidad de desplegar un servidor de retransmisión propio, privacidad de los datos y rendimiento. Indica también qué puertos o servicios intervienen en la conexión y si ha sido necesario modificar el grupo de seguridad de AWS para que funcione, así como las medidas de seguridad que ofrece la propia herramienta.
 
-### 3. Túnel SSH a un servicio no cifrado
+### 6. Acceso desde el móvil con Guacamole
+Realiza una conexión remota desde un dispositivo **móvil** (real o emulado) a una de las instancias de AWS utilizando **Apache Guacamole**, una pasarela de escritorio remoto sin cliente que permite acceder a equipos por SSH, RDP o VNC usando únicamente el navegador web. Despliega Guacamole en la instancia que elijas, configura un usuario de acceso propio, distinto del que viene por defecto, y define al menos una conexión hacia la instancia con el protocolo más adecuado según su sistema operativo. Abre en el grupo de seguridad de AWS solo los puertos imprescindibles, limitando el acceso en la medida de lo posible. Desde el navegador del móvil, inicia sesión en Guacamole, abre la conexión y ejecuta `fastfetch` en la terminal remota, capturando la pantalla del dispositivo móvil donde se muestre la información del sistema de la instancia. Comprueba también que la sesión es realmente usable desde la pantalla táctil: teclado virtual, desplazamiento y selección de texto. Para terminar, incluye una breve explicación del proceso realizado: cómo has instalado Guacamole, qué conexión has configurado, qué ventajas tiene un acceso basado solo en el navegador frente a instalar un cliente específico en el móvil y qué precauciones de seguridad has tenido en cuenta al publicar el servicio en Internet.
 
-**3.1 Servidor MySQL**: instala un servidor MySQL en la máquina Ubuntu, crea un usuario con permisos sobre una base de datos de prueba y cambia el puerto de escucha de MySQL al 5252.
+## **VPN** { .seccion }
 
-**3.2 Túnel**: desde el cliente Windows, usando PuTTY (o `ssh -L`), configura un túnel SSH que redirija el puerto local 3306 al puerto remoto 5252.
+### 7. WireGuard en un contenedor de Proxmox
+Crea en **Proxmox** un contenedor LXC, instala **WireGuard** y configura lo necesario para permitir conexiones VPN desde dos clientes. Define la interfaz del servidor con su red privada, genera los pares de claves, habilita el reenvío de paquetes y comprueba que el servicio arranca automáticamente con el contenedor. El primer cliente será un dispositivo **móvil** Android o iOS con la aplicación oficial de WireGuard, al que importarás la configuración generada en el contenedor mediante código QR o archivo `.conf`; captura las pantallas donde se vea el túnel activo y las direcciones IP asignadas, verificando que la conexión a la red privada se ha realizado correctamente. El segundo será un **Ubuntu Desktop 26.04** en modo NAT, al que añadirás el archivo de configuración del cliente con sus claves y direcciones; verifica la conectividad con el contenedor e incluye la salida de `wg show` y pruebas de tráfico de red que confirmen que el túnel funciona, por ejemplo un `ping` a la dirección privada del servidor y la comprobación de que los contadores de datos aumentan.
 
-**3.3 Prueba**: conecta un cliente MySQL a `localhost:3306` y ejecuta un `INSERT` sobre la tabla de prueba, comprobando que el dato llega cifrado al servidor remoto.
-
-## **VPN WireGuard** { .seccion }
-
-### 4. Configuración de una VPN WireGuard
-
-**4.1 Servidor**: despliega un servidor WireGuard (en un contenedor LXC de Proxmox o directamente en el servidor Ubuntu) con interfaz `wg0` y dirección `10.0.0.1/24`, escuchando en el puerto UDP 51820.
-
-**4.2 Peers**: genera la configuración de al menos dos peers: un cliente móvil (importando la configuración mediante código QR) y un cliente de escritorio en modo NAT.
-
-**4.3 Verificación**: verifica el estado del túnel con `wg show` y comprueba la conectividad (`ping` a la IP interna del servidor) desde ambos clientes.
-
-### 5. Interfaz de gestión de WireGuard
-
-**5.1 Instalación de WireGuard-UI**: instala **WireGuard-UI** en el mismo equipo que aloja el servidor WireGuard, accediendo a su instalación por SSH o consola.
-
-**5.2 Alta de un peer**: desde la interfaz web, crea un nuevo usuario/peer y genera su fichero de configuración, sin editar manualmente el fichero `wg0.conf`.
-
-**5.3 Evidencias**: documenta con capturas el alta del nuevo peer y su conexión efectiva.
-
-## **Acceso remoto en Windows y cuentas** { .seccion }
-
-### 6. Acceso remoto en Windows: RDP y WinRM
-
-**6.1 Escritorio remoto**: en el servidor Windows, habilita el escritorio remoto exigiendo autenticación a nivel de red (NLA) y ajusta el firewall en consecuencia.
-
-**6.2 Conexiones RDP**: conecta desde un cliente Windows por RDP y desde el cliente Linux mediante Remmina o rdesktop.
-
-**6.3 WinRM**: habilita WinRM (`Enable-PSRemoting -Force`) y, desde otro equipo Windows, ejecuta un comando remoto con `Invoke-Command` y abre una sesión interactiva con `Enter-PSSession`.
-
-**6.4 Comparativa**: documenta la diferencia entre esta gestión sin sesión gráfica y la conexión RDP anterior.
-
-### 7. Creación de cuentas de acceso remoto
-Crea, tanto en el servidor Ubuntu como en el servidor Windows, una cuenta nominal específica para el acceso remoto de la práctica (no reutilices una cuenta administrativa genérica).
-
-**7.1 Cuenta en Linux**: añade la cuenta a `AllowUsers` y genera para ella su propio par de claves SSH.
-
-**7.2 Cuenta en Windows**: añade la cuenta únicamente al grupo "Usuarios de escritorio remoto" (no al de administradores).
-
-**7.3 Permisos mínimos**: comprueba que con esos permisos mínimos el acceso remoto sigue funcionando correctamente.
-
-## **Pruebas, cifrado y documentación** { .seccion }
-
-### 8. Pruebas cruzadas entre sistemas heterogéneos
-Realiza y documenta con capturas (terminal cliente a la izquierda, sistema remoto a la derecha, mostrando por ejemplo la salida de `neofetch` o `systeminfo`) al menos cuatro combinaciones cruzadas. Cada prueba debe indicar el protocolo usado y si está o no orientado a sesión.
-
-**8.1 Windows → Linux** por SSH.
-
-**8.2 Linux → Windows** por RDP/WinRM.
-
-**8.3 Cliente a través de WireGuard**: un cliente conectado a través del túnel WireGuard.
-
-**8.4 Dispositivo móvil**: acceso desde el dispositivo móvil a través de la VPN.
-
-### 9. Cifrado y verificación de la información transferida
-
-**9.1 Mecanismos de cifrado**: para cada uno de los servicios configurados (SSH, túnel SSH, WireGuard, RDP, WinRM), indica explícitamente qué mecanismo de cifrado emplea (algoritmo de intercambio de claves, cifrado simétrico, TLS...).
-
-**9.2 Captura de tráfico**: si es posible, captura con Wireshark el tráfico de una conexión Telnet o VNC sin cifrar frente a una conexión SSH o WireGuard, comparando visualmente los datos legibles en cada caso.
-
-### 10. Documentación final del entorno administrado en remoto
-
-**10.1 Fichas de servicio**: redacta una ficha por cada servicio de acceso remoto desplegado (SSH, túnel SSH, WireGuard, RDP, WinRM) indicando: puerto utilizado, mecanismo de autenticación y cifrado, cuentas autorizadas, reglas de firewall aplicadas y resultado de la última prueba de conectividad.
-
-**10.2 Reproducibilidad**: esta documentación debe permitir que otra persona del equipo reproduzca el acceso sin necesidad de preguntar nada más.
-
-!!! tip "SI NO DISPONES DE VARIAS MÁQUINAS FÍSICAS"
-    Todo el escenario puede desplegarse con máquinas virtuales en VirtualBox, VMware o un contenedor Proxmox sobre un único equipo potente, e incluso combinarse con instancias gratuitas de un proveedor cloud para el servidor Windows si el hardware disponible es limitado. Lo importante no es el medio de virtualización, sino que existan al menos dos sistemas operativos distintos y una red que los conecte para poder cumplir el apartado 8.
+Por último, desde el cliente Ubuntu Desktop accede al contenedor mediante SSH o consola e instala **WireGuard-UI**, una interfaz web para gestionar de forma visual las configuraciones de WireGuard sin editar a mano los ficheros del servidor. Protege el acceso a la interfaz con unas credenciales propias, distintas de las que vienen por defecto. Crea un nuevo usuario desde la interfaz web y genera una configuración de cliente desde la propia aplicación, aplicando los cambios y comprobando que es posible administrarla de manera sencilla. Documenta con capturas la instalación, el acceso a la interfaz, el alta del usuario y la configuración generada, y explica la utilidad de estas herramientas de gestión visual en entornos de red frente a la administración por comandos.
 
 !!! example "ENTREGA"
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento “**Pautas del curso**”, que se encuentra en el apartado de recursos del Campus.
     - La entrega debe incluir:
-        1. Tabla de direccionamiento y roles del apartado 1.
-        2. Capturas de la configuración de `sshd_config` y de la conexión por el nuevo puerto (apartado 2).
-        3. Capturas del túnel SSH configurado en PuTTY y del `INSERT` ejecutado a través de él (apartado 3).
-        4. Ficheros de configuración de los peers WireGuard (sin exponer claves privadas reales) y capturas de `wg show` (apartados 4 y 5).
-        5. Capturas de las conexiones RDP y de la sesión WinRM (apartado 6).
-        6. Evidencia de las cuentas de acceso remoto creadas y sus permisos (apartado 7).
-        7. Capturas de las pruebas cruzadas heterogéneas (apartado 8).
-        8. Comparación del tráfico cifrado frente a no cifrado, si se ha podido capturar (apartado 9).
-        9. Documento final con las fichas de cada servicio (apartado 10).
+        1. Capturas de la implementación de Remote Desktop Services, de la RemoteApp de Visual Studio Code y de la web «Hola mundo» en el navegador del cliente (apartado 1).
+        2. Capturas del servidor SSH de Windows, del firewall y de la doble pantalla con `fastfetch` por el puerto 2222 (apartado 2).
+        3. Captura de Firefox remoto con Xming y del túnel SSH con el `INSERT` ejecutado (apartados 3 y 4).
+        4. Explicación y capturas de RustDesk y Guacamole con `fastfetch` (apartados 5 y 6).
+        5. Configuración de WireGuard (sin exponer claves privadas reales), capturas de los dos clientes, salida de `wg show` y capturas de WireGuard-UI (apartado 7).
     - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”.
