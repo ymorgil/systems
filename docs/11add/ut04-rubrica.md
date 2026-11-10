@@ -11,7 +11,7 @@ Rúbrica de comprobación de la práctica *Escritorio remoto, acceso remoto y VP
 | 3 | Desde el navegador del cliente Windows 11 se accede al portal web y se abre Visual Studio Code | | |
 | 4 | La web «Hola mundo» se crea desde la RemoteApp, se guarda en IIS y se muestra en el navegador del cliente | | |
 
-### Apartado 2 · Servidor SSH en una instancia Windows Server de AWS
+### Apartado 2 · Servidor SSH en una instancia Windows Server de AWS 
 
 | # | Elemento a comprobar | Sí | No |
 |---|---|---|---|
