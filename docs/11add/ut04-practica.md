@@ -10,6 +10,7 @@
     - Crear túneles SSH hacia servicios no cifrados.
     - Usar RustDesk y Guacamole para el acceso remoto.
     - Montar una VPN WireGuard y gestionarla con WireGuard-UI.
+    - Capturar y desplegar imágenes de sistemas por red con FOG.
 
 !!! info "RECURSOS"
     - Windows Server 2025 y cliente Windows 11 locales.
@@ -19,6 +20,7 @@
     - Servidor Proxmox para el contenedor LXC.
     - PuTTY, Xming, RustDesk, Guacamole y WireGuard.
     - Visual Studio Code y MySQL Server.
+    - Ubuntu Server de 100 GB con FOG y cliente Linux Mint.
 
 </div>
 
@@ -55,6 +57,21 @@ Crea en **Proxmox** un contenedor LXC, instala **WireGuard** y configura lo nece
 
 Por último, desde el cliente Ubuntu Desktop accede al contenedor mediante SSH o consola e instala **WireGuard-UI**, una interfaz web para gestionar de forma visual las configuraciones de WireGuard sin editar a mano los ficheros del servidor. Protege el acceso a la interfaz con unas credenciales propias, distintas de las que vienen por defecto. Crea un nuevo usuario desde la interfaz web y genera una configuración de cliente desde la propia aplicación, aplicando los cambios y comprobando que es posible administrarla de manera sencilla. Documenta con capturas la instalación, el acceso a la interfaz, el alta del usuario y la configuración generada, y explica la utilidad de estas herramientas de gestión visual en entornos de red frente a la administración por comandos.
 
+## **Despliegue remoto** { .seccion }
+
+### 8. Captura y despliegue de imágenes con FOG
+En un equipo con **Ubuntu Server** de **100 GB** de disco y la dirección IP **192.168.1xx.150** (donde *xx* es tu número de lista), instala y configura [FOG Project](https://fogproject.org/), la solución libre de clonación y despliegue de imágenes de sistemas a través de la red. Puedes apoyarte en el [Video](https://youtu.be/DaqxDAasKBs). Durante todo el apartado explica el procedimiento seguido y las decisiones tomadas, acompañando cada paso con capturas de las comprobaciones realizadas. Una vez instalado el servidor, captura una imagen del sistema de un equipo con **Linux Mint** y comprueba en la interfaz web de FOG que la imagen ha quedado almacenada correctamente.
+
+A continuación, amplía el espacio de almacenamiento de imágenes en **100 GB** más, de forma que la interfaz web de FOG muestre un total de **200 GB**, y comprueba que los cambios se mantienen después de reiniciar el servidor. Después, ten en cuenta que, con la ampliación de puestos de trabajo en la empresa, la red ha pasado de ser una red privada de clase C a una red privada de clase B: la nueva red de trabajo es la **172.16.0.0/16**, por lo que deberás realizar los cambios correspondientes tanto en el servidor como en el propio aplicativo. Por último, trabajando ya con estas modificaciones, despliega en un equipo la imagen de Linux Mint almacenada en FOG e incluye una captura del despliegue en la pantalla de fondo azul donde se muestra la IP actual del servidor FOG.
+
+## **Laboratorio** { .seccion }
+
+### 9. Laboratorio en el aula
+Laboratorio que se realizará en el aula. El enunciado se facilitará en clase.
+
+### 10. Laboratorio en el aula
+Laboratorio que se realizará en el aula. El enunciado se facilitará en clase.
+
 !!! example "ENTREGA"
     - En caso de no indicar lo contrario cada apartado tendrá el mismo valor.
     - Para una calificación correcta se han de seguir las instrucciones del documento “**Pautas del curso**”, que se encuentra en el apartado de recursos del Campus.
@@ -64,4 +81,6 @@ Por último, desde el cliente Ubuntu Desktop accede al contenedor mediante SSH o
         3. Captura de Firefox remoto con Xming y del túnel SSH con el `INSERT` ejecutado (apartados 3 y 4).
         4. Explicación y capturas de RustDesk y Guacamole con `fastfetch` (apartados 5 y 6).
         5. Configuración de WireGuard (sin exponer claves privadas reales), capturas de los dos clientes, salida de `wg show` y capturas de WireGuard-UI (apartado 7).
+        6. Explicación y capturas de FOG: imagen capturada, almacenamiento de 200 GB tras reiniciar, cambio a la red 172.16.0.0/16 y despliegue con la IP del servidor (apartado 8).
+        7. Evidencias de los laboratorios realizados en el aula (apartados 9 y 10).
     - Entregar un documento **“pdf”** a través del Campus. El nombre del archivo debe ser: “**Apellido1Apellido2Nombre_SPXX**”.

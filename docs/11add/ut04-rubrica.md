@@ -1,6 +1,6 @@
 # **📋 UT04 · Rúbrica de evaluación**
 
-Rúbrica de comprobación de la práctica *Escritorio remoto, acceso remoto y VPN*. Para cada uno de los 7 apartados se comprueban **4 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
+Rúbrica de comprobación de la práctica *Escritorio remoto, acceso remoto y VPN*. Para cada uno de los 10 apartados se comprueban **4 elementos**: cada elemento se marca como presente (Sí) o ausente (No). No hay términos medios: o la evidencia está en la entrega, o no lo está.
 
 ### Apartado 1 · Visual Studio Code como RemoteApp con Remote Desktop Services
 
@@ -65,6 +65,33 @@ Rúbrica de comprobación de la práctica *Escritorio remoto, acceso remoto y VP
 | 3 | El cliente Ubuntu Desktop (NAT) conecta con el contenedor, con salida de `wg show` y pruebas de tráfico | | |
 | 4 | WireGuard-UI está instalado, con un usuario nuevo y una configuración de cliente generada desde la interfaz | | |
 
+### Apartado 8 · Captura y despliegue de imágenes con FOG
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | FOG está instalado en Ubuntu Server (100 GB, IP 192.168.1xx.150) y se captura la imagen de Linux Mint | | |
+| 2 | La interfaz web de FOG muestra 200 GB de almacenamiento y el cambio se mantiene tras reiniciar | | |
+| 3 | Se adaptan el servidor y FOG a la nueva red 172.16.0.0/16 | | |
+| 4 | Se despliega la imagen de Linux Mint con captura de la pantalla azul con la IP actual de FOG | | |
+
+### Apartado 9 · Laboratorio en el aula I
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Se realiza el laboratorio en el aula en la sesión indicada | | |
+| 2 | Se completan todos los pasos indicados en clase | | |
+| 3 | Se aportan las capturas o evidencias solicitadas | | |
+| 4 | Se explica brevemente el resultado obtenido | | |
+
+### Apartado 10 · Laboratorio en el aula II
+
+| # | Elemento a comprobar | Sí | No |
+|---|---|---|---|
+| 1 | Se realiza el laboratorio en el aula en la sesión indicada | | |
+| 2 | Se completan todos los pasos indicados en clase | | |
+| 3 | Se aportan las capturas o evidencias solicitadas | | |
+| 4 | Se explica brevemente el resultado obtenido | | |
+
 ## Calificación
 
-Cada apartado tiene el mismo valor y cada elemento marcado "Sí" suma un punto (máximo 28 puntos). La calificación sobre 10 se obtiene multiplicando el total por 10 y dividiendo entre 28. Para superar la unidad es necesario alcanzar al menos 14 de los 28 elementos y tener, como mínimo, 2 de los 4 elementos marcados en cada uno de los 7 apartados (ningún apartado puede quedar completamente vacío).
+Cada apartado tiene el mismo valor y cada elemento marcado "Sí" suma un punto (máximo 40 puntos). La calificación sobre 10 se obtiene dividiendo el total entre 4. Para superar la unidad es necesario alcanzar al menos 20 de los 40 elementos y tener, como mínimo, 2 de los 4 elementos marcados en cada uno de los 10 apartados (ningún apartado puede quedar completamente vacío).
