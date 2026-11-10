@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="300" rx="18" fill="#f7f6fb"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#37474f">Round Robin: cola de listos con quantum fijo</text>
+
+  <!-- CPU box -->
+  <g>
+    <rect x="410" y="40" width="180" height="70" rx="14" fill="#ede7f6" stroke="#5e35b1" stroke-width="2"/>
+    <text x="500" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#5e35b1">CPU</text>
+    <text x="500" y="90" text-anchor="middle" font-size="10" fill="#37474f">quantum = Q</text>
+  </g>
+
+  <!-- circular queue of processes -->
+  <g>
+    <rect x="60" y="160" width="90" height="60" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="105" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">P1</text>
+
+    <rect x="190" y="160" width="90" height="60" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="235" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">P2</text>
+
+    <rect x="320" y="160" width="90" height="60" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="365" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">P3</text>
+
+    <rect x="450" y="160" width="90" height="60" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="495" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">P4</text>
+
+    <rect x="580" y="160" width="90" height="60" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+    <text x="625" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#00897b">P5</text>
+
+    <rect x="710" y="160" width="90" height="60" rx="10" fill="#eceff1" stroke="#37474f" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="755" y="195" text-anchor="middle" font-size="12" fill="#37474f">...</text>
+  </g>
+
+  <!-- arrows queue -->
+  <path d="M150 190 L185 190" stroke="#90a4ae" stroke-width="2.5" marker-end="url(#arrow2)"/>
+  <path d="M280 190 L315 190" stroke="#90a4ae" stroke-width="2.5" marker-end="url(#arrow2)"/>
+  <path d="M410 190 L445 190" stroke="#90a4ae" stroke-width="2.5" marker-end="url(#arrow2)"/>
+  <path d="M540 190 L575 190" stroke="#90a4ae" stroke-width="2.5" marker-end="url(#arrow2)"/>
+  <path d="M670 190 L705 190" stroke="#90a4ae" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+  <!-- P1 to CPU -->
+  <path d="M105 160 C 105 100, 300 60, 405 65" stroke="#5e35b1" stroke-width="2.5" fill="none" marker-end="url(#arrow3)"/>
+  <text x="230" y="95" text-anchor="middle" font-size="10" fill="#5e35b1">despacho (dispatch)</text>
+
+  <!-- CPU back to end of queue -->
+  <path d="M590 70 C 850 70, 850 190, 800 190" stroke="#90a4ae" stroke-width="2.5" fill="none" marker-end="url(#arrow2)"/>
+  <text x="820" y="130" text-anchor="middle" font-size="10" fill="#607d8b" transform="rotate(90 820 130)">no termina: vuelve al final</text>
+
+  <text x="500" y="270" text-anchor="middle" font-size="12" fill="#607d8b" font-style="italic">Si el proceso no finaliza en el quantum Q, es expropiado y regresa al final de la cola de listos</text>
+
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#90a4ae"/>
+    </marker>
+    <marker id="arrow3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#5e35b1"/>
+    </marker>
+  </defs>
+</svg>
